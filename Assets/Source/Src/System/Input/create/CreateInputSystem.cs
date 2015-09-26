@@ -1,0 +1,25 @@
+using Entitas;
+using UnityEngine;
+
+public class CreateInputSystem : IExecuteSystem, ISetPool {
+	Pool _pool;
+	
+	public void SetPool(Pool pool) {
+		_pool = pool;
+	}
+	
+	public void Execute() {
+		if (isMouseButton ()) {
+			generateInputComponent();
+		}
+	}
+
+	bool isMouseButton() {
+		return Input.GetMouseButton (0);
+	}
+
+	void generateInputComponent() {
+		_pool.CreateEntity()
+			.AddInput(10, 10);
+	}
+}
