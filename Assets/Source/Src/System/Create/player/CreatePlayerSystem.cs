@@ -10,7 +10,9 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 	public void Initialize() {
 		_pool.CreateEntity()
 			.AddPlayer("superPlayer")
-			.AddPosition(2, 2)
+			.AddPosition(2.0f, 2.0f)
+			.AddVelocity(0.0f, 0.0f)
+			.AddAcceleration(0.0f, 0.0f)
 			.AddResource(Resource.Test);
 	}
 }

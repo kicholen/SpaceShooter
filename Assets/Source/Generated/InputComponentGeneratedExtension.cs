@@ -12,14 +12,14 @@ namespace Entitas {
             _inputComponentPool.Clear();
         }
 
-        public Entity AddInput(int newX, int newY) {
+        public Entity AddInput(float newX, float newY) {
             var component = _inputComponentPool.Count > 0 ? _inputComponentPool.Pop() : new InputComponent();
             component.x = newX;
             component.y = newY;
             return AddComponent(ComponentIds.Input, component);
         }
 
-        public Entity ReplaceInput(int newX, int newY) {
+        public Entity ReplaceInput(float newX, float newY) {
             var previousComponent = hasInput ? input : null;
             var component = _inputComponentPool.Count > 0 ? _inputComponentPool.Pop() : new InputComponent();
             component.x = newX;

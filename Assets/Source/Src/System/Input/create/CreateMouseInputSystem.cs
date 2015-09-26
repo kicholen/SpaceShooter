@@ -1,9 +1,9 @@
 using Entitas;
 using UnityEngine;
 
-public class CreateInputSystem : IExecuteSystem, ISetPool {
+public class CreateMouseInputSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
-	
+
 	public void SetPool(Pool pool) {
 		_pool = pool;
 	}
@@ -20,6 +20,7 @@ public class CreateInputSystem : IExecuteSystem, ISetPool {
 
 	void generateInputComponent() {
 		_pool.CreateEntity()
-			.AddInput(10, 10);
+			.AddMouseInput(Input.mousePosition.x, Input.mousePosition.y)
+			.AddComponent(ComponentIds.DestroyEntity, new DestroyEntityComponent());
 	}
 }

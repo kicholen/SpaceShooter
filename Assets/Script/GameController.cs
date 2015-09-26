@@ -21,20 +21,29 @@ public class GameController : MonoBehaviour {
         return new Systems()
         #endif
 
-            // Initialize
-            .Add(pool.CreateCreatePlayerSystem())
-
-        	// Input
-			.Add(pool.CreateCreateInputSystem())
-			.Add(pool.CreateProcessInputSystem())
-
-			// Render
+	            // Initialize
+	            .Add(pool.CreateCreatePlayerSystem())
+			
+			// AddGO
 			.Add(pool.CreateAddGameObjectSystem())
-			.Add(pool.CreateRemoveGameObjectSystem())
-
-			// Position
+			
+        	// Input
+			.Add(pool.CreateCreateMouseInputSystem())
+			.Add(pool.CreateProcessInputSystem())
+			
+				// Input player
+				.Add(pool.CreatePlayerInputSystem())
+			
+			// Physics
+			.Add(pool.CreateAccelerationSystem())
+			.Add(pool.CreateVelocitySystem())
 			.Add(pool.CreatePositionSystem())
 
+			// PositionGO
+			.Add(pool.CreatePositionGameObjectSystem())
+			// RemoveGO
+			.Add(pool.CreateRemoveGameObjectSystem())
+			
 			// Destroy
 			.Add(pool.CreateDestroyEntitySystem());
     }
