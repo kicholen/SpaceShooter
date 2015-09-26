@@ -1,10 +1,10 @@
 ﻿using Entitas;
 
 public class CreatePlayerSystem : IInitializeSystem, ISetPool {
-    Pool _pool;
-
+	Pool _pool;
+	
 	public void SetPool(Pool pool) {
-        _pool = pool;
+		_pool = pool;
 	}
 	
 	public void Initialize() {

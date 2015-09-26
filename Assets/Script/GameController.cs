@@ -23,7 +23,11 @@ public class GameController : MonoBehaviour {
 
 	            // Initialize
 	            .Add(pool.CreateCreatePlayerSystem())
-			
+				.Add(pool.CreateCreatePlayerWeaponSystem())
+
+				// Spawners
+				.Add(pool.CreateSpawnMissileSystem())
+
 			// AddGO
 			.Add(pool.CreateAddGameObjectSystem())
 			
@@ -33,7 +37,7 @@ public class GameController : MonoBehaviour {
 			
 				// Input player
 				.Add(pool.CreatePlayerInputSystem())
-			
+
 			// Physics
 			.Add(pool.CreateAccelerationSystem())
 			.Add(pool.CreateVelocitySystem())
