@@ -29,9 +29,6 @@ public class GameController : MonoBehaviour {
 				// Spawners
 				.Add(pool.CreateSpawnMissileSystem())
 
-				// Camera
-				.Add(pool.CreateCameraSystem())
-
 			// AddGO
 			.Add(pool.CreateAddGameObjectSystem())
 			
@@ -52,6 +49,9 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreatePositionGameObjectSystem())
 			// RemoveGO
 			.Add(pool.CreateRemoveGameObjectSystem())
+			
+			// Camera
+			.Add(pool.CreateCameraSystem())
 			
 			// DestroyPosition, static GO do not need to refresh on every frame
 			.Add(pool.CreateDestroyPositionSystem())
