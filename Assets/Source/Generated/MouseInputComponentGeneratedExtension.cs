@@ -12,18 +12,20 @@ namespace Entitas {
             _mouseInputComponentPool.Clear();
         }
 
-        public Entity AddMouseInput(float newX, float newY) {
+        public Entity AddMouseInput(float newX, float newY, bool newIsDown) {
             var component = _mouseInputComponentPool.Count > 0 ? _mouseInputComponentPool.Pop() : new MouseInputComponent();
             component.x = newX;
             component.y = newY;
+            component.isDown = newIsDown;
             return AddComponent(ComponentIds.MouseInput, component);
         }
 
-        public Entity ReplaceMouseInput(float newX, float newY) {
+        public Entity ReplaceMouseInput(float newX, float newY, bool newIsDown) {
             var previousComponent = hasMouseInput ? mouseInput : null;
             var component = _mouseInputComponentPool.Count > 0 ? _mouseInputComponentPool.Pop() : new MouseInputComponent();
             component.x = newX;
             component.y = newY;
+            component.isDown = newIsDown;
             ReplaceComponent(ComponentIds.MouseInput, component);
             if (previousComponent != null) {
                 _mouseInputComponentPool.Push(previousComponent);

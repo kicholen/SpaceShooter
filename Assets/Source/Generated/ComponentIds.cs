@@ -12,8 +12,10 @@ public static class ComponentIds {
     public const int Position = 10;
     public const int Resource = 11;
     public const int Velocity = 12;
+    public const int VelocityLimit = 13;
+    public const int Weapon = 14;
 
-    public const int TotalComponents = 13;
+    public const int TotalComponents = 15;
 
     static readonly string[] components = {
         "Acceleration",
@@ -28,7 +30,9 @@ public static class ComponentIds {
         "Player",
         "Position",
         "Resource",
-        "Velocity"
+        "Velocity",
+        "VelocityLimit",
+        "Weapon"
     };
 
     public static string IdToString(int componentId) {

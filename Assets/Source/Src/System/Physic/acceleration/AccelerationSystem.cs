@@ -7,7 +7,7 @@ public class AccelerationSystem : IExecuteSystem, ISetPool {
 	float _deltaTime;
 	
 	public void SetPool(Pool pool) {
-		_group = pool.GetGroup(Matcher.AllOf(Matcher.Acceleration));
+		_group = pool.GetGroup(Matcher.AllOf(Matcher.Acceleration, Matcher.Velocity));
 	}
 	
 	public void Execute() {
@@ -21,8 +21,8 @@ public class AccelerationSystem : IExecuteSystem, ISetPool {
 	void applyFriction(Entity e) {
 		AccelerationComponent acceleration = e.acceleration;
 
-		acceleration.x = getAcceleration(acceleration.x, 0.0f);
-		acceleration.y = getAcceleration(acceleration.y, 0.0f);
+		acceleration.x = getAcceleration(acceleration.x, acceleration.frictionX);
+		acceleration.y = getAcceleration(acceleration.y, acceleration.frictionY);
 	}
 
 	float getAcceleration(float value, float friction) {

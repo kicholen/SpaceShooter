@@ -16,9 +16,7 @@ public class ProcessInputSystem : IReactiveSystem, ISetPool {
 		Debug.Log("ProcessInputSystem");
 		Entity e = entities.SingleEntity();
 
-		if (e.hasMouseInput) {
-			handleMouseInput(e.mouseInput);
-		}
+		handleMouseInput(e.mouseInput);
 	}
 
 	void handleMouseInput(MouseInputComponent component) {
@@ -26,7 +24,7 @@ public class ProcessInputSystem : IReactiveSystem, ISetPool {
 		temp = Camera.main.ScreenToWorldPoint(temp);
 
 		_pool.CreateEntity()
-			.AddInput(temp.x, temp.y)
+			.AddInput(temp.x, temp.y, component.isDown)
 			.isDestroyEntity = true;
 	}
 }

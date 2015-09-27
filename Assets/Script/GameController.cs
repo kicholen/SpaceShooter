@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour {
 
 	            // Initialize
 	            .Add(pool.CreateCreatePlayerSystem())
-				.Add(pool.CreateCreatePlayerWeaponSystem())
+				.Add(pool.CreateWeaponSystem())
 				.Add(pool.CreateCreateStaticElementsSystem())
 
 				// Spawners

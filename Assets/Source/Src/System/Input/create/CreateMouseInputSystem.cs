@@ -9,9 +9,7 @@ public class CreateMouseInputSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		if (isMouseButton ()) {
-			generateInputComponent();
-		}
+		generateInputComponent();
 	}
 
 	bool isMouseButton() {
@@ -20,7 +18,7 @@ public class CreateMouseInputSystem : IExecuteSystem, ISetPool {
 
 	void generateInputComponent() {
 		_pool.CreateEntity()
-			.AddMouseInput(Input.mousePosition.x, Input.mousePosition.y)
+			.AddMouseInput(Input.mousePosition.x, Input.mousePosition.y, isMouseButton())
 			.isDestroyEntity = true;
 	}
 }

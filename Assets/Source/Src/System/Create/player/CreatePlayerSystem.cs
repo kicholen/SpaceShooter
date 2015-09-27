@@ -15,8 +15,9 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 			.AddPlayer("superPlayer")
 			.AddPosition(2.0f, 2.0f)
 			.AddVelocity(0.0f, 0.0f)
-			.AddAcceleration(0.0f, 0.0f)
-			.AddCamera(camera, new Vector3(0.0f, 0.0f, camera.transform.position.z))
+			.AddAcceleration(0.0f, 0.0f, 0.0f, 0.0f)
+			.AddVelocityLimit(5.0f, 5.0f)
+			.AddCamera(camera, new Vector3(0.0f, 2.0f, camera.transform.position.z))
 			.AddResource(Resource.Player);
 	}
 }

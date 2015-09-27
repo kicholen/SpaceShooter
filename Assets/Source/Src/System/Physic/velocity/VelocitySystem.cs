@@ -15,6 +15,7 @@ public class VelocitySystem : IExecuteSystem, ISetPool {
 		_deltaTime = Time.deltaTime;
 		foreach (var e in _group.GetEntities()) {
 			applyVelocity(e);
+			limitVelocity(e);
 		}
 	}
 
@@ -23,5 +24,27 @@ public class VelocitySystem : IExecuteSystem, ISetPool {
 		VelocityComponent velocity = e.velocity;
 
 		e.ReplaceVelocity(velocity.x + _deltaTime * acceleration.x, velocity.y + _deltaTime * acceleration.y);
+	}
+
+	void limitVelocity(Entity e) {
+		if (!e.hasVelocityLimit) {
+			return;
+		}
+		VelocityLimitComponent velocityLimit = e.velocityLimit;
+		VelocityComponent velocity = e.velocity;
+
+		if (velocity.x > velocityLimit.x) {
+			velocity.x = velocityLimit.x;
+		}
+		else if (velocity.x < -velocityLimit.x) {
+			velocity.x = -velocityLimit.x;
+		}
+
+		if (velocity.y > velocityLimit.y) {
+			velocity.y = velocityLimit.y;
+		}
+		else if (velocity.y < -velocityLimit.y) {
+			velocity.y = -velocityLimit.y;
+		}
 	}
 }

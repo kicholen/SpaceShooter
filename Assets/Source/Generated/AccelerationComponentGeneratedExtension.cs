@@ -12,18 +12,22 @@ namespace Entitas {
             _accelerationComponentPool.Clear();
         }
 
-        public Entity AddAcceleration(float newX, float newY) {
+        public Entity AddAcceleration(float newX, float newY, float newFrictionX, float newFrictionY) {
             var component = _accelerationComponentPool.Count > 0 ? _accelerationComponentPool.Pop() : new AccelerationComponent();
             component.x = newX;
             component.y = newY;
+            component.frictionX = newFrictionX;
+            component.frictionY = newFrictionY;
             return AddComponent(ComponentIds.Acceleration, component);
         }
 
-        public Entity ReplaceAcceleration(float newX, float newY) {
+        public Entity ReplaceAcceleration(float newX, float newY, float newFrictionX, float newFrictionY) {
             var previousComponent = hasAcceleration ? acceleration : null;
             var component = _accelerationComponentPool.Count > 0 ? _accelerationComponentPool.Pop() : new AccelerationComponent();
             component.x = newX;
             component.y = newY;
+            component.frictionX = newFrictionX;
+            component.frictionY = newFrictionY;
             ReplaceComponent(ComponentIds.Acceleration, component);
             if (previousComponent != null) {
                 _accelerationComponentPool.Push(previousComponent);
