@@ -50,6 +50,8 @@ public class GameController : MonoBehaviour {
 			// RemoveGO
 			.Add(pool.CreateRemoveGameObjectSystem())
 			
+			// DestroyPosition, static GO do not need to refresh on every frame
+			.Add(pool.CreateDestroyPositionSystem())
 			// Destroy
 			.Add(pool.CreateDestroyEntitySystem());
     }

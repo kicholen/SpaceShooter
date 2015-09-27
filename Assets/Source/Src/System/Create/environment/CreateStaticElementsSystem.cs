@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public class CreateStaticElementsSystem : IInitializeSystem, ISetPool {
 	Pool _pool;
@@ -8,8 +9,10 @@ public class CreateStaticElementsSystem : IInitializeSystem, ISetPool {
 	}
 	
 	public void Initialize() {
+		Debug.Log("CreateStaticElementsSystem");
 		_pool.CreateEntity()
 			.AddPosition(0.0f, 0.0f)
-			.AddResource(Resource.Blockade);
+			.AddResource(Resource.Blockade)
+			.isDestroyPosition = true;
 	}
 }

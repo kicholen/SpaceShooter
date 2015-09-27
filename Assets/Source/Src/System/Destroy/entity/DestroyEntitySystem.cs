@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
@@ -12,6 +11,7 @@ public class DestroyEntitySystem : IExecuteSystem, ISetPool {
 	}
 
 	public void Execute() {
+		Debug.Log("DestroyEntitySystem");
 		foreach (var e in _group.GetEntities()) {
 			_pool.DestroyEntity(e);
 		}
