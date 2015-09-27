@@ -33,6 +33,6 @@ public class ProcessInputSystem : IReactiveSystem, ISetPool {
 
 		_pool.CreateEntity()
 			.AddInput(temp.x, temp.y)
-			.AddComponent(ComponentIds.DestroyEntity, new DestroyEntityComponent());
+			.isDestroyEntity = true;
 	}
 }

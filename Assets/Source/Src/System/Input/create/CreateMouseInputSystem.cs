@@ -21,6 +21,6 @@ public class CreateMouseInputSystem : IExecuteSystem, ISetPool {
 	void generateInputComponent() {
 		_pool.CreateEntity()
 			.AddMouseInput(Input.mousePosition.x, Input.mousePosition.y)
-			.AddComponent(ComponentIds.DestroyEntity, new DestroyEntityComponent());
+			.isDestroyEntity = true;
 	}
 }

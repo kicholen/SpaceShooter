@@ -21,6 +21,9 @@ public class AddGameObjectSystem : IReactiveSystem {
 				Debug.Log ("Cannot instantiate " + res);
 			}
 			if (gameObject != null) {
+				if (e.hasCollision) {
+					gameObject.AddComponent<CollisionScript>();
+				}
 				gameObject.transform.SetParent (_viewContainer, false);
 				e.AddGameObject(gameObject);
 			}

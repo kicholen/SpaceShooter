@@ -21,7 +21,7 @@ public class RemoveGameObjectSystem : IReactiveSystem, ISetPool, IEnsureComponen
 		for (int i = 0; i < entities.Count; i++) {
 			Entity e = entities [i];
 			e.RemoveGameObject();
-			e.AddComponent(ComponentIds.DestroyEntity, new DestroyEntityComponent());
+			e.isDestroyEntity = true;
 		}
 	}
 }

@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour {
 	            // Initialize
 	            .Add(pool.CreateCreatePlayerSystem())
 				.Add(pool.CreateCreatePlayerWeaponSystem())
+				.Add(pool.CreateCreateStaticElementsSystem())
 
 				// Spawners
 				.Add(pool.CreateSpawnMissileSystem())
@@ -41,6 +42,7 @@ public class GameController : MonoBehaviour {
 			// Physics
 			.Add(pool.CreateAccelerationSystem())
 			.Add(pool.CreateVelocitySystem())
+			.Add(pool.CreateCollisionSystem())
 			.Add(pool.CreatePositionSystem())
 
 			// PositionGO
