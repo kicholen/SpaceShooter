@@ -2,11 +2,9 @@ using UnityEngine;
 using Entitas;
 
 public class DestroyPositionSystem : IExecuteSystem, ISetPool {
-	Pool _pool;
 	Group _group;
 	
 	public void SetPool(Pool pool) {
-		_pool = pool;
 		_group = pool.GetGroup(Matcher.DestroyPosition);
 	}
 	

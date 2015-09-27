@@ -21,12 +21,6 @@ public class ProcessInputSystem : IReactiveSystem, ISetPool {
 		}
 	}
 
-	void createTestEntity(InputComponent component) {
-		_pool.CreateEntity()
-			.AddPosition(component.x, component.y)
-			.AddResource(Resource.Test);
-	}	
-
 	void handleMouseInput(MouseInputComponent component) {
 		temp.Set(component.x, component.y, 0);
 		temp = Camera.main.ScreenToWorldPoint(temp);
