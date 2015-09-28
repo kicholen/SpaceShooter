@@ -10,14 +10,12 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 	
 	public void Initialize() {
 		Debug.Log("CreatePlayerSystem");
-		Camera camera = Camera.main;
 		_pool.CreateEntity()
 			.AddPlayer("superPlayer")
 			.AddPosition(2.0f, 2.0f)
 			.AddVelocity(0.0f, 0.0f)
 			.AddAcceleration(0.0f, 0.0f, 0.0f, 0.0f)
 			.AddVelocityLimit(5.0f, 5.0f)
-			.AddCamera(camera, new Vector3(0.0f, 2.0f, camera.transform.position.z))
 			.AddResource(Resource.Player);
 	}
 }

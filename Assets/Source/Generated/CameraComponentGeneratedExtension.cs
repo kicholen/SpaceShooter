@@ -12,18 +12,16 @@ namespace Entitas {
             _cameraComponentPool.Clear();
         }
 
-        public Entity AddCamera(UnityEngine.Camera newCamera, UnityEngine.Vector3 newOffset) {
+        public Entity AddCamera(Entitas.Entity newFollow) {
             var component = _cameraComponentPool.Count > 0 ? _cameraComponentPool.Pop() : new CameraComponent();
-            component.camera = newCamera;
-            component.offset = newOffset;
+            component.follow = newFollow;
             return AddComponent(ComponentIds.Camera, component);
         }
 
-        public Entity ReplaceCamera(UnityEngine.Camera newCamera, UnityEngine.Vector3 newOffset) {
+        public Entity ReplaceCamera(Entitas.Entity newFollow) {
             var previousComponent = hasCamera ? camera : null;
             var component = _cameraComponentPool.Count > 0 ? _cameraComponentPool.Pop() : new CameraComponent();
-            component.camera = newCamera;
-            component.offset = newOffset;
+            component.follow = newFollow;
             ReplaceComponent(ComponentIds.Camera, component);
             if (previousComponent != null) {
                 _cameraComponentPool.Push(previousComponent);

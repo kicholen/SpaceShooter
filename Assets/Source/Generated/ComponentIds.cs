@@ -10,14 +10,15 @@ public static class ComponentIds {
     public const int MouseInput = 8;
     public const int Player = 9;
     public const int Position = 10;
-    public const int Resource = 11;
-    public const int SmoothCamera = 12;
-    public const int Test = 13;
-    public const int Velocity = 14;
-    public const int VelocityLimit = 15;
-    public const int Weapon = 16;
+    public const int RegularCamera = 11;
+    public const int Resource = 12;
+    public const int SmoothCamera = 13;
+    public const int Test = 14;
+    public const int Velocity = 15;
+    public const int VelocityLimit = 16;
+    public const int Weapon = 17;
 
-    public const int TotalComponents = 17;
+    public const int TotalComponents = 18;
 
     static readonly string[] components = {
         "Acceleration",
@@ -31,6 +32,7 @@ public static class ComponentIds {
         "MouseInput",
         "Player",
         "Position",
+        "RegularCamera",
         "Resource",
         "SmoothCamera",
         "Test",

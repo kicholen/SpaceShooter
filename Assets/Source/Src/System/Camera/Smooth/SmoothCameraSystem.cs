@@ -17,14 +17,15 @@ public class SmoothCameraSystem : IExecuteSystem, ISetPool {
 	}
 	
 	void updateCamera(Entity e) {
-		SmoothCameraComponent camera = e.smoothCamera;
+		SmoothCameraComponent smoothCamera = e.smoothCamera;
 		PositionComponent position = e.position;
+		CameraComponent camera = e.camera;
+		PositionComponent playerPosition = camera.follow.position;
 
 		float lerp = 0.1f;
-		Vector3 cameraPosition = camera.camera.transform.position;
-		temp.x = cameraPosition.x + (position.x - cameraPosition.x) * lerp;
-		temp.y = cameraPosition.y + (position.y - cameraPosition.y) * lerp;
+		Vector3 cameraPosition = smoothCamera.camera.transform.position;
+		temp.x = cameraPosition.x + (playerPosition.x - cameraPosition.x) * lerp;
 
-		camera.camera.transform.position = new Vector3(temp.x, temp.y, camera.offset.z);
+		smoothCamera.camera.transform.position = new Vector3(temp.x, position.y, smoothCamera.offset.z);
 	}
 }

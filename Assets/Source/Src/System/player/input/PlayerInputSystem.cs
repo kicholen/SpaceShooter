@@ -53,6 +53,10 @@ public class PlayerInputSystem : IReactiveSystem, ISetPool {
 
 		velocity.x = (component.x - position.x) * 10.0f;
 		velocity.y = (component.y - position.y) * 10.0f;
+
+		if (velocity.y < 0.0f) {
+			velocity.y += 4.0f;
+		}
 	}
 
 	void slowDown(Entity entity) {
