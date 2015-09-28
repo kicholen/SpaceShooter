@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
     Systems createSystems(Pool pool) {
         #if (UNITY_EDITOR)
         return new DebugSystems()
+			.Add(pool.CreateTestSystem())
         #else
         return new Systems()
         #endif
@@ -52,6 +53,7 @@ public class GameController : MonoBehaviour {
 			
 			// Camera
 			.Add(pool.CreateCameraSystem())
+			.Add(pool.CreateSmoothCameraSystem())
 			
 			// DestroyPosition, static GO do not need to refresh on every frame
 			.Add(pool.CreateDestroyPositionSystem())
