@@ -1,6 +1,6 @@
 public static class Resource {
-	public const string Player = "Player";
-	public const string Enemy = "Enemy";
-	public const string Missile = "Missile";
-	public const string Blockade = "Blockade";
+	public const string Player = "10_Player";
+	public const string Enemy = "200_Enemy";
+	public const string Missile = "50_Missile";
+	public const string Blockade = "100_Blockade";
 }

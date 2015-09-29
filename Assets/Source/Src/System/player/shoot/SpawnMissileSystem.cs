@@ -28,6 +28,7 @@ public class SpawnMissileSystem : IExecuteSystem, ISetPool {
 		_pool.CreateEntity()
 			.AddPosition(position.x, position.y)
 			.AddVelocity(0.0f, 10.0f)
+			.AddHealth(0)
 			.AddCollision(CollisionTypes.Player)
 			.AddResource(Resource.Missile);
 	}
