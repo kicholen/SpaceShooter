@@ -28,9 +28,11 @@ public class GameController : MonoBehaviour {
 				.Add(pool.CreateWeaponSystem())
 				.Add(pool.CreateCreateStaticElementsSystem())
 				.Add(pool.CreateCreateCameraSystem())
+				.Add(pool.CreateCreateLevelSystem())
 
 				// Spawners
 				.Add(pool.CreateSpawnMissileSystem())
+				.Add(pool.CreateEnemySpawnerSystem())
 
 			// AddGO
 			.Add(pool.CreateAddGameObjectSystem())

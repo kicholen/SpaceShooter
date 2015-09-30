@@ -1,0 +1,5 @@
+﻿<enemy version="1">
+	<level value="10">
+		<enemy count="4" />
+	</level>
+</enemy>
