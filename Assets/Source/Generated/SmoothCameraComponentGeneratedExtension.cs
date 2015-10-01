@@ -12,17 +12,15 @@ namespace Entitas {
             _smoothCameraComponentPool.Clear();
         }
 
-        public Entity AddSmoothCamera(UnityEngine.Camera newCamera, UnityEngine.Vector3 newOffset) {
+        public Entity AddSmoothCamera(UnityEngine.Vector3 newOffset) {
             var component = _smoothCameraComponentPool.Count > 0 ? _smoothCameraComponentPool.Pop() : new SmoothCameraComponent();
-            component.camera = newCamera;
             component.offset = newOffset;
             return AddComponent(ComponentIds.SmoothCamera, component);
         }
 
-        public Entity ReplaceSmoothCamera(UnityEngine.Camera newCamera, UnityEngine.Vector3 newOffset) {
+        public Entity ReplaceSmoothCamera(UnityEngine.Vector3 newOffset) {
             var previousComponent = hasSmoothCamera ? smoothCamera : null;
             var component = _smoothCameraComponentPool.Count > 0 ? _smoothCameraComponentPool.Pop() : new SmoothCameraComponent();
-            component.camera = newCamera;
             component.offset = newOffset;
             ReplaceComponent(ComponentIds.SmoothCamera, component);
             if (previousComponent != null) {

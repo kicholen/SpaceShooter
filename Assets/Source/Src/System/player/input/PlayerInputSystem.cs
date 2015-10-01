@@ -2,7 +2,7 @@ using Entitas;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerInputSystem : IReactiveSystem, ISetPool {
+public class PlayerInputSystem : IReactiveSystem, ISetPool { // todo maybe change it to execute, it's called every frame anyway
 	public TriggerOnEvent trigger { get { return Matcher.Input.OnEntityAdded(); } }
 	
 	Pool _pool;

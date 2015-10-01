@@ -22,7 +22,7 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 		#endif
 
 		Debug.Log("EnemySpawnerSystem");
-		Camera camera = _camera.GetSingleEntity().smoothCamera.camera;
+		Camera camera = _camera.GetSingleEntity().camera.camera;
 		Vector3 cameraPosition = camera.transform.position;
 		foreach (Entity e in _group.GetEntities()) {
 			spawnIfCan(e, cameraPosition);
@@ -34,22 +34,30 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 		XmlNode node = enemySpawner.node;
 
 		if (enemySpawner.used) {
-			node = node.NextSibling;
+			enemySpawner.node = enemySpawner.node.NextSibling;
+			node = enemySpawner.node;
 		}
 		if (node != null) {
+			enemySpawner.used = false;
 			XmlAttributeCollection attributes = node.Attributes;
-			float spawnPosition = (float)Convert.ToDouble(attributes[0].Value);
-			if (spawnPosition < position.y) {
+			float spawnBarrier = (float)Convert.ToDouble(attributes[0].Value);
+			if (spawnBarrier < position.y) {
 				XmlNode innerNode = node.FirstChild;
 				while(innerNode != null) {
 					int enemyCount = Convert.ToInt16(innerNode.Attributes[0].Value);
+					float x = (float)Convert.ToDouble(innerNode.Attributes[1].Value);
+					float y = (float)Convert.ToDouble(innerNode.Attributes[2].Value);
+					float velocityX = (float)Convert.ToDouble(innerNode.Attributes[3].Value);
+					float velocityY = (float)Convert.ToDouble(innerNode.Attributes[4].Value);
+					int type = Convert.ToInt16(innerNode.Attributes[5].Value);
+					int health = Convert.ToInt16(innerNode.Attributes[6].Value);
 					while (enemyCount != 0) {
 						_pool.CreateEntity()
-							.AddEnemy(0)
-							.AddPosition(2.0f, spawnPosition)
-							.AddVelocity(0.0f, 0.1f)
+							.AddEnemy(type)
+							.AddPosition(x, y)
+							.AddVelocity(velocityX, velocityY)
 							.AddVelocityLimit(5.0f, 5.0f)
-							.AddHealth(10)
+							.AddHealth(health)
 							.AddCollision(CollisionTypes.Enemy)
 							.AddResource(Resource.Enemy);
 						enemyCount--;

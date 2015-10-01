@@ -20,6 +20,6 @@ public class RegularCameraSystem : IExecuteSystem, ISetPool {
 		CameraComponent camera = e.camera;
 		Entity follow = camera.follow;
 
-		regularCamera.camera.transform.position = new Vector3(follow.position.x + regularCamera.offset.x, follow.position.y + regularCamera.offset.y, regularCamera.offset.z);
+		camera.camera.transform.position = new Vector3(follow.position.x + regularCamera.offset.x, follow.position.y + regularCamera.offset.y, regularCamera.offset.z);
 	}
 }

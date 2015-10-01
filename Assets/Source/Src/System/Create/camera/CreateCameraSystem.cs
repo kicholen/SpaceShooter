@@ -15,7 +15,7 @@ public class CreateCameraSystem : IInitializeSystem, ISetPool {
 		Camera camera = Camera.main;
 		Entity player = _group.GetSingleEntity();
 		_pool.CreateEntity()
-			.AddCamera(player)
-			.AddRegularCamera(camera, new Vector3(0.0f, 2.0f, camera.transform.position.z));
+			.AddCamera(camera, player)
+			.AddRegularCamera(new Vector3(0.0f, 2.0f, camera.transform.position.z));
 	}
 }

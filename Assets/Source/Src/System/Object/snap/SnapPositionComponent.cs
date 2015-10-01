@@ -5,4 +5,6 @@ public class SnapPositionComponent : IComponent {
 	public float y;
 	public float width;
 	public float height;
+
+	public bool shouldSnapToCameraY;
 }

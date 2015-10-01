@@ -12,22 +12,24 @@ namespace Entitas {
             _snapPositionComponentPool.Clear();
         }
 
-        public Entity AddSnapPosition(float newX, float newY, float newWidth, float newHeight) {
+        public Entity AddSnapPosition(float newX, float newY, float newWidth, float newHeight, bool newShouldSnapToCameraY) {
             var component = _snapPositionComponentPool.Count > 0 ? _snapPositionComponentPool.Pop() : new SnapPositionComponent();
             component.x = newX;
             component.y = newY;
             component.width = newWidth;
             component.height = newHeight;
+            component.shouldSnapToCameraY = newShouldSnapToCameraY;
             return AddComponent(ComponentIds.SnapPosition, component);
         }
 
-        public Entity ReplaceSnapPosition(float newX, float newY, float newWidth, float newHeight) {
+        public Entity ReplaceSnapPosition(float newX, float newY, float newWidth, float newHeight, bool newShouldSnapToCameraY) {
             var previousComponent = hasSnapPosition ? snapPosition : null;
             var component = _snapPositionComponentPool.Count > 0 ? _snapPositionComponentPool.Pop() : new SnapPositionComponent();
             component.x = newX;
             component.y = newY;
             component.width = newWidth;
             component.height = newHeight;
+            component.shouldSnapToCameraY = newShouldSnapToCameraY;
             ReplaceComponent(ComponentIds.SnapPosition, component);
             if (previousComponent != null) {
                 _snapPositionComponentPool.Push(previousComponent);

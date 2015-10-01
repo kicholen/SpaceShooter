@@ -29,13 +29,13 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		Entity player = _playerGroup.GetSingleEntity();
 
 		if (e.hasSmoothCamera) {
-			e.AddRegularCamera(e.smoothCamera.camera, e.smoothCamera.offset)
+			e.AddRegularCamera(e.smoothCamera.offset)
 				.RemoveVelocity()
 				.RemovePosition();
 			e.RemoveSmoothCamera();
 		}
 		else if (e.hasRegularCamera) {
-			e.AddSmoothCamera(e.regularCamera.camera, e.regularCamera.offset)
+			e.AddSmoothCamera(e.regularCamera.offset)
 				.AddVelocity(0.0f, 2.0f)
 				.AddPosition(player.position.x, player.position.y + e.regularCamera.offset.y);
 			e.RemoveRegularCamera();

@@ -42,9 +42,13 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 		float width = (float)Convert.ToDouble(attributes[2].Value);
 		float height = (float)Convert.ToDouble(attributes[3].Value);
 
-		_cameras.GetSingleEntity()
-			.AddSnapPosition(x, y, width, height);
-		_players.GetSingleEntity();
+		Entity cameraEntity = _cameras.GetSingleEntity();
+		cameraEntity.AddSnapPosition(x, y, width, height, false);
+		Camera camera = cameraEntity.camera.camera;//= 
+		float screenWidth = camera.orthographicSize * camera.aspect * 2.0f;
+		float screenHeight = camera.orthographicSize * 2.0f;// todo what if player resize/rotate, needs to update 
+		_players.GetSingleEntity()
+			.AddSnapPosition(x, y, screenWidth, screenHeight, true);
 	}
 
 	XmlNode loadXml(CreateLevelComponent component) {

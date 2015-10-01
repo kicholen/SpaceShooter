@@ -6,9 +6,11 @@ using System;
 
 public class SnapPositionSystem : IExecuteSystem, ISetPool {
 	Group _group;
-	
+	Group _camera;
+
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.SnapPosition, Matcher.Position));
+		_camera = pool.GetGroup(Matcher.Camera);
 	}
 	
 	public void Execute() {
@@ -17,7 +19,13 @@ public class SnapPositionSystem : IExecuteSystem, ISetPool {
 		foreach (Entity e in _group.GetEntities()) {
 			PositionComponent position = e.position;
 			SnapPositionComponent snapPosition = e.snapPosition;
-			
+
+			if (snapPosition.shouldSnapToCameraY) {
+				Camera camera = _camera.GetSingleEntity().camera.camera;
+				snapPosition.y = camera.transform.position.y - camera.orthographicSize;
+				snapPosition.x = camera.transform.position.x - camera.orthographicSize * camera.aspect;
+			}
+
 			if (position.x < snapPosition.x) {
 				position.x = snapPosition.x;
 			}
