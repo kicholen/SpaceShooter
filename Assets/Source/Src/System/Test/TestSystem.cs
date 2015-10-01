@@ -3,12 +3,10 @@ using UnityEngine;
 
 public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	Pool _pool;
-	Group _group;
 	Group _playerGroup;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
-		_group = pool.GetGroup(Matcher.Test);
 		_playerGroup = pool.GetGroup(Matcher.Player);
 	}
 
@@ -19,7 +17,6 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 
 	public void Execute() {
 		Debug.Log("TestSystem");
-		Entity e = _group.GetSingleEntity();
 
 		if (Input.GetKeyDown(KeyCode.C)) {
 			changeCamera();

@@ -21,11 +21,30 @@ public class SmoothCameraSystem : IExecuteSystem, ISetPool {
 		PositionComponent position = e.position;
 		CameraComponent camera = e.camera;
 		PositionComponent playerPosition = camera.follow.position;
-
+		// todo would be good to move it above position system, the snapCamera to trash 
 		float lerp = 0.1f;
 		Vector3 cameraPosition = smoothCamera.camera.transform.position;
 		temp.x = cameraPosition.x + (playerPosition.x - cameraPosition.x) * lerp;
 
+		snapCamera(e, position);
 		smoothCamera.camera.transform.position = new Vector3(temp.x, position.y, smoothCamera.offset.z);
+	}
+
+	void snapCamera(Entity e, PositionComponent position) {
+		SnapPositionComponent snapPosition = e.snapPosition;
+		
+		if (temp.x < snapPosition.x) {
+			temp.x = snapPosition.x;
+		}
+		else if (temp.x > (snapPosition.x + snapPosition.width)) {
+			temp.x = snapPosition.x + snapPosition.width;
+		}
+		
+		if (position.y > (snapPosition.height + snapPosition.y)) {
+			position.y = snapPosition.height + snapPosition.y;
+		}
+		else if (position.y < snapPosition.y) {
+			position.y = snapPosition.y;
+		}
 	}
 }

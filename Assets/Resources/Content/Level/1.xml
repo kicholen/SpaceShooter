@@ -1,5 +1,8 @@
-﻿<enemy version="1">
-	<level value="10">
-		<enemy count="4" />
-	</level>
-</enemy>
+﻿<level version="1">
+	<enemy>
+		<enemy value="10">
+			<enemy count="4" />
+		</enemy>
+	</enemy>
+	<dimensions x="-5" y="-2" width="10" height="20" />
+</level>

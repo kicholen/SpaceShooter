@@ -50,6 +50,9 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreateCollisionSystem())
 			.Add(pool.CreatePositionSystem())
 			
+				// Physics not so much
+				.Add(pool.CreateSnapPositionSystem())
+
 				// Object
 				.Add(pool.CreateHealthSystem())
 
@@ -58,9 +61,11 @@ public class GameController : MonoBehaviour {
 			// RemoveGO
 			.Add(pool.CreateRemoveGameObjectSystem())
 			
+			
 			// Camera
 			.Add(pool.CreateRegularCameraSystem())
 			.Add(pool.CreateSmoothCameraSystem())
+			
 			
 			// DestroyPosition, static GO do not need to refresh on every frame
 			.Add(pool.CreateDestroyPositionSystem())

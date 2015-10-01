@@ -11,19 +11,21 @@ public static class ComponentIds {
     public const int GameObject = 9;
     public const int Health = 10;
     public const int Input = 11;
-    public const int MissileSpawner = 12;
-    public const int MouseInput = 13;
-    public const int Player = 14;
-    public const int Position = 15;
-    public const int RegularCamera = 16;
-    public const int Resource = 17;
-    public const int SmoothCamera = 18;
-    public const int Test = 19;
-    public const int Velocity = 20;
-    public const int VelocityLimit = 21;
-    public const int Weapon = 22;
+    public const int LevelDimensions = 12;
+    public const int MissileSpawner = 13;
+    public const int MouseInput = 14;
+    public const int Player = 15;
+    public const int Position = 16;
+    public const int RegularCamera = 17;
+    public const int Resource = 18;
+    public const int SmoothCamera = 19;
+    public const int SnapPosition = 20;
+    public const int Test = 21;
+    public const int Velocity = 22;
+    public const int VelocityLimit = 23;
+    public const int Weapon = 24;
 
-    public const int TotalComponents = 23;
+    public const int TotalComponents = 25;
 
     static readonly string[] components = {
         "Acceleration",
@@ -38,6 +40,7 @@ public static class ComponentIds {
         "GameObject",
         "Health",
         "Input",
+        "LevelDimensions",
         "MissileSpawner",
         "MouseInput",
         "Player",
@@ -45,6 +48,7 @@ public static class ComponentIds {
         "RegularCamera",
         "Resource",
         "SmoothCamera",
+        "SnapPosition",
         "Test",
         "Velocity",
         "VelocityLimit",

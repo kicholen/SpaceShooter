@@ -2,14 +2,19 @@ using Entitas;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Xml;
+using System;
 
 public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.CreateLevel.OnEntityAdded(); } }
 
 	Pool _pool;
+	Group _players;
+	Group _cameras;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
+		_players = _pool.GetGroup(Matcher.Player);
+		_cameras = _pool.GetGroup(Matcher.Camera);
 	}
 
 	public void Initialize() {
@@ -20,14 +25,26 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 	
 	public void Execute(List<Entity> entities) {
 		Debug.Log("CreateLevelSystem");
-		for (int i = 0; i < entities.Count; i++) {
-			Entity e = entities[i];
-			CreateLevelComponent createLevel = e.createLevel;
-			XmlNode node = loadXml(createLevel);
+		Entity e = entities.SingleEntity();
 
-			_pool.CreateEntity()
-				.AddEnemySpawner(createLevel.level, false, node.FirstChild);
-		}
+		CreateLevelComponent createLevel = e.createLevel;
+		XmlNode node = loadXml(createLevel);
+
+		XmlNode enemyNode = node.FirstChild;
+		_pool.CreateEntity()
+			.AddEnemySpawner(createLevel.level, false, enemyNode.FirstChild);
+
+		XmlNode sizeNode = enemyNode.NextSibling;
+		XmlAttributeCollection attributes = sizeNode.Attributes;
+
+		float x = (float)Convert.ToDouble(attributes[0].Value);
+		float y = (float)Convert.ToDouble(attributes[1].Value);
+		float width = (float)Convert.ToDouble(attributes[2].Value);
+		float height = (float)Convert.ToDouble(attributes[3].Value);
+
+		_cameras.GetSingleEntity()
+			.AddSnapPosition(x, y, width, height);
+		_players.GetSingleEntity();
 	}
 
 	XmlNode loadXml(CreateLevelComponent component) {
