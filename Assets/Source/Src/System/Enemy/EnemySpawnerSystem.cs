@@ -59,7 +59,8 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 							.AddVelocityLimit(5.0f, 5.0f)
 							.AddHealth(health)
 							.AddCollision(CollisionTypes.Enemy)
-							.AddResource(Resource.Enemy);
+							.AddResource(Resource.Enemy)
+							.isFaceDirection = true;
 						enemyCount--;
 					}
 					innerNode = innerNode.NextSibling;

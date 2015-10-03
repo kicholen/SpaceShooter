@@ -1,8 +1,5 @@
 using Entitas;
 using UnityEngine;
-using System.Collections.Generic;
-using System.Xml;
-using System;
 
 public class SnapPositionSystem : IExecuteSystem, ISetPool {
 	Group _group;

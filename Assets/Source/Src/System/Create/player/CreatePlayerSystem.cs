@@ -14,7 +14,7 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 			.AddPlayer("superPlayer")
 			.AddPosition(2.0f, 2.0f)
 			.AddVelocity(0.0f, 0.0f)
-			.AddAcceleration(0.0f, 0.0f, 0.0f, 0.0f)
+			//.AddAcceleration(0.0f, 0.0f, 0.0f, 0.0f)
 			.AddVelocityLimit(5.0f, 5.0f)
 			.AddHealth(50)
 			.AddResource(Resource.Player);
