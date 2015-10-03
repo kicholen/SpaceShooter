@@ -33,7 +33,7 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 		EnemySpawnerComponent enemySpawner = e.enemySpawner;
 		XmlNode node = enemySpawner.node;
 
-		if (enemySpawner.used) {
+		if (enemySpawner.used && node != null) {
 			enemySpawner.node = enemySpawner.node.NextSibling;
 			node = enemySpawner.node;
 		}

@@ -16,17 +16,18 @@ public static class ComponentIds {
     public const int MissileSpawner = 14;
     public const int MouseInput = 15;
     public const int Player = 16;
-    public const int Position = 17;
-    public const int RegularCamera = 18;
-    public const int Resource = 19;
-    public const int SmoothCamera = 20;
-    public const int SnapPosition = 21;
-    public const int Test = 22;
-    public const int Velocity = 23;
-    public const int VelocityLimit = 24;
-    public const int Weapon = 25;
+    public const int PoolableGO = 17;
+    public const int Position = 18;
+    public const int RegularCamera = 19;
+    public const int Resource = 20;
+    public const int SmoothCamera = 21;
+    public const int SnapPosition = 22;
+    public const int Test = 23;
+    public const int Velocity = 24;
+    public const int VelocityLimit = 25;
+    public const int Weapon = 26;
 
-    public const int TotalComponents = 26;
+    public const int TotalComponents = 27;
 
     static readonly string[] components = {
         "Acceleration",
@@ -46,6 +47,7 @@ public static class ComponentIds {
         "MissileSpawner",
         "MouseInput",
         "Player",
+        "PoolableGO",
         "Position",
         "RegularCamera",
         "Resource",

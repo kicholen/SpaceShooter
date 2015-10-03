@@ -12,16 +12,18 @@ namespace Entitas {
             _gameObjectComponentPool.Clear();
         }
 
-        public Entity AddGameObject(UnityEngine.GameObject newGameObject) {
+        public Entity AddGameObject(UnityEngine.GameObject newGameObject, string newPath) {
             var component = _gameObjectComponentPool.Count > 0 ? _gameObjectComponentPool.Pop() : new GameObjectComponent();
             component.gameObject = newGameObject;
+            component.path = newPath;
             return AddComponent(ComponentIds.GameObject, component);
         }
 
-        public Entity ReplaceGameObject(UnityEngine.GameObject newGameObject) {
+        public Entity ReplaceGameObject(UnityEngine.GameObject newGameObject, string newPath) {
             var previousComponent = hasGameObject ? gameObject : null;
             var component = _gameObjectComponentPool.Count > 0 ? _gameObjectComponentPool.Pop() : new GameObjectComponent();
             component.gameObject = newGameObject;
+            component.path = newPath;
             ReplaceComponent(ComponentIds.GameObject, component);
             if (previousComponent != null) {
                 _gameObjectComponentPool.Push(previousComponent);
