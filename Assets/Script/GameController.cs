@@ -50,6 +50,7 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreateCollisionSystem())
 			.Add(pool.CreatePositionSystem())
 			
+				.Add(pool.CreateRemoveOutOfViewGOSystem())
 				// Physics not so much
 				.Add(pool.CreateSnapPositionSystem())
 				.Add(pool.CreateFaceDirectionSystem())

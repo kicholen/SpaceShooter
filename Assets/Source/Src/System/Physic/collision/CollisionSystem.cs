@@ -15,7 +15,7 @@ public class CollisionSystem : IExecuteSystem, ISetPool {
 	
 	public void Execute() {
 		Debug.Log("CollisionSystem");
-		foreach(var e in _group.GetEntities()) {
+		foreach(Entity e in _group.GetEntities()) {
 			checkCollision(e);
 		}
 	}

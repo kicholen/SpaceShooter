@@ -27,7 +27,7 @@ public class RemoveGameObjectSystem : IReactiveSystem, ISetPool, IEnsureComponen
 
 	public void Execute(List<Entity> entities) {
 		Debug.Log("RemoveGameObjectSystem");
-		for (int i = 0; i < entities.Count; i++) {
+		for (int i = 0; i < entities.Count; i++) {// todo this is not called at all, change name to poolableSystem ^^
 			Entity e = entities [i];
 			e.RemoveGameObject();
 			e.isDestroyEntity = true;
