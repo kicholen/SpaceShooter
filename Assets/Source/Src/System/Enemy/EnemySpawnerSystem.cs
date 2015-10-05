@@ -7,11 +7,14 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 	Group _group;
 	Group _camera;
 	Pool _pool;
+	EnemyFactory _factory;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		_group = pool.GetGroup(Matcher.EnemySpawner);
 		_camera = pool.GetGroup(Matcher.SmoothCamera);
+		_factory = new EnemyFactory();
+		_factory.SetPool(_pool);
 	}
 	
 	public void Execute() {
@@ -52,15 +55,7 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 					int type = Convert.ToInt16(innerNode.Attributes[5].Value);
 					int health = Convert.ToInt16(innerNode.Attributes[6].Value);
 					while (enemyCount != 0) {
-						_pool.CreateEntity()
-							.AddEnemy(type)
-							.AddPosition(x, y)
-							.AddVelocity(velocityX, velocityY)
-							.AddVelocityLimit(5.0f, 5.0f)
-							.AddHealth(health)
-							.AddCollision(CollisionTypes.Enemy)
-							.AddResource(Resource.Enemy)
-							.isFaceDirection = true;
+						_factory.createEnemyByType(type, x, y, velocityX, velocityY, health);
 						enemyCount--;
 					}
 					innerNode = innerNode.NextSibling;

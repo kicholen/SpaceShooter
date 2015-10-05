@@ -13,9 +13,11 @@ public class RemoveOutOfViewGOSystem : IExecuteSystem, ISetPool {
 	
 	public void Execute() {
 		Debug.Log("RemoveOutOfViewGOSystem");
-		Entity camera = _cameraGroup.GetSingleEntity();
-		Vector3 cameraPosition = camera.camera.camera.transform.position;
-		float radiusPower = Mathf.Pow(radius, 2.0f);
+		Entity cameraEntity = _cameraGroup.GetSingleEntity();
+		Camera camera = cameraEntity.camera.camera;
+		Vector3 cameraPosition = camera.transform.position;
+		float ortographicSize = camera.orthographicSize;
+		float radiusPower = Mathf.Pow(camera.aspect > 1.0f ? ortographicSize * camera.aspect + 1.0f: ortographicSize + 1.0f, 2.0f);
 
 		foreach (Entity e in _group.GetEntities()) {
 			PositionComponent position = e.position;

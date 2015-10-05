@@ -9,7 +9,7 @@ public class WeaponSystem : IReactiveSystem {
 		Debug.Log("WeaponSystem");
 		foreach (Entity e in entities) {
 			if (e.isWeapon) {
-				e.AddMissileSpawner(0.0f, 0.5f, true);
+				e.AddMissileSpawner(0.0f, 0.5f, Resource.Missile, CollisionTypes.Player, 0.0f, 10.0f, true);
 			}
 			else {
 				e.RemoveMissileSpawner();

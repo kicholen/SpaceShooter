@@ -19,18 +19,18 @@ public class SpawnMissileSystem : IExecuteSystem, ISetPool {
 			missile.time -= _deltaTime;
 			if (missile.time < 0.0f) {
 				missile.time = missile.spawnDelay;
-				spawnMissile(e.position);
+				spawnMissile(missile, e.position);
 			}
 		}
 	}
 	
-	void spawnMissile(PositionComponent position) {
+	void spawnMissile(MissileSpawnerComponent missile, PositionComponent position) {
 		_pool.CreateEntity()
 			.AddPosition(position.x, position.y)
-			.AddVelocity(0.0f, 10.0f)
+			.AddVelocity(missile.velocityX, missile.velocityY)
 			.AddHealth(0)
-			.AddCollision(CollisionTypes.Player)
-			.AddResource(Resource.Missile);
+			.AddCollision(missile.collisionType)
+			.AddResource(missile.resource);
 	}
 
 }

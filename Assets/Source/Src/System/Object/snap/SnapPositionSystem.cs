@@ -12,13 +12,13 @@ public class SnapPositionSystem : IExecuteSystem, ISetPool {
 	
 	public void Execute() {
 		Debug.Log("SnapPositionSystem");
+		Camera camera = _camera.GetSingleEntity().camera.camera;
 
 		foreach (Entity e in _group.GetEntities()) {
 			PositionComponent position = e.position;
 			SnapPositionComponent snapPosition = e.snapPosition;
 
 			if (snapPosition.shouldSnapToCameraY) {
-				Camera camera = _camera.GetSingleEntity().camera.camera;
 				snapPosition.y = camera.transform.position.y - camera.orthographicSize;
 				snapPosition.x = camera.transform.position.x - camera.orthographicSize * camera.aspect;
 			}
