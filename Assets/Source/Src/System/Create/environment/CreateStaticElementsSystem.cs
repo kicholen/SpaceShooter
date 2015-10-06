@@ -12,7 +12,9 @@ public class CreateStaticElementsSystem : IInitializeSystem, ISetPool {
 		Debug.Log("CreateStaticElementsSystem");
 		_pool.CreateEntity()
 			.AddPosition(0.0f, 0.0f)
+			.AddHealth(2000)
 			.AddResource(Resource.Blockade)
+			.AddCollision(CollisionTypes.Static)
 			.isDestroyPosition = true;
 	}
 }

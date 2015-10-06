@@ -1,7 +1,6 @@
 using UnityEngine;
 using Entitas;
 using System.Collections.Generic;
-using System.Collections;
 
 public class RemoveGameObjectSystem : IReactiveSystem, ISetPool, IEnsureComponents {
 	public TriggerOnEvent trigger { get { return Matcher.Resource.OnEntityRemoved(); } }

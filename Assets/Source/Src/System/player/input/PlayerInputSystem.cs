@@ -58,8 +58,8 @@ public class PlayerInputSystem : IReactiveSystem, ISetPool { // todo maybe chang
 		velocity.x = (tx/dist)*5.0f;
 		velocity.y = (ty/dist)*5.0f;*/
 
-		velocity.x = (component.x - position.x) * 5.0f;
-		velocity.y = (component.y - position.y) * 5.0f;
+		velocity.x = Mathf.Max(-5.0f, Mathf.Min((component.x - position.x) * 5.0f, 5.0f));
+		velocity.y = Mathf.Max(-5.0f, Mathf.Min((component.y - position.y) * 5.0f, 5.0f));
 	}
 
 	void slowDown(Entity entity) {
