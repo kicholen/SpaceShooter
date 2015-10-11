@@ -1,4 +1,3 @@
-using UnityEngine;
 using Entitas;
 
 public class PositionSystem : IExecuteSystem, ISetPool {
@@ -11,7 +10,6 @@ public class PositionSystem : IExecuteSystem, ISetPool {
 	}
 
 	public void Execute() {
-		Debug.Log("PositionSystem");
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (Entity e in _group.GetEntities()) {
 			PositionComponent position = e.position;

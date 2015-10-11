@@ -20,8 +20,6 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	}
 
 	public void Execute() {
-		Debug.Log("TestSystem");
-
 		if (Input.GetKeyDown(KeyCode.C)) {
 			changeCamera();
 		}

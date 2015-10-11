@@ -1,5 +1,4 @@
 using Entitas;
-using UnityEngine;
 
 public class HomeMissileSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
@@ -13,7 +12,6 @@ public class HomeMissileSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("HomeMissileSystem");
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (Entity e in _missiles.GetEntities()) {
 

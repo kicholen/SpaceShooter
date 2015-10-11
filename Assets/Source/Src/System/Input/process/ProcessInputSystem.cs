@@ -13,7 +13,6 @@ public class ProcessInputSystem : IReactiveSystem, ISetPool {
 	}
 
 	public void Execute(List<Entity> entities) {
-		Debug.Log("ProcessInputSystem");
 		Entity e = entities.SingleEntity();
 
 		handleMouseInput(e.mouseInput);

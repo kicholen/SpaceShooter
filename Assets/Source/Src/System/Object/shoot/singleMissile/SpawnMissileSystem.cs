@@ -1,5 +1,4 @@
 using Entitas;
-using UnityEngine;
 
 public class SpawnMissileSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
@@ -13,7 +12,6 @@ public class SpawnMissileSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("SpawnMissileSystem");
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (Entity e in _missiles.GetEntities()) {
 			MissileSpawnerComponent missile = e.missileSpawner;

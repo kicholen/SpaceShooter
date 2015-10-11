@@ -13,7 +13,6 @@ public class CircleMissileSpawnerSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("CircleMissileSpawnerSystem");
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (Entity e in _missiles.GetEntities()) {
 			CircleMissileSpawnerComponent missile = e.circleMissileSpawner;

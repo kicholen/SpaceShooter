@@ -9,7 +9,6 @@ public class RegularCameraSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("RegularCameraSystem");
 		foreach (Entity e in _group.GetEntities()) {
 			updateCamera(e);
 		}

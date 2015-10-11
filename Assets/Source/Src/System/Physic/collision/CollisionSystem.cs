@@ -1,4 +1,3 @@
-using UnityEngine;
 using Entitas;
 using System.Collections.Generic;
 using System;
@@ -14,7 +13,6 @@ public class CollisionSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("CollisionSystem");
 		foreach(Entity e in _group.GetEntities()) {
 			checkCollision(e);
 		}

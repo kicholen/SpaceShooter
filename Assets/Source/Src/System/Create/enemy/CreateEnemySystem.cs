@@ -1,4 +1,3 @@
-using UnityEngine;
 using Entitas;
 
 public class CreateEnemySystem : IInitializeSystem, ISetPool {
@@ -9,7 +8,6 @@ public class CreateEnemySystem : IInitializeSystem, ISetPool {
 	}
 	
 	public void Initialize() {
-		Debug.Log("CreateEnemySystem");
 		_pool.CreateEntity()
 			.AddEnemy(0)
 			.AddPosition(2.0f, 5.0f)

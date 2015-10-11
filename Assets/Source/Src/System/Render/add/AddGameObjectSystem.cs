@@ -15,7 +15,6 @@ public class AddGameObjectSystem : IReactiveSystem, ISetPool {
 	}
 
     public void Execute(List<Entity> entities) {
-		Debug.Log("AddGameObjectSystem");
         for (int i = 0; i < entities.Count; i++) {
 			Entity e = entities[i];
 			string resourceName = e.resource.name;

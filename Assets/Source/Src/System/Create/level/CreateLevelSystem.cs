@@ -18,13 +18,11 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 	}
 
 	public void Initialize() {
-		Debug.Log("CreateLevelSystem");
 		_pool.CreateEntity()
 			.AddCreateLevel(1, "/Resources/Content/level/"); // todo make another system for handling this
 	}
 	
 	public void Execute(List<Entity> entities) {
-		Debug.Log("CreateLevelSystem");
 		Entity e = entities.SingleEntity();
 
 		CreateLevelComponent createLevel = e.createLevel;

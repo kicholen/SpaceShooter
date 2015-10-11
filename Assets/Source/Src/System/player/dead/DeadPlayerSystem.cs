@@ -1,4 +1,3 @@
-using UnityEngine;
 using Entitas;
 using System.Collections.Generic;
 
@@ -12,8 +11,6 @@ public class DeadPlayerSystem : IReactiveSystem, ISetPool {
 	}
 
 	public void Execute(List<Entity> entities) {
-		Debug.Log("DeadPlayerSystem");
-
 		foreach (Entity e in entities) {
 			if (e.isDestroyEntity) {
 				createRestartEntity();

@@ -10,7 +10,6 @@ public class SmoothCameraSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("SmoothCameraSystem");
 		foreach (Entity e in _group.GetEntities()) {
 			updateCamera(e);
 		}

@@ -18,7 +18,6 @@ public class RemoveGameObjectSystem : IReactiveSystem, ISetPool, IEnsureComponen
 	}
 	
 	void onEntityRemoved(Group group, Entity entity, int index, IComponent component) {
-		Debug.Log("RemoveGameObjectSystem");
 		GameObjectComponent gameObjectComponent = (GameObjectComponent)component;
 		gameObjectComponent.gameObject.transform.parent = null;
 		gameObjectComponent.gameObject.SetActive(false);

@@ -11,11 +11,12 @@ public class CreateCameraSystem : IInitializeSystem, ISetPool {
 	}
 	
 	public void Initialize() {
-		Debug.Log("CreateCameraSystem");
 		Camera camera = Camera.main;
 		Entity player = _group.GetSingleEntity();
 		_pool.CreateEntity()
 			.AddCamera(camera, player)
-			.AddRegularCamera(new Vector3(0.0f, 2.0f, camera.transform.position.z));
+			.AddSmoothCamera(new Vector3(0.0f, 2.0f, camera.transform.position.z))
+			.AddVelocity(0.0f, 2.0f)
+			.AddPosition(player.position.x, player.position.y + 2.0f);
 	}
 }

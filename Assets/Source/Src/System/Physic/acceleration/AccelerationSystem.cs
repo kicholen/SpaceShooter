@@ -1,4 +1,3 @@
-using UnityEngine;
 using Entitas;
 
 public class AccelerationSystem : IExecuteSystem, ISetPool {
@@ -11,7 +10,6 @@ public class AccelerationSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("AccelerationSystem");
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (var e in _group.GetEntities()) {
 			applyFriction(e, deltaTime);

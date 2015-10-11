@@ -16,7 +16,6 @@ public class TimeSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("TimeSystem");
 		Entity e = _group.GetSingleEntity();
 		TimeComponent time = e.time;
 		time.deltaTime = Time.deltaTime * time.modificator;

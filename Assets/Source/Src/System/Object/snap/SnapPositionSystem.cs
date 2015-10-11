@@ -11,7 +11,6 @@ public class SnapPositionSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("SnapPositionSystem");
 		Camera camera = _camera.GetSingleEntity().camera.camera;
 
 		foreach (Entity e in _group.GetEntities()) {

@@ -24,7 +24,6 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 		}
 		#endif
 
-		Debug.Log("EnemySpawnerSystem");
 		Camera camera = _camera.GetSingleEntity().camera.camera;
 		Vector3 cameraPosition = camera.transform.position;
 		foreach (Entity e in _group.GetEntities()) {

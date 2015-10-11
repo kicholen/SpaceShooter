@@ -1,4 +1,3 @@
-using UnityEngine;
 using Entitas;
 
 public class DestroyPositionSystem : IExecuteSystem, ISetPool {
@@ -9,7 +8,6 @@ public class DestroyPositionSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("DestroyPositionSystem");
 		foreach (var e in _group.GetEntities()) {
 			e.RemovePosition();
 			e.isDestroyPosition = false;

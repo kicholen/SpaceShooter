@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Entitas;
+﻿using Entitas;
 
 public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 	Pool _pool;
@@ -9,7 +8,6 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 	}
 	
 	public void Initialize() {
-		Debug.Log("CreatePlayerSystem");
 		_pool.CreateEntity()
 			.AddPlayer("superPlayer")
 			.AddPosition(0.0f, 0.0f)

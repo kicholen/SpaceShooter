@@ -1,5 +1,4 @@
 using Entitas;
-using UnityEngine;
 
 public class HealthSystem : IExecuteSystem, ISetPool {
 	Group _group;
@@ -9,7 +8,6 @@ public class HealthSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("HealthSystem");
 		foreach(Entity e in _group.GetEntities()) {
 			HealthComponent health = e.health;
 			DamageComponent damage = e.damage;

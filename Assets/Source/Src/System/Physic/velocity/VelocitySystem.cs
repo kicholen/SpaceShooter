@@ -1,4 +1,3 @@
-using UnityEngine;
 using Entitas;
 
 public class VelocitySystem : IExecuteSystem, ISetPool {
@@ -11,7 +10,6 @@ public class VelocitySystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("VelocitySystem");
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (var e in _group.GetEntities()) {
 			applyVelocity(e, deltaTime);

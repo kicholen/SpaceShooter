@@ -12,7 +12,6 @@ public class RemoveOutOfViewGOSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("RemoveOutOfViewGOSystem");
 		Entity cameraEntity = _cameraGroup.GetSingleEntity();
 		Camera camera = cameraEntity.camera.camera;
 		Vector3 cameraPosition = camera.transform.position;

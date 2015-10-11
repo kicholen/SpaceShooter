@@ -15,7 +15,6 @@ public class PlayerInputSystem : IReactiveSystem, ISetPool { // todo maybe chang
 	}
 	
 	public void Execute(List<Entity> entities) {
-		Debug.Log("PlayerInputSystem");
 		Entity e = entities.SingleEntity();
 		InputComponent input = e.input;
 		updatePlayer(input);

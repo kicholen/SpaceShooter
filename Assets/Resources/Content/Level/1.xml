@@ -35,5 +35,5 @@
 			<enemy count="1" x="1" y="18" velX="4" velY="-2" type="0" health="100"/>
 		</enemy>
 	</enemy>
-	<dimensions x="-2.5" y="-2" width="5" height="100" />
+	<dimensions x="-1.5" y="-2" width="3" height="100" />
 </level>

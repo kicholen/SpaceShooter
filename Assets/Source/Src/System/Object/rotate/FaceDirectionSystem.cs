@@ -10,8 +10,6 @@ public class FaceDirectionSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Debug.Log("FaceDirectionSystem");
-		
 		foreach (Entity e in _group.GetEntities()) { // todo do not calculate this every frame instead use time/velocity diff
 			VelocityComponent velocity = e.velocity;
 			GameObjectComponent gameObject = e.gameObject;
