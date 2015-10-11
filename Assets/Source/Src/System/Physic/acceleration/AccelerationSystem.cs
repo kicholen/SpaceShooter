@@ -4,7 +4,7 @@ using UnityEngine;
 public class AccelerationSystem : IExecuteSystem, ISetPool {
 	Group _group;
 	Group _time;
-	const float EPSILON = 0.05f;
+	const float EPSILON = 0.1f;
 
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Acceleration, Matcher.Velocity));
@@ -45,11 +45,12 @@ public class AccelerationSystem : IExecuteSystem, ISetPool {
 	}
 
 	float getAcceleration(float value, float friction, float deltaTime) {
-		if (value > friction) {
-			return value - deltaTime * friction;
+		float deltaFriction = deltaTime * friction;
+		if (value > deltaFriction) {
+			return value - deltaFriction;
 		}
-		if (value < -friction) {
-			return value + deltaTime * friction;
+		if (value < -deltaFriction) {
+			return value + deltaFriction;
 		}
 
 		return 0.0f;
