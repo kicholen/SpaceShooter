@@ -8,7 +8,7 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 	
 	public void SetPool(Pool pool) {
 		_pool = pool;
-		_missiles = _pool.GetGroup(Matcher.CircleMissileSpawner);
+		_missiles = _pool.GetGroup(Matcher.HomeMissileSpawner);
 		_time = pool.GetGroup(Matcher.Time);
 	}
 	

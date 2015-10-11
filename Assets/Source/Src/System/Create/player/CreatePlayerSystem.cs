@@ -12,7 +12,7 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 		Debug.Log("CreatePlayerSystem");
 		_pool.CreateEntity()
 			.AddPlayer("superPlayer")
-			.AddPosition(2.0f, 2.0f)
+			.AddPosition(0.0f, 0.0f)
 			.AddVelocity(0.0f, 0.0f)
 			//.AddAcceleration(0.0f, 0.0f, 0.0f, 0.0f)
 			.AddVelocityLimit(5.0f, 5.0f)

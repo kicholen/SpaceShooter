@@ -11,7 +11,7 @@ public class CreateStaticElementsSystem : IInitializeSystem, ISetPool {
 	public void Initialize() {
 		Debug.Log("CreateStaticElementsSystem");
 		_pool.CreateEntity()
-			.AddPosition(0.0f, 0.0f)
+			.AddPosition(-2.0f, 2.0f)
 			.AddHealth(2000)
 			.AddResource(Resource.Blockade)
 			.AddCollision(CollisionTypes.Static)

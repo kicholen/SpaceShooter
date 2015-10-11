@@ -28,6 +28,9 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		if (Input.GetKeyDown(KeyCode.T)) {
 			changeTime();
 		}
+		if (Input.GetKeyDown(KeyCode.H)) {
+			homeMissile();
+		}
 	}
 	
 	void changeCamera() {
@@ -52,5 +55,16 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	void changeTime() {
 		TimeComponent component = _timeGroup.GetSingleEntity().time;
 		component.modificator = Mathf.Abs(component.modificator - 1.0f) < EPSILON ? 0.2f : 1.0f;
+	}
+
+	void homeMissile() {
+		Entity player = _playerGroup.GetSingleEntity();
+
+		if (player.hasHomeMissileSpawner) {
+			player.RemoveHomeMissileSpawner();
+		}
+		else {
+			player.AddHomeMissileSpawner(player.gameObject.gameObject, 0.0f, 5.0f, Resource.Missile, 5.0f, CollisionTypes.Player);
+		}
 	}
 }

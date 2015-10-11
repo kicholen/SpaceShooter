@@ -15,9 +15,12 @@ public class DeadPlayerSystem : IReactiveSystem, ISetPool {
 		Debug.Log("DeadPlayerSystem");
 
 		foreach (Entity e in entities) {
-			e.isDestroyEntity = false;
+			if (e.isDestroyEntity) {
+				createRestartEntity();
+				e.isDestroyEntity = false;
+			}
 		}
-		createRestartEntity();
+
 	}
 
 	void createRestartEntity() {

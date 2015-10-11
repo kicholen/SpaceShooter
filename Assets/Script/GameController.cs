@@ -33,6 +33,8 @@ public class GameController : MonoBehaviour {
 				// Spawners
 				.Add(pool.CreateSpawnMissileSystem())
 				.Add(pool.CreateCircleMissileSpawnerSystem())
+				.Add(pool.CreateHomeMissileSpawnerSystem())
+				.Add(pool.CreateHomeMissileSystem())
 				.Add(pool.CreateEnemySpawnerSystem())
 			
 			.Add(pool.CreateTimeSystem())
