@@ -10,6 +10,8 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 	Group _cameras;
 	Group _resources;
 	Group _enemySpawners;
+	Group _bonusSpawners;
+	Group _bonuses;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
@@ -18,6 +20,7 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 		_cameras = pool.GetGroup(Matcher.SmoothCamera);
 		_resources = pool.GetGroup(Matcher.Resource);
 		_enemySpawners = pool.GetGroup(Matcher.EnemySpawner);
+		_bonuses = pool.GetGroup(Matcher.BonusModel);
 	}
 	
 	public void Execute(List<Entity> entities) {
@@ -29,6 +32,8 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 		restartLevel();
 		clearGameObjects();
 		clearEnemySpawners();
+		clearBonuses();
+
 		restartPlayer();
 	}
 
@@ -63,6 +68,12 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 
 	void clearGameObjects() {
 		foreach (Entity e in _resources.GetEntities()) {
+			e.isDestroyEntity = true;
+		}
+	}
+
+	void clearBonuses() {
+		foreach (Entity e in _bonuses.GetEntities()) {
 			e.isDestroyEntity = true;
 		}
 	}

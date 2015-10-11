@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour {
 				.Add(pool.CreateHomeMissileSpawnerSystem())
 				.Add(pool.CreateHomeMissileSystem())
 				.Add(pool.CreateEnemySpawnerSystem())
-			
+
 			.Add(pool.CreateTimeSystem())
 
 			// AddGO
@@ -63,6 +63,7 @@ public class GameController : MonoBehaviour {
 				// Object
 				.Add(pool.CreateHealthSystem())
 				.Add(pool.CreateDeadPlayerSystem())
+				.Add(pool.CreateActivateBonusSystem())
 
 			// PositionGO
 			.Add(pool.CreatePositionGameObjectSystem())
@@ -74,6 +75,8 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreateRegularCameraSystem())
 			.Add(pool.CreateSmoothCameraSystem())
 			
+				// Bonus Spawner
+				.Add(pool.CreateBonusSpawnerSystem())
 			
 			// DestroyPosition, static GO do not need to refresh on every frame
 			.Add(pool.CreateDestroyPositionSystem())

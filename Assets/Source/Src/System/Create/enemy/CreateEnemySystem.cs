@@ -13,8 +13,9 @@ public class CreateEnemySystem : IInitializeSystem, ISetPool {
 			.AddPosition(2.0f, 5.0f)
 			.AddVelocity(0.0f, 0.0f)
 			.AddVelocityLimit(5.0f, 5.0f)
-			.AddHealth(2000)
-			.AddCircleMissileSpawner(12, 5.0f, 5.0f, Resource.MissileEnemy, 0.0f, -2.0f, CollisionTypes.Enemy)
+			.AddHealth(20)
+			.AddBonusSpawner(1)
+			.AddCircleMissileSpawner(12, 1.0f, 5.0f, Resource.MissileEnemy, 0.0f, -2.0f, CollisionTypes.Enemy)
 			.AddCollision(CollisionTypes.Enemy)
 			.AddResource(Resource.Enemy);
 	}
