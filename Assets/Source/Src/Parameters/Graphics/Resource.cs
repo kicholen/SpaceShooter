@@ -5,4 +5,5 @@ public static class Resource {
 	public const string MissileEnemy = "50_Missile_Enemy";
 	public const string Blockade = "100_Blockade";
 	public const string Bonus = "0_Bonus";
+	public const string Star = "0_Star";
 }

@@ -6,4 +6,6 @@ public class AccelerationComponent : IComponent {
 
 	public float frictionX;
 	public float frictionY;
+
+	public bool stopNearZero;
 }

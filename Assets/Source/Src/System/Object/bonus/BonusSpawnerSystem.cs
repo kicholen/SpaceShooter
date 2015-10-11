@@ -7,7 +7,10 @@ public class BonusSpawnerSystem : IReactiveSystem, ISetPool {
 
 	Pool _pool;
 	Group _group;
-	
+	const float ACCELERATION = 1.0f;
+	const float FRICTION = 0.45f;
+	const float VELOCITY = 2.0f;
+
 	public void SetPool(Pool pool) {
 		Random.seed = 42;
 		_pool = pool;
@@ -22,7 +25,7 @@ public class BonusSpawnerSystem : IReactiveSystem, ISetPool {
 			foreach (Entity bonusEntity in _group.GetEntities()) {
 				BonusModelComponent model = bonusEntity.bonusModel;
 				if ((model.type & type) == 1) {
-					if (Random.value < model.probability) {
+					if (Random.value <= model.probability) {
 						spawnBonus(e, model);
 					}
 				}
@@ -32,11 +35,21 @@ public class BonusSpawnerSystem : IReactiveSystem, ISetPool {
 
 	void spawnBonus(Entity e, BonusModelComponent bonus) {
 		PositionComponent position = e.position;
-		_pool.CreateEntity()
-			.AddBonus(bonus.type)
-			.AddPosition(position.x, position.y)
-			.AddHealth(0)
-			.AddCollision(CollisionTypes.Bonus)
-			.AddResource(Resource.Bonus);
+		int amount = Random.Range(bonus.minAmount, bonus.maxAmount);
+
+		for (int i = 0; i < amount; i++) {
+			float velocityX = Random.Range(-VELOCITY, VELOCITY);
+			float velocityY = Random.Range(-VELOCITY, VELOCITY);
+			float acceX = velocityX > 0.0f ? -ACCELERATION : ACCELERATION;
+			float acceY = velocityY > 0.0f ? -ACCELERATION : ACCELERATION;
+			_pool.CreateEntity()
+				.AddBonus(bonus.type)
+				.AddVelocity(velocityX, velocityY)
+				.AddAcceleration(acceX, acceY, acceX > 0.0f ? -FRICTION : FRICTION, acceY > 0.0f ? -FRICTION : FRICTION, true)
+				.AddPosition(position.x, position.y)
+				.AddHealth(0)
+				.AddCollision(CollisionTypes.Bonus)
+				.AddResource(bonus.resource);
+		}
 	}
 }

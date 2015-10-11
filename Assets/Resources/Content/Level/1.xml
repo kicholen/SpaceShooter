@@ -37,6 +37,7 @@
 	</enemy>
 	<dimensions x="-1.5" y="-2" width="3" height="100" />
 	<bonuses>
-		<speed type="1" amount="1" rate="0.1" res="Missile"/>
+		<speed type="1" minAmount="1" maxAmount="1" rate="0.1" res="0_Bonus"/>
+		<stars type="1" minAmount="1" maxAmount="5" rate="0.9" res="0_Star"/>
 	</bonuses>
 </level>

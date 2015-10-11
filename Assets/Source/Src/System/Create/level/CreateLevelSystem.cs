@@ -69,7 +69,7 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 			while (bonus != null) {
 				XmlAttributeCollection attributes = bonus.Attributes;
 				_pool.CreateEntity()
-					.AddBonusModel(Convert.ToInt16(attributes[0].Value), Convert.ToInt16(attributes[0].Value), (float)Convert.ToDouble(attributes[1].Value), attributes[2].Value);
+					.AddBonusModel(Convert.ToInt16(attributes[0].Value), Convert.ToInt16(attributes[1].Value), Convert.ToInt16(attributes[2].Value), (float)Convert.ToDouble(attributes[3].Value), attributes[4].Value);
 
 				bonus = bonus.NextSibling;
 			}
