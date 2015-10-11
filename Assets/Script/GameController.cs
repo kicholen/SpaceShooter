@@ -63,7 +63,9 @@ public class GameController : MonoBehaviour {
 				// Object
 				.Add(pool.CreateHealthSystem())
 				.Add(pool.CreateDeadPlayerSystem())
+				// bonus
 				.Add(pool.CreateActivateBonusSystem())
+				.Add(pool.CreateSpeedBonusSystem())
 
 			// PositionGO
 			.Add(pool.CreatePositionGameObjectSystem())

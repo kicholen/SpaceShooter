@@ -7,11 +7,13 @@ public class ActivateBonusSystem : IReactiveSystem, ISetPool {
 	
 	Pool _pool;
 	Group _group;
-	
+	Group _player;
+
 	public void SetPool(Pool pool) {
 		Random.seed = 42;
 		_pool = pool;
 		_group = pool.GetGroup(Matcher.BonusModel);
+		_player = pool.GetGroup(Matcher.Player);
 	}
 	
 	public void Execute(List<Entity> entities) {
@@ -31,6 +33,14 @@ public class ActivateBonusSystem : IReactiveSystem, ISetPool {
 	}
 	
 	void activateBonus(Entity e, BonusModelComponent bonus) {
-		Debug.Log("bonus activated");
+		switch(bonus.type) {
+		case 1:
+			_pool.CreateEntity()
+				.AddSpeedBonus(10.0f, 10.0f, 2.0f);
+			break;
+		default:
+			throw new UnityException("Unknown bonus type: " + bonus.type);
+			break;
+		}
 	}
 }

@@ -27,7 +27,7 @@ public class EnemyFactory {
 			.AddEnemy(type)
 			.AddPosition(x, y)
 			.AddVelocity(velocityX, velocityY)
-			.AddVelocityLimit(5.0f, 5.0f)
+			.AddVelocityLimit(5.0f, 5.0f, 0.0f, 0.0f)
 			.AddHealth(health)
 			.AddCollision(CollisionTypes.Enemy)
 			.AddBonusSpawner(1)

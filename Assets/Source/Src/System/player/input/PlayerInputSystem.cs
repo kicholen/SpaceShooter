@@ -2,7 +2,7 @@ using Entitas;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerInputSystem : IReactiveSystem, ISetPool { // todo maybe change it to execute, it's called every frame anyway
+public class PlayerInputSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.Input.OnEntityAdded(); } }
 	
 	Pool _pool;
@@ -49,6 +49,7 @@ public class PlayerInputSystem : IReactiveSystem, ISetPool { // todo maybe chang
 	void setVelocityByInput(Entity entity, InputComponent component) {
 		PositionComponent position = entity.position;
 		VelocityComponent velocity = entity.velocity;
+		VelocityLimitComponent velocityLimit = entity.velocityLimit;
 
 		/*float tx = (component.x - position.x);
 		float ty = (component.y - position.y);
@@ -57,8 +58,8 @@ public class PlayerInputSystem : IReactiveSystem, ISetPool { // todo maybe chang
 		velocity.x = (tx/dist)*5.0f;
 		velocity.y = (ty/dist)*5.0f;*/
 
-		velocity.x = Mathf.Max(-5.0f, Mathf.Min((component.x - position.x) * 5.0f, 5.0f));
-		velocity.y = Mathf.Max(-5.0f, Mathf.Min((component.y - position.y) * 5.0f, 5.0f));
+		velocity.x = Mathf.Max(-(velocityLimit.x + velocityLimit.offsetX), Mathf.Min((component.x - position.x) * 5.0f, velocityLimit.x + velocityLimit.offsetX));
+		velocity.y = Mathf.Max(-(velocityLimit.y + velocityLimit.offsetY), Mathf.Min((component.y - position.y) * 5.0f, velocityLimit.y + velocityLimit.offsetY));
 	}
 
 	void slowDown(Entity entity) {
