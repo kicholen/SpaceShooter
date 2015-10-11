@@ -12,28 +12,26 @@ namespace Entitas {
             _missileSpawnerComponentPool.Clear();
         }
 
-        public Entity AddMissileSpawner(float newTime, float newSpawnDelay, string newResource, int newCollisionType, float newVelocityX, float newVelocityY, bool newIsFriendly) {
+        public Entity AddMissileSpawner(float newTime, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, int newCollisionType) {
             var component = _missileSpawnerComponentPool.Count > 0 ? _missileSpawnerComponentPool.Pop() : new MissileSpawnerComponent();
             component.time = newTime;
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
-            component.collisionType = newCollisionType;
             component.velocityX = newVelocityX;
             component.velocityY = newVelocityY;
-            component.isFriendly = newIsFriendly;
+            component.collisionType = newCollisionType;
             return AddComponent(ComponentIds.MissileSpawner, component);
         }
 
-        public Entity ReplaceMissileSpawner(float newTime, float newSpawnDelay, string newResource, int newCollisionType, float newVelocityX, float newVelocityY, bool newIsFriendly) {
+        public Entity ReplaceMissileSpawner(float newTime, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, int newCollisionType) {
             var previousComponent = hasMissileSpawner ? missileSpawner : null;
             var component = _missileSpawnerComponentPool.Count > 0 ? _missileSpawnerComponentPool.Pop() : new MissileSpawnerComponent();
             component.time = newTime;
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
-            component.collisionType = newCollisionType;
             component.velocityX = newVelocityX;
             component.velocityY = newVelocityY;
-            component.isFriendly = newIsFriendly;
+            component.collisionType = newCollisionType;
             ReplaceComponent(ComponentIds.MissileSpawner, component);
             if (previousComponent != null) {
                 _missileSpawnerComponentPool.Push(previousComponent);

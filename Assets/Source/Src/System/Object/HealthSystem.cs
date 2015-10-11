@@ -18,9 +18,8 @@ public class HealthSystem : IExecuteSystem, ISetPool {
 			if (health.health < 0) {
 				e.isDestroyEntity = true;
 			}
-			else {
-				e.RemoveDamage();
-			}
+
+			e.RemoveDamage();
 		}
 	}
 }

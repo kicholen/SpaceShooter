@@ -2,12 +2,16 @@ using Entitas;
 using UnityEngine;
 
 public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
+	const float EPSILON = 0.005f;
+
 	Pool _pool;
 	Group _playerGroup;
+	Group _timeGroup;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		_playerGroup = pool.GetGroup(Matcher.Player);
+		_timeGroup = pool.GetGroup(Matcher.Time);
 	}
 
 	public void Initialize() {
@@ -20,6 +24,9 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 
 		if (Input.GetKeyDown(KeyCode.C)) {
 			changeCamera();
+		}
+		if (Input.GetKeyDown(KeyCode.T)) {
+			changeTime();
 		}
 	}
 	
@@ -40,5 +47,10 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 				.AddPosition(player.position.x, player.position.y + e.regularCamera.offset.y);
 			e.RemoveRegularCamera();
 		}
+	}
+
+	void changeTime() {
+		TimeComponent component = _timeGroup.GetSingleEntity().time;
+		component.modificator = Mathf.Abs(component.modificator - 1.0f) < EPSILON ? 0.2f : 1.0f;
 	}
 }

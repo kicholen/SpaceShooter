@@ -7,5 +7,4 @@ public class MissileSpawnerComponent : IComponent {
 	public float velocityX;
 	public float velocityY;
 	public int collisionType;
-	public bool isFriendly;
 }

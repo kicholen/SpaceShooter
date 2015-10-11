@@ -13,7 +13,7 @@ public class EnemyFactory {
 		case 0:
 			e = createStandardEnemy(type, x, y, velocityX, velocityY, health);
 			e.isFaceDirection = true;
-			e.AddMissileSpawner(0.0f, 2.5f, Resource.MissileEnemy, CollisionTypes.Enemy, 0.0f, -4.0f, false);
+			e.AddMissileSpawner(0.0f, 2.5f, Resource.MissileEnemy, 0.0f, -4.0f, CollisionTypes.Enemy);
 		break;
 
 		default:

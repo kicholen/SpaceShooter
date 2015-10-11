@@ -1,29 +1,29 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
 public class VelocitySystem : IExecuteSystem, ISetPool {
 	Group _group;
-	float _deltaTime;
+	Group _time;
 
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Acceleration, Matcher.Velocity));
+		_time = pool.GetGroup(Matcher.Time);
 	}
 	
 	public void Execute() {
 		Debug.Log("VelocitySystem");
-		_deltaTime = Time.deltaTime;
+		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (var e in _group.GetEntities()) {
-			applyVelocity(e);
+			applyVelocity(e, deltaTime);
 			limitVelocity(e);
 		}
 	}
 
-	void applyVelocity(Entity e) {
+	void applyVelocity(Entity e, float deltaTime) {
 		AccelerationComponent acceleration = e.acceleration;
 		VelocityComponent velocity = e.velocity;
 
-		e.ReplaceVelocity(velocity.x + _deltaTime * acceleration.x, velocity.y + _deltaTime * acceleration.y);
+		e.ReplaceVelocity(velocity.x + deltaTime * acceleration.x, velocity.y + deltaTime * acceleration.y);
 	}
 
 	void limitVelocity(Entity e) {
