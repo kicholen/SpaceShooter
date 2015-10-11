@@ -1,14 +1,14 @@
 ﻿<level version="1">
 	<enemy>
+		<enemy value="5">
+			<enemy count="1" x="-2" y="5" velX="0" velY="0" type="1" health="20"/>
+		</enemy>
 		<enemy value="10">
 			<enemy count="1" x="0" y="14" velX="0" velY="2" type="0" health="100"/>
 			<enemy count="1" x="0" y="13" velX="0" velY="2" type="0" health="100"/>
 			<enemy count="1" x="0" y="12" velX="0" velY="2" type="0" health="100"/>
 			<enemy count="1" x="0" y="11" velX="0" velY="2" type="0" health="100"/>
 			<enemy count="1" x="0" y="10" velX="0" velY="2" type="0" health="100"/>
-			<enemy count="1" x="0" y="9" velX="0" velY="2" type="0" health="100"/>
-			<enemy count="1" x="0" y="8" velX="0" velY="2" type="0" health="100"/>
-			<enemy count="1" x="0" y="7" velX="0" velY="2" type="0" health="100"/>
 		</enemy>
 		<enemy value="11">
 			<enemy count="1" x="2" y="11" velX="2" velY="1" type="0" health="100"/>

@@ -2,9 +2,11 @@ using Entitas;
 
 public class CreateEnemySystem : IInitializeSystem, ISetPool {
 	Pool _pool;
-	
+	Group _players;
+
 	public void SetPool(Pool pool) {
 		_pool = pool;
+		_players = pool.GetGroup(Matcher.Player);
 	}
 	
 	public void Initialize() {

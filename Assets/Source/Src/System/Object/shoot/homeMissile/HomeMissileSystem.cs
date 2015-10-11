@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public class HomeMissileSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
@@ -14,7 +15,21 @@ public class HomeMissileSystem : IExecuteSystem, ISetPool {
 	public void Execute() {
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (Entity e in _missiles.GetEntities()) {
-
+			navigateMissile(e, deltaTime);
 		}
+	}
+
+	void navigateMissile(Entity e, float deltaTime) {
+		HomeMissileComponent homeMissile = e.homeMissile;
+		PositionComponent position = e.position;
+		GameObject target = homeMissile.target;
+		Vector3 targetPosition = target.transform.position;
+		VelocityComponent velocity = e.velocity;
+
+		float velocityX = (targetPosition.x - position.x) * 5.0f;
+		float velocityY = (targetPosition.y - position.y) * 5.0f;
+
+		velocity.x = Mathf.Lerp(velocity.x, velocityX, deltaTime);
+		velocity.y = Mathf.Lerp(velocity.y, velocityY, deltaTime);
 	}
 }
