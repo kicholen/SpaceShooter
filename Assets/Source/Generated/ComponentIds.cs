@@ -19,25 +19,28 @@ public static class ComponentIds {
     public const int HomeMissile = 17;
     public const int HomeMissileSpawner = 18;
     public const int Input = 19;
-    public const int LevelDimensions = 20;
-    public const int MissileSpawner = 21;
-    public const int MouseInput = 22;
-    public const int Player = 23;
-    public const int PoolableGO = 24;
-    public const int Position = 25;
-    public const int RegularCamera = 26;
-    public const int Resource = 27;
-    public const int RestartGame = 28;
-    public const int SmoothCamera = 29;
-    public const int SnapPosition = 30;
-    public const int SpeedBonus = 31;
-    public const int Test = 32;
-    public const int Time = 33;
-    public const int Velocity = 34;
-    public const int VelocityLimit = 35;
-    public const int Weapon = 36;
+    public const int Laser = 20;
+    public const int LaserSpawner = 21;
+    public const int LevelDimensions = 22;
+    public const int MissileSpawner = 23;
+    public const int MouseInput = 24;
+    public const int NonRemovable = 25;
+    public const int Player = 26;
+    public const int PoolableGO = 27;
+    public const int Position = 28;
+    public const int RegularCamera = 29;
+    public const int Resource = 30;
+    public const int RestartGame = 31;
+    public const int SmoothCamera = 32;
+    public const int SnapPosition = 33;
+    public const int SpeedBonus = 34;
+    public const int Test = 35;
+    public const int Time = 36;
+    public const int Velocity = 37;
+    public const int VelocityLimit = 38;
+    public const int Weapon = 39;
 
-    public const int TotalComponents = 37;
+    public const int TotalComponents = 40;
 
     static readonly string[] components = {
         "Acceleration",
@@ -60,9 +63,12 @@ public static class ComponentIds {
         "HomeMissile",
         "HomeMissileSpawner",
         "Input",
+        "Laser",
+        "LaserSpawner",
         "LevelDimensions",
         "MissileSpawner",
         "MouseInput",
+        "NonRemovable",
         "Player",
         "PoolableGO",
         "Position",

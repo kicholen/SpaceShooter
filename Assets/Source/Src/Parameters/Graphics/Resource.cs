@@ -6,4 +6,5 @@ public static class Resource {
 	public const string Blockade = "100_Blockade";
 	public const string Bonus = "0_Bonus";
 	public const string Star = "0_Star";
+	public const string Laser = "Laser";
 }

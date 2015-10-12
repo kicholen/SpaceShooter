@@ -29,6 +29,9 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		if (Input.GetKeyDown(KeyCode.H)) {
 			homeMissile();
 		}
+		if (Input.GetKeyDown(KeyCode.L)) {
+			laserWeapon();
+		}
 	}
 	
 	void changeCamera() {
@@ -63,6 +66,17 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		}
 		else {
 			player.AddHomeMissileSpawner(player.gameObject.gameObject, 0.0f, 5.0f, Resource.Missile, 5.0f, CollisionTypes.Player);
+		}
+	}
+
+	void laserWeapon() {
+		Entity player = _playerGroup.GetSingleEntity();
+		
+		if (player.hasLaserSpawner) {
+			player.RemoveLaserSpawner();
+		}
+		else {
+			player.AddLaserSpawner(5.0f, 0.0f, null);
 		}
 	}
 }

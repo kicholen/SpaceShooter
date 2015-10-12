@@ -54,7 +54,11 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreateVelocitySystem())
 			.Add(pool.CreateCollisionSystem())
 			.Add(pool.CreatePositionSystem())
-			
+
+				// laser
+				.Add(pool.CreateLaserSpawnerSystem())
+				.Add(pool.CreateLaserSystem())
+
 				.Add(pool.CreateRemoveOutOfViewGOSystem())
 				// Physics not so much
 				.Add(pool.CreateSnapPositionSystem())
@@ -67,16 +71,18 @@ public class GameController : MonoBehaviour {
 				.Add(pool.CreateActivateBonusSystem())
 				.Add(pool.CreateSpeedBonusSystem())
 
+
+
 			// PositionGO
 			.Add(pool.CreatePositionGameObjectSystem())
 			// RemoveGO
 			.Add(pool.CreateRemoveGameObjectSystem())
 			
-			
 			// Camera
 			.Add(pool.CreateRegularCameraSystem())
 			.Add(pool.CreateSmoothCameraSystem())
 			
+
 				// Bonus Spawner
 				.Add(pool.CreateBonusSpawnerSystem())
 			
