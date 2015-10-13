@@ -1,12 +1,12 @@
 using Entitas;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class LaserSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
 	Group _time;
 	Group _group;
-	
+	const float pixelsPerUnit = 100.0f;
+
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Laser, Matcher.GameObject));
@@ -23,10 +23,9 @@ public class LaserSystem : IExecuteSystem, ISetPool {
 				LaserSpawnerComponent sourceSpawner = source.laserSpawner;
 
 				GameObject go = e.gameObject.gameObject;
-				float spriteHeight = go.GetComponent<SpriteRenderer>().sprite.bounds.size.y;
 				Transform transform = go.transform;
-				transform.localScale = new Vector3(transform.localScale.x, sourceSpawner.height, transform.localScale.z);
-				e.ReplacePosition(sourcePosition.x, sourcePosition.y + (sourceSpawner.height * spriteHeight) / 2.0f);
+				transform.localScale = new Vector3(transform.localScale.x, sourceSpawner.height * pixelsPerUnit, transform.localScale.z);
+				e.ReplacePosition(sourcePosition.x, sourcePosition.y + sourceSpawner.height / 2.0f);
 			}
 			else {
 				e.isDestroyEntity = true;
