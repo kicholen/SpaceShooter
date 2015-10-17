@@ -60,7 +60,7 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 		velocity.x = (tx/dist)*5.0f;
 		velocity.y = (ty/dist)*5.0f;*/
 
-		velocity.x = Mathf.Max(-(velocityLimit.x + velocityLimit.offsetX), Mathf.Min((component.x - position.x) * 5.0f, velocityLimit.x + velocityLimit.offsetX));
+		velocity.x = Mathf.Max(-(velocityLimit.x + velocityLimit.offsetX), Mathf.Min((component.x - position.x) * 5.0f, velocityLimit.x + velocityLimit.offsetX)); // todo sth is fucked up here
 		velocity.y = Mathf.Max(-(velocityLimit.y + velocityLimit.offsetY), Mathf.Min((component.y - position.y) * 5.0f, velocityLimit.y + velocityLimit.offsetY));
 	}
 

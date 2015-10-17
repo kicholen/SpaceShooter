@@ -7,17 +7,23 @@ public class BonusSpawnerSystem : IReactiveSystem, ISetPool {
 
 	Pool _pool;
 	Group _group;
+	Group _players;
 	const float ACCELERATION = 1.0f;
 	const float FRICTION = 0.45f;
 	const float VELOCITY = 2.0f;
+
+	const float TEST_VELOCITY = 5.0f;
+	const float TEST_RADIUS = 4.0f;
 
 	public void SetPool(Pool pool) {
 		Random.seed = 42;
 		_pool = pool;
 		_group = pool.GetGroup(Matcher.BonusModel);
+		_players = pool.GetGroup(Matcher.Player);
 	}
 	
 	public void Execute(List<Entity> entities) {
+		Entity player = _players.GetSingleEntity();
 		foreach (Entity e in entities) {
 			BonusSpawnerComponent bonus = e.bonusSpawner;
 			int type = bonus.type;
@@ -26,14 +32,14 @@ public class BonusSpawnerSystem : IReactiveSystem, ISetPool {
 				BonusModelComponent model = bonusEntity.bonusModel;
 				if ((model.type & type) == 1) {
 					if (Random.value <= model.probability) {
-						spawnBonus(e, model);
+						spawnBonus(e, model, player);
 					}
 				}
 			}
 		}
 	}
 
-	void spawnBonus(Entity e, BonusModelComponent bonus) {
+	void spawnBonus(Entity e, BonusModelComponent bonus, Entity follow) {
 		PositionComponent position = e.position;
 		int amount = Random.Range(bonus.minAmount, bonus.maxAmount);
 
@@ -49,6 +55,8 @@ public class BonusSpawnerSystem : IReactiveSystem, ISetPool {
 				.AddPosition(position.x, position.y)
 				.AddHealth(0)
 				.AddCollision(CollisionTypes.Bonus)
+				.AddFollowTarget(follow)
+				.AddMagnet(TEST_VELOCITY, TEST_RADIUS)
 				.AddResource(bonus.resource);
 		}
 	}

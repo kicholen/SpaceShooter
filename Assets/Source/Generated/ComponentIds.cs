@@ -26,27 +26,28 @@ public static class ComponentIds {
     public const int Laser = 24;
     public const int LaserSpawner = 25;
     public const int LevelDimensions = 26;
-    public const int MissileSpawner = 27;
-    public const int MouseInput = 28;
-    public const int NonRemovable = 29;
-    public const int Parent = 30;
-    public const int Player = 31;
-    public const int PoolableGO = 32;
-    public const int Position = 33;
-    public const int RegularCamera = 34;
-    public const int RelativePosition = 35;
-    public const int Resource = 36;
-    public const int RestartGame = 37;
-    public const int SmoothCamera = 38;
-    public const int SnapPosition = 39;
-    public const int SpeedBonus = 40;
-    public const int Test = 41;
-    public const int Time = 42;
-    public const int Velocity = 43;
-    public const int VelocityLimit = 44;
-    public const int Weapon = 45;
+    public const int Magnet = 27;
+    public const int MissileSpawner = 28;
+    public const int MouseInput = 29;
+    public const int NonRemovable = 30;
+    public const int Parent = 31;
+    public const int Player = 32;
+    public const int PoolableGO = 33;
+    public const int Position = 34;
+    public const int RegularCamera = 35;
+    public const int RelativePosition = 36;
+    public const int Resource = 37;
+    public const int RestartGame = 38;
+    public const int SmoothCamera = 39;
+    public const int SnapPosition = 40;
+    public const int SpeedBonus = 41;
+    public const int Test = 42;
+    public const int Time = 43;
+    public const int Velocity = 44;
+    public const int VelocityLimit = 45;
+    public const int Weapon = 46;
 
-    public const int TotalComponents = 46;
+    public const int TotalComponents = 47;
 
     static readonly string[] components = {
         "Acceleration",
@@ -76,6 +77,7 @@ public static class ComponentIds {
         "Laser",
         "LaserSpawner",
         "LevelDimensions",
+        "Magnet",
         "MissileSpawner",
         "MouseInput",
         "NonRemovable",

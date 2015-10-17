@@ -49,7 +49,9 @@ public class GameController : MonoBehaviour {
 			
 				// Input player
 				.Add(pool.CreatePlayerInputSystem())
-
+			
+				// magnet
+				.Add(pool.CreateMagnetSystem())
 			// Physics
 			.Add(pool.CreateAccelerationSystem())
 			.Add(pool.CreateVelocitySystem())
