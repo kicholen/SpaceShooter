@@ -28,13 +28,21 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 		             	.AddPosition(0.0f, 0.0f)
 		             	.AddChild(parent)
 		             	.AddHomeMissileSpawner(0.0f, 0.5f, Resource.Missile, 5.0f, CollisionTypes.Player)
-		             	.AddResource(Resource.Weapon));
+		            	.AddResource(Resource.Weapon));
 		children.Add(_pool.CreateEntity()
-		             .AddRelativePosition(-0.5f, 0.5f)
-		             .AddPosition(0.0f, 0.0f)
-		             .AddChild(parent)
-		             .AddHomeMissileSpawner(0.0f, 0.5f, Resource.Missile, 5.0f, CollisionTypes.Player)
-		             .AddResource(Resource.Weapon));
+		             	.AddRelativePosition(-0.5f, 0.5f)
+			            .AddPosition(0.0f, 0.0f)
+			            .AddChild(parent)
+			            .AddHomeMissileSpawner(0.0f, 0.5f, Resource.Missile, 5.0f, CollisionTypes.Player)
+		            	.AddResource(Resource.Weapon));
+
+		addNonRemovable(children);
 		return children;
+	}
+
+	void addNonRemovable(List<Entity> entities) {
+		foreach (Entity e in entities) {
+			e.isNonRemovable = true;
+		}
 	}
 }
