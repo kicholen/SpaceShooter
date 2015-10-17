@@ -70,6 +70,11 @@ public class GameController : MonoBehaviour {
 				// Object
 				.Add(pool.CreateHealthSystem())
 				.Add(pool.CreateDeadPlayerSystem())
+				.Add(pool.CreateAlphaSystem())
+
+				// Particle
+				.Add(pool.CreateParticleSpawnSystem())
+
 				// bonus
 				.Add(pool.CreateActivateBonusSystem())
 				.Add(pool.CreateSpeedBonusSystem())

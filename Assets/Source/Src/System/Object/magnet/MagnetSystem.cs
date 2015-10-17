@@ -21,10 +21,6 @@ public class MagnetSystem : IExecuteSystem, ISetPool {
 
 				if (isPointInCircle(targetPosition.x, targetPosition.y, magnetComponent.radius, position.x, position.y)) { // todo it's calculating all, view seperation in quads?
 					VelocityComponent velocity = e.velocity;
-
-					float velocityX = targetPosition.x - position.x;
-					float velocityY = targetPosition.y - position.y;
-
 					velocity.x = (targetPosition.x - position.x) * 5.0f;
 					velocity.y = (targetPosition.y - position.y) * 5.0f;
 				}

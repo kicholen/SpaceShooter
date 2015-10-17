@@ -1,9 +1,11 @@
 using Entitas;
 
 public class HealthSystem : IExecuteSystem, ISetPool {
+	Pool _pool;
 	Group _group;
 	
 	public void SetPool(Pool pool) {
+		_pool = pool;
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Damage, Matcher.Health));
 	}
 	
@@ -16,9 +18,17 @@ public class HealthSystem : IExecuteSystem, ISetPool {
 			if (health.health < 0) {
 				e.isDestroyEntity = true;
 				e.isCollisionDeath = true;
+				spawnParticles(e.position);
 			}
 
 			e.RemoveDamage();
 		}
+	}
+
+	void spawnParticles(PositionComponent position) {
+		_pool.CreateEntity()
+			.AddPosition(position.x, position.y)
+			.AddParticleSpawn(10, Resource.Particle, 0.5f, 2.0f);
+
 	}
 }

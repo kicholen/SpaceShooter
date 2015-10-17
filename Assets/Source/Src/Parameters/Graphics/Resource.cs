@@ -8,4 +8,5 @@ public static class Resource {
 	public const string Star = "0_Star";
 	public const string Laser = "Laser";
 	public const string Weapon = "Weapon";
+	public const string Particle = "Particle";
 }

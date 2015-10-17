@@ -1,56 +1,59 @@
 public static class ComponentIds {
     public const int Acceleration = 0;
-    public const int Bonus = 1;
-    public const int BonusModel = 2;
-    public const int BonusSpawner = 3;
-    public const int Camera = 4;
-    public const int Child = 5;
-    public const int CircleMissileSpawner = 6;
-    public const int Collision = 7;
-    public const int CollisionDeath = 8;
-    public const int CreateLevel = 9;
-    public const int Damage = 10;
-    public const int DestroyEntity = 11;
-    public const int DestroyEntityDelayed = 12;
-    public const int DestroyPosition = 13;
-    public const int Enemy = 14;
-    public const int EnemySpawner = 15;
-    public const int FaceDirection = 16;
-    public const int FindTarget = 17;
-    public const int FollowTarget = 18;
-    public const int GameObject = 19;
-    public const int Health = 20;
-    public const int HomeMissile = 21;
-    public const int HomeMissileSpawner = 22;
-    public const int Input = 23;
-    public const int Laser = 24;
-    public const int LaserSpawner = 25;
-    public const int LevelDimensions = 26;
-    public const int Magnet = 27;
-    public const int MissileSpawner = 28;
-    public const int MouseInput = 29;
-    public const int NonRemovable = 30;
-    public const int Parent = 31;
-    public const int Player = 32;
-    public const int PoolableGO = 33;
-    public const int Position = 34;
-    public const int RegularCamera = 35;
-    public const int RelativePosition = 36;
-    public const int Resource = 37;
-    public const int RestartGame = 38;
-    public const int SmoothCamera = 39;
-    public const int SnapPosition = 40;
-    public const int SpeedBonus = 41;
-    public const int Test = 42;
-    public const int Time = 43;
-    public const int Velocity = 44;
-    public const int VelocityLimit = 45;
-    public const int Weapon = 46;
+    public const int Alpha = 1;
+    public const int Bonus = 2;
+    public const int BonusModel = 3;
+    public const int BonusSpawner = 4;
+    public const int Camera = 5;
+    public const int Child = 6;
+    public const int CircleMissileSpawner = 7;
+    public const int Collision = 8;
+    public const int CollisionDeath = 9;
+    public const int CreateLevel = 10;
+    public const int Damage = 11;
+    public const int DestroyEntity = 12;
+    public const int DestroyEntityDelayed = 13;
+    public const int DestroyPosition = 14;
+    public const int Enemy = 15;
+    public const int EnemySpawner = 16;
+    public const int FaceDirection = 17;
+    public const int FindTarget = 18;
+    public const int FollowTarget = 19;
+    public const int GameObject = 20;
+    public const int Health = 21;
+    public const int HomeMissile = 22;
+    public const int HomeMissileSpawner = 23;
+    public const int Input = 24;
+    public const int Laser = 25;
+    public const int LaserSpawner = 26;
+    public const int LevelDimensions = 27;
+    public const int Magnet = 28;
+    public const int MissileSpawner = 29;
+    public const int MouseInput = 30;
+    public const int NonRemovable = 31;
+    public const int Parent = 32;
+    public const int ParticleSpawn = 33;
+    public const int Player = 34;
+    public const int PoolableGO = 35;
+    public const int Position = 36;
+    public const int RegularCamera = 37;
+    public const int RelativePosition = 38;
+    public const int Resource = 39;
+    public const int RestartGame = 40;
+    public const int SmoothCamera = 41;
+    public const int SnapPosition = 42;
+    public const int SpeedBonus = 43;
+    public const int Test = 44;
+    public const int Time = 45;
+    public const int Velocity = 46;
+    public const int VelocityLimit = 47;
+    public const int Weapon = 48;
 
-    public const int TotalComponents = 47;
+    public const int TotalComponents = 49;
 
     static readonly string[] components = {
         "Acceleration",
+        "Alpha",
         "Bonus",
         "BonusModel",
         "BonusSpawner",
@@ -82,6 +85,7 @@ public static class ComponentIds {
         "MouseInput",
         "NonRemovable",
         "Parent",
+        "ParticleSpawn",
         "Player",
         "PoolableGO",
         "Position",
