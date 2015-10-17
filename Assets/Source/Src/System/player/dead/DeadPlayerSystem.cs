@@ -17,7 +17,6 @@ public class DeadPlayerSystem : IReactiveSystem, ISetPool {
 				e.isDestroyEntity = false;
 			}
 		}
-
 	}
 
 	void createRestartEntity() {

@@ -89,7 +89,7 @@ public class GameController : MonoBehaviour {
 			// Camera
 			.Add(pool.CreateRegularCameraSystem())
 			.Add(pool.CreateSmoothCameraSystem())
-			
+				.Add(pool.CreateCameraShakeSystem())
 
 				// Bonus Spawner
 				.Add(pool.CreateBonusSpawnerSystem())

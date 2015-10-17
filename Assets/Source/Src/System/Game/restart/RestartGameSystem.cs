@@ -13,6 +13,7 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 	Group _bonusSpawners;
 	Group _homeMissileSpawners;
 	Group _bonuses;
+	Group _cameraShakes;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
@@ -22,6 +23,7 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 		_resources = pool.GetGroup(Matcher.Resource);
 		_enemySpawners = pool.GetGroup(Matcher.EnemySpawner);
 		_homeMissileSpawners = pool.GetGroup(Matcher.HomeMissileSpawner);
+		_cameraShakes = pool.GetGroup(Matcher.CameraShake);
 		_bonuses = pool.GetGroup(Matcher.BonusModel);
 	}
 	
@@ -36,6 +38,7 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 		clearEnemySpawners();
 		clearHomeMissileSpawners();
 		clearBonuses();
+		clearCameraShakes();
 
 		restartPlayer();
 	}
@@ -89,6 +92,12 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 
 	void clearBonuses() {
 		foreach (Entity e in _bonuses.GetEntities()) {
+			e.isDestroyEntity = true;
+		}
+	}
+
+	void clearCameraShakes() {
+		foreach (Entity e in _cameraShakes.GetEntities()) {
 			e.isDestroyEntity = true;
 		}
 	}

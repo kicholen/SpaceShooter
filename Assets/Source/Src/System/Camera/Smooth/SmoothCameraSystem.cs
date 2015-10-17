@@ -6,7 +6,7 @@ public class SmoothCameraSystem : IExecuteSystem, ISetPool {
 	Vector3 temp = new Vector3();
 
 	public void SetPool(Pool pool) {
-		_group = pool.GetGroup(Matcher.SmoothCamera);
+		_group = pool.GetGroup(Matcher.Camera);
 	}
 	
 	public void Execute() {
