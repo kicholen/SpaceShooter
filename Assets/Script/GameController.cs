@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour {
 				.Add(pool.CreateSpawnMissileSystem())
 				.Add(pool.CreateCircleMissileSpawnerSystem())
 				.Add(pool.CreateHomeMissileSpawnerSystem())
+				.Add(pool.CreateFindTargetSystem())
 				.Add(pool.CreateHomeMissileSystem())
 				.Add(pool.CreateEnemySpawnerSystem())
 
@@ -89,6 +90,7 @@ public class GameController : MonoBehaviour {
 			// DestroyPosition, static GO do not need to refresh on every frame
 			.Add(pool.CreateDestroyPositionSystem())
 			// Destroy
+			.Add(pool.CreateDestroyEntityDelayedSystem())
 			.Add(pool.CreateDestroyEntitySystem())
 
 			.Add(pool.CreateRestartGameSystem());

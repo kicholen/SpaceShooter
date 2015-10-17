@@ -20,8 +20,7 @@ public class EnemyFactory {
 		case 1:
 			e = createStandardEnemy(type, x, y, velocityX, velocityY, health);
 			e.isFaceDirection = true;
-			Entity player = _players.GetSingleEntity();
-			e.AddHomeMissileSpawner(player.gameObject.gameObject, 0.0f, 2.0f, Resource.MissileEnemy, 5.0f, CollisionTypes.Enemy);
+			e.AddHomeMissileSpawner(0.0f, 2.0f, Resource.MissileEnemy, 5.0f, CollisionTypes.Enemy);
 		break;
 		default:
 			e = createStandardEnemy(type, x, y, velocityX, velocityY, health);

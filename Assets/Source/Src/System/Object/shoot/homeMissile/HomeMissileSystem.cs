@@ -8,7 +8,7 @@ public class HomeMissileSystem : IExecuteSystem, ISetPool {
 	
 	public void SetPool(Pool pool) {
 		_pool = pool;
-		_missiles = _pool.GetGroup(Matcher.HomeMissile);
+		_missiles = _pool.GetGroup(Matcher.AllOf(Matcher.HomeMissile, Matcher.FollowTarget));
 		_time = pool.GetGroup(Matcher.Time);
 	}
 	
@@ -21,15 +21,19 @@ public class HomeMissileSystem : IExecuteSystem, ISetPool {
 
 	void navigateMissile(Entity e, float deltaTime) {
 		HomeMissileComponent homeMissile = e.homeMissile;
-		PositionComponent position = e.position;
-		GameObject target = homeMissile.target;
-		Vector3 targetPosition = target.transform.position;
-		VelocityComponent velocity = e.velocity;
+		FollowTargetComponent targetComponent = e.followTarget;
+		if (targetComponent.target != null && targetComponent.target.hasGameObject) {
+			GameObject target = targetComponent.target.gameObject.gameObject;
 
-		float velocityX = (targetPosition.x - position.x) * 5.0f;
-		float velocityY = (targetPosition.y - position.y) * 5.0f;
+			PositionComponent position = e.position;
+			Vector3 targetPosition = target.transform.position;
+			VelocityComponent velocity = e.velocity;
 
-		velocity.x = Mathf.Lerp(velocity.x, velocityX, deltaTime);
-		velocity.y = Mathf.Lerp(velocity.y, velocityY, deltaTime);
+			float velocityX = (targetPosition.x - position.x) * 5.0f;
+			float velocityY = (targetPosition.y - position.y) * 5.0f;
+
+			velocity.x = Mathf.Lerp(velocity.x, velocityX, deltaTime);
+			velocity.y = Mathf.Lerp(velocity.y, velocityY, deltaTime);
+		}
 	}
 }

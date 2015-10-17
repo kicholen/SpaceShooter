@@ -10,37 +10,40 @@ public static class ComponentIds {
     public const int CreateLevel = 8;
     public const int Damage = 9;
     public const int DestroyEntity = 10;
-    public const int DestroyPosition = 11;
-    public const int Enemy = 12;
-    public const int EnemySpawner = 13;
-    public const int FaceDirection = 14;
-    public const int GameObject = 15;
-    public const int Health = 16;
-    public const int HomeMissile = 17;
-    public const int HomeMissileSpawner = 18;
-    public const int Input = 19;
-    public const int Laser = 20;
-    public const int LaserSpawner = 21;
-    public const int LevelDimensions = 22;
-    public const int MissileSpawner = 23;
-    public const int MouseInput = 24;
-    public const int NonRemovable = 25;
-    public const int Player = 26;
-    public const int PoolableGO = 27;
-    public const int Position = 28;
-    public const int RegularCamera = 29;
-    public const int Resource = 30;
-    public const int RestartGame = 31;
-    public const int SmoothCamera = 32;
-    public const int SnapPosition = 33;
-    public const int SpeedBonus = 34;
-    public const int Test = 35;
-    public const int Time = 36;
-    public const int Velocity = 37;
-    public const int VelocityLimit = 38;
-    public const int Weapon = 39;
+    public const int DestroyEntityDelayed = 11;
+    public const int DestroyPosition = 12;
+    public const int Enemy = 13;
+    public const int EnemySpawner = 14;
+    public const int FaceDirection = 15;
+    public const int FindTarget = 16;
+    public const int FollowTarget = 17;
+    public const int GameObject = 18;
+    public const int Health = 19;
+    public const int HomeMissile = 20;
+    public const int HomeMissileSpawner = 21;
+    public const int Input = 22;
+    public const int Laser = 23;
+    public const int LaserSpawner = 24;
+    public const int LevelDimensions = 25;
+    public const int MissileSpawner = 26;
+    public const int MouseInput = 27;
+    public const int NonRemovable = 28;
+    public const int Player = 29;
+    public const int PoolableGO = 30;
+    public const int Position = 31;
+    public const int RegularCamera = 32;
+    public const int Resource = 33;
+    public const int RestartGame = 34;
+    public const int SmoothCamera = 35;
+    public const int SnapPosition = 36;
+    public const int SpeedBonus = 37;
+    public const int Test = 38;
+    public const int Time = 39;
+    public const int Velocity = 40;
+    public const int VelocityLimit = 41;
+    public const int Weapon = 42;
 
-    public const int TotalComponents = 40;
+    public const int TotalComponents = 43;
 
     static readonly string[] components = {
         "Acceleration",
@@ -54,10 +57,13 @@ public static class ComponentIds {
         "CreateLevel",
         "Damage",
         "DestroyEntity",
+        "DestroyEntityDelayed",
         "DestroyPosition",
         "Enemy",
         "EnemySpawner",
         "FaceDirection",
+        "FindTarget",
+        "FollowTarget",
         "GameObject",
         "Health",
         "HomeMissile",

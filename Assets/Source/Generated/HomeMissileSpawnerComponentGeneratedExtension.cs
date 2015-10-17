@@ -12,9 +12,8 @@ namespace Entitas {
             _homeMissileSpawnerComponentPool.Clear();
         }
 
-        public Entity AddHomeMissileSpawner(UnityEngine.GameObject newTarget, float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
+        public Entity AddHomeMissileSpawner(float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
             var component = _homeMissileSpawnerComponentPool.Count > 0 ? _homeMissileSpawnerComponentPool.Pop() : new HomeMissileSpawnerComponent();
-            component.target = newTarget;
             component.time = newTime;
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
@@ -23,10 +22,9 @@ namespace Entitas {
             return AddComponent(ComponentIds.HomeMissileSpawner, component);
         }
 
-        public Entity ReplaceHomeMissileSpawner(UnityEngine.GameObject newTarget, float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
+        public Entity ReplaceHomeMissileSpawner(float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
             var previousComponent = hasHomeMissileSpawner ? homeMissileSpawner : null;
             var component = _homeMissileSpawnerComponentPool.Count > 0 ? _homeMissileSpawnerComponentPool.Pop() : new HomeMissileSpawnerComponent();
-            component.target = newTarget;
             component.time = newTime;
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
