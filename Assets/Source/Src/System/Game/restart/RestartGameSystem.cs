@@ -1,6 +1,5 @@
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class RestartGameSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.RestartGame.OnEntityAdded(); } }

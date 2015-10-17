@@ -7,11 +7,13 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	Pool _pool;
 	Group _playerGroup;
 	Group _timeGroup;
+	Group _pause;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		_playerGroup = pool.GetGroup(Matcher.Player);
 		_timeGroup = pool.GetGroup(Matcher.Time);
+		_pause = pool.GetGroup(Matcher.PauseGame);
 	}
 
 	public void Initialize() {
@@ -31,6 +33,9 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		}
 		if (Input.GetKeyDown(KeyCode.L)) {
 			laserWeapon();
+		}
+		if (Input.GetKeyDown(KeyCode.P)) {
+			pauseOrUnpauseGame();
 		}
 	}
 	
@@ -77,6 +82,17 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		}
 		else {
 			player.AddLaserSpawner(5.0f, 0.0f, null);
+		}
+	}
+
+	void pauseOrUnpauseGame() {
+		if (_pause.Count > 0) {
+			_pause.GetSingleEntity()
+				.isDestroyEntity = true;
+		}
+		else {
+			_pool.CreateEntity()
+				.isPauseGame = true;
 		}
 	}
 }

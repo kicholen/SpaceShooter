@@ -100,6 +100,7 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreateDestroyEntityDelayedSystem())
 			.Add(pool.CreateDestroyEntitySystem())
 
-			.Add(pool.CreateRestartGameSystem());
+			.Add(pool.CreateRestartGameSystem())
+			.Add(pool.CreatePauseGameSystem());
     }
 }

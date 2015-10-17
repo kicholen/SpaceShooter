@@ -33,23 +33,24 @@ public static class ComponentIds {
     public const int NonRemovable = 31;
     public const int Parent = 32;
     public const int ParticleSpawn = 33;
-    public const int Player = 34;
-    public const int PoolableGO = 35;
-    public const int Position = 36;
-    public const int RegularCamera = 37;
-    public const int RelativePosition = 38;
-    public const int Resource = 39;
-    public const int RestartGame = 40;
-    public const int SmoothCamera = 41;
-    public const int SnapPosition = 42;
-    public const int SpeedBonus = 43;
-    public const int Test = 44;
-    public const int Time = 45;
-    public const int Velocity = 46;
-    public const int VelocityLimit = 47;
-    public const int Weapon = 48;
+    public const int PauseGame = 34;
+    public const int Player = 35;
+    public const int PoolableGO = 36;
+    public const int Position = 37;
+    public const int RegularCamera = 38;
+    public const int RelativePosition = 39;
+    public const int Resource = 40;
+    public const int RestartGame = 41;
+    public const int SmoothCamera = 42;
+    public const int SnapPosition = 43;
+    public const int SpeedBonus = 44;
+    public const int Test = 45;
+    public const int Time = 46;
+    public const int Velocity = 47;
+    public const int VelocityLimit = 48;
+    public const int Weapon = 49;
 
-    public const int TotalComponents = 49;
+    public const int TotalComponents = 50;
 
     static readonly string[] components = {
         "Acceleration",
@@ -86,6 +87,7 @@ public static class ComponentIds {
         "NonRemovable",
         "Parent",
         "ParticleSpawn",
+        "PauseGame",
         "Player",
         "PoolableGO",
         "Position",
