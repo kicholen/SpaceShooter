@@ -29,8 +29,8 @@ public class HomeMissileSystem : IExecuteSystem, ISetPool {
 			Vector3 targetPosition = target.transform.position;
 			VelocityComponent velocity = e.velocity;
 
-			float velocityX = (targetPosition.x - position.x) * 5.0f;
-			float velocityY = (targetPosition.y - position.y) * 5.0f;
+			float velocityX = (targetPosition.x - position.x) * 15.0f;
+			float velocityY = (targetPosition.y - position.y) * 15.0f;
 
 			velocity.x = Mathf.Lerp(velocity.x, velocityX, deltaTime);
 			velocity.y = Mathf.Lerp(velocity.y, velocityY, deltaTime);

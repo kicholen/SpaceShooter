@@ -4,46 +4,49 @@ public static class ComponentIds {
     public const int BonusModel = 2;
     public const int BonusSpawner = 3;
     public const int Camera = 4;
-    public const int CircleMissileSpawner = 5;
-    public const int Collision = 6;
-    public const int CollisionDeath = 7;
-    public const int CreateLevel = 8;
-    public const int Damage = 9;
-    public const int DestroyEntity = 10;
-    public const int DestroyEntityDelayed = 11;
-    public const int DestroyPosition = 12;
-    public const int Enemy = 13;
-    public const int EnemySpawner = 14;
-    public const int FaceDirection = 15;
-    public const int FindTarget = 16;
-    public const int FollowTarget = 17;
-    public const int GameObject = 18;
-    public const int Health = 19;
-    public const int HomeMissile = 20;
-    public const int HomeMissileSpawner = 21;
-    public const int Input = 22;
-    public const int Laser = 23;
-    public const int LaserSpawner = 24;
-    public const int LevelDimensions = 25;
-    public const int MissileSpawner = 26;
-    public const int MouseInput = 27;
-    public const int NonRemovable = 28;
-    public const int Player = 29;
-    public const int PoolableGO = 30;
-    public const int Position = 31;
-    public const int RegularCamera = 32;
-    public const int Resource = 33;
-    public const int RestartGame = 34;
-    public const int SmoothCamera = 35;
-    public const int SnapPosition = 36;
-    public const int SpeedBonus = 37;
-    public const int Test = 38;
-    public const int Time = 39;
-    public const int Velocity = 40;
-    public const int VelocityLimit = 41;
-    public const int Weapon = 42;
+    public const int Child = 5;
+    public const int CircleMissileSpawner = 6;
+    public const int Collision = 7;
+    public const int CollisionDeath = 8;
+    public const int CreateLevel = 9;
+    public const int Damage = 10;
+    public const int DestroyEntity = 11;
+    public const int DestroyEntityDelayed = 12;
+    public const int DestroyPosition = 13;
+    public const int Enemy = 14;
+    public const int EnemySpawner = 15;
+    public const int FaceDirection = 16;
+    public const int FindTarget = 17;
+    public const int FollowTarget = 18;
+    public const int GameObject = 19;
+    public const int Health = 20;
+    public const int HomeMissile = 21;
+    public const int HomeMissileSpawner = 22;
+    public const int Input = 23;
+    public const int Laser = 24;
+    public const int LaserSpawner = 25;
+    public const int LevelDimensions = 26;
+    public const int MissileSpawner = 27;
+    public const int MouseInput = 28;
+    public const int NonRemovable = 29;
+    public const int Parent = 30;
+    public const int Player = 31;
+    public const int PoolableGO = 32;
+    public const int Position = 33;
+    public const int RegularCamera = 34;
+    public const int RelativePosition = 35;
+    public const int Resource = 36;
+    public const int RestartGame = 37;
+    public const int SmoothCamera = 38;
+    public const int SnapPosition = 39;
+    public const int SpeedBonus = 40;
+    public const int Test = 41;
+    public const int Time = 42;
+    public const int Velocity = 43;
+    public const int VelocityLimit = 44;
+    public const int Weapon = 45;
 
-    public const int TotalComponents = 43;
+    public const int TotalComponents = 46;
 
     static readonly string[] components = {
         "Acceleration",
@@ -51,6 +54,7 @@ public static class ComponentIds {
         "BonusModel",
         "BonusSpawner",
         "Camera",
+        "Child",
         "CircleMissileSpawner",
         "Collision",
         "CollisionDeath",
@@ -75,10 +79,12 @@ public static class ComponentIds {
         "MissileSpawner",
         "MouseInput",
         "NonRemovable",
+        "Parent",
         "Player",
         "PoolableGO",
         "Position",
         "RegularCamera",
+        "RelativePosition",
         "Resource",
         "RestartGame",
         "SmoothCamera",

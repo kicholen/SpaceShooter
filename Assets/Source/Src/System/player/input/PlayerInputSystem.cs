@@ -1,21 +1,23 @@
 using Entitas;
 using UnityEngine;
-using System.Collections.Generic;
 
-public class PlayerInputSystem : IReactiveSystem, ISetPool {
-	public TriggerOnEvent trigger { get { return Matcher.Input.OnEntityAdded(); } }
-	
+public class PlayerInputSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
+	Group _group;
 	Group _players;
+	Group _timeGroup;
+	bool hasChanged = true;
 	const float EPSILON = 0.005f;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
+		_group = _pool.GetGroup(Matcher.Input); 
 		_players = _pool.GetGroup(Matcher.Player);
+		_timeGroup = _pool.GetGroup(Matcher.Time);
 	}
 	
-	public void Execute(List<Entity> entities) {
-		Entity e = entities.SingleEntity();
+	public void Execute() {
+		Entity e = _group.GetSingleEntity();
 		InputComponent input = e.input;
 		updatePlayer(input);
 	}

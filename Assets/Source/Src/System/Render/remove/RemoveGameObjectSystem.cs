@@ -18,10 +18,22 @@ public class RemoveGameObjectSystem : IReactiveSystem, ISetPool, IEnsureComponen
 	}
 	
 	void onEntityRemoved(Group group, Entity entity, int index, IComponent component) {
-		GameObjectComponent gameObjectComponent = (GameObjectComponent)component;
-		gameObjectComponent.gameObject.transform.parent = null;
-		gameObjectComponent.gameObject.SetActive(false);
-		addToPool(gameObjectComponent);
+		removeGameObject((GameObjectComponent)component);
+		if (entity.hasParent) {
+			ParentComponent parentComponent = entity.parent;
+			for (int i = 0; i < parentComponent.children.Count; i++) {
+				Entity child = parentComponent.children[i];
+				if (child != null && child.hasGameObject) {
+					removeGameObject(child.gameObject);
+				}
+			}
+		}
+	}
+
+	void removeGameObject(GameObjectComponent component) {
+		component.gameObject.transform.parent = null;
+		component.gameObject.SetActive(false);
+		addToPool(component);
 	}
 
 	public void Execute(List<Entity> entities) {

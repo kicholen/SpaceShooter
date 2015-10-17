@@ -7,7 +7,7 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 	Group _enemies;
 	Group _player;
 
-	const float SELF_DESTRUCTION_TIME = 5.0f;
+	const float SELF_DESTRUCTION_TIME = 3.0f;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
@@ -39,7 +39,7 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 	void spawnMissile(HomeMissileSpawnerComponent missile, PositionComponent position) {
 		_pool.CreateEntity()
 			.AddPosition(position.x, position.y)
-			.AddVelocity(missile.velocity, missile.velocity)
+			.AddVelocity(0.0f, 0.0f)
 			.AddVelocityLimit(missile.velocity, missile.velocity, 0.0f, 0.0f)
 			.AddHealth(0)
 			.AddHomeMissile(0.0f)

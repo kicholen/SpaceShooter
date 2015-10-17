@@ -1,0 +1,72 @@
+﻿<level version="1">
+	<enemy>
+		<enemy value="5">
+			<enemy count="1" x="-2" y="5" velX="0" velY="0" type="1" health="20"/>
+		</enemy>
+		<enemy value="10">
+			<enemy count="1" x="0" y="14" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="1" y="14" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="2" y="14" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="3" y="14" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="-1" y="14" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="-2" y="14" velX="0" velY="2" type="0" health="100"/>
+			
+			<enemy count="1" x="0" y="13" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="1" y="13" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="2" y="13" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="3" y="13" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="-1" y="13" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="-2" y="13" velX="0" velY="2" type="0" health="100"/>
+			
+			<enemy count="1" x="0" y="12" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="1" y="12" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="2" y="12" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="3" y="12" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="-1" y="12" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="-2" y="12" velX="0" velY="2" type="0" health="100"/>
+			
+			<enemy count="1" x="0" y="11" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="1" y="14" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="2" y="14" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="3" y="14" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="-1" y="14" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="-2" y="14" velX="0" velY="2" type="0" health="100"/>
+			
+			<enemy count="1" x="0" y="10" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="1" y="10" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="2" y="10" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="3" y="10" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="-1" y="10" velX="0" velY="2" type="0" health="100"/>
+			<enemy count="1" x="-2" y="10" velX="0" velY="2" type="0" health="100"/>
+		</enemy>
+		<enemy value="11">
+			<enemy count="1" x="2" y="11" velX="2" velY="1" type="0" health="100"/>
+		</enemy>
+		<enemy value="12">
+			<enemy count="1" x="3" y="12" velX="2" velY="0" type="0" health="100"/>
+		</enemy>
+		<enemy value="13">
+			<enemy count="1" x="4" y="13" velX="3" velY="4" type="0" health="100"/>
+		</enemy>
+		<enemy value="14">
+			<enemy count="1" x="5" y="14" velX="1" velY="5" type="0" health="100"/>
+		</enemy>
+		<enemy value="15">
+			<enemy count="1" x="4" y="15" velX="1" velY="6" type="0" health="100"/>
+		</enemy>
+		<enemy value="16">
+			<enemy count="1" x="3" y="16" velX="-2" velY="4" type="0" health="100"/>
+		</enemy>
+		<enemy value="17">
+			<enemy count="1" x="2" y="17" velX="3" velY="5" type="0" health="100"/>
+		</enemy>
+		<enemy value="18">
+			<enemy count="1" x="1" y="18" velX="4" velY="-2" type="0" health="100"/>
+		</enemy>
+	</enemy>
+	<dimensions x="-1.5" y="-2" width="3" height="100" />
+	<bonuses>
+		<speed type="1" minAmount="1" maxAmount="1" rate="0.1" res="0_Bonus"/>
+		<stars type="1" minAmount="1" maxAmount="5" rate="0.9" res="0_Star"/>
+	</bonuses>
+</level>

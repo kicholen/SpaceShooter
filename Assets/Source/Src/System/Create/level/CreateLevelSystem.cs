@@ -19,7 +19,7 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 
 	public void Initialize() {
 		_pool.CreateEntity()
-			.AddCreateLevel(1, "/Resources/Content/level/"); // todo make another system for handling this
+			.AddCreateLevel(1, "/Resources/"); // todo make another system for handling this
 	}
 	
 	public void Execute(List<Entity> entities) {
@@ -58,7 +58,8 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 
 	XmlNode loadXml(CreateLevelComponent component) {
 		XmlDocument doc = new XmlDocument();
-		doc.Load(Application.dataPath + component.path + component.level + ".xml");
+		TextAsset textFile = Resources.Load<TextAsset>(component.level.ToString());
+		doc.LoadXml(textFile.text);//Application.dataPath + component.path + component.level + ".xml");
 		return doc.FirstChild;
 	}
 

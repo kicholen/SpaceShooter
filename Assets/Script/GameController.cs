@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour {
 				.Add(pool.CreateActivateBonusSystem())
 				.Add(pool.CreateSpeedBonusSystem())
 
-
+			.Add(pool.CreateRelativePositionSystem())
 
 			// PositionGO
 			.Add(pool.CreatePositionGameObjectSystem())

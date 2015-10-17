@@ -1,29 +1,37 @@
 using Entitas;
 using UnityEngine;
-using System.Collections.Generic;
 
-public class ProcessInputSystem : IReactiveSystem, ISetPool {
-	public TriggerOnEvent trigger { get { return Matcher.MouseInput.OnEntityAdded(); } }
-
+public class ProcessInputSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 	Pool _pool;
+	Group _group;
+	Group _input;
 	Vector3 temp = new Vector3();
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
+		_group = pool.GetGroup(Matcher.MouseInput);
+		_input = pool.GetGroup(Matcher.Input);
 	}
 
-	public void Execute(List<Entity> entities) {
-		Entity e = entities.SingleEntity();
-
-		handleMouseInput(e.mouseInput);
+	public void Initialize() {
+		createEntity();
 	}
 
-	void handleMouseInput(MouseInputComponent component) {
+	public void Execute() {
+		Entity e = _group.GetSingleEntity();
+
+		MouseInputComponent component = e.mouseInput;
 		temp.Set(component.x, component.y, 0);
 		temp = Camera.main.ScreenToWorldPoint(temp);
 
+		InputComponent input = _input.GetSingleEntity().input;
+		input.x = temp.x;
+		input.y = temp.y;
+		input.isDown = component.isDown;
+	}
+
+	void createEntity() {
 		_pool.CreateEntity()
-			.AddInput(temp.x, temp.y, component.isDown)
-			.isDestroyEntity = true;
+			.AddInput(temp.x, temp.y, false);
 	}
 }

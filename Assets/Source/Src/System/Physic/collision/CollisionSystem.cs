@@ -32,7 +32,7 @@ public class CollisionSystem : IExecuteSystem, ISetPool {
 			e.AddDamage(damage);
 		}
 		else {
-			throw new Exception("Sth is fucked up, and is unnecessary calculating damage");
+			//throw new Exception("Sth is fucked up, and is unnecessary calculating damage");
 		}
 	}
 

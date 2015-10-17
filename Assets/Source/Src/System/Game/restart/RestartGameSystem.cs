@@ -1,5 +1,6 @@
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class RestartGameSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.RestartGame.OnEntityAdded(); } }
@@ -11,6 +12,7 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 	Group _resources;
 	Group _enemySpawners;
 	Group _bonusSpawners;
+	Group _homeMissileSpawners;
 	Group _bonuses;
 
 	public void SetPool(Pool pool) {
@@ -20,6 +22,7 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 		_cameras = pool.GetGroup(Matcher.SmoothCamera);
 		_resources = pool.GetGroup(Matcher.Resource);
 		_enemySpawners = pool.GetGroup(Matcher.EnemySpawner);
+		_homeMissileSpawners = pool.GetGroup(Matcher.HomeMissileSpawner);
 		_bonuses = pool.GetGroup(Matcher.BonusModel);
 	}
 	
@@ -32,6 +35,7 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 		restartLevel();
 		clearGameObjects();
 		clearEnemySpawners();
+		clearHomeMissileSpawners();
 		clearBonuses();
 
 		restartPlayer();
@@ -42,6 +46,12 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 		player.ReplacePosition(0.0f, 0.0f);
 		player.ReplaceHealth(50);
 		player.isDestroyEntity = false;
+		if (player.hasParent) {
+			List<Entity> children = player.parent.children;
+			for (int i = 0; i < children.Count; i++) {
+				children[i].isDestroyEntity = false;
+			}
+		}
 	}
 
 	void restartCamera() {
@@ -63,6 +73,12 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 	void clearEnemySpawners() {
 		foreach (Entity e in _enemySpawners.GetEntities()) {
 			_pool.DestroyEntity(e);
+		}
+	}
+
+	void clearHomeMissileSpawners() {
+		foreach (Entity e in _homeMissileSpawners.GetEntities()) {
+			e.isDestroyEntity = true;
 		}
 	}
 

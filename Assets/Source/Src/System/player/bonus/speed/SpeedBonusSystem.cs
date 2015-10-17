@@ -24,7 +24,7 @@ public class SpeedBonusSystem : IExecuteSystem, ISetPool {
 			if (component.time < 0.0f) {
 				limit.offsetX = 0.0f;
 				limit.offsetY = 0.0f;
-				_pool.DestroyEntity(e);
+				e.isDestroyEntity = true;
 			}
 			else {
 				limit.offsetX = component.velocityX;
