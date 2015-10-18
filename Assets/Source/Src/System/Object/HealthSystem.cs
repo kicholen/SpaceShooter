@@ -18,20 +18,9 @@ public class HealthSystem : IExecuteSystem, ISetPool {
 			if (health.health < 0) {
 				e.isDestroyEntity = true;
 				e.isCollisionDeath = true;
-				_pool.CreateEntity()
-					.AddCameraShake(0.4f, 0.4f, 0.1f, 0.0f, -1, 0.0f, false); // maybe create object for storing this data
-
-				spawnParticles(e.position);
 			}
 
 			e.RemoveDamage();
 		}
-	}
-
-	void spawnParticles(PositionComponent position) {
-		_pool.CreateEntity()
-			.AddPosition(position.x, position.y)
-			.AddParticleSpawn(10, Resource.Particle, 0.5f, 2.0f);
-
 	}
 }

@@ -2,8 +2,8 @@ using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BonusSpawnerSystem : IReactiveSystem, ISetPool {
-	public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.BonusSpawner, Matcher.CollisionDeath).OnEntityAdded(); } }
+public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
+	public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.BonusOnDeath, Matcher.CollisionDeath).OnEntityAdded(); } }
 
 	Pool _pool;
 	Group _group;
@@ -25,7 +25,7 @@ public class BonusSpawnerSystem : IReactiveSystem, ISetPool {
 	public void Execute(List<Entity> entities) {
 		Entity player = _players.GetSingleEntity();
 		foreach (Entity e in entities) {
-			BonusSpawnerComponent bonus = e.bonusSpawner;
+			BonusOnDeathComponent bonus = e.bonusOnDeath;
 			int type = bonus.type;
 
 			foreach (Entity bonusEntity in _group.GetEntities()) {

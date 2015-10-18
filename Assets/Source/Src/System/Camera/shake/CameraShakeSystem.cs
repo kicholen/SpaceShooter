@@ -22,26 +22,27 @@ public class CameraShakeSystem : IExecuteSystem, ISetPool {
 				return;
 			}
 
-			CameraShakeComponent component = e.cameraShake;
-			component.time -= deltaTime;
-			if (component.time < 0.0f) { // todo maybe amplify depending on count and remove rest entities
+			CameraShakeProperties componentProperties = e.cameraShake.properties;
+
+			componentProperties.time -= deltaTime;
+			if (componentProperties.time < 0.0f) {
 				e.isDestroyEntity = true;
 			}
 			else {
-				if (!component.velocityCalculated) {
-					component.velocity = component.totalOffsetX * 4.0f / component.totalTime;
+				if (!componentProperties.velocityCalculated) {
+					componentProperties.velocity = componentProperties.totalOffsetX * 4.0f / componentProperties.totalTime;
 				}
 				Vector3 originalPosition = camera.camera.transform.position;
-				component.offsetX += component.direction * component.velocity * deltaTime;
+				componentProperties.offsetX += componentProperties.direction * componentProperties.velocity * deltaTime;
 
-				if (component.offsetX >= component.totalOffsetX) {
-					component.direction = -1;
+				if (componentProperties.offsetX >= componentProperties.totalOffsetX) {
+					componentProperties.direction = -1;
 				}
-				else if (component.offsetX <= -component.totalOffsetX) {
-					component.direction = 1;
+				else if (componentProperties.offsetX <= -componentProperties.totalOffsetX) {
+					componentProperties.direction = 1;
 				}
 
-				camera.camera.transform.position = new Vector3(originalPosition.x + component.offsetX, originalPosition.y, originalPosition.z);
+				camera.camera.transform.position = new Vector3(originalPosition.x + componentProperties.offsetX, originalPosition.y, originalPosition.z);
 				wasFirstOne = true;
 			}
 		}

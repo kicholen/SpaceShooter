@@ -72,6 +72,11 @@ public class GameController : MonoBehaviour {
 				.Add(pool.CreateDeadPlayerSystem())
 				.Add(pool.CreateAlphaSystem())
 
+				// OnDeath Actions
+				.Add(pool.CreateBonusOnDeathSystem())
+				.Add(pool.CreateCameraShakeOnDeathSystem())
+				.Add(pool.CreateParticlesOnDeathSystem())
+
 				// Particle
 				.Add(pool.CreateParticleSpawnSystem())
 
@@ -90,9 +95,6 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreateRegularCameraSystem())
 			.Add(pool.CreateSmoothCameraSystem())
 				.Add(pool.CreateCameraShakeSystem())
-
-				// Bonus Spawner
-				.Add(pool.CreateBonusSpawnerSystem())
 			
 			// DestroyPosition, static GO do not need to refresh on every frame
 			.Add(pool.CreateDestroyPositionSystem())

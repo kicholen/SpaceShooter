@@ -12,28 +12,16 @@ namespace Entitas {
             _cameraShakeComponentPool.Clear();
         }
 
-        public Entity AddCameraShake(float newTime, float newTotalTime, float newTotalOffsetX, float newOffsetX, int newDirection, float newVelocity, bool newVelocityCalculated) {
+        public Entity AddCameraShake(CameraShakeProperties newProperties) {
             var component = _cameraShakeComponentPool.Count > 0 ? _cameraShakeComponentPool.Pop() : new CameraShakeComponent();
-            component.time = newTime;
-            component.totalTime = newTotalTime;
-            component.totalOffsetX = newTotalOffsetX;
-            component.offsetX = newOffsetX;
-            component.direction = newDirection;
-            component.velocity = newVelocity;
-            component.velocityCalculated = newVelocityCalculated;
+            component.properties = newProperties;
             return AddComponent(ComponentIds.CameraShake, component);
         }
 
-        public Entity ReplaceCameraShake(float newTime, float newTotalTime, float newTotalOffsetX, float newOffsetX, int newDirection, float newVelocity, bool newVelocityCalculated) {
+        public Entity ReplaceCameraShake(CameraShakeProperties newProperties) {
             var previousComponent = hasCameraShake ? cameraShake : null;
             var component = _cameraShakeComponentPool.Count > 0 ? _cameraShakeComponentPool.Pop() : new CameraShakeComponent();
-            component.time = newTime;
-            component.totalTime = newTotalTime;
-            component.totalOffsetX = newTotalOffsetX;
-            component.offsetX = newOffsetX;
-            component.direction = newDirection;
-            component.velocity = newVelocity;
-            component.velocityCalculated = newVelocityCalculated;
+            component.properties = newProperties;
             ReplaceComponent(ComponentIds.CameraShake, component);
             if (previousComponent != null) {
                 _cameraShakeComponentPool.Push(previousComponent);
