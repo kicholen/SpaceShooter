@@ -14,7 +14,8 @@ public class CreateCameraSystem : IInitializeSystem, ISetPool {
 		Camera camera = Camera.main;
 		Entity player = _group.GetSingleEntity();
 		_pool.CreateEntity()
-			.AddCamera(camera, player)
+			.AddCamera(camera)
+			.AddFollowTarget(player)
 			.AddSmoothCamera(new Vector3(0.0f, 2.0f, camera.transform.position.z))
 			.AddVelocity(0.0f, 2.0f)
 			.AddPosition(player.position.x, player.position.y + 2.0f);

@@ -4,6 +4,7 @@ using UnityEngine;
 public class SmoothCameraSystem : IExecuteSystem, ISetPool {
 	Group _group;
 	Vector3 temp = new Vector3();
+	const float LERP_FACTOR = 0.1f;
 
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Camera, Matcher.SmoothCamera));
@@ -19,11 +20,11 @@ public class SmoothCameraSystem : IExecuteSystem, ISetPool {
 		SmoothCameraComponent smoothCamera = e.smoothCamera;
 		PositionComponent position = e.position;
 		CameraComponent camera = e.camera;
-		PositionComponent playerPosition = camera.follow.position;
-		// todo would be good to move it above position system, the snapCamera to trash 
-		float lerp = 0.1f;
+		FollowTargetComponent target = e.followTarget;
+		PositionComponent targetPosition = target.target.position;
+
 		Vector3 cameraPosition = camera.camera.transform.position;
-		temp.x = cameraPosition.x + (playerPosition.x - cameraPosition.x) * lerp;
+		temp.x = cameraPosition.x + (targetPosition.x - cameraPosition.x) * LERP_FACTOR;
 
 		snapCamera(e, position);
 		camera.camera.transform.position = new Vector3(temp.x, position.y, smoothCamera.offset.z);
