@@ -21,7 +21,7 @@ public class AlphaSystem : IExecuteSystem, ISetPool {
 
 			SpriteRenderer renderer = gameobject.gameObject.GetComponent<SpriteRenderer>();
 			Color color = renderer.color;
-			renderer.color = new Color(color.r, color.g, color.b, alpha.time / alpha.deltaTime);
+			renderer.color = new Color(color.r, color.g, color.b, alpha.time / alpha.totalTime);
 		}
 	}
 }

@@ -12,7 +12,6 @@ public class CreateStaticElementsSystem : IInitializeSystem, ISetPool {
 			.AddPosition(-2.0f, 2.0f)
 			.AddHealth(2000)
 			.AddResource(Resource.Blockade)
-			.AddCollision(CollisionTypes.Static)
-			.isDestroyPosition = true;
+			.AddCollision(CollisionTypes.Static);
 	}
 }

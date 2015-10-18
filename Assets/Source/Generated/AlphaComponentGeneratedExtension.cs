@@ -12,18 +12,18 @@ namespace Entitas {
             _alphaComponentPool.Clear();
         }
 
-        public Entity AddAlpha(float newTime, float newDeltaTime) {
+        public Entity AddAlpha(float newTime, float newTotalTime) {
             var component = _alphaComponentPool.Count > 0 ? _alphaComponentPool.Pop() : new AlphaComponent();
             component.time = newTime;
-            component.deltaTime = newDeltaTime;
+            component.totalTime = newTotalTime;
             return AddComponent(ComponentIds.Alpha, component);
         }
 
-        public Entity ReplaceAlpha(float newTime, float newDeltaTime) {
+        public Entity ReplaceAlpha(float newTime, float newTotalTime) {
             var previousComponent = hasAlpha ? alpha : null;
             var component = _alphaComponentPool.Count > 0 ? _alphaComponentPool.Pop() : new AlphaComponent();
             component.time = newTime;
-            component.deltaTime = newDeltaTime;
+            component.totalTime = newTotalTime;
             ReplaceComponent(ComponentIds.Alpha, component);
             if (previousComponent != null) {
                 _alphaComponentPool.Push(previousComponent);

@@ -7,7 +7,7 @@ public class HealthSystem : IExecuteSystem, ISetPool {
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Damage, Matcher.Health));
-	}
+	}	
 	
 	public void Execute() {
 		foreach(Entity e in _group.GetEntities()) {
@@ -19,7 +19,8 @@ public class HealthSystem : IExecuteSystem, ISetPool {
 				e.isDestroyEntity = true;
 				e.isCollisionDeath = true;
 				_pool.CreateEntity()
-					.AddCameraShake(0.5f, 0.1f, 0.0f);
+					.AddCameraShake(0.4f, 0.4f, 0.1f, 0.0f, -1, 0.0f, false); // maybe create object for storing this data
+
 				spawnParticles(e.position);
 			}
 
