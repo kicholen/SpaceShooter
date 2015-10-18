@@ -16,10 +16,7 @@ public class SpeedBonusSystem : IExecuteSystem, ISetPool {
 	public void Execute() {
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		Entity player = _player.GetSingleEntity();
-		if (!player.hasVelocityLimit) {
-			int asd = 10;
-		}
-		VelocityLimitComponent limit = player.velocityLimit; // todo here is a bug check this again
+		VelocityLimitComponent limit = player.velocityLimit;
 
 		foreach (Entity e in _group.GetEntities()) {
 			SpeedBonusComponent component = e.speedBonus;

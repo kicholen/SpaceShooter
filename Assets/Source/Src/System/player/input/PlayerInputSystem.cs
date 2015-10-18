@@ -5,7 +5,7 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
 	Group _group;
 	Group _players;
-	Group _timeGroup;
+	Group _time;
 	bool hasChanged = true;
 	const float EPSILON = 0.005f;
 
@@ -13,7 +13,7 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 		_pool = pool;
 		_group = _pool.GetGroup(Matcher.Input); 
 		_players = _pool.GetGroup(Matcher.Player);
-		_timeGroup = _pool.GetGroup(Matcher.Time);
+		_time = _pool.GetGroup(Matcher.Time);
 	}
 	
 	public void Execute() {
@@ -60,8 +60,8 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 		velocity.x = (tx/dist)*5.0f;
 		velocity.y = (ty/dist)*5.0f;*/
 
-		velocity.x = Mathf.Max(-(velocityLimit.x + velocityLimit.offsetX), Mathf.Min((component.x - position.x) * 5.0f, velocityLimit.x + velocityLimit.offsetX)); // todo sth is fucked up here
-		velocity.y = Mathf.Max(-(velocityLimit.y + velocityLimit.offsetY), Mathf.Min((component.y - position.y) * 5.0f, velocityLimit.y + velocityLimit.offsetY));
+		velocity.x = (component.x - position.x) * 5.0f;
+		velocity.y = (component.y - position.y) * 5.0f;
 	}
 
 	void slowDown(Entity entity) {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ActivateBonusSystem : IReactiveSystem, ISetPool {
-	public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Bonus, Matcher.DestroyEntity).OnEntityAdded(); } }
+	public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Bonus, Matcher.CollisionDeath).OnEntityAdded(); } }
 	
 	Pool _pool;
 	Group _group;
