@@ -7,7 +7,7 @@ public class TimeSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 
 	public void Initialize() {
 		_pool.CreateEntity()
-			.AddTime(Time.deltaTime, Time.time, 1.0f);
+			.AddTime(Time.deltaTime, Time.time, 1.0f, false);
 	}
 
 	public void SetPool(Pool pool) {

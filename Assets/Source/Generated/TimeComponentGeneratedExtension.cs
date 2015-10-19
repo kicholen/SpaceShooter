@@ -12,20 +12,22 @@ namespace Entitas {
             _timeComponentPool.Clear();
         }
 
-        public Entity AddTime(float newDeltaTime, float newTime, float newModificator) {
+        public Entity AddTime(float newDeltaTime, float newTime, float newModificator, bool newIsPaused) {
             var component = _timeComponentPool.Count > 0 ? _timeComponentPool.Pop() : new TimeComponent();
             component.deltaTime = newDeltaTime;
             component.time = newTime;
             component.modificator = newModificator;
+            component.isPaused = newIsPaused;
             return AddComponent(ComponentIds.Time, component);
         }
 
-        public Entity ReplaceTime(float newDeltaTime, float newTime, float newModificator) {
+        public Entity ReplaceTime(float newDeltaTime, float newTime, float newModificator, bool newIsPaused) {
             var previousComponent = hasTime ? time : null;
             var component = _timeComponentPool.Count > 0 ? _timeComponentPool.Pop() : new TimeComponent();
             component.deltaTime = newDeltaTime;
             component.time = newTime;
             component.modificator = newModificator;
+            component.isPaused = newIsPaused;
             ReplaceComponent(ComponentIds.Time, component);
             if (previousComponent != null) {
                 _timeComponentPool.Push(previousComponent);

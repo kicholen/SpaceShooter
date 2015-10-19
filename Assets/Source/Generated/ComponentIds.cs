@@ -44,16 +44,17 @@ public static class ComponentIds {
     public const int RelativePosition = 42;
     public const int Resource = 43;
     public const int RestartGame = 44;
-    public const int SmoothCamera = 45;
-    public const int SnapPosition = 46;
-    public const int SpeedBonus = 47;
-    public const int Test = 48;
-    public const int Time = 49;
-    public const int Velocity = 50;
-    public const int VelocityLimit = 51;
-    public const int Weapon = 52;
+    public const int SlowGame = 45;
+    public const int SmoothCamera = 46;
+    public const int SnapPosition = 47;
+    public const int SpeedBonus = 48;
+    public const int Test = 49;
+    public const int Time = 50;
+    public const int Velocity = 51;
+    public const int VelocityLimit = 52;
+    public const int Weapon = 53;
 
-    public const int TotalComponents = 53;
+    public const int TotalComponents = 54;
 
     static readonly string[] components = {
         "Acceleration",
@@ -101,6 +102,7 @@ public static class ComponentIds {
         "RelativePosition",
         "Resource",
         "RestartGame",
+        "SlowGame",
         "SmoothCamera",
         "SnapPosition",
         "SpeedBonus",

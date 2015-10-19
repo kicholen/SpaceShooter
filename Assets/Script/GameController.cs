@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour {
 			
 				// Input player
 				.Add(pool.CreatePlayerInputSystem())
-			
+
 				// magnet
 				.Add(pool.CreateMagnetSystem())
 			// Physics
@@ -103,6 +103,7 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreateDestroyEntitySystem())
 
 			.Add(pool.CreateRestartGameSystem())
-			.Add(pool.CreatePauseGameSystem());
+			.Add(pool.CreatePauseGameSystem())
+			.Add(pool.CreateSlowGameSystem());
     }
 }

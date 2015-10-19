@@ -1,11 +1,11 @@
 using Entitas;
-using UnityEngine;
 
 public class PlayerInputSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
 	Group _group;
 	Group _players;
 	Group _time;
+	Group _slowGame;
 	bool hasChanged = true;
 	const float EPSILON = 0.005f;
 
@@ -14,6 +14,7 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 		_group = _pool.GetGroup(Matcher.Input); 
 		_players = _pool.GetGroup(Matcher.Player);
 		_time = _pool.GetGroup(Matcher.Time);
+		_slowGame = _pool.GetGroup(Matcher.SlowGame);
 	}
 	
 	public void Execute() {
@@ -28,8 +29,10 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 			if (isDown) {
 				setVelocityByInput(player, component);
 				setWeapon(player);
+				normalGameSpeed();
 			}
 			else {
+				slowGameSpeed();
 				slowDown(player);
 				removeWeapon(player);
 			}
@@ -66,7 +69,6 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 
 	void slowDown(Entity entity) {
 		VelocityComponent velocity = entity.velocity;
-		//PlayerComponent player = entity.player; todo add sth like PlayerInputControllerComponent
 
 		if (System.Math.Abs(velocity.x) > EPSILON) {
 			velocity.x *= 0.8f;
@@ -80,6 +82,20 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 		}
 		else {
 			velocity.y = 0.0f;
+		}
+	}
+
+	void normalGameSpeed() {
+		if (_slowGame.Count > 0) {
+			_slowGame.GetSingleEntity()
+				.isDestroyEntity = true;
+		}
+	}
+
+	void slowGameSpeed() {
+		if (_slowGame.Count == 0) {
+			_pool.CreateEntity()
+				.AddSlowGame(0.3f);
 		}
 	}
 }
