@@ -18,14 +18,17 @@ public class LaserSystem : IExecuteSystem, ISetPool {
 		foreach (Entity e in _group.GetEntities()) {
 			LaserComponent component = e.laser;
 			Entity source = component.source;
-			if (source != null && source.hasLaserSpawner) {
+			if (source != null && source.hasLaserSpawner) { // todo fix this one, make it child or sth, current version of rotating works only in 2 directions ^^
 				PositionComponent sourcePosition = source.position;
 				LaserSpawnerComponent sourceSpawner = source.laserSpawner;
 
 				GameObject go = e.gameObject.gameObject;
 				Transform transform = go.transform;
 				transform.localScale = new Vector3(transform.localScale.x, sourceSpawner.height * pixelsPerUnit, transform.localScale.z);
-				e.ReplacePosition(sourcePosition.x, sourcePosition.y + sourceSpawner.height / 2.0f);
+
+				float xOffset = sourceSpawner.height / 2.0f * component.direction.x;
+				float yOffset = sourceSpawner.height / 2.0f * component.direction.y;
+				e.ReplacePosition(sourcePosition.x + xOffset, sourcePosition.y + yOffset);
 			}
 			else {
 				e.isDestroyEntity = true;

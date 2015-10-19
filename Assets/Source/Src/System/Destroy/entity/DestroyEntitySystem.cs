@@ -15,7 +15,7 @@ public class DestroyEntitySystem : IExecuteSystem, ISetPool {
 				ParentComponent parentComponent = e.parent;
 				for (int i = 0; i < parentComponent.children.Count; i++) {
 					Entity child = parentComponent.children[i];
-					if (child != null) {
+					if (child != null && child.hasChild) {
 						_pool.DestroyEntity(child);
 					}
 				}

@@ -19,7 +19,7 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 
 	public void Initialize() {
 		_pool.CreateEntity()
-			.AddCreateLevel(1, "/Resources/"); // todo make another system for handling this
+			.AddCreateLevel(101, "/Resources/"); // todo make another system for handling this
 	}
 	
 	public void Execute(List<Entity> entities) {

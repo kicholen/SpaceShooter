@@ -52,6 +52,10 @@ public class GameController : MonoBehaviour {
 
 				// magnet
 				.Add(pool.CreateMagnetSystem())
+
+				// AI
+				.Add(pool.CreateFirstBossSystem())
+
 			// Physics
 			.Add(pool.CreateAccelerationSystem())
 			.Add(pool.CreateVelocitySystem())

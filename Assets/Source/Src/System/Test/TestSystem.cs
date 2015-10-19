@@ -81,7 +81,7 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 			player.RemoveLaserSpawner();
 		}
 		else {
-			player.AddLaserSpawner(5.0f, 0.0f, null);
+			player.AddLaserSpawner(5.0f, 0.0f, 0.0f, CollisionTypes.Player, null);
 		}
 	}
 

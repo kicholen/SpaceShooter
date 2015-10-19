@@ -1,4 +1,5 @@
 using Entitas;
+using System.Collections.Generic;
 
 public class EnemyFactory {
 	Pool _pool;
@@ -22,6 +23,9 @@ public class EnemyFactory {
 			e.isFaceDirection = true;
 			e.AddHomeMissileSpawner(0.0f, 2.0f, Resource.MissileEnemy, 2.0f, CollisionTypes.Enemy);
 		break;
+		case 101:
+			e = createFirstBoss(type, x, y, health);
+			break;
 		default:
 			e = createStandardEnemy(type, x, y, velocityX, velocityY, health);
 		break;
@@ -40,5 +44,41 @@ public class EnemyFactory {
 			.AddCameraShakeOnDeath(1)
 			.AddParticlesOnDeath(1)
 			.AddResource(Resource.Enemy);
+	}
+
+	Entity createFirstBoss(int type, float x, float y, int health) {
+		Entity boss = _pool.CreateEntity()
+			.AddPosition(x, y)
+			.AddVelocity(0.0f, 0.0f)
+			.AddVelocityLimit(5.0f, 5.0f, 0.0f, 0.0f)
+			.AddCollision(CollisionTypes.Enemy)
+			.AddHealth(health)
+			.AddLaserSpawner(5.0f, 0.0f, 180, CollisionTypes.Enemy, null)
+			.AddResource(Resource.Boss)
+			.AddEnemy(type)
+			.AddFirstBoss(22.0f);
+
+		List<Entity> children = new List<Entity>();
+		children.Add(_pool.CreateEntity()
+		             .AddRelativePosition(0.5f, 0.5f)
+		             .AddPosition(0.0f, 0.0f)
+		             .AddChild(boss)
+		             .AddHomeMissileSpawner(5.0f, 10f, Resource.MissileEnemy, 2.0f, CollisionTypes.Enemy)
+		             .AddResource(Resource.Weapon));
+		children.Add(_pool.CreateEntity()
+		             .AddRelativePosition(-0.5f, 0.5f)
+		             .AddPosition(0.0f, 0.0f)
+		             .AddChild(boss)
+		             .AddHomeMissileSpawner(5.0f, 10f, Resource.MissileEnemy, 2.0f, CollisionTypes.Enemy)
+		             .AddResource(Resource.Weapon));
+		addNonRemovable(children);
+		boss.AddParent(children);
+		return boss;
+	}
+
+	void addNonRemovable(List<Entity> entities) {
+		foreach (Entity e in entities) {
+			e.isNonRemovable = true;
+		}
 	}
 }

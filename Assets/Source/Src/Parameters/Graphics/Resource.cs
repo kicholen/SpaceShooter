@@ -9,4 +9,5 @@ public static class Resource {
 	public const string Laser = "Laser";
 	public const string Weapon = "Weapon";
 	public const string Particle = "Particle";
+	public const string Boss = "1000_Boss";
 }

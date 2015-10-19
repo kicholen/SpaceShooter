@@ -80,25 +80,33 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 
 	void clearHomeMissileSpawners() {
 		foreach (Entity e in _homeMissileSpawners.GetEntities()) {
-			e.isDestroyEntity = true;
+			if (!e.hasChild) {
+				e.isDestroyEntity = true;
+			}
 		}
 	}
 
 	void clearGameObjects() {
 		foreach (Entity e in _resources.GetEntities()) {
-			e.isDestroyEntity = true;
+			if (!e.hasChild) {
+				e.isDestroyEntity = true;
+			}
 		}
 	}
 
 	void clearBonuses() {
 		foreach (Entity e in _bonuses.GetEntities()) {
-			e.isDestroyEntity = true;
+			if (!e.hasChild) {
+				e.isDestroyEntity = true;
+			}
 		}
 	}
 
 	void clearCameraShakes() {
 		foreach (Entity e in _cameraShakes.GetEntities()) {
-			e.isDestroyEntity = true;
+			if (!e.hasChild) {
+				e.isDestroyEntity = true;
+			}
 		}
 	}
 }

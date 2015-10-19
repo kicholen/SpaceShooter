@@ -12,17 +12,19 @@ namespace Entitas {
             _laserComponentPool.Clear();
         }
 
-        public Entity AddLaser(float newHeight, Entitas.Entity newSource) {
+        public Entity AddLaser(float newHeight, UnityEngine.Vector2 newDirection, Entitas.Entity newSource) {
             var component = _laserComponentPool.Count > 0 ? _laserComponentPool.Pop() : new LaserComponent();
             component.height = newHeight;
+            component.direction = newDirection;
             component.source = newSource;
             return AddComponent(ComponentIds.Laser, component);
         }
 
-        public Entity ReplaceLaser(float newHeight, Entitas.Entity newSource) {
+        public Entity ReplaceLaser(float newHeight, UnityEngine.Vector2 newDirection, Entitas.Entity newSource) {
             var previousComponent = hasLaser ? laser : null;
             var component = _laserComponentPool.Count > 0 ? _laserComponentPool.Pop() : new LaserComponent();
             component.height = newHeight;
+            component.direction = newDirection;
             component.source = newSource;
             ReplaceComponent(ComponentIds.Laser, component);
             if (previousComponent != null) {
