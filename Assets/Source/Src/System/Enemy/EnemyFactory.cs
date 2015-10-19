@@ -24,7 +24,7 @@ public class EnemyFactory {
 			e.AddHomeMissileSpawner(0.0f, 2.0f, Resource.MissileEnemy, 2.0f, CollisionTypes.Enemy);
 		break;
 		case 101:
-			e = createFirstBoss(type, x, y, health);
+			e = createFirstBoss(type, x, y, velocityX, velocityY, health);
 			break;
 		default:
 			e = createStandardEnemy(type, x, y, velocityX, velocityY, health);
@@ -46,14 +46,13 @@ public class EnemyFactory {
 			.AddResource(Resource.Enemy);
 	}
 
-	Entity createFirstBoss(int type, float x, float y, int health) {
+	Entity createFirstBoss(int type, float x, float y, float velocityX, float velocityY, int health) {
 		Entity boss = _pool.CreateEntity()
 			.AddPosition(x, y)
-			.AddVelocity(0.0f, 0.0f)
+			.AddVelocity(velocityX, velocityY)
 			.AddVelocityLimit(5.0f, 5.0f, 0.0f, 0.0f)
 			.AddCollision(CollisionTypes.Enemy)
 			.AddHealth(health)
-			.AddLaserSpawner(5.0f, 0.0f, 180, CollisionTypes.Enemy, null)
 			.AddResource(Resource.Boss)
 			.AddEnemy(type)
 			.AddFirstBoss(22.0f);
