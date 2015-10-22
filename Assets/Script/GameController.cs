@@ -102,6 +102,9 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreateSmoothCameraSystem())
 				.Add(pool.CreateCameraShakeSystem())
 			
+			// Sound
+			.Add(pool.CreateSoundSystem())
+			
 			// DestroyPosition, static GO do not need to refresh on every frame
 			.Add(pool.CreateDestroyPositionSystem())
 			// Destroy

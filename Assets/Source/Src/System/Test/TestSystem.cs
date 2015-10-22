@@ -37,6 +37,9 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		if (Input.GetKeyDown(KeyCode.P)) {
 			pauseOrUnpauseGame();
 		}
+		if (Input.GetKeyDown(KeyCode.S)) {
+			playSound();
+		}
 	}
 	
 	void changeCamera() {
@@ -94,5 +97,10 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 			_pool.CreateEntity()
 				.isPauseGame = true;
 		}
+	}
+
+	void playSound() {
+		_pool.CreateEntity()
+			.AddSound("Sound/test", 1.0f, null);
 	}
 }
