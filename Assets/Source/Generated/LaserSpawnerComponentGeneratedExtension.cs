@@ -12,22 +12,24 @@ namespace Entitas {
             _laserSpawnerComponentPool.Clear();
         }
 
-        public Entity AddLaserSpawner(float newVelocity, float newHeight, float newAngle, int newCollisionType, Entitas.Entity newLaser) {
+        public Entity AddLaserSpawner(float newVelocity, float newHeight, float newAngle, UnityEngine.Vector2 newDirection, int newCollisionType, Entitas.Entity newLaser) {
             var component = _laserSpawnerComponentPool.Count > 0 ? _laserSpawnerComponentPool.Pop() : new LaserSpawnerComponent();
             component.velocity = newVelocity;
             component.height = newHeight;
             component.angle = newAngle;
+            component.direction = newDirection;
             component.collisionType = newCollisionType;
             component.laser = newLaser;
             return AddComponent(ComponentIds.LaserSpawner, component);
         }
 
-        public Entity ReplaceLaserSpawner(float newVelocity, float newHeight, float newAngle, int newCollisionType, Entitas.Entity newLaser) {
+        public Entity ReplaceLaserSpawner(float newVelocity, float newHeight, float newAngle, UnityEngine.Vector2 newDirection, int newCollisionType, Entitas.Entity newLaser) {
             var previousComponent = hasLaserSpawner ? laserSpawner : null;
             var component = _laserSpawnerComponentPool.Count > 0 ? _laserSpawnerComponentPool.Pop() : new LaserSpawnerComponent();
             component.velocity = newVelocity;
             component.height = newHeight;
             component.angle = newAngle;
+            component.direction = newDirection;
             component.collisionType = newCollisionType;
             component.laser = newLaser;
             ReplaceComponent(ComponentIds.LaserSpawner, component);

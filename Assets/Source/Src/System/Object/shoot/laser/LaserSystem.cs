@@ -25,9 +25,9 @@ public class LaserSystem : IExecuteSystem, ISetPool {
 				GameObject go = e.gameObject.gameObject;
 				Transform transform = go.transform;
 				transform.localScale = new Vector3(transform.localScale.x, sourceSpawner.height * pixelsPerUnit, transform.localScale.z);
-
-				float xOffset = sourceSpawner.height / 2.0f * component.direction.x;
-				float yOffset = sourceSpawner.height / 2.0f * component.direction.y;
+				transform.localRotation = Quaternion.AngleAxis(sourceSpawner.angle, Vector3.forward);
+				float xOffset = sourceSpawner.height / 2.0f * sourceSpawner.direction.x;
+				float yOffset = sourceSpawner.height / 2.0f * sourceSpawner.direction.y;
 				e.ReplacePosition(sourcePosition.x + xOffset, sourcePosition.y + yOffset);
 			}
 			else {

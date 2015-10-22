@@ -12,16 +12,20 @@ namespace Entitas {
             _firstBossComponentPool.Clear();
         }
 
-        public Entity AddFirstBoss(float newRandom) {
+        public Entity AddFirstBoss(float newRandom, float newAge, float newLaserAngle) {
             var component = _firstBossComponentPool.Count > 0 ? _firstBossComponentPool.Pop() : new FirstBossComponent();
             component.random = newRandom;
+            component.age = newAge;
+            component.laserAngle = newLaserAngle;
             return AddComponent(ComponentIds.FirstBoss, component);
         }
 
-        public Entity ReplaceFirstBoss(float newRandom) {
+        public Entity ReplaceFirstBoss(float newRandom, float newAge, float newLaserAngle) {
             var previousComponent = hasFirstBoss ? firstBoss : null;
             var component = _firstBossComponentPool.Count > 0 ? _firstBossComponentPool.Pop() : new FirstBossComponent();
             component.random = newRandom;
+            component.age = newAge;
+            component.laserAngle = newLaserAngle;
             ReplaceComponent(ComponentIds.FirstBoss, component);
             if (previousComponent != null) {
                 _firstBossComponentPool.Push(previousComponent);

@@ -16,7 +16,7 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 			.AddVelocityLimit(5.0f, 5.0f, 0.0f, 0.0f)
 			.AddCollision(CollisionTypes.Player)
 			.AddHealth(50)
-			.AddLaserSpawner(5.0f, 0.0f, 0.0f, CollisionTypes.Player, null)
+			.AddLaserSpawner(5.0f, 0.0f, 0.0f, new UnityEngine.Vector2(), CollisionTypes.Player, null)
 			.AddResource(Resource.Player);
 		e.AddParent(getChildren(e));
 	}
