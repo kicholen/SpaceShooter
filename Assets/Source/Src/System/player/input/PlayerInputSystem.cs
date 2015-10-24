@@ -6,6 +6,7 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 	Group _players;
 	Group _time;
 	Group _slowGame;
+	Group _camera;
 	bool hasChanged = true;
 	const float EPSILON = 0.005f;
 
@@ -14,6 +15,7 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 		_group = _pool.GetGroup(Matcher.Input); 
 		_players = _pool.GetGroup(Matcher.Player);
 		_time = _pool.GetGroup(Matcher.Time);
+		_camera = _pool.GetGroup(Matcher.Camera);
 		_slowGame = _pool.GetGroup(Matcher.SlowGame);
 	}
 	
@@ -63,8 +65,14 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 		velocity.x = (tx/dist)*5.0f;
 		velocity.y = (ty/dist)*5.0f;*/
 
+		VelocityComponent cameraVelocity = _camera.GetSingleEntity().velocity;
+
+		velocityLimit.offsetY = cameraVelocity.y;
 		velocity.x = (component.x - position.x) * 5.0f;
-		velocity.y = (component.y - position.y) * 5.0f;
+		velocity.y = (component.y - position.y) * 5.0f + cameraVelocity.y;
+		if (velocity.y < -velocityLimit.y) {
+			velocity.y = -velocityLimit.y; // not to add new fields to velocityLimits
+		}
 	}
 
 	void slowDown(Entity entity) {

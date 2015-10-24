@@ -18,7 +18,7 @@ public class LaserSystem : IExecuteSystem, ISetPool {
 		foreach (Entity e in _group.GetEntities()) {
 			LaserComponent component = e.laser;
 			Entity source = component.source;
-			if (source != null && source.hasLaserSpawner) { // todo fix this one, make it child or sth, current version of rotating works only in 2 directions ^^
+			if (source != null && source.hasLaserSpawner) { // todo make it child or sth
 				PositionComponent sourcePosition = source.position;
 				LaserSpawnerComponent sourceSpawner = source.laserSpawner;
 

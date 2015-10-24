@@ -55,7 +55,7 @@ public class EnemyFactory {
 			.AddHealth(health)
 			.AddResource(Resource.Boss)
 			.AddEnemy(type)
-			.AddFirstBoss(22.0f, 0.0f, 1.0f);
+			.AddFirstBoss(22.0f, 0.0f, 90.0f);
 
 		List<Entity> children = new List<Entity>();
 		children.Add(_pool.CreateEntity()
