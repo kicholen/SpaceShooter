@@ -30,7 +30,7 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 			if (!tests) {
 				VelocityComponent velocity = e.velocity;
 				if (!e.hasLaserSpawner) {
-					e.AddLaserSpawner(5.0f, 0.0f, 0.0f, new UnityEngine.Vector2(), CollisionTypes.Enemy, null);
+					//e.AddLaserSpawner(5.0f, 0.0f, 0.0f, new UnityEngine.Vector2(), CollisionTypes.Enemy, null);
 				}
 				else {
 					LaserSpawnerComponent laser = e.laserSpawner;
@@ -41,7 +41,7 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 					}
 				}
 				if (!initalize) {
-					e.AddCircleMissileRotatedSpawner(4, 20, 0, 10, 0.0f, 0.1f, Resource.MissileEnemy, velocity.x, velocity.y, velocity.x, velocity.y, CollisionTypes.Enemy);
+					e.AddCircleMissileRotatedSpawner(4, 10, 0, 10, 0.0f, 0.1f, Resource.MissileEnemy, velocity.x, velocity.y, velocity.x, velocity.y, CollisionTypes.Enemy);
 					//e.AddMultipleMissileSpawner(5, 5, 0.1f, 0.1f, 5.0f, 5.0f, Resource.MissileEnemy, 0.1f, velocity.x, -velocity.y, CollisionTypes.Enemy);
 					initalize = true;
 				}
@@ -50,6 +50,6 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 	}
 
 	void setVelocity(VelocityComponent velocity, PositionComponent actual, PositionComponent desired) {
-		velocity.x = (desired.x - actual.x) * 2.0f;
+		//velocity.x = (desired.x - actual.x) * 2.0f;
 	}
 }

@@ -59,7 +59,7 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 	XmlNode loadXml(CreateLevelComponent component) {
 		XmlDocument doc = new XmlDocument();
 		TextAsset textFile = Resources.Load<TextAsset>(component.level.ToString());
-		doc.LoadXml(textFile.text);//Application.dataPath + component.path + component.level + ".xml");
+		doc.LoadXml(textFile.text);
 		return doc.FirstChild;
 	}
 

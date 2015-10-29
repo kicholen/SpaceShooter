@@ -13,52 +13,55 @@ public static class ComponentIds {
     public const int Collision = 11;
     public const int CollisionDeath = 12;
     public const int CreateLevel = 13;
-    public const int Damage = 14;
-    public const int DestroyEntity = 15;
-    public const int DestroyEntityDelayed = 16;
-    public const int DestroyPosition = 17;
-    public const int Enemy = 18;
-    public const int EnemySpawner = 19;
-    public const int FaceDirection = 20;
-    public const int FindTarget = 21;
-    public const int FirstBoss = 22;
-    public const int FollowTarget = 23;
-    public const int GameObject = 24;
-    public const int Health = 25;
-    public const int HomeMissile = 26;
-    public const int HomeMissileSpawner = 27;
-    public const int Input = 28;
-    public const int Laser = 29;
-    public const int LaserSpawner = 30;
-    public const int LevelDimensions = 31;
-    public const int Magnet = 32;
-    public const int MissileSpawner = 33;
-    public const int MouseInput = 34;
-    public const int MultipleMissileSpawner = 35;
-    public const int NonRemovable = 36;
-    public const int Parent = 37;
-    public const int ParticlesOnDeath = 38;
-    public const int ParticleSpawn = 39;
-    public const int PauseGame = 40;
-    public const int Player = 41;
-    public const int PoolableGO = 42;
-    public const int Position = 43;
-    public const int RegularCamera = 44;
-    public const int RelativePosition = 45;
-    public const int Resource = 46;
-    public const int RestartGame = 47;
-    public const int SlowGame = 48;
-    public const int SmoothCamera = 49;
-    public const int SnapPosition = 50;
-    public const int Sound = 51;
-    public const int SpeedBonus = 52;
-    public const int Test = 53;
-    public const int Time = 54;
-    public const int Velocity = 55;
-    public const int VelocityLimit = 56;
-    public const int Weapon = 57;
+    public const int CreatePlayer = 14;
+    public const int Damage = 15;
+    public const int DestroyEntity = 16;
+    public const int DestroyEntityDelayed = 17;
+    public const int DestroyPosition = 18;
+    public const int Enemy = 19;
+    public const int EnemySpawner = 20;
+    public const int FaceDirection = 21;
+    public const int FindTarget = 22;
+    public const int FirstBoss = 23;
+    public const int FollowTarget = 24;
+    public const int GameObject = 25;
+    public const int Health = 26;
+    public const int HomeMissile = 27;
+    public const int HomeMissileSpawner = 28;
+    public const int Input = 29;
+    public const int Laser = 30;
+    public const int LaserSpawner = 31;
+    public const int LevelDimensions = 32;
+    public const int Magnet = 33;
+    public const int MissileSpawner = 34;
+    public const int MouseInput = 35;
+    public const int MultipleMissileSpawner = 36;
+    public const int NonRemovable = 37;
+    public const int Parent = 38;
+    public const int ParticlesOnDeath = 39;
+    public const int ParticleSpawn = 40;
+    public const int PauseGame = 41;
+    public const int Player = 42;
+    public const int PlayerModel = 43;
+    public const int PoolableGO = 44;
+    public const int Position = 45;
+    public const int RegularCamera = 46;
+    public const int RelativePosition = 47;
+    public const int Resource = 48;
+    public const int RestartGame = 49;
+    public const int ShipModel = 50;
+    public const int SlowGame = 51;
+    public const int SmoothCamera = 52;
+    public const int SnapPosition = 53;
+    public const int Sound = 54;
+    public const int SpeedBonus = 55;
+    public const int Test = 56;
+    public const int Time = 57;
+    public const int Velocity = 58;
+    public const int VelocityLimit = 59;
+    public const int Weapon = 60;
 
-    public const int TotalComponents = 58;
+    public const int TotalComponents = 61;
 
     static readonly string[] components = {
         "Acceleration",
@@ -75,6 +78,7 @@ public static class ComponentIds {
         "Collision",
         "CollisionDeath",
         "CreateLevel",
+        "CreatePlayer",
         "Damage",
         "DestroyEntity",
         "DestroyEntityDelayed",
@@ -103,12 +107,14 @@ public static class ComponentIds {
         "ParticleSpawn",
         "PauseGame",
         "Player",
+        "PlayerModel",
         "PoolableGO",
         "Position",
         "RegularCamera",
         "RelativePosition",
         "Resource",
         "RestartGame",
+        "ShipModel",
         "SlowGame",
         "SmoothCamera",
         "SnapPosition",
