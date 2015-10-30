@@ -28,7 +28,9 @@ public class LaserSystem : IExecuteSystem, ISetPool {
 				transform.localRotation = Quaternion.AngleAxis(sourceSpawner.angle, Vector3.forward);
 				float xOffset = sourceSpawner.height / 2.0f * sourceSpawner.direction.x;
 				float yOffset = sourceSpawner.height / 2.0f * sourceSpawner.direction.y;
-				e.ReplacePosition(sourcePosition.x + xOffset, sourcePosition.y + yOffset);
+				PositionComponent position = e.position;
+				position.x = sourcePosition.x + xOffset;
+				position.y = sourcePosition.y + yOffset;
 			}
 			else {
 				e.isDestroyEntity = true;

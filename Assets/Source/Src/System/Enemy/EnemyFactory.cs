@@ -10,21 +10,21 @@ public class EnemyFactory {
 		_players = pool.GetGroup(Matcher.Player);
 	}
 	
-	public void createEnemyByType(int type, float x, float y, float velocityX, float velocityY, int health) {
+	public void createEnemyByType(int type, float x, float y, float velocityX, float velocityY, int health, int missileSpeedBonus) {
 		Entity e;
 		switch(type) {
 		case 0:
 			e = createStandardEnemy(type, x, y, velocityX, velocityY, health);
 			e.isFaceDirection = true;
-			e.AddMissileSpawner(0.0f, 2.5f, Resource.MissileEnemy, 0.0f, -4.0f, CollisionTypes.Enemy);
+			e.AddMissileSpawner(0.0f, 2.5f, Resource.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 		break;
 		case 1:
 			e = createStandardEnemy(type, x, y, velocityX, velocityY, health);
 			e.isFaceDirection = true;
-			e.AddHomeMissileSpawner(0.0f, 2.0f, Resource.MissileEnemy, 2.0f, CollisionTypes.Enemy);
+			e.AddHomeMissileSpawner(0.0f, 2.0f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 		break;
 		case 101:
-			e = createFirstBoss(type, x, y, velocityX, velocityY, health);
+			e = createFirstBoss(type, x, y, velocityX, velocityY, health, missileSpeedBonus);
 			break;
 		default:
 			e = createStandardEnemy(type, x, y, velocityX, velocityY, health);
@@ -46,7 +46,7 @@ public class EnemyFactory {
 			.AddResource(Resource.Enemy);
 	}
 
-	Entity createFirstBoss(int type, float x, float y, float velocityX, float velocityY, int health) {
+	Entity createFirstBoss(int type, float x, float y, float velocityX, float velocityY, int health, int missileSpeedBonus) {
 		Entity boss = _pool.CreateEntity()
 			.AddPosition(x, y)
 			.AddVelocity(velocityX, velocityY)
@@ -62,13 +62,13 @@ public class EnemyFactory {
 		             .AddRelativePosition(0.5f, 0.5f)
 		             .AddPosition(0.0f, 0.0f)
 		             .AddChild(boss)
-		             .AddHomeMissileSpawner(5.0f, 10f, Resource.MissileEnemy, 2.0f, CollisionTypes.Enemy)
+		             .AddHomeMissileSpawner(5.0f, 10f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy)
 		             .AddResource(Resource.Weapon));
 		children.Add(_pool.CreateEntity()
 		             .AddRelativePosition(-0.5f, 0.5f)
 		             .AddPosition(0.0f, 0.0f)
 		             .AddChild(boss)
-		             .AddHomeMissileSpawner(5.0f, 10f, Resource.MissileEnemy, 2.0f, CollisionTypes.Enemy)
+		             .AddHomeMissileSpawner(5.0f, 10f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy)
 		             .AddResource(Resource.Weapon));
 		addNonRemovable(children);
 		boss.AddParent(children);

@@ -10,11 +10,12 @@ public class RelativePositionSystem : IExecuteSystem, ISetPool {
 	
 	public void Execute() {
 		foreach (Entity e in _group.GetEntities()) {
-			RelativePositionComponent position = e.relativePosition;
-			ChildComponent child = e.child;
-			PositionComponent parentPosition = child.parent.position;
+			RelativePositionComponent relativePosition = e.relativePosition;
+			PositionComponent position = e.position;
+			PositionComponent parentPosition = e.child.parent.position;
 
-			e.ReplacePosition(position.x + parentPosition.x, position.y + parentPosition.y);
+			position.x = relativePosition.x + parentPosition.x;
+			position.y = relativePosition.y + parentPosition.y;
 		}
 	}
 }

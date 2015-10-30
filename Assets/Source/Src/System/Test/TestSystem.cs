@@ -8,12 +8,14 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	Group _playerGroup;
 	Group _timeGroup;
 	Group _pause;
+	Group _settings;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		_playerGroup = pool.GetGroup(Matcher.Player);
 		_timeGroup = pool.GetGroup(Matcher.Time);
 		_pause = pool.GetGroup(Matcher.PauseGame);
+		_settings = pool.GetGroup(Matcher.SettingsModel);
 	}
 
 	public void Initialize() {
@@ -39,6 +41,9 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		}
 		if (Input.GetKeyDown(KeyCode.S)) {
 			playSound();
+		}
+		if (Input.GetKeyDown(KeyCode.D)) {
+			changeDifficulty();
 		}
 	}
 	
@@ -102,5 +107,15 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	void playSound() {
 		_pool.CreateEntity()
 			.AddSound("Sound/test", 1.0f, null);
+	}
+
+	void changeDifficulty() {
+		Entity e = _settings.GetSingleEntity();
+		SettingsModelComponent model = e.settingsModel;
+		int difficulty = model.difficulty + 1;
+		if (difficulty == DifficultyTypes.Hard) {
+			difficulty = DifficultyTypes.Easy;
+		}
+		e.ReplaceSettingsModel(difficulty, model.music, model.sound, model.language);
 	}
 }

@@ -1,6 +1,4 @@
 using Entitas;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class DifficultyControllerSystem : IInitializeSystem, ISetPool {
 

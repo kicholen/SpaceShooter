@@ -15,8 +15,8 @@ public class PositionSystem : IExecuteSystem, ISetPool {
 			PositionComponent position = e.position;
 			VelocityComponent velocity = e.velocity;
 
-			e.ReplacePosition(position.x + velocity.x * deltaTime,
-			                  position.y + velocity.y * deltaTime);
+			position.x += velocity.x * deltaTime;
+			position.y += velocity.y * deltaTime;
 		}
 	}
 }
