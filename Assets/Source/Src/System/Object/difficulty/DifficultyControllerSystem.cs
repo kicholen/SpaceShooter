@@ -2,46 +2,39 @@ using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DifficultyControllerSystem : IReactiveSystem, ISetPool {
-	public TriggerOnEvent trigger { get { return Matcher.DifficultyController.OnEntityAdded(); } }
-	
+public class DifficultyControllerSystem : IInitializeSystem, ISetPool {
+
 	Pool _pool;
 	Group _group;
-	Group _player;
+	Group _models;
 	
 	public void SetPool(Pool pool) {
 		_pool = pool;
-		_group = pool.GetGroup(Matcher.BonusModel);
-		_player = pool.GetGroup(Matcher.Player);
+		_pool.GetGroup(Matcher.SettingsModel).OnEntityUpdated += update;
+		_group = pool.GetGroup(Matcher.DifficultyController);
+		_models = pool.GetGroup(Matcher.DifficultyModel);
 	}
-	
-	public void Execute(List<Entity> entities) {
-		foreach (Entity e in entities) {
-			DifficultyControllerComponent difficulty = e.difficultyController;
 
-			switch(difficulty.difficultyType) {
-				case DifficultyTypes.Easy:
+	public void Initialize() {
+		_pool.CreateEntity()
+			.AddDifficultyController(DifficultyTypes.None, 0, 0, 0);
+	}
 
-					break;
-				case DifficultyTypes.Normal:
+	void update(Group group, Entity entity, int index, IComponent previousComponent, IComponent nextComponent) {
+		SettingsModelComponent settings = (SettingsModelComponent)nextComponent;
+		DifficultyControllerComponent difficulty = _group.GetSingleEntity().difficultyController;
 
-					break;
-				case DifficultyTypes.Hard:
-
-					break;
-			}
+		if (settings.difficulty == difficulty.difficultyType) {
+			return;
 		}
-	}
-	
-	void activateBonus(Entity e, BonusModelComponent bonus) {
-		switch(bonus.type) {
-		case 1:
-			_pool.CreateEntity()
-				.AddSpeedBonus(10.0f, 10.0f, 2.0f);
-			break;
-		default:
-			throw new UnityException("Unknown bonus type: " + bonus.type);
-			break;
+
+		foreach (Entity e in _models.GetEntities()) {
+			DifficultyModelComponent model = e.difficultyModel;
+			if (settings.difficulty == model.type) {
+				difficulty.dmgBoostPercent = model.dmgBoostPercent;
+				difficulty.hpBoostPercent = model.hpBoostPercent;
+				difficulty.missileSpeedBoostPercent = model.missileSpeedBoostPercent;
+			}
 		}
 	}
 }

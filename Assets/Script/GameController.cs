@@ -22,6 +22,9 @@ public class GameController : MonoBehaviour {
         return new Systems()
         #endif
 
+				// Settings stuff
+				.Add(pool.CreateDifficultyControllerSystem())
+
 	            // Initialize
 				.Add(pool.CreateCreateDifficultySystem())
 				.Add(pool.CreateCreateSettingsSystem())
