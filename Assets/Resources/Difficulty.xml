@@ -1,0 +1,7 @@
+<level version="1">
+	<difficulty>
+		<easy type="0" hpboost="10" dmgboost="10" missileSpeed="10"/>
+		<normal type="0" hpboost="10" dmgboost="10" missileSpeed="10"/>
+		<hard type="0" hpboost="10" dmgboost="10" missileSpeed="10"/>
+	</difficulty>
+</level>

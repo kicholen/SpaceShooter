@@ -26,7 +26,7 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 		Entity e = entities.SingleEntity();
 
 		CreateLevelComponent createLevel = e.createLevel;
-		XmlNode node = loadXml(createLevel);
+		XmlNode node = Utils.loadXml(createLevel.level.ToString());
 
 		XmlNode enemyNode = node.FirstChild;
 		_pool.CreateEntity()
@@ -53,14 +53,7 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 			player.AddSnapPosition(x, y, screenWidth, screenHeight, true);
 		}
 
-		createBonuses (sizeNode.NextSibling);
-	}
-
-	XmlNode loadXml(CreateLevelComponent component) {
-		XmlDocument doc = new XmlDocument();
-		TextAsset textFile = Resources.Load<TextAsset>(component.level.ToString());
-		doc.LoadXml(textFile.text);
-		return doc.FirstChild;
+		createBonuses(sizeNode.NextSibling);
 	}
 
 	void createBonuses(XmlNode node) {

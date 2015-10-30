@@ -23,6 +23,8 @@ public class GameController : MonoBehaviour {
         #endif
 
 	            // Initialize
+				.Add(pool.CreateCreateDifficultySystem())
+				.Add(pool.CreateCreateSettingsSystem())
 	            .Add(pool.CreateCreatePlayerSystem())
 				.Add(pool.CreateCreateEnemySystem())
 				.Add(pool.CreateWeaponSystem())

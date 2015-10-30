@@ -19,7 +19,7 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 	public void Initialize() {
 		PlayerModelComponent component = new PlayerModelComponent();
 
-		XmlNode node = loadXml(playerSettingsPath);
+		XmlNode node = Utils.loadXml(playerSettingsPath);
 
 		XmlNode playerNode = node.FirstChild;
 		XmlNode mainNode = playerNode.FirstChild;
@@ -51,7 +51,7 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 				component.homeMissileDamage = (float)Convert.ToDouble(attributes[2].Value);
 			}
 			else {
-				//throw UnityException("Player System weapon wasn't detected");
+				throw new UnityException("PlayerSystem::weapon wasn't detected");
 			}
 			weapon = weapon.NextSibling;
 		}
@@ -100,12 +100,5 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 		foreach (Entity e in entities) {
 			e.isNonRemovable = true;
 		}
-	}
-
-	XmlNode loadXml(string path) {
-		XmlDocument doc = new XmlDocument();
-		TextAsset textFile = Resources.Load<TextAsset>(path);
-		doc.LoadXml(textFile.text);
-		return doc.FirstChild;
 	}
 }
