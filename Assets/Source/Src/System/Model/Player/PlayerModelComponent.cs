@@ -15,7 +15,7 @@ public class PlayerModelComponent : IComponent {
 	public float missileSpawnDelay;
 	public float missileDamage;
 
-	public float hasSecondaryMissiles; // not implemented yet
+	public float hasSecondaryMissiles;
 	public float secondaryMissileVelocity;
 	public float secondaryMissileSpawnDelay;
 	public float secondaryMissileDamage;

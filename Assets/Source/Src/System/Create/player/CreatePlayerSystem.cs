@@ -1,14 +1,9 @@
 ﻿using Entitas;
 using System.Collections.Generic;
-using System.Xml;
-using UnityEngine;
-using System;
 
 public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 	Pool _pool;
 	Group _group;
-
-	const string playerSettingsPath = "Player";
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
@@ -17,47 +12,8 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 	}
 	
 	public void Initialize() {
-		PlayerModelComponent component = new PlayerModelComponent();
-
-		XmlNode node = Utils.loadXml(playerSettingsPath);
-
-		XmlNode playerNode = node.FirstChild;
-		XmlNode mainNode = playerNode.FirstChild;
-
-		XmlAttributeCollection attributes = mainNode.Attributes;
-		
-		component.name = attributes[0].Value;
-		mainNode = mainNode.NextSibling;
-		attributes = mainNode.Attributes;
-		component.velocityLimit = new Vector2((float)Convert.ToDouble(attributes[0].Value), (float)Convert.ToDouble(attributes[1].Value));
-
-		mainNode = mainNode.NextSibling;
-		attributes = mainNode.Attributes;
-		component.health = Convert.ToInt32(attributes[0].Value);
-
-		XmlNode weapon = mainNode.NextSibling.FirstChild;
-
-		while (weapon != null) {
-			attributes = weapon.Attributes;
-			if (weapon.Name == "missile") {
-				component.missileVelocity = (float)Convert.ToDouble(attributes[0].Value);
-				component.missileSpawnDelay = (float)Convert.ToDouble(attributes[1].Value);
-				component.missileDamage = (float)Convert.ToDouble(attributes[2].Value);
-			}
-			else if (weapon.Name == "homeMissile") {
-				component.hasHomeMissile = true;
-				component.homeMissileVelocity = (float)Convert.ToDouble(attributes[0].Value);
-				component.homeMissileSpawnDelay = (float)Convert.ToDouble(attributes[1].Value);
-				component.homeMissileDamage = (float)Convert.ToDouble(attributes[2].Value);
-			}
-			else {
-				throw new UnityException("PlayerSystem::weapon wasn't detected");
-			}
-			weapon = weapon.NextSibling;
-		}
-
-		Entity e = _pool.CreateEntity();
-		e.AddComponent(ComponentIds.PlayerModel, component);
+		_pool.CreateEntity()
+			.AddComponent(ComponentIds.PlayerModel, Utils.DeserializeComponent(typeof(PlayerModelComponent)));
 	}
 
 	void create(Group group, Entity entity, int index, IComponent component) {

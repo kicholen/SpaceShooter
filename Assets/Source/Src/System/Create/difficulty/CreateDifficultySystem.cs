@@ -13,7 +13,7 @@ public class CreateDifficultySystem : IInitializeSystem, ISetPool {
 	}
 	
 	public void Initialize() {
-		XmlNode node = Utils.loadXml(difficultyPath);
+		XmlNode node = Utils.LoadXml(difficultyPath);
 
 		XmlNode difficulty = node.FirstChild.FirstChild;
 

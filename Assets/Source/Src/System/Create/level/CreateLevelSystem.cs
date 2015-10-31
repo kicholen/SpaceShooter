@@ -19,14 +19,14 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 
 	public void Initialize() {
 		_pool.CreateEntity()
-			.AddCreateLevel(101, "/Resources/"); // todo make another system for handling this
+			.AddCreateLevel(101, "/Resources/");
 	}
 	
 	public void Execute(List<Entity> entities) {
 		Entity e = entities.SingleEntity();
 
 		CreateLevelComponent createLevel = e.createLevel;
-		XmlNode node = Utils.loadXml(createLevel.level.ToString());
+		XmlNode node = Utils.LoadXml(createLevel.level.ToString());
 
 		XmlNode enemyNode = node.FirstChild;
 		_pool.CreateEntity()
