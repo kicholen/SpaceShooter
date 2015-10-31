@@ -19,11 +19,31 @@ public static class Utils
 	public static IComponent DeserializeComponent(Type type) {
 		string path = type.Name;
 		XmlSerializer serializer = new XmlSerializer(type);
-		bool exists = File.Exists(Application.persistentDataPath + "/" + path + xmlSufix);
-		StreamReader streamReader = new StreamReader(exists 
-		                                             ? Application.persistentDataPath + "/" + path + xmlSufix 
-		                                             : Application.dataPath + "/Resources/" + path + xmlSufix);
-		return serializer.Deserialize(streamReader.BaseStream) as IComponent;
+		if (File.Exists(Application.persistentDataPath + "/" + path + xmlSufix)) {
+			StreamReader streamReader = new StreamReader(Application.persistentDataPath + "/" + path + xmlSufix);
+			IComponent component = serializer.Deserialize(streamReader.BaseStream) as IComponent;
+			streamReader.Dispose();
+			return component;
+		}
+		else {
+			#if UNITY_EDITOR
+				StreamReader streamReader = new StreamReader(Application.dataPath + "/Resources/" + path + xmlSufix);
+				IComponent component = serializer.Deserialize(streamReader.BaseStream) as IComponent;
+				streamReader.Dispose();
+				return component;
+			#elif UNITY_ANDROID
+				TextAsset textFile = Resources.Load<TextAsset>(path);
+				StringReader stringReader = new StringReader(textFile.text);
+				XmlReader xmlReader = XmlReader.Create(stringReader);
+				IComponent component = serializer.Deserialize(xmlReader) as IComponent;
+				stringReader.Dispose();
+				xmlReader.Close();
+				return component;
+			#endif
+		}
+
+		throw new UnityException("Exception while loading: " + path);
+		return null;
 	}
 
 	public static void SerializeComponent(IComponent component) {
