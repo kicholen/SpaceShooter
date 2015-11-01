@@ -114,8 +114,6 @@ public class GameController : MonoBehaviour {
 			// Sound
 			.Add(pool.CreateSoundSystem())
 			
-			// DestroyPosition, static GO do not need to refresh on every frame
-			.Add(pool.CreateDestroyPositionSystem())
 			// Destroy
 			.Add(pool.CreateDestroyEntityDelayedSystem())
 			.Add(pool.CreateDestroyEntitySystem())
