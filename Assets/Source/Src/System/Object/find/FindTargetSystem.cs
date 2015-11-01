@@ -16,12 +16,12 @@ public class FindTargetSystem : IReactiveSystem, ISetPool {
 	public void Execute(List<Entity> entities) {
 		foreach (Entity e in entities) {
 			FindTargetComponent component = e.findTarget;
-			if (component.collisionType == CollisionTypes.Enemy) {
+			if (component.targetCollisionType == CollisionTypes.Enemy) {
 				if (_player.count > 0) {
 					e.AddFollowTarget(_player.GetSingleEntity());
 				}
 			}
-			else if (component.collisionType == CollisionTypes.Player) {
+			else if (component.targetCollisionType == CollisionTypes.Player) {
  				if (_enemies.count > 0) {
 					float minDist = float.PositiveInfinity;
 					Entity chosenEnemy = null;

@@ -12,16 +12,16 @@ namespace Entitas {
             _findTargetComponentPool.Clear();
         }
 
-        public Entity AddFindTarget(int newCollisionType) {
+        public Entity AddFindTarget(int newTargetCollisionType) {
             var component = _findTargetComponentPool.Count > 0 ? _findTargetComponentPool.Pop() : new FindTargetComponent();
-            component.collisionType = newCollisionType;
+            component.targetCollisionType = newTargetCollisionType;
             return AddComponent(ComponentIds.FindTarget, component);
         }
 
-        public Entity ReplaceFindTarget(int newCollisionType) {
+        public Entity ReplaceFindTarget(int newTargetCollisionType) {
             var previousComponent = hasFindTarget ? findTarget : null;
             var component = _findTargetComponentPool.Count > 0 ? _findTargetComponentPool.Pop() : new FindTargetComponent();
-            component.collisionType = newCollisionType;
+            component.targetCollisionType = newTargetCollisionType;
             ReplaceComponent(ComponentIds.FindTarget, component);
             if (previousComponent != null) {
                 _findTargetComponentPool.Push(previousComponent);
