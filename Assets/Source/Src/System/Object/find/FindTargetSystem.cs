@@ -1,5 +1,6 @@
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class FindTargetSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.FindTarget.OnEntityAdded(); } }
@@ -22,8 +23,22 @@ public class FindTargetSystem : IReactiveSystem, ISetPool {
 			}
 			else if (component.collisionType == CollisionTypes.Player) {
 				if (_enemies.count > 0) {
-					e.AddFollowTarget(_enemies.GetEntities()[0]);
-				}
+                    Vector2 pos = new Vector2(e.position.x, e.position.y);
+                    float minDist = float.PositiveInfinity;
+                    Entity chosenEnemy = null;
+                    Vector2 enemyPos = new Vector2();
+
+                    foreach (Entity enemy in _enemies.GetEntities()) {
+                        enemyPos.Set(enemy.position.x, enemy.position.y);
+                        float dist = Vector2.Distance(pos, enemyPos);
+                        if (dist < minDist) {
+                            chosenEnemy = enemy;
+                            minDist = dist;
+                        }
+                    }
+
+                    e.AddFollowTarget(chosenEnemy);
+                }
 			}
 			e.RemoveFindTarget();
 		}
