@@ -35,17 +35,16 @@ public class CircleMissileRotatedSpawnerSystem : IExecuteSystem, ISetPool {
 	void spawnMissiles(CircleMissileRotatedSpawnerComponent missile, Vector2 position) {
 		float angleOffset = getAngle(missile.amount);
 		float angle = missile.angle;
-		float baseVelX = missile.velocityX;
-		float baseVelY = missile.velocityY;
+		float baseVel = missile.velocity;
 
 		for (int i = 0; i < missile.amount; i++) {
 			float cosinus = Mathf.Cos(angle);
 			float sinus = Mathf.Sin(angle);
-			float velocityX = baseVelX * cosinus - baseVelY * sinus;
-			float velocityY = baseVelX * sinus + baseVelY * cosinus;
+			float velocityX = baseVel * cosinus - baseVel * sinus;
+			float velocityY = baseVel * sinus + baseVel * cosinus;
 			_pool.CreateEntity()
 				.AddPosition(new Vector2().Set(position))
-				.AddVelocity(velocityX + missile.velocityOffsetX, velocityY + missile.velocityOffsetY)
+				.AddVelocity(new Vector2(velocityX, velocityY))
 				.AddHealth(0)
 				.AddCollision(missile.collisionType)
 				.AddResource(missile.resource);

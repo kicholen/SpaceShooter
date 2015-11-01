@@ -27,7 +27,7 @@ public class SpawnMissileSystem : IExecuteSystem, ISetPool {
 	void spawnMissile(MissileSpawnerComponent missile, Vector2 position) {
 		_pool.CreateEntity()
 			.AddPosition(new Vector2().Set(position))
-			.AddVelocity(missile.velocityX, missile.velocityY)
+			.AddVelocity(new Vector2(missile.velocityX, missile.velocityY))
 			.AddHealth(0)
 			.AddCollision(missile.collisionType)
 			.AddResource(missile.resource);

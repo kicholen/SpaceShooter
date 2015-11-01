@@ -50,7 +50,7 @@ public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 			float acceY = velocityY > 0.0f ? -ACCELERATION : ACCELERATION;
 			_pool.CreateEntity()
 				.AddBonus(bonus.type)
-				.AddVelocity(velocityX, velocityY)
+				.AddVelocity(new Vector2(velocityX, velocityY))
 				.AddAcceleration(acceX, acceY, acceX > 0.0f ? -FRICTION : FRICTION, acceY > 0.0f ? -FRICTION : FRICTION, true)
 				.AddPosition(new Vector2().Set(position))
 				.AddHealth(0)

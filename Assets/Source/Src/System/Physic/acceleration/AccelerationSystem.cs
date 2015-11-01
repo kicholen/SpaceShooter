@@ -25,17 +25,16 @@ public class AccelerationSystem : IExecuteSystem, ISetPool {
 		acceleration.x = getAcceleration(acceleration.x, acceleration.frictionX, deltaTime);
 		acceleration.y = getAcceleration(acceleration.y, acceleration.frictionY, deltaTime);
 
-		velocity.x = velocity.x + deltaTime * acceleration.x;
-		velocity.y = velocity.y + deltaTime * acceleration.y;
+		velocity.vel += new Vector2(acceleration.x * deltaTime, acceleration.y * deltaTime);
 
-		if (acceleration.stopNearZero) {
+		if (acceleration.stopNearZero) { // todo
 			int count = 0;
-			if (Mathf.Abs(velocity.x) < EPSILON) {
-				velocity.x = 0.0f;
+			if (Mathf.Abs(velocity.vel.x) < EPSILON) {
+				velocity.vel.x = 0.0f;
 				count++;
 			}
-			if (Mathf.Abs(velocity.y) < EPSILON) {
-				velocity.y = 0.0f;
+			if (Mathf.Abs(velocity.vel.y) < EPSILON) {
+				velocity.vel.y = 0.0f;
 				count++;
 			}
 			if (count == 2) {

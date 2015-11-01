@@ -32,8 +32,7 @@ public class HomeMissileSystem : IExecuteSystem, ISetPool {
 			float velocityX = (targetPosition.x - position.x) * 15.0f;
 			float velocityY = (targetPosition.y - position.y) * 15.0f;
 
-			velocity.x = Mathf.Lerp(velocity.x, velocityX, deltaTime);
-			velocity.y = Mathf.Lerp(velocity.y, velocityY, deltaTime);
+			velocity.vel.Set(Mathf.Lerp(velocity.vel.x, velocityX, deltaTime), Mathf.Lerp(velocity.vel.y, velocityY, deltaTime));
 		}
 	}
 }

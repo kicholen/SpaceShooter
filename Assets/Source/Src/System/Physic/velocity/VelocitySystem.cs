@@ -2,6 +2,7 @@ using Entitas;
 
 public class VelocitySystem : IExecuteSystem, ISetPool {
 	Group _group;
+	int asd;
 
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.VelocityLimit, Matcher.Velocity));
@@ -17,18 +18,9 @@ public class VelocitySystem : IExecuteSystem, ISetPool {
 		VelocityLimitComponent velocityLimit = e.velocityLimit;
 		VelocityComponent velocity = e.velocity;
 
-		if (velocity.x > (velocityLimit.x + velocityLimit.offsetX)) {
-			velocity.x = velocityLimit.x + velocityLimit.offsetX;
-		}
-		else if (velocity.x < -(velocityLimit.x + velocityLimit.offsetX)) {
-			velocity.x = -(velocityLimit.x + velocityLimit.offsetX);
-		}
-
-		if (velocity.y > (velocityLimit.y + velocityLimit.offsetY)) {
-			velocity.y = velocityLimit.y + velocityLimit.offsetY;
-		}
-		else if (velocity.y < -(velocityLimit.y + velocityLimit.offsetY)) {
-			velocity.y = -(velocityLimit.y + velocityLimit.offsetY);
+		if (velocity.vel.magnitude > velocityLimit.maxVelocity) {
+			velocity.vel.Normalize();
+			velocity.vel *= velocityLimit.maxVelocity;
 		}
 	}
 }

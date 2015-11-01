@@ -12,22 +12,16 @@ namespace Entitas {
             _velocityLimitComponentPool.Clear();
         }
 
-        public Entity AddVelocityLimit(float newX, float newY, float newOffsetX, float newOffsetY) {
+        public Entity AddVelocityLimit(float newMaxVelocity) {
             var component = _velocityLimitComponentPool.Count > 0 ? _velocityLimitComponentPool.Pop() : new VelocityLimitComponent();
-            component.x = newX;
-            component.y = newY;
-            component.offsetX = newOffsetX;
-            component.offsetY = newOffsetY;
+            component.maxVelocity = newMaxVelocity;
             return AddComponent(ComponentIds.VelocityLimit, component);
         }
 
-        public Entity ReplaceVelocityLimit(float newX, float newY, float newOffsetX, float newOffsetY) {
+        public Entity ReplaceVelocityLimit(float newMaxVelocity) {
             var previousComponent = hasVelocityLimit ? velocityLimit : null;
             var component = _velocityLimitComponentPool.Count > 0 ? _velocityLimitComponentPool.Pop() : new VelocityLimitComponent();
-            component.x = newX;
-            component.y = newY;
-            component.offsetX = newOffsetX;
-            component.offsetY = newOffsetY;
+            component.maxVelocity = newMaxVelocity;
             ReplaceComponent(ComponentIds.VelocityLimit, component);
             if (previousComponent != null) {
                 _velocityLimitComponentPool.Push(previousComponent);

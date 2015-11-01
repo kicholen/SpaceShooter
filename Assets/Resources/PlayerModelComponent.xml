@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PlayerModelComponent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <name>Default</name>
-  <velocityLimit>
-    <x>10</x>
-    <y>10</y>
-  </velocityLimit>
+  <maxVelocity>5</maxVelocity>
   <health>50</health>
   <hasLaser>false</hasLaser>
   <laserDamage>0</laserDamage>
@@ -16,10 +13,10 @@
   <secondaryMissileVelocity>0</secondaryMissileVelocity>
   <secondaryMissileSpawnDelay>0</secondaryMissileSpawnDelay>
   <secondaryMissileDamage>0</secondaryMissileDamage>
-  <hasHomeMissile>false</hasHomeMissile>
-  <homeMissileVelocity>0</homeMissileVelocity>
-  <homeMissileSpawnDelay>0</homeMissileSpawnDelay>
-  <homeMissileDamage>0</homeMissileDamage>
+  <hasHomeMissile>true</hasHomeMissile>
+  <homeMissileVelocity>5</homeMissileVelocity>
+  <homeMissileSpawnDelay>5</homeMissileSpawnDelay>
+  <homeMissileDamage>5</homeMissileDamage>
   <hasMagnetField>false</hasMagnetField>
   <magnetRadius>0</magnetRadius>
 </PlayerModelComponent>

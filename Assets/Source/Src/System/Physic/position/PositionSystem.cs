@@ -13,7 +13,7 @@ public class PositionSystem : IExecuteSystem, ISetPool {
 	public void Execute() {
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (Entity e in _group.GetEntities()) {
-			VelocityComponent velocity = e.velocity;
+			Vector2 velocity = e.velocity.vel;
 			e.position.pos += new Vector2(velocity.x * deltaTime, velocity.y * deltaTime);
 		}
 	}

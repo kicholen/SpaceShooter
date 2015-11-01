@@ -1,10 +1,9 @@
 using Entitas;
-using UnityEngine;
 
 public class PlayerModelComponent : IComponent {
 	public string name;
 
-	public Vector2 velocityLimit;
+	public float maxVelocity;
 	public int health;
 
 	public bool hasLaser;

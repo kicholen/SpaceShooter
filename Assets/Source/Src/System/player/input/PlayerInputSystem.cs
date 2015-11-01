@@ -55,41 +55,28 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 	void setVelocityByInput(Entity entity, InputComponent component) {
 		Vector2 position = entity.position.pos;
 		VelocityComponent velocity = entity.velocity;
-		VelocityLimitComponent velocityLimit = entity.velocityLimit;
-
-		/*float tx = (component.x - position.x);
-		float ty = (component.y - position.y);
-		float dist = Mathf.Sqrt(tx*tx+ty*ty);
-		
-		velocity.x = (tx/dist)*5.0f;
-		velocity.y = (ty/dist)*5.0f;*/
 
 		Entity cameraEntity = _camera.GetSingleEntity();
-		float velocityOffsetY = cameraEntity.hasVelocity ? cameraEntity.velocity.y : 0.0f;
+		float velocityOffsetY = cameraEntity.hasVelocity ? cameraEntity.velocity.vel.y : 0.0f;
 
-		velocityLimit.offsetY = velocityOffsetY;
-		velocity.x = (component.x - position.x) * 5.0f;
-		velocity.y = (component.y - position.y) * 5.0f + velocityOffsetY;
-		if (velocity.y < -velocityLimit.y) {
-			velocity.y = -velocityLimit.y; // not to add new fields to velocityLimits
-		}
+		velocity.vel.Set((component.x - position.x) * 5.0f, (component.y - position.y) * 5.0f + velocityOffsetY);
 	}
 
 	void slowDown(Entity entity) {
 		VelocityComponent velocity = entity.velocity;
 
-		if (System.Math.Abs(velocity.x) > EPSILON) {
-			velocity.x *= 0.8f;
+		if (System.Math.Abs(velocity.vel.x) > EPSILON) {
+			velocity.vel.x *= 0.8f;
 		}
 		else {
-			velocity.x = 0.0f;
+			velocity.vel.x = 0.0f;
 		}
 
-		if (System.Math.Abs(velocity.y) > EPSILON) {
-			velocity.y *= 0.8f;
+		if (System.Math.Abs(velocity.vel.y) > EPSILON) {
+			velocity.vel.y *= 0.8f;
 		}
 		else {
-			velocity.y = 0.0f;
+			velocity.vel.y = 0.0f;
 		}
 	}
 

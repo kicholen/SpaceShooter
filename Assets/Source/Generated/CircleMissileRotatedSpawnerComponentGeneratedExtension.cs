@@ -12,7 +12,7 @@ namespace Entitas {
             _circleMissileRotatedSpawnerComponentPool.Clear();
         }
 
-        public Entity AddCircleMissileRotatedSpawner(int newAmount, int newWaves, int newAngle, int newAngleOffset, float newTime, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, float newVelocityOffsetX, float newVelocityOffsetY, int newCollisionType) {
+        public Entity AddCircleMissileRotatedSpawner(int newAmount, int newWaves, int newAngle, int newAngleOffset, float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
             var component = _circleMissileRotatedSpawnerComponentPool.Count > 0 ? _circleMissileRotatedSpawnerComponentPool.Pop() : new CircleMissileRotatedSpawnerComponent();
             component.amount = newAmount;
             component.waves = newWaves;
@@ -21,15 +21,12 @@ namespace Entitas {
             component.time = newTime;
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
-            component.velocityX = newVelocityX;
-            component.velocityY = newVelocityY;
-            component.velocityOffsetX = newVelocityOffsetX;
-            component.velocityOffsetY = newVelocityOffsetY;
+            component.velocity = newVelocity;
             component.collisionType = newCollisionType;
             return AddComponent(ComponentIds.CircleMissileRotatedSpawner, component);
         }
 
-        public Entity ReplaceCircleMissileRotatedSpawner(int newAmount, int newWaves, int newAngle, int newAngleOffset, float newTime, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, float newVelocityOffsetX, float newVelocityOffsetY, int newCollisionType) {
+        public Entity ReplaceCircleMissileRotatedSpawner(int newAmount, int newWaves, int newAngle, int newAngleOffset, float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
             var previousComponent = hasCircleMissileRotatedSpawner ? circleMissileRotatedSpawner : null;
             var component = _circleMissileRotatedSpawnerComponentPool.Count > 0 ? _circleMissileRotatedSpawnerComponentPool.Pop() : new CircleMissileRotatedSpawnerComponent();
             component.amount = newAmount;
@@ -39,10 +36,7 @@ namespace Entitas {
             component.time = newTime;
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
-            component.velocityX = newVelocityX;
-            component.velocityY = newVelocityY;
-            component.velocityOffsetX = newVelocityOffsetX;
-            component.velocityOffsetY = newVelocityOffsetY;
+            component.velocity = newVelocity;
             component.collisionType = newCollisionType;
             ReplaceComponent(ComponentIds.CircleMissileRotatedSpawner, component);
             if (previousComponent != null) {

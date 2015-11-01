@@ -1,5 +1,6 @@
 using Entitas;
 using UnityEngine;
+using System.IO;
 
 public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	const float EPSILON = 0.005f;
@@ -53,6 +54,9 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		if (Input.GetKeyDown(KeyCode.R)) {
 			restart();
 		}
+		if (Input.GetKeyDown(KeyCode.E)) {
+			clearPersistentFolder();
+		}
 	}
 	
 	void changeCamera() {
@@ -67,8 +71,8 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		}
 		else if (e.hasRegularCamera) {
 			e.AddSmoothCamera(e.regularCamera.offset)
-				.AddVelocity(0.0f, 2.0f);
-				//.AddPosition(new Vector2(playerPosition.x, playerPosition.y + e.regularCamera.offset.y));
+				.AddVelocity(new Vector2(0.0f, 2.0f))
+				.ReplacePosition(new Vector2(playerPosition.x, playerPosition.y + e.regularCamera.offset.y));
 			e.RemoveRegularCamera();
 		}
 	}
@@ -134,5 +138,14 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	void restart() {
 		_pool.CreateEntity()
 			.isRestartGame = true;
+	}
+
+	void clearPersistentFolder() {
+		if (File.Exists(Application.persistentDataPath + "/PlayerModelComponent.xml")) {
+			File.Delete(Application.persistentDataPath + "/PlayerModelComponent.xml");
+		}
+		if (File.Exists(Application.persistentDataPath + "/SettingsModelComponent.xml")) {
+			File.Delete(Application.persistentDataPath + "/SettingsModelComponent.xml");
+		}
 	}
 }

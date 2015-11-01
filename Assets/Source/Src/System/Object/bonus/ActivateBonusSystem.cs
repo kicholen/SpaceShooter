@@ -33,7 +33,7 @@ public class ActivateBonusSystem : IReactiveSystem, ISetPool {
 			break;
 		case BonusTypes.Speed:
 			_pool.CreateEntity()
-				.AddSpeedBonus(10.0f, 10.0f, 2.0f);
+				.AddSpeedBonus(15.0f, 0.0f, 2.0f);
 		break;
 		default:
 			throw new UnityException("Unknown bonus type: " + bonus.type);

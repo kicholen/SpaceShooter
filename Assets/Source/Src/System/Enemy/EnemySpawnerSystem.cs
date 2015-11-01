@@ -47,12 +47,12 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 					int enemyCount = Convert.ToInt16(innerNode.Attributes[0].Value);
 					Vector2 position = new Vector2((float)Convert.ToDouble(innerNode.Attributes[1].Value),
 					                               (float)Convert.ToDouble(innerNode.Attributes[2].Value));
-					float velocityX = (float)Convert.ToDouble(innerNode.Attributes[3].Value);
-					float velocityY = (float)Convert.ToDouble(innerNode.Attributes[4].Value);
+					Vector2 velocity = new Vector2((float)Convert.ToDouble(innerNode.Attributes[3].Value),
+					                               (float)Convert.ToDouble(innerNode.Attributes[4].Value));
 					int type = Convert.ToInt16(innerNode.Attributes[5].Value);
 					int health = Convert.ToInt16(innerNode.Attributes[6].Value) * (difficulty.hpBoostPercent + 100) / 100;
 					while (enemyCount != 0) {
-						_factory.createEnemyByType(type, position, velocityX, velocityY, health, difficulty.missileSpeedBoostPercent);
+						_factory.createEnemyByType(type, position, velocity, health, difficulty.missileSpeedBoostPercent);
 						enemyCount--;
 					}
 					innerNode = innerNode.NextSibling;

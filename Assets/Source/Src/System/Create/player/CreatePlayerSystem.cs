@@ -21,8 +21,8 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 		Entity player = _pool.CreateEntity()
 				.AddPlayer(playerModel.name)
 				.AddPosition(new Vector2(0.0f, 0.0f))
-				.AddVelocity(0.0f, 0.0f)
-				.AddVelocityLimit(playerModel.velocityLimit.x, playerModel.velocityLimit.y, 0.0f, 0.0f)
+				.AddVelocity(new Vector2(0.0f, 0.0f))
+				.AddVelocityLimit(playerModel.maxVelocity)
 				.AddCollision(CollisionTypes.Player)
 				.AddHealth(playerModel.health)
 				.AddResource(Resource.Player);

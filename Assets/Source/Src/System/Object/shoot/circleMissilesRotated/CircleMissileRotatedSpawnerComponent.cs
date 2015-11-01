@@ -8,9 +8,6 @@ public class CircleMissileRotatedSpawnerComponent : IComponent {
 	public float time;
 	public float spawnDelay;
 	public string resource;
-	public float velocityX;
-	public float velocityY;
-	public float velocityOffsetX;
-	public float velocityOffsetY;
+	public float velocity;
 	public int collisionType;
 }

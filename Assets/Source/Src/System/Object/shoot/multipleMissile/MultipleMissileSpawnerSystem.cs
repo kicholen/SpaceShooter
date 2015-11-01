@@ -36,7 +36,7 @@ public class MultipleMissileSpawnerSystem : IExecuteSystem, ISetPool {
 		float offsetX = Random.Range(-missile.randomPositionOffsetX, missile.randomPositionOffsetX);
 		_pool.CreateEntity()
 			.AddPosition(new Vector2(position.x + offsetX, position.y))
-			.AddVelocity(missile.velocityX, missile.velocityY)
+			.AddVelocity(new Vector2(missile.velocityX, missile.velocityY))
 			.AddHealth(0)
 			.AddCollision(missile.collisionType)
 			.AddResource(missile.resource);

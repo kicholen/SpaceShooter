@@ -18,7 +18,7 @@ public class CreateCameraSystem : IInitializeSystem, ISetPool {
 			.AddCamera(camera)
 			.AddFollowTarget(player)
 			.AddSmoothCamera(new Vector3(0.0f, 2.0f, camera.transform.position.z))
-			.AddVelocity(0.0f, 2.0f)
+			.AddVelocity(new Vector2(0.0f, 2.0f))
 			.AddPosition(new Vector2(playerPosition.x, playerPosition.y + 2.0f));
 	}
 }

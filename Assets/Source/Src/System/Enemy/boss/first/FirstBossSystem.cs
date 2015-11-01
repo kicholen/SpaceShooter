@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public class FirstBossSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
@@ -22,7 +23,8 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 	
 	public void Execute() {
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
-		float cameraVelocityY = _camera.GetSingleEntity().velocity.y;
+		Entity cameraEntity = _camera.GetSingleEntity();
+		float cameraVelocityY = cameraEntity.hasVelocity ? cameraEntity.velocity.vel.y : 0.0f;
 		foreach (Entity e in _group.GetEntities()) {
 			FirstBossComponent component = e.firstBoss;
 			component.age += deltaTime;
@@ -30,7 +32,6 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 			setVelocity(e.velocity, e.position, _player.GetSingleEntity().position);
 
 			if (!tests) {
-				VelocityComponent velocity = e.velocity;
 				if (!e.hasLaserSpawner) {
 					//e.AddLaserSpawner(5.0f, 0.0f, 0.0f, new UnityEngine.Vector2(), CollisionTypes.Enemy, null);
 				}
@@ -43,8 +44,8 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 					}
 				}
 				if (!initalize) {
-					//e.AddCircleMissileRotatedSpawner(40, 10, 0, 10, 0.0f, 0.1f, Resource.MissileEnemy, velocity.x, velocity.y, velocity.x, velocity.y, CollisionTypes.Enemy);
-					e.AddCircleMissileSpawner(12, 0, 0.05f, Resource.MissileEnemy, 4.0f, 4.0f, velocity.x, velocity.y, CollisionTypes.Enemy);
+					//e.AddCircleMissileRotatedSpawner(40, 8, 0, 10, 0.0f, 0.1f, Resource.MissileEnemy, 3.0f, CollisionTypes.Enemy);
+					e.AddCircleMissileSpawner(20, 2.0f, 0.05f, Resource.MissileEnemy, 4.0f, CollisionTypes.Enemy);
 					//e.AddMultipleMissileSpawner(5, 5, 0.1f, 0.1f, 5.0f, 5.0f, Resource.MissileEnemy, 0.1f, velocity.x, -velocity.y, CollisionTypes.Enemy);
 					initalize = true;
 				}

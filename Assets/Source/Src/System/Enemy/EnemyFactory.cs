@@ -9,34 +9,34 @@ public class EnemyFactory {
 		_pool = pool;
 	}
 	
-	public void createEnemyByType(int type, Vector2 position, float velocityX, float velocityY, int health, int missileSpeedBonus) {
+	public void createEnemyByType(int type, Vector2 position, Vector2 velocity, int health, int missileSpeedBonus) {
 		Entity e;
 		switch(type) {
 		case 0:
-			e = createStandardEnemy(type, position, velocityX, velocityY, health);
+			e = createStandardEnemy(type, position, velocity, health);
 			e.isFaceDirection = true;
 			e.AddMissileSpawner(0.0f, 2.5f, Resource.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 		break;
 		case 1:
-			e = createStandardEnemy(type, position, velocityX, velocityY, health);
+			e = createStandardEnemy(type, position, velocity, health);
 			e.isFaceDirection = true;
 			e.AddHomeMissileSpawner(0.0f, 2.0f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 		break;
 		case 101:
-			e = createFirstBoss(type, position, velocityX, velocityY, health, missileSpeedBonus);
+			e = createFirstBoss(type, position, velocity, health, missileSpeedBonus);
 			break;
 		default:
-			e = createStandardEnemy(type, position, velocityX, velocityY, health);
+			e = createStandardEnemy(type, position, velocity, health);
 		break;
 		}
 	}
 
-	Entity createStandardEnemy(int type, Vector2 position, float velocityX, float velocityY, int health) {
+	Entity createStandardEnemy(int type, Vector2 position, Vector2 velocity, int health) {
 		return _pool.CreateEntity()
 			.AddEnemy(type)
 			.AddPosition(new Vector2().Set(position))
-			.AddVelocity(velocityX, velocityY)
-			.AddVelocityLimit(5.0f, 5.0f, 0.0f, 0.0f)
+			.AddVelocity(new Vector2().Set(velocity))
+			.AddVelocityLimit(5.0f)
 			.AddHealth(health)
 			.AddCollision(CollisionTypes.Enemy)
 			.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed)
@@ -45,11 +45,11 @@ public class EnemyFactory {
 			.AddResource(Resource.Enemy);
 	}
 
-	Entity createFirstBoss(int type, Vector2 position, float velocityX, float velocityY, int health, int missileSpeedBonus) {
+	Entity createFirstBoss(int type, Vector2 position, Vector2 velocity, int health, int missileSpeedBonus) {
 		Entity boss = _pool.CreateEntity()
 			.AddPosition(new Vector2().Set(position))
-			.AddVelocity(velocityX, velocityY)
-			.AddVelocityLimit(5.0f, 5.0f, 0.0f, 0.0f)
+			.AddVelocity(new Vector2().Set(velocity))
+			.AddVelocityLimit(5.0f)
 			.AddCollision(CollisionTypes.Enemy)
 			.AddHealth(health)
 			.AddResource(Resource.Boss)

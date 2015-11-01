@@ -40,8 +40,8 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 	void spawnMissile(HomeMissileSpawnerComponent missile, Vector2 position) {
 		_pool.CreateEntity()
 			.AddPosition(new Vector2().Set(position))
-			.AddVelocity(0.0f, 0.0f)
-			.AddVelocityLimit(missile.velocity, missile.velocity, 0.0f, 0.0f)
+			.AddVelocity(new Vector2(0.0f, 0.0f))
+			.AddVelocityLimit(missile.velocity)
 			.AddHealth(0)
 			.AddHomeMissile(0.0f)
 			.AddFindTarget(missile.collisionType)

@@ -12,31 +12,25 @@ namespace Entitas {
             _circleMissileSpawnerComponentPool.Clear();
         }
 
-        public Entity AddCircleMissileSpawner(int newAmount, float newTime, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, float newVelocityOffsetX, float newVelocityOffsetY, int newCollisionType) {
+        public Entity AddCircleMissileSpawner(int newAmount, float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
             var component = _circleMissileSpawnerComponentPool.Count > 0 ? _circleMissileSpawnerComponentPool.Pop() : new CircleMissileSpawnerComponent();
             component.amount = newAmount;
             component.time = newTime;
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
-            component.velocityX = newVelocityX;
-            component.velocityY = newVelocityY;
-            component.velocityOffsetX = newVelocityOffsetX;
-            component.velocityOffsetY = newVelocityOffsetY;
+            component.velocity = newVelocity;
             component.collisionType = newCollisionType;
             return AddComponent(ComponentIds.CircleMissileSpawner, component);
         }
 
-        public Entity ReplaceCircleMissileSpawner(int newAmount, float newTime, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, float newVelocityOffsetX, float newVelocityOffsetY, int newCollisionType) {
+        public Entity ReplaceCircleMissileSpawner(int newAmount, float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
             var previousComponent = hasCircleMissileSpawner ? circleMissileSpawner : null;
             var component = _circleMissileSpawnerComponentPool.Count > 0 ? _circleMissileSpawnerComponentPool.Pop() : new CircleMissileSpawnerComponent();
             component.amount = newAmount;
             component.time = newTime;
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
-            component.velocityX = newVelocityX;
-            component.velocityY = newVelocityY;
-            component.velocityOffsetX = newVelocityOffsetX;
-            component.velocityOffsetY = newVelocityOffsetY;
+            component.velocity = newVelocity;
             component.collisionType = newCollisionType;
             ReplaceComponent(ComponentIds.CircleMissileSpawner, component);
             if (previousComponent != null) {

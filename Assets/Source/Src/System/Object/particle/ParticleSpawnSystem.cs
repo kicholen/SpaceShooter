@@ -30,7 +30,7 @@ public class ParticleSpawnSystem : IExecuteSystem, ISetPool {
 			float velocityY = baseVelX * sinus + baseVelY * cosinus;
 			_pool.CreateEntity()
 				.AddPosition(new Vector2().Set(position))
-				.AddVelocity(velocityX, velocityY)
+				.AddVelocity(new Vector2(velocityX, velocityY))
 				.AddHealth(0)
 				.AddDestroyEntityDelayed(particle.lifespan)
 				.AddResource(particle.resource)
