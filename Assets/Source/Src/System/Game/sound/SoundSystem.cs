@@ -1,6 +1,5 @@
 using Entitas;
 using UnityEngine;
-using System;
 
 public class SoundSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
@@ -23,7 +22,7 @@ public class SoundSystem : IExecuteSystem, ISetPool {
 				sound.go = new GameObject();
 				AudioSource source = sound.go.AddComponent<AudioSource>();
 				source.volume = sound.volume;
-				source.clip = Resources.Load<AudioClip>("Sound/test");
+				source.clip = Resources.Load<AudioClip>(sound.path);
 				source.Play();
 			}
 			else {

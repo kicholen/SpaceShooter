@@ -43,6 +43,7 @@ public class EnemyFactory {
 			.AddBonusOnDeath(1)
 			.AddCameraShakeOnDeath(1)
 			.AddParticlesOnDeath(1)
+			.AddSoundOnDeath(Sound.Test, 1.0f)
 			.AddResource(Resource.Enemy);
 	}
 

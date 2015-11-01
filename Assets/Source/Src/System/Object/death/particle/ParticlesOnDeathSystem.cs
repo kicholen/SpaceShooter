@@ -10,7 +10,6 @@ public class ParticlesOnDeathSystem : IReactiveSystem, ISetPool {
 	
 	public void SetPool(Pool pool) {
 		_pool = pool;
-		//_group = pool.GetGroup(Matcher.BonusModel);
 	}
 	
 	public void Execute(List<Entity> entities) {

@@ -1,11 +1,8 @@
 using UnityEngine;
 using Entitas;
 using System.Collections.Generic;
-using System;
 
-public class RemoveGameObjectSystem : IReactiveSystem, ISetPool, IEnsureComponents {
-	public TriggerOnEvent trigger { get { return Matcher.Resource.OnEntityRemoved(); } }
-	
+public class RemoveGameObjectSystem : ISystem, ISetPool, IEnsureComponents {
 	public IMatcher ensureComponents { get { return Matcher.GameObject; } }
 
 	Group _poolGroup;
@@ -34,10 +31,6 @@ public class RemoveGameObjectSystem : IReactiveSystem, ISetPool, IEnsureComponen
 		component.gameObject.transform.parent = null;
 		component.gameObject.SetActive(false);
 		addToPool(component);
-	}
-
-	public void Execute(List<Entity> entities) {
-		throw new Exception("Remove game object system called ^^");
 	}
 
 	void addToPool(GameObjectComponent gameObjectComponent) {

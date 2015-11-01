@@ -50,6 +50,9 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		if (Input.GetKeyDown(KeyCode.S)) {
 			serialize();
 		}
+		if (Input.GetKeyDown(KeyCode.R)) {
+			restart();
+		}
 	}
 	
 	void changeCamera() {
@@ -127,5 +130,10 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	void serialize() {
 		Utils.SerializeComponent(_settings.GetSingleEntity().settingsModel);
 		Utils.SerializeComponent(_playerModel.GetSingleEntity().playerModel);
+	}
+
+	void restart() {
+		_pool.CreateEntity()
+			.isRestartGame = true;
 	}
 }
