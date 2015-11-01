@@ -58,18 +58,17 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	void changeCamera() {
 		Group group = _pool.GetGroup(Matcher.Camera);
 		Entity e = group.GetSingleEntity();
-		Entity player = _playerGroup.GetSingleEntity();
+		Vector2 playerPosition = _playerGroup.GetSingleEntity().position.pos;
 
 		if (e.hasSmoothCamera) {
 			e.AddRegularCamera(e.smoothCamera.offset)
-				.RemoveVelocity()
-				.RemovePosition();
+				.RemoveVelocity();
 			e.RemoveSmoothCamera();
 		}
 		else if (e.hasRegularCamera) {
 			e.AddSmoothCamera(e.regularCamera.offset)
-				.AddVelocity(0.0f, 2.0f)
-				.AddPosition(player.position.x, player.position.y + e.regularCamera.offset.y);
+				.AddVelocity(0.0f, 2.0f);
+				//.AddPosition(new Vector2(playerPosition.x, playerPosition.y + e.regularCamera.offset.y));
 			e.RemoveRegularCamera();
 		}
 	}

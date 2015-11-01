@@ -10,8 +10,7 @@ public class PositionGameObjectSystem : IExecuteSystem, ISetPool {
 	
 	public void Execute() {
 		foreach (Entity e in _group.GetEntities()) {
-			PositionComponent position = e.position;
-			e.gameObject.gameObject.transform.position = new Vector3(position.x, position.y, 0);
+			e.gameObject.gameObject.transform.position = new Vector2().Set(e.position.pos);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class RestartGameSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.RestartGame.OnEntityAdded(); } }
@@ -48,7 +49,7 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 
 	void restartPlayer() {
 		Entity player = _players.GetSingleEntity();
-		player.ReplacePosition(0.0f, 0.0f);
+		player.ReplacePosition(new Vector2(0.0f, 0.0f));
 		player.ReplaceHealth(50);
 		player.isDestroyEntity = false;
 		if (player.hasParent) {
@@ -61,7 +62,7 @@ public class RestartGameSystem : IReactiveSystem, ISetPool {
 
 	void restartCamera() {
 		foreach (Entity e in _cameras.GetEntities()) {
-			e.ReplacePosition(0.0f, 0.0f);
+			e.ReplacePosition(new Vector2(0.0f, 0.0f));
 		}
 	}
 

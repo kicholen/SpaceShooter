@@ -10,7 +10,7 @@ public class CreateEnemySystem : IInitializeSystem, ISetPool {
 	public void Initialize() {
 		_pool.CreateEntity()
 			.AddEnemy(0)
-			.AddPosition(2.0f, 5.0f)
+			.AddPosition(new UnityEngine.Vector2(2.0f, 5.0f))
 			.AddVelocity(0.0f, 0.0f)
 			.AddVelocityLimit(5.0f, 5.0f, 0.0f, 0.0f)
 			.AddHealth(20)

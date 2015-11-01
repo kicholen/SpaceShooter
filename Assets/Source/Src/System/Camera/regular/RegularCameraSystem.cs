@@ -18,7 +18,7 @@ public class RegularCameraSystem : IExecuteSystem, ISetPool {
 		RegularCameraComponent regularCamera = e.regularCamera;
 		CameraComponent camera = e.camera;
 		FollowTargetComponent target = e.followTarget;
-		PositionComponent targetPosition = target.target.position;
+		Vector2 targetPosition = target.target.position.pos;
 
 		camera.camera.transform.position = new Vector3(targetPosition.x + regularCamera.offset.x, targetPosition.y + regularCamera.offset.y, regularCamera.offset.z);
 	}

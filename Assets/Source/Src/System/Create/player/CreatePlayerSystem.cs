@@ -1,5 +1,6 @@
 ﻿using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 	Pool _pool;
@@ -19,7 +20,7 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 		
 		Entity player = _pool.CreateEntity()
 				.AddPlayer(playerModel.name)
-				.AddPosition(0.0f, 0.0f)
+				.AddPosition(new Vector2(0.0f, 0.0f))
 				.AddVelocity(0.0f, 0.0f)
 				.AddVelocityLimit(playerModel.velocityLimit.x, playerModel.velocityLimit.y, 0.0f, 0.0f)
 				.AddCollision(CollisionTypes.Player)
@@ -34,13 +35,13 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 		if (component.hasHomeMissile) {
 	         children.Add(_pool.CreateEntity()
 		         .AddRelativePosition(0.5f, 0.5f)
-		         .AddPosition(0.0f, 0.0f)
+		         .AddPosition(new Vector2(0.0f, 0.0f))
 		         .AddChild(parent)
 	             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.Missile, component.homeMissileVelocity, CollisionTypes.Player)
 		         .AddResource(Resource.Weapon));
 	         children.Add(_pool.CreateEntity()
 		         .AddRelativePosition(-0.5f, 0.5f)
-		         .AddPosition(0.0f, 0.0f)
+	             .AddPosition(new Vector2(0.0f, 0.0f))
 		         .AddChild(parent)
 	             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.Missile, component.homeMissileVelocity, CollisionTypes.Player)
 		         .AddResource(Resource.Weapon));

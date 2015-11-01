@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
@@ -27,18 +28,18 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			if (missile.time < 0.0f) {
 				missile.time = missile.spawnDelay;
 				if (missile.collisionType == CollisionTypes.Player && canSpawnPlayer) {
-					spawnMissile(missile, e.position);
+					spawnMissile(missile, e.position.pos);
 				}
 				else if (missile.collisionType == CollisionTypes.Enemy && canSpawnEnemy) {
-					spawnMissile(missile, e.position);
+					spawnMissile(missile, e.position.pos);
 				}
 			}
 		}
 	}
 	
-	void spawnMissile(HomeMissileSpawnerComponent missile, PositionComponent position) {
+	void spawnMissile(HomeMissileSpawnerComponent missile, Vector2 position) {
 		_pool.CreateEntity()
-			.AddPosition(position.x, position.y)
+			.AddPosition(new Vector2().Set(position))
 			.AddVelocity(0.0f, 0.0f)
 			.AddVelocityLimit(missile.velocity, missile.velocity, 0.0f, 0.0f)
 			.AddHealth(0)

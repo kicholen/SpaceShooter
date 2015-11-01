@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public class PositionSystem : IExecuteSystem, ISetPool {
 	Group _group;
@@ -12,11 +13,8 @@ public class PositionSystem : IExecuteSystem, ISetPool {
 	public void Execute() {
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (Entity e in _group.GetEntities()) {
-			PositionComponent position = e.position;
 			VelocityComponent velocity = e.velocity;
-
-			position.x += velocity.x * deltaTime;
-			position.y += velocity.y * deltaTime;
+			e.position.pos += new Vector2(velocity.x * deltaTime, velocity.y * deltaTime);
 		}
 	}
 }

@@ -40,7 +40,7 @@ public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 	}
 
 	void spawnBonus(Entity e, BonusModelComponent bonus, Entity follow) {
-		PositionComponent position = e.position;
+		Vector2 position = e.position.pos;
 		int amount = Random.Range(bonus.minAmount, bonus.maxAmount);
 
 		for (int i = 0; i < amount; i++) {
@@ -52,7 +52,7 @@ public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 				.AddBonus(bonus.type)
 				.AddVelocity(velocityX, velocityY)
 				.AddAcceleration(acceX, acceY, acceX > 0.0f ? -FRICTION : FRICTION, acceY > 0.0f ? -FRICTION : FRICTION, true)
-				.AddPosition(position.x, position.y)
+				.AddPosition(new Vector2().Set(position))
 				.AddHealth(0)
 				.AddCollision(CollisionTypes.Bonus)
 				.AddFollowTarget(follow)

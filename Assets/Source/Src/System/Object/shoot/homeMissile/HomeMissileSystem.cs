@@ -25,7 +25,7 @@ public class HomeMissileSystem : IExecuteSystem, ISetPool {
 		if (targetComponent.target != null && targetComponent.target.hasGameObject) {
 			GameObject target = targetComponent.target.gameObject.gameObject;
 
-			PositionComponent position = e.position;
+			Vector2 position = e.position.pos;
 			Vector3 targetPosition = target.transform.position;
 			VelocityComponent velocity = e.velocity;
 

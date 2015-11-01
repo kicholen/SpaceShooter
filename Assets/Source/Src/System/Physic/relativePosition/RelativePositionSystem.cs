@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public class RelativePositionSystem : IExecuteSystem, ISetPool {
 	Group _group;
@@ -11,11 +12,9 @@ public class RelativePositionSystem : IExecuteSystem, ISetPool {
 	public void Execute() {
 		foreach (Entity e in _group.GetEntities()) {
 			RelativePositionComponent relativePosition = e.relativePosition;
-			PositionComponent position = e.position;
-			PositionComponent parentPosition = e.child.parent.position;
+			Vector2 parentPosition = e.child.parent.position.pos;
 
-			position.x = relativePosition.x + parentPosition.x;
-			position.y = relativePosition.y + parentPosition.y;
+			e.position.pos.Set(relativePosition.x + parentPosition.x, relativePosition.y + parentPosition.y);
 		}
 	}
 }

@@ -14,7 +14,8 @@ public class SnapPositionSystem : IExecuteSystem, ISetPool {
 		Camera camera = _camera.GetSingleEntity().camera.camera;
 
 		foreach (Entity e in _group.GetEntities()) {
-			PositionComponent position = e.position;
+			PositionComponent positionComponent = e.position;
+			Vector2 position = e.position.pos;
 			SnapPositionComponent snapPosition = e.snapPosition;
 
 			if (snapPosition.shouldSnapToCameraY) {
@@ -23,17 +24,17 @@ public class SnapPositionSystem : IExecuteSystem, ISetPool {
 			}
 
 			if (position.x < snapPosition.x) {
-				position.x = snapPosition.x;
+				positionComponent.pos.x = snapPosition.x;
 			}
 			else if (position.x > (snapPosition.x + snapPosition.width)) {
-				position.x = snapPosition.x + snapPosition.width;
+				positionComponent.pos.x = snapPosition.x + snapPosition.width;
 			}
 			
 			if (position.y > (snapPosition.height + snapPosition.y)) {
-				position.y = snapPosition.height + snapPosition.y;
+				positionComponent.pos.y = snapPosition.height + snapPosition.y;
 			}
 			else if (position.y < snapPosition.y) {
-				position.y = snapPosition.y;
+				positionComponent.pos.y = snapPosition.y;
 			}
 		}
 	}

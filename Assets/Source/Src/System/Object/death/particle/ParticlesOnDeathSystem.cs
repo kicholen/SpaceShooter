@@ -16,7 +16,7 @@ public class ParticlesOnDeathSystem : IReactiveSystem, ISetPool {
 		foreach (Entity e in entities) {
 			ParticlesOnDeathComponent component = e.particlesOnDeath;
 			if (component.type == 1) {
-				spawnParticles(e.position);
+				spawnParticles(e.position.pos);
 			}
 			else {
 				throw new UnityException("ParticlesOnDeathSystem: unknown type");
@@ -24,9 +24,9 @@ public class ParticlesOnDeathSystem : IReactiveSystem, ISetPool {
 		}
 	}
 
-	void spawnParticles(PositionComponent position) {
+	void spawnParticles(Vector2 position) {
 		_pool.CreateEntity()
-			.AddPosition(position.x, position.y)
+			.AddPosition(new Vector2(position.x, position.y))
 			.AddParticleSpawn(10, Resource.Particle, 0.5f, 2.0f);
 		
 	}

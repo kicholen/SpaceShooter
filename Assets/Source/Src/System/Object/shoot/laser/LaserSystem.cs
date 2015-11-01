@@ -15,7 +15,7 @@ public class LaserSystem : IExecuteSystem, ISetPool {
 			LaserComponent component = e.laser;
 			Entity source = component.source;
 			if (source != null && source.hasLaserSpawner) { // todo make it child or sth
-				PositionComponent sourcePosition = source.position;
+				Vector2 sourcePosition = source.position.pos;
 				LaserSpawnerComponent sourceSpawner = source.laserSpawner;
 
 				GameObject go = e.gameObject.gameObject;
@@ -24,9 +24,7 @@ public class LaserSystem : IExecuteSystem, ISetPool {
 				transform.localRotation = Quaternion.AngleAxis(sourceSpawner.angle, Vector3.forward);
 				float xOffset = sourceSpawner.height / 2.0f * sourceSpawner.direction.x;
 				float yOffset = sourceSpawner.height / 2.0f * sourceSpawner.direction.y;
-				PositionComponent position = e.position;
-				position.x = sourcePosition.x + xOffset;
-				position.y = sourcePosition.y + yOffset;
+				e.position.pos.Set(sourcePosition.x + xOffset, sourcePosition.y + yOffset);
 			}
 			else {
 				e.isDestroyEntity = true;

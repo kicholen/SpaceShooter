@@ -14,7 +14,7 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		_group = pool.GetGroup(Matcher.EnemySpawner);
-		_camera = pool.GetGroup(Matcher.SmoothCamera);
+		_camera = pool.GetGroup(Matcher.Camera);
 		_difficulty = pool.GetGroup(Matcher.DifficultyController);
 		_factory = new EnemyFactory();
 		_factory.SetPool(_pool);
@@ -29,7 +29,7 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 		}
 	}
 	
-	void spawnIfCan(Entity e, Vector3 position, DifficultyControllerComponent difficulty) {
+	void spawnIfCan(Entity e, Vector3 cameraPosition, DifficultyControllerComponent difficulty) {
 		EnemySpawnerComponent enemySpawner = e.enemySpawner;
 		XmlNode node = enemySpawner.node;
 
@@ -41,18 +41,18 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 			enemySpawner.used = false;
 			XmlAttributeCollection attributes = node.Attributes;
 			float spawnBarrier = (float)Convert.ToDouble(attributes[0].Value);
-			if (spawnBarrier < position.y) {
+			if (spawnBarrier < cameraPosition.y) {
 				XmlNode innerNode = node.FirstChild;
 				while(innerNode != null) {
 					int enemyCount = Convert.ToInt16(innerNode.Attributes[0].Value);
-					float x = (float)Convert.ToDouble(innerNode.Attributes[1].Value);
-					float y = (float)Convert.ToDouble(innerNode.Attributes[2].Value);
+					Vector2 position = new Vector2((float)Convert.ToDouble(innerNode.Attributes[1].Value),
+					                               (float)Convert.ToDouble(innerNode.Attributes[2].Value));
 					float velocityX = (float)Convert.ToDouble(innerNode.Attributes[3].Value);
 					float velocityY = (float)Convert.ToDouble(innerNode.Attributes[4].Value);
 					int type = Convert.ToInt16(innerNode.Attributes[5].Value);
 					int health = Convert.ToInt16(innerNode.Attributes[6].Value) * (difficulty.hpBoostPercent + 100) / 100;
 					while (enemyCount != 0) {
-						_factory.createEnemyByType(type, x, y, velocityX, velocityY, health, difficulty.missileSpeedBoostPercent);
+						_factory.createEnemyByType(type, position, velocityX, velocityY, health, difficulty.missileSpeedBoostPercent);
 						enemyCount--;
 					}
 					innerNode = innerNode.NextSibling;

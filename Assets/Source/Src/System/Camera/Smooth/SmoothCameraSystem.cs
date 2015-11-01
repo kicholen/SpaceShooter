@@ -18,19 +18,20 @@ public class SmoothCameraSystem : IExecuteSystem, ISetPool {
 	
 	void updateCamera(Entity e) {
 		SmoothCameraComponent smoothCamera = e.smoothCamera;
-		PositionComponent position = e.position;
 		CameraComponent camera = e.camera;
 		FollowTargetComponent target = e.followTarget;
-		PositionComponent targetPosition = target.target.position;
+		Vector2 targetPosition = target.target.position.pos;
 
 		Vector3 cameraPosition = camera.camera.transform.position;
 		temp.x = cameraPosition.x + (targetPosition.x - cameraPosition.x) * LERP_FACTOR;
 
+		Vector2 position = e.position.pos;
 		snapCamera(e, position);
+		e.position.pos.Set(position);
 		camera.camera.transform.position = new Vector3(temp.x, position.y, smoothCamera.offset.z);
 	}
 
-	void snapCamera(Entity e, PositionComponent position) {
+	void snapCamera(Entity e, Vector2 position) {
 		SnapPositionComponent snapPosition = e.snapPosition;
 		
 		if (temp.x < snapPosition.x) {

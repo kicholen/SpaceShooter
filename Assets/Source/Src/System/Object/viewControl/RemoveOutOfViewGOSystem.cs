@@ -19,7 +19,7 @@ public class RemoveOutOfViewGOSystem : IExecuteSystem, ISetPool {
 		float radiusPower = Mathf.Pow(camera.aspect > 1.0f ? ortographicSize * camera.aspect + 1.0f: ortographicSize + 1.0f, 2.0f);
 
 		foreach (Entity e in _group.GetEntities()) {
-			PositionComponent position = e.position;
+			Vector2 position = e.position.pos;
 			if (!e.isNonRemovable && !isPointInCircle(cameraPosition.x, cameraPosition.y, radiusPower, position.x, position.y)) {
 				e.isDestroyEntity = true;
 			}

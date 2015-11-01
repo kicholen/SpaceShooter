@@ -19,12 +19,12 @@ public class CircleMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			missile.time -= deltaTime;
 			if (missile.time < 0.0f) {
 				missile.time = missile.spawnDelay;
-				spawnMissiles(missile, e.position);
+				spawnMissiles(missile, e.position.pos);
 			}
 		}
 	}
 	
-	void spawnMissiles(CircleMissileSpawnerComponent missile, PositionComponent position) {
+	void spawnMissiles(CircleMissileSpawnerComponent missile, Vector2 position) {
 		float angleOffset = getAngle(missile.amount);
 		float angle = 0.0f;
 		float baseVelX = missile.velocityX;
@@ -36,7 +36,7 @@ public class CircleMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			float velocityX = baseVelX * cosinus - baseVelY * sinus;
 			float velocityY = baseVelX * sinus + baseVelY * cosinus;
 			_pool.CreateEntity()
-				.AddPosition(position.x, position.y)
+				.AddPosition(new Vector2().Set(position))
 				.AddVelocity(velocityX + missile.velocityOffsetX, velocityY + missile.velocityOffsetY)
 				.AddHealth(0)
 				.AddCollision(missile.collisionType)

@@ -12,12 +12,12 @@ public class ParticleSpawnSystem : IExecuteSystem, ISetPool {
 	
 	public void Execute() {
 		foreach (Entity e in _group.GetEntities()) {
-			spawnParticles(e.particleSpawn, e.position);
+			spawnParticles(e.particleSpawn, e.position.pos);
 			e.isDestroyEntity = true;
 		}
 	}
 
-	void spawnParticles(ParticleSpawnComponent particle, PositionComponent position) {
+	void spawnParticles(ParticleSpawnComponent particle, Vector2 position) {
 		float angleOffset = getAngle(particle.amount);
 		float angle = 0.0f;
 		float baseVelX = particle.velocity;
@@ -29,7 +29,7 @@ public class ParticleSpawnSystem : IExecuteSystem, ISetPool {
 			float velocityX = baseVelX * cosinus - baseVelY * sinus;
 			float velocityY = baseVelX * sinus + baseVelY * cosinus;
 			_pool.CreateEntity()
-				.AddPosition(position.x, position.y)
+				.AddPosition(new Vector2().Set(position))
 				.AddVelocity(velocityX, velocityY)
 				.AddHealth(0)
 				.AddDestroyEntityDelayed(particle.lifespan)

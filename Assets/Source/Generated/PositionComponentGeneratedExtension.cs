@@ -12,18 +12,16 @@ namespace Entitas {
             _positionComponentPool.Clear();
         }
 
-        public Entity AddPosition(float newX, float newY) {
+        public Entity AddPosition(UnityEngine.Vector2 newPos) {
             var component = _positionComponentPool.Count > 0 ? _positionComponentPool.Pop() : new PositionComponent();
-            component.x = newX;
-            component.y = newY;
+            component.pos = newPos;
             return AddComponent(ComponentIds.Position, component);
         }
 
-        public Entity ReplacePosition(float newX, float newY) {
+        public Entity ReplacePosition(UnityEngine.Vector2 newPos) {
             var previousComponent = hasPosition ? position : null;
             var component = _positionComponentPool.Count > 0 ? _positionComponentPool.Pop() : new PositionComponent();
-            component.x = newX;
-            component.y = newY;
+            component.pos = newPos;
             ReplaceComponent(ComponentIds.Position, component);
             if (previousComponent != null) {
                 _positionComponentPool.Push(previousComponent);

@@ -21,7 +21,7 @@ public class MultipleMissileSpawnerSystem : IExecuteSystem, ISetPool {
 				missile.delay -= deltaTime;
 				if (missile.delay < 0.0f) {
 					missile.delay = missile.timeDelay;
-					spawnMissile(missile, e.position);
+					spawnMissile(missile, e.position.pos);
 					missile.currentAmount--;
 					if (missile.currentAmount == 0) {
 						missile.time = missile.spawnDelay;
@@ -32,10 +32,10 @@ public class MultipleMissileSpawnerSystem : IExecuteSystem, ISetPool {
 		}
 	}
 	
-	void spawnMissile(MultipleMissileSpawnerComponent missile, PositionComponent position) {
+	void spawnMissile(MultipleMissileSpawnerComponent missile, Vector2 position) {
 		float offsetX = Random.Range(-missile.randomPositionOffsetX, missile.randomPositionOffsetX);
 		_pool.CreateEntity()
-			.AddPosition(position.x + offsetX, position.y)
+			.AddPosition(new Vector2(position.x + offsetX, position.y))
 			.AddVelocity(missile.velocityX, missile.velocityY)
 			.AddHealth(0)
 			.AddCollision(missile.collisionType)

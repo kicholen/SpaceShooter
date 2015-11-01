@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public class PlayerInputSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
@@ -52,7 +53,7 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 	}
 
 	void setVelocityByInput(Entity entity, InputComponent component) {
-		PositionComponent position = entity.position;
+		Vector2 position = entity.position.pos;
 		VelocityComponent velocity = entity.velocity;
 		VelocityLimitComponent velocityLimit = entity.velocityLimit;
 
@@ -63,11 +64,12 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 		velocity.x = (tx/dist)*5.0f;
 		velocity.y = (ty/dist)*5.0f;*/
 
-		VelocityComponent cameraVelocity = _camera.GetSingleEntity().velocity;
+		Entity cameraEntity = _camera.GetSingleEntity();
+		float velocityOffsetY = cameraEntity.hasVelocity ? cameraEntity.velocity.y : 0.0f;
 
-		velocityLimit.offsetY = cameraVelocity.y;
+		velocityLimit.offsetY = velocityOffsetY;
 		velocity.x = (component.x - position.x) * 5.0f;
-		velocity.y = (component.y - position.y) * 5.0f + cameraVelocity.y;
+		velocity.y = (component.y - position.y) * 5.0f + velocityOffsetY;
 		if (velocity.y < -velocityLimit.y) {
 			velocity.y = -velocityLimit.y; // not to add new fields to velocityLimits
 		}
