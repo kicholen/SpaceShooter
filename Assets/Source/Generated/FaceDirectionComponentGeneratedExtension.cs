@@ -22,12 +22,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherFaceDirection;
+        static IMatcher _matcherFaceDirection;
 
-        public static AllOfMatcher FaceDirection {
+        public static IMatcher FaceDirection {
             get {
                 if (_matcherFaceDirection == null) {
-                    _matcherFaceDirection = new Matcher(ComponentIds.FaceDirection);
+                    _matcherFaceDirection = Matcher.AllOf(ComponentIds.FaceDirection);
                 }
 
                 return _matcherFaceDirection;

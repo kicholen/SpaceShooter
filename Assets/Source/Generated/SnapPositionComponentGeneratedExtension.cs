@@ -46,12 +46,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherSnapPosition;
+        static IMatcher _matcherSnapPosition;
 
-        public static AllOfMatcher SnapPosition {
+        public static IMatcher SnapPosition {
             get {
                 if (_matcherSnapPosition == null) {
-                    _matcherSnapPosition = new Matcher(ComponentIds.SnapPosition);
+                    _matcherSnapPosition = Matcher.AllOf(ComponentIds.SnapPosition);
                 }
 
                 return _matcherSnapPosition;

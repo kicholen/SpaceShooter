@@ -1,11 +1,9 @@
 using Entitas;
 
 public class HealthSystem : IExecuteSystem, ISetPool {
-	Pool _pool;
 	Group _group;
 	
 	public void SetPool(Pool pool) {
-		_pool = pool;
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Damage, Matcher.Health));
 	}	
 	

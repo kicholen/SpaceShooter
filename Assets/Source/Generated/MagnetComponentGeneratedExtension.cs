@@ -40,12 +40,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherMagnet;
+        static IMatcher _matcherMagnet;
 
-        public static AllOfMatcher Magnet {
+        public static IMatcher Magnet {
             get {
                 if (_matcherMagnet == null) {
-                    _matcherMagnet = new Matcher(ComponentIds.Magnet);
+                    _matcherMagnet = Matcher.AllOf(ComponentIds.Magnet);
                 }
 
                 return _matcherMagnet;

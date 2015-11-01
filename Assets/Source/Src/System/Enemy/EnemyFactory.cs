@@ -3,11 +3,9 @@ using System.Collections.Generic;
 
 public class EnemyFactory {
 	Pool _pool;
-	Group _players;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
-		_players = pool.GetGroup(Matcher.Player);
 	}
 	
 	public void createEnemyByType(int type, float x, float y, float velocityX, float velocityY, int health, int missileSpeedBonus) {
@@ -40,10 +38,9 @@ public class EnemyFactory {
 			.AddVelocityLimit(5.0f, 5.0f, 0.0f, 0.0f)
 			.AddHealth(health)
 			.AddCollision(CollisionTypes.Enemy)
-			.AddBonusOnDeath(1)
+			.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed)
 			.AddCameraShakeOnDeath(1)
 			.AddParticlesOnDeath(1)
-			.AddSoundOnDeath(Sound.Test, 1.0f)
 			.AddResource(Resource.Enemy);
 	}
 

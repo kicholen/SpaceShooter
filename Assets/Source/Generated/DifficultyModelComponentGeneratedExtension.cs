@@ -44,12 +44,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherDifficultyModel;
+        static IMatcher _matcherDifficultyModel;
 
-        public static AllOfMatcher DifficultyModel {
+        public static IMatcher DifficultyModel {
             get {
                 if (_matcherDifficultyModel == null) {
-                    _matcherDifficultyModel = new Matcher(ComponentIds.DifficultyModel);
+                    _matcherDifficultyModel = Matcher.AllOf(ComponentIds.DifficultyModel);
                 }
 
                 return _matcherDifficultyModel;

@@ -37,7 +37,7 @@ public class CircleMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			float velocityY = baseVelX * sinus + baseVelY * cosinus;
 			_pool.CreateEntity()
 				.AddPosition(position.x, position.y)
-				.AddVelocity(velocityX, velocityY)
+				.AddVelocity(velocityX + missile.velocityOffsetX, velocityY + missile.velocityOffsetY)
 				.AddHealth(0)
 				.AddCollision(missile.collisionType)
 				.AddResource(missile.resource);

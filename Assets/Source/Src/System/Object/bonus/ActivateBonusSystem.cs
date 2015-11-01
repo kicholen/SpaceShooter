@@ -7,40 +7,36 @@ public class ActivateBonusSystem : IReactiveSystem, ISetPool {
 	
 	Pool _pool;
 	Group _group;
-	Group _player;
 
 	public void SetPool(Pool pool) {
 		Random.seed = 42;
 		_pool = pool;
 		_group = pool.GetGroup(Matcher.BonusModel);
-		_player = pool.GetGroup(Matcher.Player);
 	}
 	
 	public void Execute(List<Entity> entities) {
 		foreach (Entity e in entities) {
 			BonusComponent bonus = e.bonus;
-			int type = bonus.type;
-			
 			foreach (Entity bonusEntity in _group.GetEntities()) {
-				BonusModelComponent model = bonusEntity.bonusModel;
-				if ((model.type & type) == 1) {
-					if (Random.value < model.probability) {
-						activateBonus(e, model);
-					}
+				BonusModelComponent bonusModel = bonusEntity.bonusModel;
+				if ((bonus.type & bonusModel.type) > 0) {
+					activateBonus(bonusEntity.bonusModel);
 				}
 			}
 		}
 	}
 	
-	void activateBonus(Entity e, BonusModelComponent bonus) {
+	void activateBonus(BonusModelComponent bonus) {
 		switch(bonus.type) {
-		case 1:
+		case BonusTypes.Star:
+			// do nothing
+			break;
+		case BonusTypes.Speed:
 			_pool.CreateEntity()
 				.AddSpeedBonus(10.0f, 10.0f, 2.0f);
 		break;
 		default:
 			throw new UnityException("Unknown bonus type: " + bonus.type);
-		break;
 		}
 	}
 }

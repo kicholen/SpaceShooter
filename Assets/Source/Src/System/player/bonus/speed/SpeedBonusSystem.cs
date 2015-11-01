@@ -1,13 +1,11 @@
 using Entitas;
 
 public class SpeedBonusSystem : IExecuteSystem, ISetPool {
-	Pool _pool;
 	Group _group;
 	Group _player;
 	Group _time;
 
 	public void SetPool(Pool pool) {
-		_pool = pool;
 		_player = pool.GetGroup(Matcher.Player);
 		_time = pool.GetGroup(Matcher.Time);
 		_group = pool.GetGroup(Matcher.SpeedBonus);

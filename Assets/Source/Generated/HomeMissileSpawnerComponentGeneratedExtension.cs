@@ -46,12 +46,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherHomeMissileSpawner;
+        static IMatcher _matcherHomeMissileSpawner;
 
-        public static AllOfMatcher HomeMissileSpawner {
+        public static IMatcher HomeMissileSpawner {
             get {
                 if (_matcherHomeMissileSpawner == null) {
-                    _matcherHomeMissileSpawner = new Matcher(ComponentIds.HomeMissileSpawner);
+                    _matcherHomeMissileSpawner = Matcher.AllOf(ComponentIds.HomeMissileSpawner);
                 }
 
                 return _matcherHomeMissileSpawner;

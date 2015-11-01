@@ -40,12 +40,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherAlpha;
+        static IMatcher _matcherAlpha;
 
-        public static AllOfMatcher Alpha {
+        public static IMatcher Alpha {
             get {
                 if (_matcherAlpha == null) {
-                    _matcherAlpha = new Matcher(ComponentIds.Alpha);
+                    _matcherAlpha = Matcher.AllOf(ComponentIds.Alpha);
                 }
 
                 return _matcherAlpha;

@@ -12,7 +12,7 @@ namespace Entitas {
             _circleMissileSpawnerComponentPool.Clear();
         }
 
-        public Entity AddCircleMissileSpawner(int newAmount, float newTime, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, int newCollisionType) {
+        public Entity AddCircleMissileSpawner(int newAmount, float newTime, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, float newVelocityOffsetX, float newVelocityOffsetY, int newCollisionType) {
             var component = _circleMissileSpawnerComponentPool.Count > 0 ? _circleMissileSpawnerComponentPool.Pop() : new CircleMissileSpawnerComponent();
             component.amount = newAmount;
             component.time = newTime;
@@ -20,11 +20,13 @@ namespace Entitas {
             component.resource = newResource;
             component.velocityX = newVelocityX;
             component.velocityY = newVelocityY;
+            component.velocityOffsetX = newVelocityOffsetX;
+            component.velocityOffsetY = newVelocityOffsetY;
             component.collisionType = newCollisionType;
             return AddComponent(ComponentIds.CircleMissileSpawner, component);
         }
 
-        public Entity ReplaceCircleMissileSpawner(int newAmount, float newTime, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, int newCollisionType) {
+        public Entity ReplaceCircleMissileSpawner(int newAmount, float newTime, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, float newVelocityOffsetX, float newVelocityOffsetY, int newCollisionType) {
             var previousComponent = hasCircleMissileSpawner ? circleMissileSpawner : null;
             var component = _circleMissileSpawnerComponentPool.Count > 0 ? _circleMissileSpawnerComponentPool.Pop() : new CircleMissileSpawnerComponent();
             component.amount = newAmount;
@@ -33,6 +35,8 @@ namespace Entitas {
             component.resource = newResource;
             component.velocityX = newVelocityX;
             component.velocityY = newVelocityY;
+            component.velocityOffsetX = newVelocityOffsetX;
+            component.velocityOffsetY = newVelocityOffsetY;
             component.collisionType = newCollisionType;
             ReplaceComponent(ComponentIds.CircleMissileSpawner, component);
             if (previousComponent != null) {
@@ -50,12 +54,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherCircleMissileSpawner;
+        static IMatcher _matcherCircleMissileSpawner;
 
-        public static AllOfMatcher CircleMissileSpawner {
+        public static IMatcher CircleMissileSpawner {
             get {
                 if (_matcherCircleMissileSpawner == null) {
-                    _matcherCircleMissileSpawner = new Matcher(ComponentIds.CircleMissileSpawner);
+                    _matcherCircleMissileSpawner = Matcher.AllOf(ComponentIds.CircleMissileSpawner);
                 }
 
                 return _matcherCircleMissileSpawner;

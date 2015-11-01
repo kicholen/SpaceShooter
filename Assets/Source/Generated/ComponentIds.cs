@@ -27,47 +27,48 @@ public static class ComponentIds {
     public const int FirstBoss = 25;
     public const int FollowTarget = 26;
     public const int GameObject = 27;
-    public const int Health = 28;
-    public const int HomeMissile = 29;
-    public const int HomeMissileSpawner = 30;
-    public const int Input = 31;
-    public const int Laser = 32;
-    public const int LaserSpawner = 33;
-    public const int LevelDimensions = 34;
-    public const int Magnet = 35;
-    public const int MissileSpawner = 36;
-    public const int MouseInput = 37;
-    public const int MultipleMissileSpawner = 38;
-    public const int NonRemovable = 39;
-    public const int Parent = 40;
-    public const int ParticlesOnDeath = 41;
-    public const int ParticleSpawn = 42;
-    public const int PauseGame = 43;
-    public const int Player = 44;
-    public const int PlayerModel = 45;
-    public const int PoolableGO = 46;
-    public const int Position = 47;
-    public const int RegularCamera = 48;
-    public const int RelativePosition = 49;
-    public const int Resource = 50;
-    public const int RestartGame = 51;
-    public const int SettingsModel = 52;
-    public const int ShipModel = 53;
-    public const int SlowGame = 54;
-    public const int SmoothCamera = 55;
-    public const int SnapPosition = 56;
-    public const int Sound = 57;
-    public const int SoundOnDeath = 58;
-    public const int SpeedBonus = 59;
-    public const int Test = 60;
-    public const int Time = 61;
-    public const int Velocity = 62;
-    public const int VelocityLimit = 63;
-    public const int Weapon = 64;
+    public const int GameStats = 28;
+    public const int Health = 29;
+    public const int HomeMissile = 30;
+    public const int HomeMissileSpawner = 31;
+    public const int Input = 32;
+    public const int Laser = 33;
+    public const int LaserSpawner = 34;
+    public const int LevelDimensions = 35;
+    public const int Magnet = 36;
+    public const int MissileSpawner = 37;
+    public const int MouseInput = 38;
+    public const int MultipleMissileSpawner = 39;
+    public const int NonRemovable = 40;
+    public const int Parent = 41;
+    public const int ParticlesOnDeath = 42;
+    public const int ParticleSpawn = 43;
+    public const int PauseGame = 44;
+    public const int Player = 45;
+    public const int PlayerModel = 46;
+    public const int PoolableGO = 47;
+    public const int Position = 48;
+    public const int RegularCamera = 49;
+    public const int RelativePosition = 50;
+    public const int Resource = 51;
+    public const int RestartGame = 52;
+    public const int SettingsModel = 53;
+    public const int ShipModel = 54;
+    public const int SlowGame = 55;
+    public const int SmoothCamera = 56;
+    public const int SnapPosition = 57;
+    public const int Sound = 58;
+    public const int SoundOnDeath = 59;
+    public const int SpeedBonus = 60;
+    public const int Test = 61;
+    public const int Time = 62;
+    public const int Velocity = 63;
+    public const int VelocityLimit = 64;
+    public const int Weapon = 65;
 
-    public const int TotalComponents = 65;
+    public const int TotalComponents = 66;
 
-    static readonly string[] components = {
+    public static readonly string[] componentNames = {
         "Acceleration",
         "Alpha",
         "Bonus",
@@ -96,6 +97,7 @@ public static class ComponentIds {
         "FirstBoss",
         "FollowTarget",
         "GameObject",
+        "GameStats",
         "Health",
         "HomeMissile",
         "HomeMissileSpawner",
@@ -135,18 +137,72 @@ public static class ComponentIds {
         "Weapon"
     };
 
-    public static string IdToString(int componentId) {
-        return components[componentId];
-    }
-}
-
-namespace Entitas {
-    public partial class Matcher : AllOfMatcher {
-        public Matcher(int index) : base(new [] { index }) {
-        }
-
-        public override string ToString() {
-            return ComponentIds.IdToString(indices[0]);
-        }
-    }
+    public static readonly System.Type[] componentTypes = {
+        typeof(AccelerationComponent),
+        typeof(AlphaComponent),
+        typeof(BonusComponent),
+        typeof(BonusModelComponent),
+        typeof(BonusOnDeathComponent),
+        typeof(CameraComponent),
+        typeof(CameraShakeComponent),
+        typeof(CameraShakeOnDeathComponent),
+        typeof(ChildComponent),
+        typeof(CircleMissileRotatedSpawnerComponent),
+        typeof(CircleMissileSpawnerComponent),
+        typeof(CollisionComponent),
+        typeof(CollisionDeathComponent),
+        typeof(CreateLevelComponent),
+        typeof(CreatePlayerComponent),
+        typeof(DamageComponent),
+        typeof(DestroyEntityComponent),
+        typeof(DestroyEntityDelayedComponent),
+        typeof(DestroyPositionComponent),
+        typeof(DifficultyControllerComponent),
+        typeof(DifficultyModelComponent),
+        typeof(EnemyComponent),
+        typeof(EnemySpawnerComponent),
+        typeof(FaceDirectionComponent),
+        typeof(FindTargetComponent),
+        typeof(FirstBossComponent),
+        typeof(FollowTargetComponent),
+        typeof(GameObjectComponent),
+        typeof(GameStatsComponent),
+        typeof(HealthComponent),
+        typeof(HomeMissileComponent),
+        typeof(HomeMissileSpawnerComponent),
+        typeof(InputComponent),
+        typeof(LaserComponent),
+        typeof(LaserSpawnerComponent),
+        typeof(LevelDimensionsComponent),
+        typeof(MagnetComponent),
+        typeof(MissileSpawnerComponent),
+        typeof(MouseInputComponent),
+        typeof(MultipleMissileSpawnerComponent),
+        typeof(NonRemovableComponent),
+        typeof(ParentComponent),
+        typeof(ParticlesOnDeathComponent),
+        typeof(ParticleSpawnComponent),
+        typeof(PauseGameComponent),
+        typeof(PlayerComponent),
+        typeof(PlayerModelComponent),
+        typeof(PoolableGOComponent),
+        typeof(PositionComponent),
+        typeof(RegularCameraComponent),
+        typeof(RelativePositionComponent),
+        typeof(ResourceComponent),
+        typeof(RestartGameComponent),
+        typeof(SettingsModelComponent),
+        typeof(ShipModelComponent),
+        typeof(SlowGameComponent),
+        typeof(SmoothCameraComponent),
+        typeof(SnapPositionComponent),
+        typeof(SoundComponent),
+        typeof(SoundOnDeathComponent),
+        typeof(SpeedBonusComponent),
+        typeof(TestComponent),
+        typeof(TimeComponent),
+        typeof(VelocityComponent),
+        typeof(VelocityLimitComponent),
+        typeof(WeaponComponent)
+    };
 }

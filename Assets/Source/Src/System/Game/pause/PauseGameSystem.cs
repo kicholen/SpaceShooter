@@ -1,15 +1,12 @@
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PauseGameSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.PauseGame.OnEntityAddedOrRemoved(); } }
 	
-	Pool _pool;
 	Group _time;
 
 	public void SetPool(Pool pool) {
-		_pool = pool;
 		_time = pool.GetGroup(Matcher.Time);
 	}
 	

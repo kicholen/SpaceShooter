@@ -108,6 +108,9 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreateSmoothCameraSystem())
 				.Add(pool.CreateCameraShakeSystem())
 			
+			// Stats
+			.Add(pool.CreateGameStatsSystem())
+			
 			// Sound
 			.Add(pool.CreateSoundSystem())
 			

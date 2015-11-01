@@ -30,7 +30,7 @@ public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 
 			foreach (Entity bonusEntity in _group.GetEntities()) {
 				BonusModelComponent model = bonusEntity.bonusModel;
-				if ((model.type & type) == 1) {
+				if ((type & model.type) > 0) {
 					if (Random.value <= model.probability) {
 						spawnBonus(e, model, player);
 					}

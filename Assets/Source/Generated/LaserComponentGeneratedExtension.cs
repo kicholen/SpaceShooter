@@ -42,12 +42,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherLaser;
+        static IMatcher _matcherLaser;
 
-        public static AllOfMatcher Laser {
+        public static IMatcher Laser {
             get {
                 if (_matcherLaser == null) {
-                    _matcherLaser = new Matcher(ComponentIds.Laser);
+                    _matcherLaser = Matcher.AllOf(ComponentIds.Laser);
                 }
 
                 return _matcherLaser;

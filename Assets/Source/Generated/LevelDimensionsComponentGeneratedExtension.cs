@@ -40,12 +40,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherLevelDimensions;
+        static IMatcher _matcherLevelDimensions;
 
-        public static AllOfMatcher LevelDimensions {
+        public static IMatcher LevelDimensions {
             get {
                 if (_matcherLevelDimensions == null) {
-                    _matcherLevelDimensions = new Matcher(ComponentIds.LevelDimensions);
+                    _matcherLevelDimensions = Matcher.AllOf(ComponentIds.LevelDimensions);
                 }
 
                 return _matcherLevelDimensions;

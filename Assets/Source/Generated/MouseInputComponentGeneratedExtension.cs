@@ -42,12 +42,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherMouseInput;
+        static IMatcher _matcherMouseInput;
 
-        public static AllOfMatcher MouseInput {
+        public static IMatcher MouseInput {
             get {
                 if (_matcherMouseInput == null) {
-                    _matcherMouseInput = new Matcher(ComponentIds.MouseInput);
+                    _matcherMouseInput = Matcher.AllOf(ComponentIds.MouseInput);
                 }
 
                 return _matcherMouseInput;

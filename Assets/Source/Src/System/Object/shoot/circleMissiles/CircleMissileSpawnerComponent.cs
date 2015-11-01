@@ -7,5 +7,7 @@ public class CircleMissileSpawnerComponent : IComponent {
 	public string resource;
 	public float velocityX;
 	public float velocityY;
+	public float velocityOffsetX;
+	public float velocityOffsetY;
 	public int collisionType;
 }

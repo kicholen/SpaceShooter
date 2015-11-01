@@ -4,17 +4,15 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
 	Group _group;
 	Group _players;
-	Group _time;
 	Group _slowGame;
 	Group _camera;
-	bool hasChanged = true;
+
 	const float EPSILON = 0.005f;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		_group = _pool.GetGroup(Matcher.Input); 
 		_players = _pool.GetGroup(Matcher.Player);
-		_time = _pool.GetGroup(Matcher.Time);
 		_camera = _pool.GetGroup(Matcher.Camera);
 		_slowGame = _pool.GetGroup(Matcher.SlowGame);
 	}
@@ -94,14 +92,14 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 	}
 
 	void normalGameSpeed() {
-		if (_slowGame.Count > 0) {
+		if (_slowGame.count > 0) {
 			_slowGame.GetSingleEntity()
 				.isDestroyEntity = true;
 		}
 	}
 
 	void slowGameSpeed() {
-		if (_slowGame.Count == 0) {
+		if (_slowGame.count == 0) {
 			_pool.CreateEntity()
 				.AddSlowGame(0.3f);
 		}

@@ -42,12 +42,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherEnemySpawner;
+        static IMatcher _matcherEnemySpawner;
 
-        public static AllOfMatcher EnemySpawner {
+        public static IMatcher EnemySpawner {
             get {
                 if (_matcherEnemySpawner == null) {
-                    _matcherEnemySpawner = new Matcher(ComponentIds.EnemySpawner);
+                    _matcherEnemySpawner = Matcher.AllOf(ComponentIds.EnemySpawner);
                 }
 
                 return _matcherEnemySpawner;

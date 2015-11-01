@@ -50,10 +50,10 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 	}
 
 	bool canSpawnPlayerMissile() {
-		return _enemies.Count > 0;
+		return _enemies.count > 0;
 	}
 
 	bool canSpawnEnemyMissile() {
-		return _player.Count > 0;
+		return _player.count > 0;
 	}
 }

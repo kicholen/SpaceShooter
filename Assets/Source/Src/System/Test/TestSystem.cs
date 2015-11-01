@@ -102,7 +102,7 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	}
 
 	void pauseOrUnpauseGame() {
-		if (_pause.Count > 0) {
+		if (_pause.count > 0) {
 			_pause.GetSingleEntity()
 				.isDestroyEntity = true;
 		}

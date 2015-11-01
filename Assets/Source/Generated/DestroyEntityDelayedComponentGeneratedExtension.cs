@@ -38,12 +38,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherDestroyEntityDelayed;
+        static IMatcher _matcherDestroyEntityDelayed;
 
-        public static AllOfMatcher DestroyEntityDelayed {
+        public static IMatcher DestroyEntityDelayed {
             get {
                 if (_matcherDestroyEntityDelayed == null) {
-                    _matcherDestroyEntityDelayed = new Matcher(ComponentIds.DestroyEntityDelayed);
+                    _matcherDestroyEntityDelayed = Matcher.AllOf(ComponentIds.DestroyEntityDelayed);
                 }
 
                 return _matcherDestroyEntityDelayed;

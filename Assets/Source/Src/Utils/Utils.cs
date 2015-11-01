@@ -41,9 +41,6 @@ public static class Utils
 				return component;
 			#endif
 		}
-
-		throw new UnityException("Exception while loading: " + path);
-		return null;
 	}
 
 	public static void SerializeComponent(IComponent component) {

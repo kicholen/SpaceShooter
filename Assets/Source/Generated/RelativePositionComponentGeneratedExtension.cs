@@ -40,12 +40,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherRelativePosition;
+        static IMatcher _matcherRelativePosition;
 
-        public static AllOfMatcher RelativePosition {
+        public static IMatcher RelativePosition {
             get {
                 if (_matcherRelativePosition == null) {
-                    _matcherRelativePosition = new Matcher(ComponentIds.RelativePosition);
+                    _matcherRelativePosition = Matcher.AllOf(ComponentIds.RelativePosition);
                 }
 
                 return _matcherRelativePosition;

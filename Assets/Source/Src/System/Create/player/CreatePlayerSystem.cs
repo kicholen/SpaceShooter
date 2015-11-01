@@ -3,12 +3,10 @@ using System.Collections.Generic;
 
 public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 	Pool _pool;
-	Group _group;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		pool.GetGroup(Matcher.PlayerModel).OnEntityAdded += create;
-		_group = pool.GetGroup(Matcher.PlayerModel);
 	}
 	
 	public void Initialize() {

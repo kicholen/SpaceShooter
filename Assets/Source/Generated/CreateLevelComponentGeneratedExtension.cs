@@ -40,12 +40,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherCreateLevel;
+        static IMatcher _matcherCreateLevel;
 
-        public static AllOfMatcher CreateLevel {
+        public static IMatcher CreateLevel {
             get {
                 if (_matcherCreateLevel == null) {
-                    _matcherCreateLevel = new Matcher(ComponentIds.CreateLevel);
+                    _matcherCreateLevel = Matcher.AllOf(ComponentIds.CreateLevel);
                 }
 
                 return _matcherCreateLevel;

@@ -5,6 +5,7 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 	Group _group;
 	Group _time;
 	Group _player;
+	Group _camera;
 
 	const float EPSILON = 0.005f;
 
@@ -16,15 +17,16 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 		_group = pool.GetGroup(Matcher.FirstBoss);
 		_time = _pool.GetGroup(Matcher.Time);
 		_player = pool.GetGroup(Matcher.Player);
+		_camera = pool.GetGroup(Matcher.Camera);
 	}
 	
 	public void Execute() {
 		float deltaTime = _time.GetSingleEntity().time.deltaTime;
-
+		float cameraVelocityY = _camera.GetSingleEntity().velocity.y;
 		foreach (Entity e in _group.GetEntities()) {
 			FirstBossComponent component = e.firstBoss;
 			component.age += deltaTime;
-			float age = component.age;
+			//float age = component.age;
 			setVelocity(e.velocity, e.position, _player.GetSingleEntity().position);
 
 			if (!tests) {
@@ -41,7 +43,8 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 					}
 				}
 				if (!initalize) {
-					e.AddCircleMissileRotatedSpawner(4, 10, 0, 10, 0.0f, 0.1f, Resource.MissileEnemy, velocity.x, velocity.y, velocity.x, velocity.y, CollisionTypes.Enemy);
+					//e.AddCircleMissileRotatedSpawner(40, 10, 0, 10, 0.0f, 0.1f, Resource.MissileEnemy, velocity.x, velocity.y, velocity.x, velocity.y, CollisionTypes.Enemy);
+					e.AddCircleMissileSpawner(12, 0, 0.05f, Resource.MissileEnemy, 4.0f, 4.0f, velocity.x, velocity.y, CollisionTypes.Enemy);
 					//e.AddMultipleMissileSpawner(5, 5, 0.1f, 0.1f, 5.0f, 5.0f, Resource.MissileEnemy, 0.1f, velocity.x, -velocity.y, CollisionTypes.Enemy);
 					initalize = true;
 				}

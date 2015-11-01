@@ -44,12 +44,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherTime;
+        static IMatcher _matcherTime;
 
-        public static AllOfMatcher Time {
+        public static IMatcher Time {
             get {
                 if (_matcherTime == null) {
-                    _matcherTime = new Matcher(ComponentIds.Time);
+                    _matcherTime = Matcher.AllOf(ComponentIds.Time);
                 }
 
                 return _matcherTime;

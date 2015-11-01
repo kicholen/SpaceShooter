@@ -22,12 +22,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherNonRemovable;
+        static IMatcher _matcherNonRemovable;
 
-        public static AllOfMatcher NonRemovable {
+        public static IMatcher NonRemovable {
             get {
                 if (_matcherNonRemovable == null) {
-                    _matcherNonRemovable = new Matcher(ComponentIds.NonRemovable);
+                    _matcherNonRemovable = Matcher.AllOf(ComponentIds.NonRemovable);
                 }
 
                 return _matcherNonRemovable;

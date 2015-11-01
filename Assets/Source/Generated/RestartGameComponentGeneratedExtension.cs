@@ -22,12 +22,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherRestartGame;
+        static IMatcher _matcherRestartGame;
 
-        public static AllOfMatcher RestartGame {
+        public static IMatcher RestartGame {
             get {
                 if (_matcherRestartGame == null) {
-                    _matcherRestartGame = new Matcher(ComponentIds.RestartGame);
+                    _matcherRestartGame = Matcher.AllOf(ComponentIds.RestartGame);
                 }
 
                 return _matcherRestartGame;

@@ -38,12 +38,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherCameraShake;
+        static IMatcher _matcherCameraShake;
 
-        public static AllOfMatcher CameraShake {
+        public static IMatcher CameraShake {
             get {
                 if (_matcherCameraShake == null) {
-                    _matcherCameraShake = new Matcher(ComponentIds.CameraShake);
+                    _matcherCameraShake = Matcher.AllOf(ComponentIds.CameraShake);
                 }
 
                 return _matcherCameraShake;

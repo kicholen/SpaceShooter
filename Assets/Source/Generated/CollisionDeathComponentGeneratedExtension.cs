@@ -22,12 +22,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherCollisionDeath;
+        static IMatcher _matcherCollisionDeath;
 
-        public static AllOfMatcher CollisionDeath {
+        public static IMatcher CollisionDeath {
             get {
                 if (_matcherCollisionDeath == null) {
-                    _matcherCollisionDeath = new Matcher(ComponentIds.CollisionDeath);
+                    _matcherCollisionDeath = Matcher.AllOf(ComponentIds.CollisionDeath);
                 }
 
                 return _matcherCollisionDeath;

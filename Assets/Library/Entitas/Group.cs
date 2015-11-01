@@ -8,11 +8,9 @@ namespace Entitas {
         public event GroupUpdated OnEntityUpdated;
 
         public delegate void GroupChanged(Group group, Entity entity, int index, IComponent component);
-
         public delegate void GroupUpdated(Group group, Entity entity, int index, IComponent previousComponent, IComponent newComponent);
 
-        public int Count { get { return _entities.Count; } }
-
+        public int count { get { return _entities.Count; } }
         public IMatcher matcher { get { return _matcher; } }
 
         readonly IMatcher _matcher;
@@ -112,20 +110,16 @@ namespace Entitas {
 
         public Entity GetSingleEntity() {
             if (_singleEntityCache == null) {
-                var count = _entities.Count;
-                if (count == 1) {
+                var c = _entities.Count;
+                if (c == 1) {
                     using (var enumerator = _entities.GetEnumerator()) {
                         enumerator.MoveNext();
                         _singleEntityCache = enumerator.Current;
                     }
+                } else if (c == 0) {
+                    return null;
                 } else {
-                    if (count == 0) {
-                        return null;
-                    }
-
-                    if (count > 1) {
-                        throw new SingleEntityException(_matcher);
-                    }
+                    throw new SingleEntityException(_matcher);
                 }
             }
 

@@ -44,12 +44,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherSettingsModel;
+        static IMatcher _matcherSettingsModel;
 
-        public static AllOfMatcher SettingsModel {
+        public static IMatcher SettingsModel {
             get {
                 if (_matcherSettingsModel == null) {
-                    _matcherSettingsModel = new Matcher(ComponentIds.SettingsModel);
+                    _matcherSettingsModel = Matcher.AllOf(ComponentIds.SettingsModel);
                 }
 
                 return _matcherSettingsModel;

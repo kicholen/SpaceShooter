@@ -20,7 +20,7 @@ public class HomeMissileSystem : IExecuteSystem, ISetPool {
 	}
 
 	void navigateMissile(Entity e, float deltaTime) {
-		HomeMissileComponent homeMissile = e.homeMissile;
+		//HomeMissileComponent homeMissile = e.homeMissile;
 		FollowTargetComponent targetComponent = e.followTarget;
 		if (targetComponent.target != null && targetComponent.target.hasGameObject) {
 			GameObject target = targetComponent.target.gameObject.gameObject;

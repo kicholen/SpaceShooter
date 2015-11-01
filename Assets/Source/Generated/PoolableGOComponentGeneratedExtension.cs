@@ -40,12 +40,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherPoolableGO;
+        static IMatcher _matcherPoolableGO;
 
-        public static AllOfMatcher PoolableGO {
+        public static IMatcher PoolableGO {
             get {
                 if (_matcherPoolableGO == null) {
-                    _matcherPoolableGO = new Matcher(ComponentIds.PoolableGO);
+                    _matcherPoolableGO = Matcher.AllOf(ComponentIds.PoolableGO);
                 }
 
                 return _matcherPoolableGO;

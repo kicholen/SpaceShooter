@@ -44,12 +44,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherVelocityLimit;
+        static IMatcher _matcherVelocityLimit;
 
-        public static AllOfMatcher VelocityLimit {
+        public static IMatcher VelocityLimit {
             get {
                 if (_matcherVelocityLimit == null) {
-                    _matcherVelocityLimit = new Matcher(ComponentIds.VelocityLimit);
+                    _matcherVelocityLimit = Matcher.AllOf(ComponentIds.VelocityLimit);
                 }
 
                 return _matcherVelocityLimit;

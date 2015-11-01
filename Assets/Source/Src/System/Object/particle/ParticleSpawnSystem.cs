@@ -4,22 +4,18 @@ using UnityEngine;
 public class ParticleSpawnSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
 	Group _group;
-	Group _time;
 	
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.ParticleSpawn, Matcher.Position));
-		_time = pool.GetGroup(Matcher.Time);
 	}
 	
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (Entity e in _group.GetEntities()) {
 			spawnParticles(e.particleSpawn, e.position);
 			e.isDestroyEntity = true;
 		}
 	}
-
 
 	void spawnParticles(ParticleSpawnComponent particle, PositionComponent position) {
 		float angleOffset = getAngle(particle.amount);

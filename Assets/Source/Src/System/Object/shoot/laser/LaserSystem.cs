@@ -2,19 +2,15 @@ using Entitas;
 using UnityEngine;
 
 public class LaserSystem : IExecuteSystem, ISetPool {
-	Pool _pool;
-	Group _time;
 	Group _group;
+
 	const float pixelsPerUnit = 100.0f;
 
 	public void SetPool(Pool pool) {
-		_pool = pool;
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Laser, Matcher.GameObject));
-		_time = pool.GetGroup(Matcher.Time);
 	}
 	
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
 		foreach (Entity e in _group.GetEntities()) {
 			LaserComponent component = e.laser;
 			Entity source = component.source;

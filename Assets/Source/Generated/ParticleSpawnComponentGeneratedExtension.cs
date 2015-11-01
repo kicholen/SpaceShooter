@@ -44,12 +44,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherParticleSpawn;
+        static IMatcher _matcherParticleSpawn;
 
-        public static AllOfMatcher ParticleSpawn {
+        public static IMatcher ParticleSpawn {
             get {
                 if (_matcherParticleSpawn == null) {
-                    _matcherParticleSpawn = new Matcher(ComponentIds.ParticleSpawn);
+                    _matcherParticleSpawn = Matcher.AllOf(ComponentIds.ParticleSpawn);
                 }
 
                 return _matcherParticleSpawn;

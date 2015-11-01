@@ -2,12 +2,10 @@ using Entitas;
 using UnityEngine;
 
 public class AlphaSystem : IExecuteSystem, ISetPool {
-	Pool _pool;
 	Group _group;
 	Group _time;
 
 	public void SetPool(Pool pool) {
-		_pool = pool;
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Alpha, Matcher.GameObject));
 		_time = pool.GetGroup(Matcher.Time);
 	}

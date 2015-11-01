@@ -40,12 +40,12 @@ namespace Entitas {
     }
 
     public partial class Matcher {
-        static AllOfMatcher _matcherSoundOnDeath;
+        static IMatcher _matcherSoundOnDeath;
 
-        public static AllOfMatcher SoundOnDeath {
+        public static IMatcher SoundOnDeath {
             get {
                 if (_matcherSoundOnDeath == null) {
-                    _matcherSoundOnDeath = new Matcher(ComponentIds.SoundOnDeath);
+                    _matcherSoundOnDeath = Matcher.AllOf(ComponentIds.SoundOnDeath);
                 }
 
                 return _matcherSoundOnDeath;
