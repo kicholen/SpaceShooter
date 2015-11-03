@@ -28,23 +28,23 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			if (missile.time < 0.0f) {
 				missile.time = missile.spawnDelay;
 				if (missile.collisionType == CollisionTypes.Player && canSpawnPlayer) {
-					spawnMissile(missile, e.position.pos);
+					spawnMissile(missile, CollisionTypes.Enemy, e.position.pos);
 				}
 				else if (missile.collisionType == CollisionTypes.Enemy && canSpawnEnemy) {
-					spawnMissile(missile, e.position.pos);
+					spawnMissile(missile, CollisionTypes.Player, e.position.pos);
 				}
 			}
 		}
 	}
 	
-	void spawnMissile(HomeMissileSpawnerComponent missile, Vector2 position) {
+	void spawnMissile(HomeMissileSpawnerComponent missile, int targetCollisionType, Vector2 position) {
 		_pool.CreateEntity()
 			.AddPosition(new Vector2().Set(position))
 			.AddVelocity(new Vector2(0.0f, 0.0f))
 			.AddVelocityLimit(missile.velocity)
 			.AddHealth(0)
 			.AddHomeMissile(0.0f)
-			.AddFindTarget(missile.collisionType)
+			.AddFindTarget(targetCollisionType)
 			.AddCollision(missile.collisionType)
 			.AddDestroyEntityDelayed(SELF_DESTRUCTION_TIME)
 			.AddResource(missile.resource);
