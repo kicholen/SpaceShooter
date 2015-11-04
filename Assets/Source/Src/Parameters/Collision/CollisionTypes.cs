@@ -1,6 +1,7 @@
 public static class CollisionTypes {
-	public const int Static = 0;
-	public const int Enemy = 1;
-	public const int Player = 2;
-	public const int Bonus = 3;
+	public const int Unknown = 0;
+	public const int Static = 1;
+	public const int Enemy = 2;
+	public const int Player = 3;
+	public const int Bonus = 4;
 }
