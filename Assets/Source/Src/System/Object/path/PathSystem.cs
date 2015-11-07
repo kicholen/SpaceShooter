@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PathSystem : IExecuteSystem, ISetPool {
-	Pool _pool;
 	Group _group;
 	
 	public void SetPool(Pool pool) {
-		_pool = pool;
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Path, Matcher.GameObject, Matcher.Velocity, Matcher.Position));
 	}
 	

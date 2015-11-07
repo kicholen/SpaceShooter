@@ -19,8 +19,8 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 
 	public void Initialize() {
 		_pool.CreateEntity()
-			.AddCreateLevel(999, "/Resources/");
-			//.AddCreateLevel(101, "/Resources/");
+			//.AddCreateLevel(999, "/Resources/");
+			.AddCreateLevel(101, "/Resources/");
 	}
 	
 	public void Execute(List<Entity> entities) {

@@ -46,9 +46,18 @@ public static class Utils
 		}
 	}
 
-	public static void SerializeComponent(IComponent component) {
+	public static void SerializeComponent(IComponent component, string sufix = "") {
+		string path = "";
+		if (sufix != "") {
+			path += "_" + sufix;
+		}
+		#if UNITY_EDITOR
+			path = Application.dataPath + "/Resources/" + component.GetType().Name + path + xmlSufix;
+		#elif UNITY_ANDROID
+			path = Application.persistentDataPath + "/" + component.GetType().Name + path + xmlSufix;
+		#endif
 		XmlSerializer serializer = new XmlSerializer(component.GetType());
-		StreamWriter streamWriter = new StreamWriter(Application.persistentDataPath + "/" + component.GetType().Name + xmlSufix, false);
+		StreamWriter streamWriter = new StreamWriter(path, false);
 		serializer.Serialize(streamWriter, component);
 		streamWriter.Close();
 	}
