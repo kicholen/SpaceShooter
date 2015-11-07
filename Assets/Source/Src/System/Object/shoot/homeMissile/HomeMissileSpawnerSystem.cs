@@ -43,7 +43,7 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			.AddVelocity(new Vector2(0.0f, 0.0f))
 			.AddVelocityLimit(missile.velocity)
 			.AddHealth(0)
-			.AddHomeMissile(0.0f)
+			.AddHomeMissile(0.0f, targetCollisionType)
 			.AddFindTarget(targetCollisionType)
 			.AddCollision(missile.collisionType)
 			.AddDestroyEntityDelayed(SELF_DESTRUCTION_TIME)
