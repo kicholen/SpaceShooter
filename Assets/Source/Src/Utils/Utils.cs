@@ -16,8 +16,11 @@ public static class Utils
 		return document.FirstChild;
 	}
 
-	public static IComponent DeserializeComponent(Type type) {
+	public static IComponent DeserializeComponent(Type type, string sufix = "") {
 		string path = type.Name;
+		if (sufix != "") {
+			path += "_" + sufix;
+		}
 		XmlSerializer serializer = new XmlSerializer(type);
 		if (File.Exists(Application.persistentDataPath + "/" + path + xmlSufix)) {
 			StreamReader streamReader = new StreamReader(Application.persistentDataPath + "/" + path + xmlSufix);

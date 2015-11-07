@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour {
 				.Add(pool.CreateDifficultyControllerSystem())
 
 	            // Initialize
+				.Add(pool.CreateCreatePathSystem())
 				.Add(pool.CreateCreateDifficultySystem())
 				.Add(pool.CreateCreateSettingsSystem())
 	            .Add(pool.CreateCreatePlayerSystem())
@@ -68,6 +69,9 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreateVelocitySystem())
 			.Add(pool.CreateCollisionSystem())
 			.Add(pool.CreatePositionSystem())
+
+				// Path
+				.Add(pool.CreatePathSystem())
 
 				// laser
 				.Add(pool.CreateLaserSpawnerSystem())

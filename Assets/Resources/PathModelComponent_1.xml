@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PathModelComponent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <points>
+    <Vector2>
+      <x>3</x>
+      <y>7</y>
+    </Vector2>
+    <Vector2>
+      <x>-3</x>
+      <y>14</y>
+    </Vector2>
+    <Vector2>
+      <x>3</x>
+      <y>21</y>
+    </Vector2>
+    <Vector2>
+      <x>-3</x>
+      <y>28</y>
+    </Vector2>
+  </points>
+</PathModelComponent>

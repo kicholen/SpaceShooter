@@ -42,30 +42,32 @@ public static class ComponentIds {
     public const int Parent = 40;
     public const int ParticlesOnDeath = 41;
     public const int ParticleSpawn = 42;
-    public const int PauseGame = 43;
-    public const int Player = 44;
-    public const int PlayerModel = 45;
-    public const int PoolableGO = 46;
-    public const int Position = 47;
-    public const int RegularCamera = 48;
-    public const int RelativePosition = 49;
-    public const int Resource = 50;
-    public const int RestartGame = 51;
-    public const int SettingsModel = 52;
-    public const int ShipModel = 53;
-    public const int SlowGame = 54;
-    public const int SmoothCamera = 55;
-    public const int SnapPosition = 56;
-    public const int Sound = 57;
-    public const int SoundOnDeath = 58;
-    public const int SpeedBonus = 59;
-    public const int Test = 60;
-    public const int Time = 61;
-    public const int Velocity = 62;
-    public const int VelocityLimit = 63;
-    public const int Weapon = 64;
+    public const int Path = 43;
+    public const int PathModel = 44;
+    public const int PauseGame = 45;
+    public const int Player = 46;
+    public const int PlayerModel = 47;
+    public const int PoolableGO = 48;
+    public const int Position = 49;
+    public const int RegularCamera = 50;
+    public const int RelativePosition = 51;
+    public const int Resource = 52;
+    public const int RestartGame = 53;
+    public const int SettingsModel = 54;
+    public const int ShipModel = 55;
+    public const int SlowGame = 56;
+    public const int SmoothCamera = 57;
+    public const int SnapPosition = 58;
+    public const int Sound = 59;
+    public const int SoundOnDeath = 60;
+    public const int SpeedBonus = 61;
+    public const int Test = 62;
+    public const int Time = 63;
+    public const int Velocity = 64;
+    public const int VelocityLimit = 65;
+    public const int Weapon = 66;
 
-    public const int TotalComponents = 65;
+    public const int TotalComponents = 67;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -111,6 +113,8 @@ public static class ComponentIds {
         "Parent",
         "ParticlesOnDeath",
         "ParticleSpawn",
+        "Path",
+        "PathModel",
         "PauseGame",
         "Player",
         "PlayerModel",
@@ -179,6 +183,8 @@ public static class ComponentIds {
         typeof(ParentComponent),
         typeof(ParticlesOnDeathComponent),
         typeof(ParticleSpawnComponent),
+        typeof(PathComponent),
+        typeof(PathModelComponent),
         typeof(PauseGameComponent),
         typeof(PlayerComponent),
         typeof(PlayerModelComponent),
