@@ -24,7 +24,7 @@ public class CreateMouseInputSystem : IExecuteSystem, IInitializeSystem, ISetPoo
 	}
 
 	bool isMouseButton() {
-		return Input.GetMouseButton (0);
+		return Input.GetMouseButton(0);
 	}
 
 	void generateInputComponent() {

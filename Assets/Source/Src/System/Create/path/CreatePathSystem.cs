@@ -1,10 +1,9 @@
 using Entitas;
-using System.Collections.Generic;
 
 public class CreatePathSystem : IInitializeSystem, ISetPool {
 	Pool _pool;
 
-	const int PATHS_COUNT = 10;
+	const int PATHS_COUNT = 11;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;

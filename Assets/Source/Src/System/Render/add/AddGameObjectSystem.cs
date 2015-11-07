@@ -22,7 +22,7 @@ public class AddGameObjectSystem : IReactiveSystem, ISetPool {
 			if (gameObject == null) {
 				GameObject res = Resources.Load<GameObject>("Prefab/" + resourceName);
 				try {
-					gameObject = UnityEngine.Object.Instantiate (res);
+					gameObject = UnityEngine.Object.Instantiate(res);
 				}
 				catch (Exception) {
 					Debug.Log("Cannot instantiate " + res);
