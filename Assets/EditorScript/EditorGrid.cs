@@ -53,7 +53,7 @@ public class EditorGrid : MonoBehaviour {
 		LineRenderer lineRenderer = new GameObject().AddComponent<LineRenderer>();
 		lineRenderer.material = LineMaterial;
 		lineRenderer.SetWidth(0.05f, 0.05f);
-		Color color = shouldExcel?Color.red:Color.black;
+		Color color = shouldExcel?Color.blue:Color.black;
 		lineRenderer.SetColors(color, color);
 		lineRenderer.SetVertexCount(2);
 		return lineRenderer;

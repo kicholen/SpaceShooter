@@ -5,6 +5,7 @@ public class EditorController : MonoBehaviour {
 	public bool blockTouch = true;
 	public PathModelComponent component;
 	public string sufix;
+	public MenuController menuController;
 	PathCreator pathCreator;
 
 	static EditorController controller;
@@ -15,6 +16,13 @@ public class EditorController : MonoBehaviour {
 				controller.init();
 			}
 			return controller;
+		}
+	}
+
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.Escape) && menuController!=null) {
+			menuController.listGO.SetActive(true);
+			blockTouch = true;
 		}
 	}
 

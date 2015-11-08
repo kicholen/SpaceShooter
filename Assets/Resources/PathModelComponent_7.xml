@@ -2,12 +2,52 @@
 <PathModelComponent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <points>
     <Vector2>
-      <x>5</x>
-      <y>5</y>
+      <x>-2.23296618</x>
+      <y>11.9006338</y>
     </Vector2>
     <Vector2>
-      <x>15</x>
-      <y>5</y>
+      <x>-1.51466966</x>
+      <y>9.995586</y>
+    </Vector2>
+    <Vector2>
+      <x>-0.7651421</x>
+      <y>7.497162</y>
+    </Vector2>
+    <Vector2>
+      <x>0.140535519</x>
+      <y>5.248581</y>
+    </Vector2>
+    <Vector2>
+      <x>2.13927627</x>
+      <y>3.874448</y>
+    </Vector2>
+    <Vector2>
+      <x>2.888802</x>
+      <y>5.99810839</y>
+    </Vector2>
+    <Vector2>
+      <x>1.48343956</x>
+      <y>7.372241</y>
+    </Vector2>
+    <Vector2>
+      <x>-1.92066336</x>
+      <y>6.59148359</y>
+    </Vector2>
+    <Vector2>
+      <x>-1.70205152</x>
+      <y>4.18675</y>
+    </Vector2>
+    <Vector2>
+      <x>-3.29479671</x>
+      <y>2.75015688</y>
+    </Vector2>
+    <Vector2>
+      <x>-5.82445</x>
+      <y>0.970030069</y>
+    </Vector2>
+    <Vector2>
+      <x>-7.04243135</x>
+      <y>-0.9974787</y>
     </Vector2>
   </points>
 </PathModelComponent>

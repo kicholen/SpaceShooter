@@ -8,7 +8,7 @@ using System;
 
 public class MenuController : MonoBehaviour {
 
-	GameObject listGO;
+	public GameObject listGO;
 	Transform content;
 	List<string> paths;
 
@@ -31,7 +31,7 @@ public class MenuController : MonoBehaviour {
 
 		List<string> paths = new List<string>();
 		foreach (FileInfo fileInfo in fileInfos) {
-			if (fileInfo.Name.StartsWith(lfThis)) {
+			if (fileInfo.Name.StartsWith(lfThis) && fileInfo.Name.IndexOf(".xml") > 0 && fileInfo.Name.IndexOf("meta") < 0) {
 				paths.Add(fileInfo.Name);
 			}
 		}
@@ -55,15 +55,21 @@ public class MenuController : MonoBehaviour {
 		go.transform.SetParent(content.transform);
 		go.GetComponent<Button>().onClick.AddListener(onPathChosen);
 		go.transform.FindChild("Text").GetComponent<Text>().text = name;
+
+		string thumbnailPath = "/Resources/" + name.Replace(".xml", ".png");
+		if (File.Exists(Application.dataPath + thumbnailPath)) {
+			go.transform.FindChild("Thumbnail").GetComponent<Image>().sprite = Resources.Load<Sprite>(name.Split('.')[0]);
+		}
 	}
 
 	void onPathChosen() {
 		string xmlToLoad = EventSystem.current.currentSelectedGameObject.name;
-		string sufix = (xmlToLoad as string).Split('_')[1].Split('.')[0];
+		string sufix = xmlToLoad.Split('_')[1].Split('.')[0];
 		EditorController.instance.component = (PathModelComponent)Utils.DeserializeComponent(typeof(PathModelComponent), sufix);
 		EditorController.instance.blockTouch = false;
 		EditorController.instance.sufix = sufix;
 		EditorController.instance.SetPathCreator();
+		EditorController.instance.menuController = this;
 		listGO.SetActive(false);
 	}
 }

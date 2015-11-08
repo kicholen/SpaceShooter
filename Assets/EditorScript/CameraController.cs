@@ -26,5 +26,12 @@ public class CameraController : MonoBehaviour {
 		}
 		Vector3 position = camera.transform.position;
 		camera.transform.position = new Vector3(position.x + offsetX, position.y + offsetY, position.z);
+
+		if(Input.GetKey(KeyCode.KeypadPlus)) {
+			camera.orthographicSize -= .1f;
+		}
+		if(Input.GetKey(KeyCode.KeypadMinus)) {
+			camera.orthographicSize += .1f;
+		}
 	}
 }
