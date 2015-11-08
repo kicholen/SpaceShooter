@@ -17,7 +17,7 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 		_camera = pool.GetGroup(Matcher.Camera);
 		_difficulty = pool.GetGroup(Matcher.DifficultyController);
 		_factory = new EnemyFactory();
-		_factory.SetPool(_pool);
+		_factory.SetPool(_pool, _pool.GetGroup(Matcher.PathModel));
 	}
 	
 	public void Execute() {
@@ -45,15 +45,28 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 				XmlNode innerNode = node.FirstChild;
 				while(innerNode != null) {
 					int enemyCount = Convert.ToInt16(innerNode.Attributes[0].Value);
-					Vector2 position = new Vector2((float)Convert.ToDouble(innerNode.Attributes[1].Value),
-					                               (float)Convert.ToDouble(innerNode.Attributes[2].Value));
-					Vector2 velocity = new Vector2((float)Convert.ToDouble(innerNode.Attributes[3].Value),
-					                               (float)Convert.ToDouble(innerNode.Attributes[4].Value));
-					int type = Convert.ToInt16(innerNode.Attributes[5].Value);
-					int health = Convert.ToInt16(innerNode.Attributes[6].Value) * (difficulty.hpBoostPercent + 100) / 100;
-					while (enemyCount != 0) {
-						_factory.createEnemyByType(type, position, velocity, health, difficulty.missileSpeedBoostPercent);
-						enemyCount--;
+					if (enemyCount == 1) {
+						Vector2 position = new Vector2((float)Convert.ToDouble(innerNode.Attributes[1].Value),
+						                               (float)Convert.ToDouble(innerNode.Attributes[2].Value));
+						Vector2 velocity = new Vector2((float)Convert.ToDouble(innerNode.Attributes[3].Value),
+						                               (float)Convert.ToDouble(innerNode.Attributes[4].Value));
+						int type = Convert.ToInt16(innerNode.Attributes[5].Value);
+						int health = Convert.ToInt16(innerNode.Attributes[6].Value) * (difficulty.hpBoostPercent + 100) / 100;
+						int path = Convert.ToInt16(innerNode.Attributes[7].Value);
+
+						_factory.CreateEnemyByType(type, position, velocity, health, difficulty.missileSpeedBoostPercent, path);
+					}
+					else {
+						Vector2 position = new Vector2((float)Convert.ToDouble(innerNode.Attributes[1].Value),
+						                               (float)Convert.ToDouble(innerNode.Attributes[2].Value));
+						Vector2 positionOffset = new Vector2((float)Convert.ToDouble(innerNode.Attributes[3].Value),
+						                               (float)Convert.ToDouble(innerNode.Attributes[4].Value));
+						float speed = (float)Convert.ToDouble(innerNode.Attributes[5].Value);
+						int type = Convert.ToInt16(innerNode.Attributes[6].Value);
+						int health = Convert.ToInt16(innerNode.Attributes[7].Value) * (difficulty.hpBoostPercent + 100) / 100;
+						int path = Convert.ToInt16(innerNode.Attributes[8].Value);
+
+						_factory.CreateWave(enemyCount, type, position, positionOffset, speed, health, difficulty.missileSpeedBoostPercent, path);
 					}
 					innerNode = innerNode.NextSibling;
 				}

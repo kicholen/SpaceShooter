@@ -1,8 +1,8 @@
 <level version="1">
 	<enemy>
 		<enemy value="5">
-			<enemy count="1" x="0" y="8" velX="0" velY="2" type="101" health="5000"/>
+			<enemy count="1" x="0" y="8" velX="0" velY="2" type="101" health="5000" path="0"/>
 		</enemy>
 	</enemy>
-	<dimensions x="-1.5" y="-2" width="3" height="100" />
+	<dimensions x="-0.5" y="-2" width="1" height="100" />
 </level>

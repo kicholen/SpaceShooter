@@ -10,7 +10,7 @@ public class CreatePathSystem : IInitializeSystem, ISetPool {
 	}
 	
 	public void Initialize() {
-		for (int i = 0; i < PATHS_COUNT; i++) {
+		for (int i = 1; i < PATHS_COUNT; i++) {
 			_pool.CreateEntity()
 				.AddComponent(ComponentIds.PathModel, Utils.DeserializeComponent(typeof(PathModelComponent), i.ToString()));
 		}

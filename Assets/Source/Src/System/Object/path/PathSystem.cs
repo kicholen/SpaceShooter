@@ -6,23 +6,23 @@ public class PathSystem : IExecuteSystem, ISetPool {
 	Group _group;
 	
 	public void SetPool(Pool pool) {
-		_group = pool.GetGroup(Matcher.AllOf(Matcher.Path, Matcher.GameObject, Matcher.Velocity, Matcher.Position));
+		_group = pool.GetGroup(Matcher.AllOf(Matcher.Path, Matcher.GameObject, Matcher.Velocity, Matcher.VelocityLimit, Matcher.Position));
 	}
 	
 	public void Execute() {
 		foreach (Entity e in _group.GetEntities()) {
 			PathComponent path = e.path;
 			List<Vector2> points = path.path.points;
-			if (path.node < points.Count) {
-				VelocityComponent velocity = e.velocity;
+			if (path.node != points.Count) {
 				PositionComponent futurePosition = e.position;
+				float speed = e.velocityLimit.maxVelocity;
 				Vector3 currentPosition = e.gameObject.gameObject.transform.position;
 				Vector2 desiredPosition = points[path.node] + new Vector2(0.0f, path.startY);
 
+				VelocityComponent velocity = e.velocity;
 				velocity.vel.Set((desiredPosition.x - futurePosition.pos.x), (desiredPosition.y - futurePosition.pos.y));
 				velocity.vel.Normalize();
-				velocity.vel *= 3.0f;
-
+				velocity.vel *= speed;
 				if (isPointBetween(currentPosition, desiredPosition, futurePosition)) {
 					path.node = path.node + 1;
 				}

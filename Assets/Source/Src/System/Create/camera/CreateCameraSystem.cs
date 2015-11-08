@@ -4,6 +4,7 @@ using UnityEngine;
 public class CreateCameraSystem : IInitializeSystem, ISetPool {
 	Pool _pool;
 	Group _group;
+	const float CAMERA_SPEED = 1.0f;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
@@ -17,8 +18,8 @@ public class CreateCameraSystem : IInitializeSystem, ISetPool {
 		_pool.CreateEntity()
 			.AddCamera(camera)
 			.AddFollowTarget(player)
-			.AddSmoothCamera(new Vector3(0.0f, 2.0f, camera.transform.position.z))
-			.AddVelocity(new Vector2(0.0f, 2.0f))
+			.AddSmoothCamera(new Vector3(0.0f, CAMERA_SPEED, camera.transform.position.z))
+			.AddVelocity(new Vector2(0.0f, CAMERA_SPEED))
 			.AddPosition(new Vector2(playerPosition.x, playerPosition.y + 2.0f));
 	}
 }
