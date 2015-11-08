@@ -66,7 +66,7 @@ public class EnemyFactory {
 	}
 
 	Entity createStandardEnemy(int type, Vector2 position, Vector2 velocity, int health, float speed = 5.0f) {
-		return _pool.CreateEntity()
+		Entity e = _pool.CreateEntity()
 			.AddEnemy(type)
 			.AddPosition(new Vector2().Set(position))
 			.AddVelocity(new Vector2().Set(velocity))
@@ -77,6 +77,10 @@ public class EnemyFactory {
 			.AddCameraShakeOnDeath(1)
 			.AddParticlesOnDeath(1)
 			.AddResource(Resource.Enemy);
+		e.isNonRemovable = true;
+		e.isActive = true;
+
+		return e;
 	}
 
 	Entity createFirstBoss(int type, Vector2 position, Vector2 velocity, int health, int missileSpeedBonus) {

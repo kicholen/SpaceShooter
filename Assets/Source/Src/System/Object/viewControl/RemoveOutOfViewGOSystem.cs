@@ -4,7 +4,7 @@ using UnityEngine;
 public class RemoveOutOfViewGOSystem : IExecuteSystem, ISetPool {
 	Group _cameraGroup;
 	Group _group;
-	const float radius = 5.0f;
+	const float offset = 2.0f;
 
 	public void SetPool(Pool pool) {
 		_cameraGroup = pool.GetGroup(Matcher.Camera);
@@ -16,11 +16,11 @@ public class RemoveOutOfViewGOSystem : IExecuteSystem, ISetPool {
 		Camera camera = cameraEntity.camera.camera;
 		Vector3 cameraPosition = camera.transform.position;
 		float ortographicSize = camera.orthographicSize;
-		float radiusPower = Mathf.Pow(camera.aspect > 1.0f ? ortographicSize * camera.aspect + 1.0f: ortographicSize + 1.0f, 2.0f);
+		float radiusPower = Mathf.Pow(camera.aspect > 1.0f ? ortographicSize * camera.aspect + offset : ortographicSize + offset, 2.0f);
 
 		foreach (Entity e in _group.GetEntities()) {
 			Vector2 position = e.position.pos;
-			if (!e.isNonRemovable && !isPointInCircle(cameraPosition.x, cameraPosition.y, radiusPower, position.x, position.y)) {
+			if (!e.isNonRemovable && !isPointInCircle(0.0f, cameraPosition.y, radiusPower, position.x, position.y)) {
 				e.isDestroyEntity = true;
 			}
 		}

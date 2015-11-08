@@ -81,6 +81,7 @@ public class GameController : MonoBehaviour {
 				// Physics not so much
 				.Add(pool.CreateSnapPositionSystem())
 				.Add(pool.CreateFaceDirectionSystem())
+				.Add(pool.CreateActiveSystem())
 
 				// Object
 				.Add(pool.CreateHealthSystem())
