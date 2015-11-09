@@ -17,7 +17,6 @@ public class EnemyFactory {
 			switch(type) {
 			case 0:
 				e = createStandardEnemy(type, position + (poitionOffset * (float)i), new Vector2(0.0f, 0.0f), health, speed);
-				e.isFaceDirection = true;
 				e.AddMissileSpawner(0.0f, 2.5f, Resource.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 				break;
 			case 1:
@@ -79,6 +78,7 @@ public class EnemyFactory {
 			.AddResource(Resource.Enemy);
 		e.isNonRemovable = true;
 		e.isActive = true;
+		e.isMoveWithCamera = true;
 
 		return e;
 	}

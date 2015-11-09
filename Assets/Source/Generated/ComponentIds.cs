@@ -38,37 +38,38 @@ public static class ComponentIds {
     public const int Magnet = 36;
     public const int MissileSpawner = 37;
     public const int MouseInput = 38;
-    public const int MultipleMissileSpawner = 39;
-    public const int NonRemovable = 40;
-    public const int Parent = 41;
-    public const int ParticlesOnDeath = 42;
-    public const int ParticleSpawn = 43;
-    public const int Path = 44;
-    public const int PathModel = 45;
-    public const int PauseGame = 46;
-    public const int Player = 47;
-    public const int PlayerModel = 48;
-    public const int PoolableGO = 49;
-    public const int Position = 50;
-    public const int RegularCamera = 51;
-    public const int RelativePosition = 52;
-    public const int Resource = 53;
-    public const int RestartGame = 54;
-    public const int SettingsModel = 55;
-    public const int ShipModel = 56;
-    public const int SlowGame = 57;
-    public const int SmoothCamera = 58;
-    public const int SnapPosition = 59;
-    public const int Sound = 60;
-    public const int SoundOnDeath = 61;
-    public const int SpeedBonus = 62;
-    public const int Test = 63;
-    public const int Time = 64;
-    public const int Velocity = 65;
-    public const int VelocityLimit = 66;
-    public const int Weapon = 67;
+    public const int MoveWithCamera = 39;
+    public const int MultipleMissileSpawner = 40;
+    public const int NonRemovable = 41;
+    public const int Parent = 42;
+    public const int ParticlesOnDeath = 43;
+    public const int ParticleSpawn = 44;
+    public const int Path = 45;
+    public const int PathModel = 46;
+    public const int PauseGame = 47;
+    public const int Player = 48;
+    public const int PlayerModel = 49;
+    public const int PoolableGO = 50;
+    public const int Position = 51;
+    public const int RegularCamera = 52;
+    public const int RelativePosition = 53;
+    public const int Resource = 54;
+    public const int RestartGame = 55;
+    public const int SettingsModel = 56;
+    public const int ShipModel = 57;
+    public const int SlowGame = 58;
+    public const int SmoothCamera = 59;
+    public const int SnapPosition = 60;
+    public const int Sound = 61;
+    public const int SoundOnDeath = 62;
+    public const int SpeedBonus = 63;
+    public const int Test = 64;
+    public const int Time = 65;
+    public const int Velocity = 66;
+    public const int VelocityLimit = 67;
+    public const int Weapon = 68;
 
-    public const int TotalComponents = 68;
+    public const int TotalComponents = 69;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -110,6 +111,7 @@ public static class ComponentIds {
         "Magnet",
         "MissileSpawner",
         "MouseInput",
+        "MoveWithCamera",
         "MultipleMissileSpawner",
         "NonRemovable",
         "Parent",
@@ -181,6 +183,7 @@ public static class ComponentIds {
         typeof(MagnetComponent),
         typeof(MissileSpawnerComponent),
         typeof(MouseInputComponent),
+        typeof(MoveWithCamera),
         typeof(MultipleMissileSpawnerComponent),
         typeof(NonRemovableComponent),
         typeof(ParentComponent),

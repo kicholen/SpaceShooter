@@ -26,7 +26,8 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 				.AddCollision(CollisionTypes.Player)
 				.AddHealth(playerModel.health)
 				.AddResource(Resource.Player);
-		
+		player.isMoveWithCamera = true;
+
 		player.AddParent(getChildren(player, playerModel));
 	}
 

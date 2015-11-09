@@ -68,6 +68,7 @@ public class GameController : MonoBehaviour {
 			.Add(pool.CreateAccelerationSystem())
 			.Add(pool.CreateVelocitySystem())
 			.Add(pool.CreateCollisionSystem())
+			.Add(pool.CreateMoveWithCameraSystem())
 			.Add(pool.CreatePositionSystem())
 
 				// Path
