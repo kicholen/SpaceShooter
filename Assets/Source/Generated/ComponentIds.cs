@@ -67,9 +67,10 @@ public static class ComponentIds {
     public const int Time = 65;
     public const int Velocity = 66;
     public const int VelocityLimit = 67;
-    public const int Weapon = 68;
+    public const int WaveSpawner = 68;
+    public const int Weapon = 69;
 
-    public const int TotalComponents = 69;
+    public const int TotalComponents = 70;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -140,6 +141,7 @@ public static class ComponentIds {
         "Time",
         "Velocity",
         "VelocityLimit",
+        "WaveSpawner",
         "Weapon"
     };
 
@@ -212,6 +214,7 @@ public static class ComponentIds {
         typeof(TimeComponent),
         typeof(VelocityComponent),
         typeof(VelocityLimitComponent),
+        typeof(WaveSpawnerComponent),
         typeof(WeaponComponent)
     };
 }

@@ -59,14 +59,14 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 					else {
 						Vector2 position = new Vector2((float)Convert.ToDouble(innerNode.Attributes[1].Value),
 						                               (float)Convert.ToDouble(innerNode.Attributes[2].Value));
-						Vector2 positionOffset = new Vector2((float)Convert.ToDouble(innerNode.Attributes[3].Value),
-						                               (float)Convert.ToDouble(innerNode.Attributes[4].Value));
-						float speed = (float)Convert.ToDouble(innerNode.Attributes[5].Value);
-						int type = Convert.ToInt16(innerNode.Attributes[6].Value);
-						int health = Convert.ToInt16(innerNode.Attributes[7].Value) * (difficulty.hpBoostPercent + 100) / 100;
-						int path = Convert.ToInt16(innerNode.Attributes[8].Value);
+						float timeOffset = (float)Convert.ToDouble(innerNode.Attributes[3].Value);
+						float speed = (float)Convert.ToDouble(innerNode.Attributes[4].Value);
+						int type = Convert.ToInt16(innerNode.Attributes[5].Value);
+						int health = Convert.ToInt16(innerNode.Attributes[6].Value) * (difficulty.hpBoostPercent + 100) / 100;
+						int path = Convert.ToInt16(innerNode.Attributes[7].Value);
 
-						_factory.CreateWave(enemyCount, type, position, positionOffset, speed, health, difficulty.missileSpeedBoostPercent, path);
+						_pool.CreateEntity()
+							.AddWaveSpawner(enemyCount, type, position, timeOffset, 0.0f, speed, health, path);
 					}
 					innerNode = innerNode.NextSibling;
 				}

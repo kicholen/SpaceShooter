@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour {
 				.Add(pool.CreateFindTargetSystem())
 				.Add(pool.CreateHomeMissileSystem())
 				.Add(pool.CreateEnemySpawnerSystem())
+				.Add(pool.CreateWaveSpawnerSystem())
 
 			.Add(pool.CreateTimeSystem())
 

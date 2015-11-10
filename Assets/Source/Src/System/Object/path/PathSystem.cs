@@ -27,16 +27,12 @@ public class PathSystem : IExecuteSystem, ISetPool {
 				if (distance(currentPosition, desiredPosition) <= MIN_DISTANCE) {
 					path.node = path.node + 1;
 				}
-				/*if (isPointBetween(currentPosition, desiredPosition, futurePosition)) {
-
-				}*/
 			}
 			else {
 				e.RemovePath();
 			}
 		}
 	}
-
 
 	float distance(Vector2 current, Vector2 desired) {
 		return Mathf.Sqrt((current.x - desired.x) * (current.x - desired.x) + (current.y - desired.y) * (current.y - desired.y));

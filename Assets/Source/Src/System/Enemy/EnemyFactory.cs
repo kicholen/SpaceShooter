@@ -2,39 +2,13 @@ using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyFactory {
+	public class EnemyFactory {
 	Pool _pool;
 	Group _paths;
 
 	public void SetPool(Pool pool, Group paths) {
 		_pool = pool;
 		_paths = paths;
-	}
-
-	public void CreateWave(int count, int type, Vector2 position, Vector2 poitionOffset, float speed, int health, int missileSpeedBonus, int path) {
-		for (int i = 1; i < count + 1; i++) {
-			Entity e;
-			switch(type) {
-			case 0:
-				e = createStandardEnemy(type, position + (poitionOffset * (float)i), new Vector2(0.0f, 0.0f), health, speed);
-				e.AddMissileSpawner(0.0f, 2.5f, Resource.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
-				break;
-			case 1:
-				e = createStandardEnemy(type, position + (poitionOffset * (float)i), new Vector2(0.0f, 0.0f), health, speed);
-				e.AddHomeMissileSpawner(0.0f, 2.0f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
-				break;
-			case 101:
-				e = createFirstBoss(type, position + (poitionOffset * (float)i), new Vector2(0.0f, 0.0f), health, missileSpeedBonus);
-				break;
-			default:
-				e = createStandardEnemy(type, position + (poitionOffset * (float)i), new Vector2(0.0f, 0.0f), health, speed);
-				break;
-			}
-
-			if (path > 0) {
-				e.AddPath(0, position.y, _paths.GetEntities()[path - 1].pathModel);
-			}
-		}
 	}
 
 	public void CreateEnemyByType(int type, Vector2 position, Vector2 velocity, int health, int missileSpeedBonus, int path) {
@@ -44,7 +18,6 @@ public class EnemyFactory {
 			e = createStandardEnemy(type, position, velocity, health);
 			e.isFaceDirection = true;
 			e.AddMissileSpawner(0.0f, 2.5f, Resource.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
-			e.AddPath(0, 14.0f, _paths.GetEntities()[path].pathModel);
 		break;
 		case 1:
 			e = createStandardEnemy(type, position, velocity, health);

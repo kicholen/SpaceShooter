@@ -1,71 +1,71 @@
 ﻿<level version="1">
 	<enemy>
 		<wave value="6">
-			<wave count="3" x="3" y="9" xOffset="1" yOffset="1" speed="6.0" type="0" health="20" path="1"/>
+			<wave count="3" x="3" y="9" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
 		</wave>
 		<wave value="7">
-			<wave count="3" x="3" y="10" xOffset="1" yOffset="1" speed="6.0" type="0" health="20" path="1"/>
+			<wave count="3" x="3" y="10" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
 		</wave>
 		<wave value="8">
-			<wave count="3" x="3" y="11" xOffset="1" yOffset="1" speed="6.0" type="0" health="20" path="1"/>
+			<wave count="3" x="3" y="11" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
 		</wave>
 		<wave value="9">
-			<wave count="3" x="3" y="12" xOffset="1" yOffset="1" speed="6.0" type="0" health="20" path="1"/>
+			<wave count="3" x="3" y="12" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
 		</wave>
 		<wave value="10">
-			<wave count="3" x="3" y="13" xOffset="1" yOffset="1" speed="6.0" type="0" health="20" path="1"/>
+			<wave count="3" x="3" y="13" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
 		</wave>
 		
 		<wave value="12">
-			<wave count="3" x="-4" y="15" xOffset="-1" yOffset="1" speed="6.0" type="0" health="50" path="2"/>
+			<wave count="3" x="-4" y="15" offset="0.5" speed="6.0" type="0" health="50" path="2"/>
 		</wave>
 		<wave value="13">
-			<wave count="3" x="-4" y="16" xOffset="-1" yOffset="1" speed="6.0" type="0" health="50" path="2"/>
+			<wave count="3" x="-4" y="16" offset="0.5" speed="6.0" type="0" health="50" path="2"/>
 		</wave>
 		<wave value="14">
-			<wave count="3" x="-4" y="17" xOffset="-1" yOffset="1" speed="6.0" type="0" health="50" path="2"/>
+			<wave count="3" x="-4" y="17" offset="0.5" speed="6.0" type="0" health="50" path="2"/>
 		</wave>
 		<wave value="15">
-			<wave count="3" x="-4" y="18" xOffset="-1" yOffset="1" speed="6.0" type="0" health="50" path="2"/>
+			<wave count="3" x="-4" y="18" offset="0.5" speed="6.0" type="0" health="50" path="2"/>
 		</wave>
 		
 		<wave value="17">
-			<wave count="3" x="-4" y="14" xOffset="-1" yOffset="-1" speed="6.0" type="0" health="50" path="3"/>
+			<wave count="3" x="-4" y="14" offset="0.5" speed="6.0" type="0" health="50" path="3"/>
 		</wave>
 		<wave value="18">
-			<wave count="3" x="-4" y="15" xOffset="-1" yOffset="-1" speed="6.0" type="0" health="50" path="3"/>
+			<wave count="3" x="-4" y="15" offset="0.5" speed="6.0" type="0" health="50" path="3"/>
 		</wave>
 		<wave value="19">
-			<wave count="3" x="-4" y="16" xOffset="-1" yOffset="-1" speed="6.0" type="0" health="50" path="3"/>
+			<wave count="3" x="-4" y="16" offset="0.5" speed="6.0" type="0" health="50" path="3"/>
 		</wave>
 		<wave value="20">
-			<wave count="3" x="-4" y="17" xOffset="-1" yOffset="-1" speed="6.0" type="0" health="50" path="3"/>
+			<wave count="3" x="-4" y="17" offset="0.5" speed="6.0" type="0" health="50" path="3"/>
 		</wave>
 		
 		<wave value="22">
-			<wave count="3" x="-4" y="22" xOffset="-1" yOffset="-1" speed="6.0" type="0" health="50" path="4"/>
+			<wave count="3" x="-4" y="22" offset="0.5" speed="6.0" type="0" health="50" path="4"/>
 		</wave>
 		<wave value="23">
-			<wave count="3" x="-4" y="23" xOffset="-1" yOffset="-1" speed="6.0" type="0" health="50" path="4"/>
+			<wave count="3" x="-4" y="23" offset="0.5" speed="6.0" type="0" health="50" path="4"/>
 		</wave>
 		<wave value="24">
-			<wave count="3" x="-4" y="24" xOffset="-1" yOffset="-1" speed="6.0" type="0" health="50" path="4"/>
+			<wave count="3" x="-4" y="24" offset="0.5" speed="6.0" type="0" health="50" path="4"/>
 		</wave>
 		<wave value="25">
-			<wave count="3" x="-4" y="25" xOffset="-1" yOffset="-1" speed="6.0" type="0" health="50" path="4"/>
+			<wave count="3" x="-4" y="25" offset="0.5" speed="6.0" type="0" health="50" path="4"/>
 		</wave>
 		
 		<wave value="27">
-			<wave count="3" x="-4" y="32" xOffset="-1" yOffset="1" speed="6.0" type="0" health="50" path="5"/>
+			<wave count="3" x="-4" y="32" offset="0.5" speed="6.0" type="0" health="50" path="5"/>
 		</wave>
 		<wave value="28">
-			<wave count="3" x="-4" y="33" xOffset="-1" yOffset="1" speed="6.0" type="0" health="50" path="5"/>
+			<wave count="3" x="-4" y="33" offset="0.5" speed="6.0" type="0" health="50" path="5"/>
 		</wave>
 		<wave value="29">
-			<wave count="3" x="-4" y="34" xOffset="-1" yOffset="1" speed="6.0" type="0" health="50" path="5"/>
+			<wave count="3" x="-4" y="34" offset="0.5" speed="6.0" type="0" health="50" path="5"/>
 		</wave>
 		<wave value="30">
-			<wave count="3" x="-4" y="35" xOffset="-1" yOffset="1" speed="6.0" type="0" health="50" path="5"/>
+			<wave count="3" x="-4" y="35" offset="0.5" speed="6.0" type="0" health="50" path="5"/>
 		</wave>
 	</enemy>
 	<dimensions x="-0.5" y="-2" width="1" height="100" />
