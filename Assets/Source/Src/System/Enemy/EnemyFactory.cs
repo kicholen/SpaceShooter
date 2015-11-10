@@ -21,7 +21,6 @@ public class EnemyFactory {
 				break;
 			case 1:
 				e = createStandardEnemy(type, position + (poitionOffset * (float)i), new Vector2(0.0f, 0.0f), health, speed);
-				e.isFaceDirection = true;
 				e.AddHomeMissileSpawner(0.0f, 2.0f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 				break;
 			case 101:
@@ -93,6 +92,8 @@ public class EnemyFactory {
 			.AddResource(Resource.Boss)
 			.AddEnemy(type)
 			.AddFirstBoss(22.0f, 0.0f, 90.0f);
+		boss.isMoveWithCamera = true;
+			
 
 		List<Entity> children = new List<Entity>();
 		children.Add(_pool.CreateEntity()

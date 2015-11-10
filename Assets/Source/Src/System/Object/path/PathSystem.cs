@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PathSystem : IExecuteSystem, ISetPool {
 	Group _group;
-	
+
+	const float MIN_DISTANCE = 0.1f;
+
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Path, Matcher.GameObject, Matcher.Velocity, Matcher.VelocityLimit, Matcher.Position));
 	}
@@ -14,18 +16,20 @@ public class PathSystem : IExecuteSystem, ISetPool {
 			PathComponent path = e.path;
 			List<Vector2> points = path.path.points;
 			if (path.node != points.Count) {
-				PositionComponent futurePosition = e.position;
-				float speed = e.velocityLimit.maxVelocity;
-				Vector3 currentPosition = e.gameObject.gameObject.transform.position;
+				Vector2 currentPosition = e.position.pos;
 				Vector2 desiredPosition = points[path.node] + new Vector2(0.0f, path.startY);
+				float speed = e.velocityLimit.maxVelocity;
 
 				VelocityComponent velocity = e.velocity;
-				velocity.vel.Set((desiredPosition.x - futurePosition.pos.x), (desiredPosition.y - futurePosition.pos.y));
+				velocity.vel.Set((desiredPosition.x - currentPosition.x), (desiredPosition.y - currentPosition.y));
 				velocity.vel.Normalize();
 				velocity.vel *= speed;
-				if (isPointBetween(currentPosition, desiredPosition, futurePosition)) {
+				if (distance(currentPosition, desiredPosition) <= MIN_DISTANCE) {
 					path.node = path.node + 1;
 				}
+				/*if (isPointBetween(currentPosition, desiredPosition, futurePosition)) {
+
+				}*/
 			}
 			else {
 				e.RemovePath();
@@ -33,12 +37,8 @@ public class PathSystem : IExecuteSystem, ISetPool {
 		}
 	}
 
-	bool isPointBetween(Vector3 current, Vector2 desired, PositionComponent future) {
-		return within(current.x, desired.x, future.pos.x) && within(current.y, desired.y, future.pos.y);
-	}
 
-	bool within(float current, float desired, float future) {
-		return (current <= desired && desired <= future) || (future <= desired && desired <= current);
+	float distance(Vector2 current, Vector2 desired) {
+		return Mathf.Sqrt((current.x - desired.x) * (current.x - desired.x) + (current.y - desired.y) * (current.y - desired.y));
 	}
-	
 }

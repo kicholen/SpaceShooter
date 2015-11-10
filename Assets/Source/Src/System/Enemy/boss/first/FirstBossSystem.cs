@@ -24,8 +24,9 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 		foreach (Entity e in _group.GetEntities()) {
 			FirstBossComponent component = e.firstBoss;
 			component.age += deltaTime;
+			e.velocity.vel.Set(0.0f, 0.0f);
 			//float age = component.age;
-			setVelocity(e.velocity, e.position, _player.GetSingleEntity().position);
+			//setVelocity(e.velocity, e.position, _player.GetSingleEntity().position);
 
 			if (!tests) {
 				if (!e.hasLaserSpawner) {
