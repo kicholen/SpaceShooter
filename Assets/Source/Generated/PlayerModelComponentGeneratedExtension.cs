@@ -12,7 +12,7 @@ namespace Entitas {
             _playerModelComponentPool.Clear();
         }
 
-        public Entity AddPlayerModel(string newName, float newMaxVelocity, int newHealth, bool newHasLaser, float newLaserDamage, bool newHasMissile, float newMissileVelocity, float newMissileSpawnDelay, float newMissileDamage, float newHasSecondaryMissiles, float newSecondaryMissileVelocity, float newSecondaryMissileSpawnDelay, float newSecondaryMissileDamage, bool newHasHomeMissile, float newHomeMissileVelocity, float newHomeMissileSpawnDelay, float newHomeMissileDamage, bool newHasMagnetField, float newMagnetRadius) {
+        public Entity AddPlayerModel(string newName, float newMaxVelocity, int newHealth, bool newHasLaser, float newLaserDamage, bool newHasMissile, float newMissileVelocity, float newMissileSpawnDelay, float newMissileDamage, bool newHasSecondaryMissiles, float newSecondaryMissileVelocity, float newSecondaryMissileSpawnDelay, float newSecondaryMissileDamage, bool newHasHomeMissile, float newHomeMissileVelocity, float newHomeMissileSpawnDelay, float newHomeMissileDamage, bool newHasMagnetField, float newMagnetRadius) {
             var component = _playerModelComponentPool.Count > 0 ? _playerModelComponentPool.Pop() : new PlayerModelComponent();
             component.name = newName;
             component.maxVelocity = newMaxVelocity;
@@ -36,7 +36,7 @@ namespace Entitas {
             return AddComponent(ComponentIds.PlayerModel, component);
         }
 
-        public Entity ReplacePlayerModel(string newName, float newMaxVelocity, int newHealth, bool newHasLaser, float newLaserDamage, bool newHasMissile, float newMissileVelocity, float newMissileSpawnDelay, float newMissileDamage, float newHasSecondaryMissiles, float newSecondaryMissileVelocity, float newSecondaryMissileSpawnDelay, float newSecondaryMissileDamage, bool newHasHomeMissile, float newHomeMissileVelocity, float newHomeMissileSpawnDelay, float newHomeMissileDamage, bool newHasMagnetField, float newMagnetRadius) {
+        public Entity ReplacePlayerModel(string newName, float newMaxVelocity, int newHealth, bool newHasLaser, float newLaserDamage, bool newHasMissile, float newMissileVelocity, float newMissileSpawnDelay, float newMissileDamage, bool newHasSecondaryMissiles, float newSecondaryMissileVelocity, float newSecondaryMissileSpawnDelay, float newSecondaryMissileDamage, bool newHasHomeMissile, float newHomeMissileVelocity, float newHomeMissileSpawnDelay, float newHomeMissileDamage, bool newHasMagnetField, float newMagnetRadius) {
             var previousComponent = hasPlayerModel ? playerModel : null;
             var component = _playerModelComponentPool.Count > 0 ? _playerModelComponentPool.Pop() : new PlayerModelComponent();
             component.name = newName;

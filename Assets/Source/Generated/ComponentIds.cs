@@ -55,22 +55,23 @@ public static class ComponentIds {
     public const int RelativePosition = 53;
     public const int Resource = 54;
     public const int RestartGame = 55;
-    public const int SettingsModel = 56;
-    public const int ShipModel = 57;
-    public const int SlowGame = 58;
-    public const int SmoothCamera = 59;
-    public const int SnapPosition = 60;
-    public const int Sound = 61;
-    public const int SoundOnDeath = 62;
-    public const int SpeedBonus = 63;
-    public const int Test = 64;
-    public const int Time = 65;
-    public const int Velocity = 66;
-    public const int VelocityLimit = 67;
-    public const int WaveSpawner = 68;
-    public const int Weapon = 69;
+    public const int SecondaryWeapon = 56;
+    public const int SettingsModel = 57;
+    public const int ShipModel = 58;
+    public const int SlowGame = 59;
+    public const int SmoothCamera = 60;
+    public const int SnapPosition = 61;
+    public const int Sound = 62;
+    public const int SoundOnDeath = 63;
+    public const int SpeedBonus = 64;
+    public const int Test = 65;
+    public const int Time = 66;
+    public const int Velocity = 67;
+    public const int VelocityLimit = 68;
+    public const int WaveSpawner = 69;
+    public const int Weapon = 70;
 
-    public const int TotalComponents = 70;
+    public const int TotalComponents = 71;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -129,6 +130,7 @@ public static class ComponentIds {
         "RelativePosition",
         "Resource",
         "RestartGame",
+        "SecondaryWeapon",
         "SettingsModel",
         "ShipModel",
         "SlowGame",
@@ -202,6 +204,7 @@ public static class ComponentIds {
         typeof(RelativePositionComponent),
         typeof(ResourceComponent),
         typeof(RestartGameComponent),
+        typeof(SecondaryWeaponComponent),
         typeof(SettingsModelComponent),
         typeof(ShipModelComponent),
         typeof(SlowGameComponent),

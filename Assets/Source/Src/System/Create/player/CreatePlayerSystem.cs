@@ -35,17 +35,33 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 		List<Entity> children = new List<Entity>();
 		if (component.hasHomeMissile) {
 	         children.Add(_pool.CreateEntity()
-		         .AddRelativePosition(0.5f, 0.5f)
+		         .AddRelativePosition(0.5f, -0.5f)
 		         .AddPosition(new Vector2(0.0f, 0.0f))
 		         .AddChild(parent)
 	             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.Missile, component.homeMissileVelocity, CollisionTypes.Player)
 		         .AddResource(Resource.Weapon));
 	         children.Add(_pool.CreateEntity()
-		         .AddRelativePosition(-0.5f, 0.5f)
+		         .AddRelativePosition(-0.5f, -0.5f)
 	             .AddPosition(new Vector2(0.0f, 0.0f))
 		         .AddChild(parent)
 	             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.Missile, component.homeMissileVelocity, CollisionTypes.Player)
 		         .AddResource(Resource.Weapon));
+		}
+		if (component.hasSecondaryMissiles) {
+			Entity leftWeapon = _pool.CreateEntity()
+				.AddRelativePosition(-0.5f, 0.5f)
+				.AddPosition(new Vector2(0.0f, 0.0f))
+				.AddChild(parent);
+			leftWeapon.isSecondaryWeapon = true;
+
+			Entity rightWeapon = _pool.CreateEntity()
+				.AddRelativePosition(0.5f, 0.5f)
+				.AddPosition(new Vector2(0.0f, 0.0f))
+				.AddChild(parent);
+			rightWeapon.isSecondaryWeapon = true;
+
+			children.Add(leftWeapon);
+			children.Add(rightWeapon);
 		}
 
 		addNonRemovable(children);
