@@ -1,19 +1,19 @@
 ﻿<level version="1">
 	<enemy>
 		<wave value="6">
-			<wave count="3" x="3" y="9" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
+			<wave count="3" x="5" y="9" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
 		</wave>
 		<wave value="7">
-			<wave count="3" x="3" y="10" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
+			<wave count="3" x="5" y="10" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
 		</wave>
 		<wave value="8">
-			<wave count="3" x="3" y="11" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
+			<wave count="3" x="5" y="11" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
 		</wave>
 		<wave value="9">
-			<wave count="3" x="3" y="12" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
+			<wave count="3" x="5" y="12" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
 		</wave>
 		<wave value="10">
-			<wave count="3" x="3" y="13" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
+			<wave count="3" x="5" y="13" offset="0.2" speed="6.0" type="0" health="20" path="1"/>
 		</wave>
 		
 		<wave value="12">

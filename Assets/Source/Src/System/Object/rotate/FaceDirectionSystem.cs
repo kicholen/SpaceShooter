@@ -7,7 +7,7 @@ public class FaceDirectionSystem : IExecuteSystem, ISetPool {
 	Group _group;
 	Group _time;
 
-	const float ROT_AMPLIFICATION = 10.0f;
+	const float ROT_AMPLIFICATION = 4.0f;
 
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Velocity, Matcher.FaceDirection, Matcher.GameObject));

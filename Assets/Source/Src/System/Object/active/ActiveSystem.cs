@@ -26,7 +26,7 @@ public class ActiveSystem : IExecuteSystem, ISetPool {
 		float width = 0.0f;
 		float height = 0.0f;
 		Vector3 position = camera.transform.position;
-		float size = camera.orthographicSize;
+		float size = camera.orthographicSize * 2.0f;
 		float aspect = camera.aspect;
 		if (camera.aspect < 1.0f) {
 			height = size;
