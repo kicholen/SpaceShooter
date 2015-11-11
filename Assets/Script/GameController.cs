@@ -95,6 +95,7 @@ public class GameController : MonoBehaviour {
 				.Add(pool.CreateCameraShakeOnDeathSystem())
 				.Add(pool.CreateParticlesOnDeathSystem())
 				.Add(pool.CreateSoundOnDeathSystem())
+				.Add(pool.CreateExplosionOnDeathSystem())
 
 				// Particle
 				.Add(pool.CreateParticleSpawnSystem())

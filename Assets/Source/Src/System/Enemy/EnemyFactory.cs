@@ -46,7 +46,7 @@ using UnityEngine;
 			.AddCollision(CollisionTypes.Enemy)
 			.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed)
 			.AddCameraShakeOnDeath(1)
-			.AddParticlesOnDeath(1)
+			.AddExplosionOnDeath(1.0f, Resource.Explosion)
 			.AddResource(Resource.Enemy);
 		e.isNonRemovable = true;
 		e.isActive = true;
