@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System;
 
-public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
+public class CreateLevelSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.CreateLevel.OnEntityAdded(); } }
 
 	Pool _pool;
@@ -16,15 +16,10 @@ public class CreateLevelSystem : IReactiveSystem, IInitializeSystem, ISetPool {
 		_players = _pool.GetGroup(Matcher.Player);
 		_cameras = _pool.GetGroup(Matcher.Camera);
 	}
-
-	public void Initialize() {
-		_pool.CreateEntity()
-			//.AddCreateLevel(999, "/Resources/");
-			.AddCreateLevel(101, "/Resources/");
-	}
 	
 	public void Execute(List<Entity> entities) {
 		Entity e = entities.SingleEntity();
+		e.isDestroyEntity = true;
 
 		CreateLevelComponent createLevel = e.createLevel;
 		XmlNode node = Utils.LoadXml(createLevel.level.ToString());

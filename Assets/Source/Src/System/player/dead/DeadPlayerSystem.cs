@@ -11,16 +11,5 @@ public class DeadPlayerSystem : IReactiveSystem, ISetPool {
 	}
 
 	public void Execute(List<Entity> entities) {
-		foreach (Entity e in entities) {
-			if (e.isDestroyEntity) {
-				createRestartEntity();
-				e.isDestroyEntity = false;
-			}
-		}
-	}
-
-	void createRestartEntity() {
-		_pool.CreateEntity()
-			.isRestartGame = true;
 	}
 }

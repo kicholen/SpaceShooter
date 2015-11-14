@@ -63,14 +63,14 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 	void normalGameSpeed() {
 		if (_slowGame.count > 0) {
 			_slowGame.GetSingleEntity()
-				.isDestroyEntity = true;
+			.isDestroyEntity = true;
 		}
 	}
 
 	void slowGameSpeed() {
 		if (_slowGame.count == 0) {
 			_pool.CreateEntity()
-				.AddSlowGame(0.3f);
+			.AddSlowGame(0.3f);
 		}
 	}
 }

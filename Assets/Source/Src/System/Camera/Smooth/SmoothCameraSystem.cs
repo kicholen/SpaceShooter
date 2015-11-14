@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class SmoothCameraSystem : IExecuteSystem, ISetPool {
 	Group _group;
-	Vector3 temp = new Vector3();
+	Vector3 temp;
+
 	const float LERP_FACTOR = 0.1f;
 
 	public void SetPool(Pool pool) {

@@ -54,8 +54,11 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		if (Input.GetKeyDown(KeyCode.R)) {
 			restart();
 		}
-		if (Input.GetKeyDown(KeyCode.E)) {
+		if (Input.GetKeyDown(KeyCode.Z)) {
 			clearPersistentFolder();
+		}
+		if (Input.GetKeyDown(KeyCode.E)) {
+			endGame();
 		}
 	}
 	
@@ -137,7 +140,7 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 
 	void restart() {
 		_pool.CreateEntity()
-			.isRestartGame = true;
+			.AddStartGame(1);
 	}
 
 	void clearPersistentFolder() {
@@ -147,5 +150,10 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		if (File.Exists(Application.persistentDataPath + "/SettingsModelComponent.xml")) {
 			File.Delete(Application.persistentDataPath + "/SettingsModelComponent.xml");
 		}
+	}
+
+	void endGame() {
+		_pool.CreateEntity()
+			.isEndGame = true;
 	}
 }

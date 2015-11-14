@@ -26,14 +26,16 @@ public class WeaponSystem : IReactiveSystem, ISetPool {
 				}
 			}
 			else {
-				e.RemoveMissileSpawner();
+				if (e.hasMissileSpawner) {
+					e.RemoveMissileSpawner();
 
-				if (component.hasSecondaryMissiles) {
-					List<Entity> children = e.parent.children;
-					for (int i = 0; i < children.Count; i++) {
-						Entity child = children[i];
-						if (child.isSecondaryWeapon) {
-							child.RemoveMissileSpawner();
+					if (component.hasSecondaryMissiles) {
+						List<Entity> children = e.parent.children;
+						for (int i = 0; i < children.Count; i++) {
+							Entity child = children[i];
+							if (child.isSecondaryWeapon) {
+								child.RemoveMissileSpawner();
+							}
 						}
 					}
 				}
