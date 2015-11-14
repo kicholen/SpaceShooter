@@ -34,8 +34,8 @@ public class EndGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool {
 		foreach(Entity e in _cameras.GetEntities()) {
 			if (e.hasSmoothCamera) {
 				e.AddStaticCamera(e.smoothCamera.offset)
-					.RemoveVelocity()
-					.RemoveSmoothCamera();
+				.RemoveVelocity()
+				.RemoveSmoothCamera();
 			}
 		}
 	}

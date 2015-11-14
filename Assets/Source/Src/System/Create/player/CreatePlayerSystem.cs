@@ -26,13 +26,13 @@ public class CreatePlayerSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 	void createPlayer(PlayerModelComponent playerModel) {
 		Entity player = _pool.CreateEntity()
 			.AddPlayer(playerModel.name)
-				.AddPosition(new Vector2(0.0f, 0.0f))
-				.AddVelocity(new Vector2(0.0f, 0.0f))
-				.AddVelocityLimit(playerModel.maxVelocity)
-				.AddCollision(CollisionTypes.Player)
-				.AddHealth(playerModel.health)
-				.AddResource(Resource.Player);
-		player.isMoveWithCamera = true;
+			.AddPosition(new Vector2(0.0f, 0.0f))
+			.AddVelocity(new Vector2(0.0f, 0.0f))
+			.AddVelocityLimit(playerModel.maxVelocity)
+			.AddCollision(CollisionTypes.Player)
+			.AddHealth(playerModel.health)
+			.AddResource(Resource.Player)
+			.IsMoveWithCamera(true);
 		
 		player.AddParent(getPlayerChildren(player, playerModel));
 	}

@@ -78,9 +78,9 @@ public class GameService : IGameService {
 				.Add(pool.CreateLaserSpawnerSystem())
 				.Add(pool.CreateLaserSystem())
 
-				.Add(pool.CreateRemoveOutOfViewGOSystem())
 				// Physics not so much
 				.Add(pool.CreateSnapPositionSystem())
+				.Add(pool.CreateRemoveOutOfViewGOSystem())
 				.Add(pool.CreateFaceDirectionSystem())
 				.Add(pool.CreateActiveSystem())
 
@@ -116,7 +116,7 @@ public class GameService : IGameService {
 			// Camera
 			.Add(pool.CreateRegularCameraSystem())
 			.Add(pool.CreateSmoothCameraSystem())
-				.Add(pool.CreateCameraShakeSystem())
+			.Add(pool.CreateCameraShakeSystem())
 			
 			// Stats
 			.Add(pool.CreateGameStatsSystem())
