@@ -8,9 +8,9 @@ public class ClearGamePassiveSystem {
 	Group _bonusSpawners;
 	Group _homeMissileSpawners;
 	Group _waveSpawners;
-	Group _bonuses;
 	Group _cameraShakes;
 	Group _gameStats;
+	Group _input;
 
 	public void SetPool(Pool pool) {
 		_resources = pool.GetGroup(Matcher.Resource);
@@ -18,8 +18,8 @@ public class ClearGamePassiveSystem {
 		_homeMissileSpawners = pool.GetGroup(Matcher.HomeMissileSpawner);
 		_waveSpawners = pool.GetGroup(Matcher.WaveSpawner);
 		_cameraShakes = pool.GetGroup(Matcher.CameraShake);
-		_bonuses = pool.GetGroup(Matcher.BonusModel);
 		_gameStats = pool.GetGroup(Matcher.GameStats);
+		_input = pool.GetGroup(Matcher.Input);
 	}
 	
 	protected void clearEnemySpawners() {
@@ -50,14 +50,6 @@ public class ClearGamePassiveSystem {
 		}
 	}
 	
-	protected void clearBonuses() {
-		foreach (Entity e in _bonuses.GetEntities()) {
-			if (!e.hasChild) {
-				e.isDestroyEntity = true;
-			}
-		}
-	}
-	
 	protected void clearCameraShakes() {
 		foreach (Entity e in _cameraShakes.GetEntities()) {
 			if (!e.hasChild) {
@@ -69,6 +61,12 @@ public class ClearGamePassiveSystem {
 	protected void clearGameStats() {
 		foreach (Entity e in _gameStats.GetEntities()) {
 			e.ReplaceGameStats(0, 0, 0);
+		}
+	}
+
+	protected void setInput(bool enable) {
+		foreach (Entity e in _input.GetEntities()) {
+			e.input.isInputBlocked = !enable;
 		}
 	}
 }

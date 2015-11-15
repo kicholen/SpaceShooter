@@ -43,8 +43,20 @@ public class CreateCameraSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 				.ReplacePosition(new Vector2(playerPosition.x, playerPosition.y + camera.staticCamera.offset.y))
 				.RemoveStaticCamera();
 		}
+		else if (type == CameraTypes.Static) {
+			if (camera.hasSmoothCamera) {
+				camera.AddStaticCamera(camera.smoothCamera.offset)
+					.RemoveVelocity()
+					.RemoveSmoothCamera();
+			}
+			else if (camera.hasRegularCamera){
+				camera.AddStaticCamera(camera.regularCamera.offset)
+					.RemoveVelocity()
+					.RemoveRegularCamera();
+			}
+		}
 		else {
-			camera.AddRegularCamera(e.staticCamera.offset)
+			camera.AddRegularCamera(camera.staticCamera.offset)
 				.RemoveVelocity()
 				.RemoveStaticCamera();
 		}

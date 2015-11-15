@@ -6,38 +6,31 @@ public class EndGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool {
 
 	Group _createLevels;
 	Group _players;
-	Group _cameras;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		base.SetPool(pool);
 		_createLevels = pool.GetGroup(Matcher.CreateLevel);
 		_players = pool.GetGroup(Matcher.Player);
-		_cameras = pool.GetGroup(Matcher.SmoothCamera);
 	}
 	
 	public void Execute(List<Entity> entities) {
 		entities[0].isDestroyEntity = true;
-		restartCamera();
+		setCamera();
 		clearLevel();
 		clearGameObjects();
 		clearEnemySpawners();
 		clearHomeMissileSpawners();
 		clearWaveSpawners();
-		clearBonuses();
 		clearCameraShakes();
 		clearGameStats();
 		clearPlayer();
+		setInput(false);
 	}
 	
-	void restartCamera() {
-		foreach(Entity e in _cameras.GetEntities()) {
-			if (e.hasSmoothCamera) {
-				e.AddStaticCamera(e.smoothCamera.offset)
-				.RemoveVelocity()
-				.RemoveSmoothCamera();
-			}
-		}
+	void setCamera() {
+		_pool.CreateEntity()
+			.AddCreateCamera(CameraTypes.Static);
 	}
 	
 	void clearLevel() {

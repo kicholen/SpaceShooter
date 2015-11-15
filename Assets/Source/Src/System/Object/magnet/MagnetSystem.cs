@@ -11,12 +11,12 @@ public class MagnetSystem : IExecuteSystem, ISetPool {
 	public void Execute() {
 		foreach (Entity e in _group.GetEntities()) {
 			Entity target = e.followTarget.target;
-			if (target != null) {
+			if (target != null && target.hasPosition) {
 				Vector2 targetPosition = target.position.pos;
 				MagnetComponent magnetComponent = e.magnet;
 				Vector2 position = e.position.pos;
 
-				if (isPointInCircle(targetPosition.x, targetPosition.y, magnetComponent.radius, position.x, position.y)) { // todo it's calculating all, view seperation in quads?
+				if (isPointInCircle(targetPosition.x, targetPosition.y, magnetComponent.radius, position.x, position.y)) {
 					VelocityComponent velocity = e.velocity;
 					velocity.vel.Set((targetPosition.x - position.x) * 5.0f, (targetPosition.y - position.y) * 5.0f);
 				}

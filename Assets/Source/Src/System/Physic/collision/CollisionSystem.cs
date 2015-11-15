@@ -37,9 +37,6 @@ public class CollisionSystem : IExecuteSystem, ISetPool {
 		if (damage > 0) {
 			e.AddDamage(damage);
 		}
-		else {
-			//throw new Exception("Sth is fucked up, and is unnecessary calculating damage");
-		}
 	}
 
 	int getDamageDone(Queue<string> queue, int health) {

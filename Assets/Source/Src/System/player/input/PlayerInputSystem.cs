@@ -21,6 +21,9 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 	}
 	
 	void updatePlayer(InputComponent component) {
+		if (component.isInputBlocked) {
+			return;
+		}
 		bool isDown = component.isDown;
 		foreach (Entity player in _players.GetEntities()) {
 			if (isDown) {

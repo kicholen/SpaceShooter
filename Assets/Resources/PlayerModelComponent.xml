@@ -2,7 +2,7 @@
 <PlayerModelComponent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <name>Default</name>
   <maxVelocity>5</maxVelocity>
-  <health>5000</health>
+  <health>50</health>
   <hasLaser>false</hasLaser>
   <laserDamage>0</laserDamage>
   <hasMissile>true</hasMissile>

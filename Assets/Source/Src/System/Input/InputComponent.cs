@@ -5,4 +5,5 @@ public class InputComponent : IComponent {
 	public float y;
 
 	public bool isDown;
+	public bool isInputBlocked;
 }

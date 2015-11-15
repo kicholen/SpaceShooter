@@ -32,6 +32,6 @@ public class ProcessInputSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 
 	void createEntity() {
 		_pool.CreateEntity()
-			.AddInput(temp.x, temp.y, false);
+			.AddInput(temp.x, temp.y, false, true);
 	}
 }

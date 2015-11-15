@@ -32,6 +32,7 @@ public class CreatePlayerSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			.AddCollision(CollisionTypes.Player)
 			.AddHealth(playerModel.health)
 			.AddResource(Resource.Player)
+			.AddExplosionOnDeath(1.0f, Resource.Explosion)
 			.IsMoveWithCamera(true);
 		
 		player.AddParent(getPlayerChildren(player, playerModel));

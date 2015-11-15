@@ -28,11 +28,11 @@ public class StartGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool
 		clearEnemySpawners();
 		clearHomeMissileSpawners();
 		clearWaveSpawners();
-		clearBonuses();
 		clearCameraShakes();
 		clearGameStats();
 		
 		createPlayer();
+		setInput(true);
 	}
 	
 	void setCamera() {
