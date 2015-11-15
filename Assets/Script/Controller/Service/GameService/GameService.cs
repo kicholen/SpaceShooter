@@ -2,18 +2,36 @@
 using Entitas.Unity.VisualDebugging;
 
 public class GameService : IGameService {
-    Systems _systems;
+    Systems systems;
+	Pool pool;
+	Controller controller;
 
-	public GameService() {
-		_systems = CreateSystems(Pools.pool);
-        _systems.Initialize();
+	public GameService(Pool pool, Controller controller) {
+		this.pool = pool;
+		this.controller = controller;
+		systems = CreateSystems();
+	}
+
+	public void Init() {
+		systems.Initialize();
+		controller.Services.Updateables.Add(this);
 	}
 
 	public void Update () {
-        _systems.Execute();
+		systems.Execute();
 	}
 
-    public Systems CreateSystems(Pool pool) {
+	public void StartGame(int level) {
+		pool.CreateEntity()
+			.AddStartGame(level);
+	}
+
+	public void EndGame() {
+		pool.CreateEntity()
+			.IsEndGame(true);
+	}
+
+    public Systems CreateSystems() {
         #if (UNITY_EDITOR)
         return new DebugSystems()
 			.Add(pool.CreateTestSystem())
@@ -25,13 +43,12 @@ public class GameService : IGameService {
 				.Add(pool.CreateDifficultyControllerSystem())
 
 	            // Initialize
+				.Add(pool.CreateCreateBonusSystem())
 				.Add(pool.CreateCreatePathSystem())
 				.Add(pool.CreateCreateDifficultySystem())
 				.Add(pool.CreateCreateSettingsSystem())
 	            .Add(pool.CreateCreatePlayerSystem())
-				.Add(pool.CreateCreateEnemySystem())
 				.Add(pool.CreateWeaponSystem())
-				.Add(pool.CreateCreateStaticElementsSystem())
 				.Add(pool.CreateCreateCameraSystem())
 				.Add(pool.CreateCreateLevelSystem())
 

@@ -69,8 +69,4 @@
 		</wave>
 	</enemy>
 	<dimensions x="-0.5" y="-2" width="1" height="100" />
-	<bonuses>
-		<stars type="0" minAmount="1" maxAmount="5" rate="0.9" res="0_Star"/>
-		<speed type="1" minAmount="1" maxAmount="1" rate="0.1" res="0_Bonus"/>
-	</bonuses>
 </level>

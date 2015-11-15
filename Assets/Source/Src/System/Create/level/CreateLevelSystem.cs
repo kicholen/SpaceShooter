@@ -48,21 +48,5 @@ public class CreateLevelSystem : IReactiveSystem, ISetPool {
 			float screenHeight = camera.orthographicSize * 2.0f;
 			player.AddSnapPosition(x, y, screenWidth, screenHeight, true);
 		}
-
-		createBonuses(sizeNode.NextSibling);
-	}
-
-	void createBonuses(XmlNode node) {
-		if (node != null) {
-			XmlNode bonus = node.FirstChild;
-
-			while (bonus != null) {
-				XmlAttributeCollection attributes = bonus.Attributes;
-				_pool.CreateEntity()
-					.AddBonusModel(1 << Convert.ToInt16(attributes[0].Value), Convert.ToInt16(attributes[1].Value), Convert.ToInt16(attributes[2].Value), (float)Convert.ToDouble(attributes[3].Value), attributes[4].Value);
-
-				bonus = bonus.NextSibling;
-			}
-		}
 	}
 }
