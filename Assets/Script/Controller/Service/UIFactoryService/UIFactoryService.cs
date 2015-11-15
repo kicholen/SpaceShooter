@@ -28,5 +28,23 @@ public class UIFactoryService : IUIFactoryService
 		}
 		button.onClick.AddListener(action);
 	}
+
+	public void AddButton(GameObject go, UnityAction action) {
+		Button button = go.GetComponent<Button>();
+		if (button == null) {
+			button = go.AddComponent<Button>();
+		}
+		button.onClick.AddListener(action);
+	}
+
+	public void AddText(Transform transform, string path, string lockit) {
+		GameObject go = transform.FindChild(path).gameObject;
+		Text text = go.GetComponent<Text>();
+		if (text == null) {
+			text = go.AddComponent<Text>();
+		}
+		text.text = lockit;
+	}
+	
 }
 

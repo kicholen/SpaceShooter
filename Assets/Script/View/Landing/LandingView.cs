@@ -3,14 +3,14 @@
 public class LandingView : IView {
 	
 	EventService eventService;
-	ILoadService loadService;
+	IViewService viewService;
 	GameObject go;
 	
 	public GameObject Go { get { return go; } }
 	
-	public LandingView(IUIFactoryService uiFactoryService, EventService eventService, ILoadService loadService) {
+	public LandingView(IUIFactoryService uiFactoryService, EventService eventService, IViewService viewService) {
 		this.eventService = eventService;
-		this.loadService = loadService;
+		this.viewService = viewService;
 		go = uiFactoryService.CreatePrefab("View/LandingView");
 		uiFactoryService.AddButton(go.transform, "PlayButton", onPlayClicked);
 	}
@@ -42,6 +42,6 @@ public class LandingView : IView {
 	}
 
 	void onPlayClicked() {
-		loadService.ExecutePlayGame(1);
+		viewService.SetView(ViewTypes.LEVEL);
 	}
 }

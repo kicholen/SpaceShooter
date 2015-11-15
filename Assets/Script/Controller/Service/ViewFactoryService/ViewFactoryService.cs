@@ -19,11 +19,14 @@ public class ViewFactoryService : IViewFactoryService {
 			case ViewTypes.GAME:
 				view = new GameView(uiFactoryService, controller.Services.GameService, eventService);
 			break;
+			case ViewTypes.LEVEL:
+				view = new LevelView(uiFactoryService, eventService, controller.Services.LoadService);
+			break;
 			case ViewTypes.LOAD:
 				view = new LoadView(uiFactoryService, eventService);
 			break;
 			case ViewTypes.LANDING:
-				view = new LandingView(uiFactoryService, eventService, controller.Services.LoadService);
+				view = new LandingView(uiFactoryService, eventService, controller.Services.ViewService);
 			break;
 		}
 

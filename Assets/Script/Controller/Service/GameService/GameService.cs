@@ -36,6 +36,14 @@ public class GameService : IGameService {
 			.AddSlowGame(1.0f);
 	}
 
+	public void InitPool(string resource, int count) {
+		for (int i = 0; i < count; i++) {
+			pool.CreateEntity()
+				.AddResource(resource)
+				.IsDestroyEntity(true);
+		}
+	}
+
 	public void EndGame() {
 		pool.CreateEntity()
 			.IsEndGame(true);
