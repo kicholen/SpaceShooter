@@ -6,6 +6,9 @@ public interface IServices : IUpdateable {
 	Pool Pool { get;}
 	List<IUpdateable> Updateables { get; }
 	ILoadService LoadService { get; }
-	IGameService GameService { get; }
 	EventService EventService { get; }
+	IGameService GameService { get; }
+	IViewService ViewService { get; }
+	IViewFactoryService ViewFactoryService { get; }
+	IUIFactoryService UIFactoryService { get; }
 }

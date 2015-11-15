@@ -7,11 +7,13 @@ public class DeadPlayerSystem : IReactiveSystem, ISetPool {
 	Pool _pool;
 	Group _time;
 	Group _input;
+	Group _eventService;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
 		_time = pool.GetGroup(Matcher.Time);
 		_input = pool.GetGroup(Matcher.Input);
+		_eventService = pool.GetGroup(Matcher.EventService);
 	}
 
 	public void Execute(List<Entity> entities) {
@@ -22,5 +24,7 @@ public class DeadPlayerSystem : IReactiveSystem, ISetPool {
 
 		_pool.CreateEntity()
 			.AddCreateCamera(CameraTypes.Static);
+
+		_eventService.GetSingleEntity().eventService.dispatcher.Dispatch<GameEndedEvent>(new GameEndedEvent(true));
 	}
 }

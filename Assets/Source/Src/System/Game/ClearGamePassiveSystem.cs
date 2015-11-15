@@ -12,7 +12,8 @@ public class ClearGamePassiveSystem {
 	Group _gameStats;
 	Group _input;
 
-	public void SetPool(Pool pool) {
+	public void Init(Pool pool) {
+		_pool = pool;
 		_resources = pool.GetGroup(Matcher.Resource);
 		_enemySpawners = pool.GetGroup(Matcher.EnemySpawner);
 		_homeMissileSpawners = pool.GetGroup(Matcher.HomeMissileSpawner);

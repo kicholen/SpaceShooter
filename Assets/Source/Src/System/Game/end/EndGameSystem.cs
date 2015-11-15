@@ -6,12 +6,13 @@ public class EndGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool {
 
 	Group _createLevels;
 	Group _players;
+	Group _pause;
 
 	public void SetPool(Pool pool) {
-		_pool = pool;
-		base.SetPool(pool);
+		Init(pool);
 		_createLevels = pool.GetGroup(Matcher.CreateLevel);
 		_players = pool.GetGroup(Matcher.Player);
+		_pause = pool.GetGroup(Matcher.PauseGame);
 	}
 	
 	public void Execute(List<Entity> entities) {
@@ -25,6 +26,7 @@ public class EndGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool {
 		clearCameraShakes();
 		clearGameStats();
 		clearPlayer();
+		clearPause();
 		setInput(false);
 	}
 	
@@ -41,6 +43,12 @@ public class EndGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool {
 
 	void clearPlayer() {
 		foreach(Entity e in _players.GetEntities()) {
+			e.isDestroyEntity = true;
+		}
+	}
+
+	void clearPause() {
+		foreach(Entity e in _pause.GetEntities()) {
 			e.isDestroyEntity = true;
 		}
 	}

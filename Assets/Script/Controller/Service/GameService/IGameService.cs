@@ -1,8 +1,8 @@
 using Entitas;
 
 public interface IGameService : IUpdateable {
-	Systems CreateSystems();
 	void Init();
-	void StartGame(int level);
+	void InitGame(int level);
+	void PlayGame();
 	void EndGame();
 }

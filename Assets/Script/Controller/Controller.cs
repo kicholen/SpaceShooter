@@ -11,7 +11,7 @@ public class Controller : MonoBehaviour {
 
 	void Start () {
 		services = new Services(this);
-		(services as Services).TestInit();
+		services.LoadService.ExecuteInit();
 	}
 
 	void Update () {

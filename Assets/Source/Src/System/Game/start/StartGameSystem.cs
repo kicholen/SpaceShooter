@@ -9,8 +9,7 @@ public class StartGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool
 	Group _cameras;
 	
 	public void SetPool(Pool pool) {
-		_pool = pool;
-		base.SetPool(pool);
+		Init(pool);
 		_createLevels = pool.GetGroup(Matcher.CreateLevel);
 		_cameras = pool.GetGroup(Matcher.SmoothCamera);
 	}
@@ -38,6 +37,15 @@ public class StartGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool
 	void setCamera() {
 		foreach (Entity e in _cameras.GetEntities()) {
 			e.ReplacePosition(new Vector2(0.0f, 0.0f));
+			if (e.hasSmoothCamera) {
+				e.smoothCamera.offset = new Vector3(0.0f, 0.0f, 0.0f);
+			}
+			else if (e.hasRegularCamera) {
+				e.regularCamera.offset = new Vector3(0.0f, 0.0f, 0.0f);
+			}
+			else if (e.hasStaticCamera) {
+				e.staticCamera.offset = new Vector3(0.0f, 0.0f, 0.0f);
+			}
 		}
 		_pool.CreateEntity()
 			.AddCreateCamera(CameraTypes.Smooth);

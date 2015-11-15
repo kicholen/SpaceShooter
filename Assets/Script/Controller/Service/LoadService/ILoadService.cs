@@ -1,3 +1,4 @@
-public interface ILoadService : IUpdateable {
-
+public interface ILoadService {
+	void ExecuteInit();
+	void ExecutePlayGame(int level);
 }

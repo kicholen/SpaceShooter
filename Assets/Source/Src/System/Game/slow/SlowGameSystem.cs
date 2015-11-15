@@ -4,12 +4,14 @@ using System.Collections.Generic;
 public class SlowGameSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.SlowGame.OnEntityAddedOrRemoved(); } }
 	
-	Group _time;
-	
+	Group time;
+	Group eventService;
+
 	const float EPSILON = 0.005f;
 	
 	public void SetPool(Pool pool) {
-		_time = pool.GetGroup(Matcher.Time);
+		time = pool.GetGroup(Matcher.Time);
+		eventService = pool.GetGroup(Matcher.EventService);
 	}
 	
 	public void Execute(List<Entity> entities) {
@@ -18,10 +20,11 @@ public class SlowGameSystem : IReactiveSystem, ISetPool {
 			value = entities[0].slowGame.value;
 		}
 
-		Entity time = _time.GetSingleEntity();
-		TimeComponent component = time.time;
+		Entity e = time.GetSingleEntity();
+		TimeComponent component = e.time;
 		if (!component.isPaused) {
 			component.modificator = value;
+			eventService.GetSingleEntity().eventService.dispatcher.Dispatch<GameSlowEvent>(new GameSlowEvent(value));
 		}
 	}
 }

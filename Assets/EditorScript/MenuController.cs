@@ -10,12 +10,11 @@ public class MenuController : MonoBehaviour {
 
 	public GameObject listGO;
 	Transform content;
-	List<string> paths;
 
 	void Start () {
 		listGO = Instantiate(Resources.Load<GameObject>("EditorPrefab/List")).gameObject;
 		content = listGO.transform.FindChild("Scroll View/Viewport/Content");
-		paths = getAvailablePaths();
+		getAvailablePaths();
 	}
 
 	void Update () {

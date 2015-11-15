@@ -13,7 +13,10 @@ public class GameService : IGameService {
 	}
 
 	public void Init() {
+		controller.Services.EventService.AddListener<GameEndedEvent>(onGameEnded);
 		systems.Initialize();
+		pool.CreateEntity()
+			.AddEventService(controller.Services.EventService);
 		controller.Services.Updateables.Add(this);
 	}
 
@@ -21,9 +24,16 @@ public class GameService : IGameService {
 		systems.Execute();
 	}
 
-	public void StartGame(int level) {
+	public void InitGame(int level) {
 		pool.CreateEntity()
 			.AddStartGame(level);
+	}
+
+	public void PlayGame() {
+		pool.CreateEntity()
+			.IsPauseGame(true);
+		pool.CreateEntity()
+			.AddSlowGame(1.0f);
 	}
 
 	public void EndGame() {
@@ -31,7 +41,12 @@ public class GameService : IGameService {
 			.IsEndGame(true);
 	}
 
-    public Systems CreateSystems() {
+	void onGameEnded(GameEndedEvent e) {
+		EndGame();
+		controller.Services.ViewService.SetView(ViewTypes.LANDING);
+	}
+
+    Systems CreateSystems() {
         #if (UNITY_EDITOR)
         return new DebugSystems()
 			.Add(pool.CreateTestSystem())
