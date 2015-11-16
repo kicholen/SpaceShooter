@@ -20,7 +20,7 @@ public class ViewFactoryService : IViewFactoryService {
 				view = new GameView(uiFactoryService, controller.Services.GameService, eventService);
 			break;
 			case ViewTypes.LEVEL:
-				view = new LevelView(uiFactoryService, eventService, controller.Services.LoadService);
+				view = new LevelView(controller.Services.Pool, uiFactoryService, eventService, controller.Services.LoadService);
 			break;
 			case ViewTypes.LOAD:
 				view = new LoadView(uiFactoryService, eventService);

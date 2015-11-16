@@ -71,12 +71,13 @@ public static class ComponentIds {
     public const int StaticCamera = 69;
     public const int Test = 70;
     public const int Time = 71;
-    public const int Velocity = 72;
-    public const int VelocityLimit = 73;
-    public const int WaveSpawner = 74;
-    public const int Weapon = 75;
+    public const int Tween = 72;
+    public const int Velocity = 73;
+    public const int VelocityLimit = 74;
+    public const int WaveSpawner = 75;
+    public const int Weapon = 76;
 
-    public const int TotalComponents = 76;
+    public const int TotalComponents = 77;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -151,6 +152,7 @@ public static class ComponentIds {
         "StaticCamera",
         "Test",
         "Time",
+        "Tween",
         "Velocity",
         "VelocityLimit",
         "WaveSpawner",
@@ -230,6 +232,7 @@ public static class ComponentIds {
         typeof(StaticCameraComponent),
         typeof(TestComponent),
         typeof(TimeComponent),
+        typeof(TweenComponent),
         typeof(VelocityComponent),
         typeof(VelocityLimitComponent),
         typeof(WaveSpawnerComponent),

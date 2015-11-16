@@ -143,6 +143,10 @@ public class GameService : IGameService {
 				.Add(pool.CreateActivateBonusSystem())
 				.Add(pool.CreateSpeedBonusSystem())
 
+			// Tween
+			.Add(pool.CreateTweenSystem())
+
+			// RelativePositionGO
 			.Add(pool.CreateRelativePositionSystem())
 
 			// PositionGO

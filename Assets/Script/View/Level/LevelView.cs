@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using Entitas;
 
 public class LevelView : IView {
 	
+	Pool pool;
 	EventService eventService;
 	IUIFactoryService uiFactoryService;
 	ILoadService loadService;
@@ -14,7 +16,8 @@ public class LevelView : IView {
 
 	public GameObject Go { get { return go; } }
 	
-	public LevelView(IUIFactoryService uiFactoryService, EventService eventService, ILoadService loadService) {
+	public LevelView(Pool pool, IUIFactoryService uiFactoryService, EventService eventService, ILoadService loadService) {
+		this.pool = pool;
 		this.eventService = eventService;
 		this.uiFactoryService = uiFactoryService;
 		this.loadService = loadService;
@@ -29,9 +32,15 @@ public class LevelView : IView {
 	}
 	
 	public void Show() {
-		OnShown();
+		Vector3 position = go.transform.position;
+		pool.CreateEntity()
+			.AddTween(0.0f, 2.0f, EaseTypes.Linear, position.x - 100.0f, position.x + 100.0f, 0.0f, onUpdate, OnShown);
 	}
-	
+
+	void onUpdate(float x) {
+		go.transform.position = new Vector3(x, go.transform.position.y);
+	}
+
 	public void Hide() {
 		OnHidden();
 	}
