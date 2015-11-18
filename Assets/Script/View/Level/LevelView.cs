@@ -24,7 +24,7 @@ public class LevelView : View, IView {
 		levels.Add(999);
 
 		for (int i = 0; i < levels.Count; i++) {
-			GameObject button = uiFactoryService.CreatePrefab("Button/SimpleButton");
+			GameObject button = uiFactoryService.CreatePrefab("Element/SimpleButton");
 			button.name = levels[i].ToString();
 			button.transform.SetParent(content, false);
 			uiFactoryService.AddText(button.transform, "Text", button.name);

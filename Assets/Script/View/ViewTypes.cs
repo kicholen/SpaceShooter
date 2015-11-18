@@ -8,6 +8,7 @@ public enum ViewTypes
 	PAUSE = 6,
 	SLOW = 7,
 	SUMMARY = 8,
-	SETTINGS = 9
+	SHIP = 9,
+	SETTINGS = 10
 }
 

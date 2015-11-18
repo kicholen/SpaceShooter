@@ -8,9 +8,14 @@ public class LandingView : View, IView {
 	: base(pool, uiFactoryService, eventService, "View/LandingView") {
 		this.viewService = viewService;
 		uiFactoryService.AddButton(go.transform, "PlayButton", onPlayClicked);
+		uiFactoryService.AddButton(go.transform, "ShipButton", onShipClicked);
 	}
 
 	void onPlayClicked() {
 		viewService.SetView(ViewTypes.LEVEL);
+	}
+
+	void onShipClicked() {
+		viewService.SetView(ViewTypes.SHIP);
 	}
 }
