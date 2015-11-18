@@ -1,5 +1,4 @@
 using Entitas;
-using UnityEngine;
 
 public class TweenSystem : IExecuteSystem, ISetPool {
 	Group _group;
@@ -18,12 +17,13 @@ public class TweenSystem : IExecuteSystem, ISetPool {
 			tween.time += deltaTime;
 			tween.current = ease(tween.ease, tween.time, tween.from, tween.to, tween.duration);
 			
-			if (tween.onUpdate != null) {
-				tween.onUpdate(tween.current);
-			}
 			if (tween.time > tween.duration) {
+				tween.onUpdate(tween.to);
 				tween.onComplete();
 				e.isDestroyEntity = true;
+			}
+			else if (tween.onUpdate != null) {
+				tween.onUpdate(tween.current);
 			}
 		}
 	}
@@ -39,6 +39,6 @@ public class TweenSystem : IExecuteSystem, ISetPool {
 	}
 
 	float easeLinear(float time, float from, float to, float duration) {
-		return  (to - from) * time / duration + from;
+		return (to - from) * time / duration + from;
 	}
 }

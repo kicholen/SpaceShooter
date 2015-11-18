@@ -26,19 +26,21 @@ public class ViewService : IViewService {
 		}
 		else {
 			currentView = viewFactoryService.CreateView(nextViewType);
-			currentView.SetParent(canvas.transform);
-			currentView.Show();
+			showCurrentView();
 		}
 	}
 
 	void onViewShown(ViewShownEvent e) {
-		// unblock View safety?
 	}
 
 	void onViewHidden(ViewHiddenEvent e) {
 		currentView.Destroy();
 
 		currentView = nextView;
+		showCurrentView();
+	}
+
+	void showCurrentView() {
 		currentView.SetParent(canvas.transform);
 		currentView.Show();
 	}
