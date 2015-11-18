@@ -12,19 +12,21 @@ namespace Entitas {
             _timeComponentPool.Clear();
         }
 
-        public Entity AddTime(float newDeltaTime, float newTime, float newModificator, bool newIsPaused) {
+        public Entity AddTime(float newDeltaTime, float newGameDeltaTime, float newTime, float newModificator, bool newIsPaused) {
             var component = _timeComponentPool.Count > 0 ? _timeComponentPool.Pop() : new TimeComponent();
             component.deltaTime = newDeltaTime;
+            component.gameDeltaTime = newGameDeltaTime;
             component.time = newTime;
             component.modificator = newModificator;
             component.isPaused = newIsPaused;
             return AddComponent(ComponentIds.Time, component);
         }
 
-        public Entity ReplaceTime(float newDeltaTime, float newTime, float newModificator, bool newIsPaused) {
+        public Entity ReplaceTime(float newDeltaTime, float newGameDeltaTime, float newTime, float newModificator, bool newIsPaused) {
             var previousComponent = hasTime ? time : null;
             var component = _timeComponentPool.Count > 0 ? _timeComponentPool.Pop() : new TimeComponent();
             component.deltaTime = newDeltaTime;
+            component.gameDeltaTime = newGameDeltaTime;
             component.time = newTime;
             component.modificator = newModificator;
             component.isPaused = newIsPaused;

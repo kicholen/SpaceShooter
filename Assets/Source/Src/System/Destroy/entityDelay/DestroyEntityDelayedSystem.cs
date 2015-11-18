@@ -10,7 +10,7 @@ public class DestroyEntityDelayedSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
+		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 		foreach (Entity e in _group.GetEntities()) {
 			DestroyEntityDelayedComponent component = e.destroyEntityDelayed;
 			component.time -= deltaTime;

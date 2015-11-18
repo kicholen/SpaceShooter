@@ -3,60 +3,19 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using Entitas;
 
-public class LevelView : IView {
+public class LevelView : View, IView {
 	
-	Pool pool;
-	EventService eventService;
-	IUIFactoryService uiFactoryService;
 	ILoadService loadService;
 
-	GameObject go;
 	Transform content;
 	List<int> levels = new List<int>();
-
-	public GameObject Go { get { return go; } }
 	
-	public LevelView(Pool pool, IUIFactoryService uiFactoryService, EventService eventService, ILoadService loadService) {
-		this.pool = pool;
-		this.eventService = eventService;
-		this.uiFactoryService = uiFactoryService;
+	public LevelView(Pool pool, IUIFactoryService uiFactoryService, EventService eventService, ILoadService loadService) 
+	: base(pool, uiFactoryService, eventService, "View/LevelView") {
 		this.loadService = loadService;
-		go = uiFactoryService.CreatePrefab("View/LevelView");
 		content = go.transform.FindChild("Viewport/Content");
 
 		createLevels();
-	}
-	
-	public void SetParent(Transform parent) {
-		go.transform.SetParent(parent, false);
-	}
-	
-	public void Show() {
-		Vector3 position = go.transform.position;
-		pool.CreateEntity()
-			.AddTween(0.0f, 2.0f, EaseTypes.Linear, position.x - 100.0f, position.x + 100.0f, 0.0f, onUpdate, OnShown);
-	}
-
-	void onUpdate(float x) {
-		go.transform.position = new Vector3(x, go.transform.position.y);
-	}
-
-	public void Hide() {
-		OnHidden();
-	}
-	
-	public void OnShown() {
-		
-		eventService.Dispatch<ViewShownEvent>(new ViewShownEvent());
-	}
-	
-	public void OnHidden() {
-		
-		eventService.Dispatch<ViewHiddenEvent>(new ViewHiddenEvent());
-	}
-	
-	public void Destroy() {
-		Object.Destroy(go);
 	}
 
 	void createLevels() {

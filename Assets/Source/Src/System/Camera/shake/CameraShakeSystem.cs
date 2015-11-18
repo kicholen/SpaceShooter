@@ -13,7 +13,7 @@ public class CameraShakeSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
+		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 		CameraComponent camera = _camera.GetSingleEntity().camera;
 		bool wasFirstOne = false;
 		foreach (Entity e in _group.GetEntities()) {

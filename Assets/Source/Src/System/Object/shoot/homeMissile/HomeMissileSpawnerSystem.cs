@@ -21,7 +21,7 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 	public void Execute() {
 		bool canSpawnPlayer = canSpawnPlayerMissile();
 		bool canSpawnEnemy = canSpawnEnemyMissile();
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
+		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 		foreach (Entity e in _missiles.GetEntities()) {
 			HomeMissileSpawnerComponent missile = e.homeMissileSpawner;
 			missile.time -= deltaTime;

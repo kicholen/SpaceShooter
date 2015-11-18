@@ -1,48 +1,25 @@
-using UnityEngine;
+using Entitas;
 
-public class GameView : IView {
+public class GameView : View, IView {
 	
-	EventService eventService;
 	IGameService gameService;
-	GameObject go;
 	
-	public GameObject Go { get { return go; } }
-	
-	public GameView(IUIFactoryService uiFactoryService, IGameService gameService, EventService eventService) {
-		this.eventService = eventService;
+	public GameView(Pool pool, IUIFactoryService uiFactoryService, IGameService gameService, EventService eventService)
+	: base(pool, uiFactoryService, eventService, "View/GameView") {
 		this.gameService = gameService;
-		go = uiFactoryService.CreatePrefab("View/GameView");
 		uiFactoryService.AddButton(go.transform, "PauseButton", onPauseClicked);
 
 		eventService.AddListener<GameSlowEvent>(onGameSlow);
 		go.SetActive(false);
 	}
 	
-	public void SetParent(Transform parent) {
-		go.transform.SetParent(parent, false);
-	}
-	
-	public void Show() {
-		OnShown();
-	}
-	
-	public void Hide() {
-		OnHidden();
-	}
-	
-	public void OnShown() {
-		
-		eventService.Dispatch<ViewShownEvent>(new ViewShownEvent());
-	}
-	
-	public void OnHidden() {
-		
-		eventService.Dispatch<ViewHiddenEvent>(new ViewHiddenEvent());
-	}
-	
-	public void Destroy() {
+	public override void Destroy() {
+		base.Destroy();
 		eventService.RemoveListener<GameSlowEvent>(onGameSlow);
-		Object.Destroy(go);
+	}
+
+	public override void Hide() {
+		OnHidden();
 	}
 
 	void onGameSlow(GameSlowEvent e) {

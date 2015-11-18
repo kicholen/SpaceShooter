@@ -1,6 +1,7 @@
-public class ViewFactoryService : IViewFactoryService {
+using Entitas;public class ViewFactoryService : IViewFactoryService {
 
 	Controller controller;
+	Pool pool;
 	EventService eventService;
 	IUIFactoryService uiFactoryService;
 
@@ -14,19 +15,19 @@ public class ViewFactoryService : IViewFactoryService {
 		IView view = null;
 		switch (type) {
 			case ViewTypes.INIT:
-				view = new InitView(uiFactoryService, eventService);
+				view = new InitView(controller.Services.Pool, uiFactoryService, eventService);
 			break;
 			case ViewTypes.GAME:
-				view = new GameView(uiFactoryService, controller.Services.GameService, eventService);
+				view = new GameView(controller.Services.Pool, uiFactoryService, controller.Services.GameService, eventService);
 			break;
 			case ViewTypes.LEVEL:
 				view = new LevelView(controller.Services.Pool, uiFactoryService, eventService, controller.Services.LoadService);
 			break;
 			case ViewTypes.LOAD:
-				view = new LoadView(uiFactoryService, eventService);
+				view = new LoadView(controller.Services.Pool, uiFactoryService, eventService);
 			break;
 			case ViewTypes.LANDING:
-				view = new LandingView(uiFactoryService, eventService, controller.Services.ViewService);
+				view = new LandingView(controller.Services.Pool, uiFactoryService, eventService, controller.Services.ViewService);
 			break;
 		}
 

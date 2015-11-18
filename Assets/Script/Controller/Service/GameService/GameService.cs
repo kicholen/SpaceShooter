@@ -32,8 +32,6 @@ public class GameService : IGameService {
 	public void PlayGame() {
 		pool.CreateEntity()
 			.IsPauseGame(true);
-		pool.CreateEntity()
-			.AddSlowGame(1.0f);
 	}
 
 	public void InitPool(string resource, int count) {
@@ -143,9 +141,6 @@ public class GameService : IGameService {
 				.Add(pool.CreateActivateBonusSystem())
 				.Add(pool.CreateSpeedBonusSystem())
 
-			// Tween
-			.Add(pool.CreateTweenSystem())
-
 			// RelativePositionGO
 			.Add(pool.CreateRelativePositionSystem())
 
@@ -174,6 +169,9 @@ public class GameService : IGameService {
 
 			.Add(pool.CreatePauseGameSystem())
 			.Add(pool.CreateEndGameSystem())
-			.Add(pool.CreateSlowGameSystem());
+			.Add(pool.CreateSlowGameSystem())
+
+			// Tween
+			.Add(pool.CreateTweenSystem());
     }
 }

@@ -15,7 +15,7 @@ public class FaceDirectionSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.deltaTime * ROT_AMPLIFICATION;
+		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime * ROT_AMPLIFICATION;
 
 		foreach (Entity e in _group.GetEntities()) {
 			Vector2 velocity = e.velocity.vel;

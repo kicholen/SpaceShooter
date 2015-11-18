@@ -36,7 +36,6 @@ public class LoadService : ILoadService {
 		phases.Enqueue(() => addViewListener());
 		phases.Enqueue(() => viewService.SetView(ViewTypes.LOAD));
 		phases.Enqueue(() => { gameService.InitGame(level); nextPhase(); });
-		phases.Enqueue(() => addViewListener());
 		if (firstGame) {
 			phases.Enqueue(() => { gameService.InitPool(Resource.Explosion, 4); nextPhase(); });
 			phases.Enqueue(() => { gameService.InitPool(Resource.MissileEnemy, 20); nextPhase(); });
@@ -46,6 +45,7 @@ public class LoadService : ILoadService {
 			phases.Enqueue(() => { gameService.InitPool(Resource.Bonus, 3); nextPhase(); });
 			firstGame = false;
 		}
+		phases.Enqueue(() => addViewListener());
 		phases.Enqueue(() => viewService.SetView(ViewTypes.GAME));
 		phases.Enqueue(() => { gameService.PlayGame(); nextPhase(); });
 

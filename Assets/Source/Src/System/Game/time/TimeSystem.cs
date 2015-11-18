@@ -7,7 +7,7 @@ public class TimeSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 
 	public void Initialize() {
 		_pool.CreateEntity()
-			.AddTime(Time.deltaTime, Time.time, 1.0f, true);
+			.AddTime(Time.deltaTime, Time.deltaTime, Time.time, 1.0f, true);
 	}
 
 	public void SetPool(Pool pool) {
@@ -18,7 +18,9 @@ public class TimeSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 	public void Execute() {
 		Entity e = _group.GetSingleEntity();
 		TimeComponent time = e.time;
-		time.deltaTime = Time.deltaTime * time.modificator;
+		float deltaTime = Time.deltaTime;
+		time.deltaTime = deltaTime;
+		time.gameDeltaTime = deltaTime * time.modificator;
 		time.time = Time.time;
 	}
 }

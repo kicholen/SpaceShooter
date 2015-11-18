@@ -39,6 +39,6 @@ public class TweenSystem : IExecuteSystem, ISetPool {
 	}
 
 	float easeLinear(float time, float from, float to, float duration) {
-		return to * time / duration + from;
+		return  (to - from) * time / duration + from;
 	}
 }

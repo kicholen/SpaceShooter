@@ -11,7 +11,7 @@ public class AlphaSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
+		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 		foreach(Entity e in _group.GetEntities()) {
 			AlphaComponent alpha = e.alpha;
 			alpha.time -= deltaTime;

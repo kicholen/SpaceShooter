@@ -14,7 +14,7 @@ public class SpeedBonusSystem : IExecuteSystem, ISetPool {
 	public void Execute() { // todo: can cause speed bugs 
 		Entity player = _player.GetSingleEntity();
 		if (player != null) {
-			float deltaTime = _time.GetSingleEntity().time.deltaTime;
+			float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 			VelocityLimitComponent limit = player.velocityLimit;
 
 			foreach (Entity e in _group.GetEntities()) {

@@ -13,7 +13,7 @@ public class SpawnMissileSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
+		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 		foreach (Entity e in _missiles.GetEntities()) {
 			MissileSpawnerComponent missile = e.missileSpawner;
 			missile.time -= deltaTime;

@@ -22,7 +22,7 @@ public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
 	
 	public void Execute() {
 		DifficultyControllerComponent difficulty = _difficulty.GetSingleEntity().difficultyController;
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
+		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 
 		foreach (Entity e in _group.GetEntities()) {
 			WaveSpawnerComponent component = e.waveSpawner;

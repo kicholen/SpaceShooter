@@ -11,10 +11,11 @@ public class PositionSystem : IExecuteSystem, ISetPool {
 	}
 
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
+		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 		foreach (Entity e in _group.GetEntities()) {
 			Vector2 velocity = e.velocity.vel;
-			e.position.pos += new Vector2(velocity.x * deltaTime, velocity.y * deltaTime);
+			velocity.Set(velocity.x * deltaTime, velocity.y * deltaTime);
+			e.position.pos += velocity;
 		}
 	}
 }

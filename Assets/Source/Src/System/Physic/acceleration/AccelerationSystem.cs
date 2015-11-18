@@ -12,7 +12,7 @@ public class AccelerationSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
+		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 		foreach (var e in _group.GetEntities()) {
 			applyAcceleration(e, deltaTime);
 		}

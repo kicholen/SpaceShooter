@@ -16,7 +16,7 @@ public class CircleMissileRotatedSpawnerSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
+		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 		foreach (Entity e in _missiles.GetEntities()) {
 			CircleMissileRotatedSpawnerComponent component = e.circleMissileRotatedSpawner;
 			component.time -= deltaTime;
