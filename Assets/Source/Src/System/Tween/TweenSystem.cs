@@ -18,7 +18,9 @@ public class TweenSystem : IExecuteSystem, ISetPool {
 			tween.current = ease(tween.ease, tween.time, tween.from, tween.to, tween.duration);
 			
 			if (tween.time > tween.duration) {
-				tween.onUpdate(tween.to);
+				if (tween.onUpdate != null) {
+					tween.onUpdate(tween.to);
+				}
 				tween.onComplete();
 				e.isDestroyEntity = true;
 			}

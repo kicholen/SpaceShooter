@@ -15,6 +15,9 @@ public class FindTargetSystem : IReactiveSystem, ISetPool {
 	
 	public void Execute(List<Entity> entities) {
 		foreach (Entity e in entities) {
+			if (!e.hasFindTarget) {
+				return;
+			}
 			FindTargetComponent component = e.findTarget;
 			if (component.targetCollisionType == CollisionTypes.Player) {
 				if (_player.count > 0) {

@@ -35,18 +35,21 @@ public class RemoveGameObjectSystem : ISystem, ISetPool, IEnsureComponents {
 
 	void addToPool(GameObjectComponent gameObjectComponent) {
 		string name = gameObjectComponent.path;
+		GameObject go = gameObjectComponent.gameObject;
+		go.transform.rotation = Quaternion.identity;
 		bool wasObjectAdded = false;
 
 		foreach (Entity e in _poolGroup.GetEntities()) {
 			if (e.poolableGO.name.Equals(name)) {
 				wasObjectAdded = true;
-				e.poolableGO.queue.Enqueue(gameObjectComponent.gameObject);
+				e.poolableGO.queue.Enqueue(go);
+				break;
 			}
 		}
 		if (!wasObjectAdded) {
 			Entity e = _pool.CreateEntity()
 				.AddPoolableGO(name, new Queue<GameObject>());
-			e.poolableGO.queue.Enqueue(gameObjectComponent.gameObject);
+			e.poolableGO.queue.Enqueue(go);
 		}
 	}
 }

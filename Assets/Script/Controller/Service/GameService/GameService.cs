@@ -43,13 +43,14 @@ public class GameService : IGameService {
 	}
 
 	public void EndGame() {
+		controller.Services.ViewService.SetView(ViewTypes.LANDING);
 		pool.CreateEntity()
 			.IsEndGame(true);
 	}
 
 	void onGameEnded(GameEndedEvent e) {
-		EndGame();
-		controller.Services.ViewService.SetView(ViewTypes.LANDING);
+		pool.CreateEntity()
+			.AddTween(0.0f, 2.0f, EaseTypes.Linear, 0.0f, 1.0f, 0.0f, null, EndGame);
 	}
 
     Systems CreateSystems() {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PathSystem : IExecuteSystem, ISetPool {
 	Group _group;
 
-	const float MIN_DISTANCE = 0.1f;
+	const float MIN_DISTANCE = 3f;
 
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Path, Matcher.GameObject, Matcher.Velocity, Matcher.VelocityLimit, Matcher.Position));
@@ -21,11 +21,15 @@ public class PathSystem : IExecuteSystem, ISetPool {
 				float speed = e.velocityLimit.maxVelocity;
 
 				VelocityComponent velocity = e.velocity;
-				velocity.vel.Set((desiredPosition.x - currentPosition.x), (desiredPosition.y - currentPosition.y));
+				Vector2 steering = new Vector2((desiredPosition.x - currentPosition.x), (desiredPosition.y - currentPosition.y));
+				steering.Normalize();
+				steering *= 1.1f;
+				velocity.vel += steering;
 				velocity.vel.Normalize();
 				velocity.vel *= speed;
 				if (distance(currentPosition, desiredPosition) <= MIN_DISTANCE) {
 					path.node = path.node + 1;
+					Debug.Log(distance(currentPosition, desiredPosition));
 				}
 			}
 			else {
