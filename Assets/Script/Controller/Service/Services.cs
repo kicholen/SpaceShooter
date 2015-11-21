@@ -34,6 +34,9 @@ public class Services : IServices {
 		viewService = new ViewService(eventService, uiFactoryService, viewFactoryService);
 
 		loadService = new LoadService(viewService, eventService, gameService);
+
+		pool.CreateEntity()
+			.AddMaterialReference(controller.GetComponent<MaterialStorage>());
 	}
 
 	public void Update () {

@@ -32,7 +32,7 @@ using UnityEngine;
 		break;
 		}
 		if (path > 0) {
-			e.AddPath(0, position.y, _paths.GetEntities()[path - 1].pathModel);
+			e.AddPath(0, position.y, 0.0f, _paths.GetEntities()[path - 1].pathModel);
 		}
 	}
 
@@ -50,7 +50,7 @@ using UnityEngine;
 			.AddResource(Resource.Enemy);
 		e.isNonRemovable = true;
 		e.isActive = true;
-		e.isMoveWithCamera = true;
+		//e.isMoveWithCamera = true;
 
 		return e;
 	}

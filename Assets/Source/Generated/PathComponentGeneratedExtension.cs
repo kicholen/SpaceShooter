@@ -12,19 +12,21 @@ namespace Entitas {
             _pathComponentPool.Clear();
         }
 
-        public Entity AddPath(int newNode, float newStartY, PathModelComponent newPath) {
+        public Entity AddPath(int newNode, float newStartY, float newDuration, PathModelComponent newPath) {
             var component = _pathComponentPool.Count > 0 ? _pathComponentPool.Pop() : new PathComponent();
             component.node = newNode;
             component.startY = newStartY;
+            component.duration = newDuration;
             component.path = newPath;
             return AddComponent(ComponentIds.Path, component);
         }
 
-        public Entity ReplacePath(int newNode, float newStartY, PathModelComponent newPath) {
+        public Entity ReplacePath(int newNode, float newStartY, float newDuration, PathModelComponent newPath) {
             var previousComponent = hasPath ? path : null;
             var component = _pathComponentPool.Count > 0 ? _pathComponentPool.Pop() : new PathComponent();
             component.node = newNode;
             component.startY = newStartY;
+            component.duration = newDuration;
             component.path = newPath;
             ReplaceComponent(ComponentIds.Path, component);
             if (previousComponent != null) {
