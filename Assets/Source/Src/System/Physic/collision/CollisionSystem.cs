@@ -42,11 +42,14 @@ public class CollisionSystem : IExecuteSystem, ISetPool {
 	int getDamageDone(Queue<string> queue, int health) {
 		bool flag = true;
 		int result = 0;
+		int value = 0;
 
 		while (flag) {
 			string colliderName = queue.Dequeue();
-			if (savedDamage.ContainsKey(colliderName)) {
-				result += savedDamage[colliderName];
+			value = 0;
+			savedDamage.TryGetValue(colliderName, out value);
+			if (value > 0) {
+				result += value;
 			}
 			else {
 				int damage = Convert.ToInt16(colliderName.Substring(0, colliderName.IndexOf(interlude)));
@@ -55,6 +58,7 @@ public class CollisionSystem : IExecuteSystem, ISetPool {
 			}
 
 			if (queue.Count == 0 || result > health) {
+				queue.Clear();
 				flag = false;
 			}
 		}

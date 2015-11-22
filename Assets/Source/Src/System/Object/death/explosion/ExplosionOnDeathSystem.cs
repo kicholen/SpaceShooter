@@ -17,7 +17,7 @@ public class ExplosionOnDeathSystem : IReactiveSystem, ISetPool {
 			ExplosionOnDeathComponent component = e.explosionOnDeath;
 			Vector2 position = e.position.pos;
 			_pool.CreateEntity()
-				.AddPosition (new Vector2 (position.x, position.y))
+				.AddPosition (new Vector2(position.x, position.y))
 				.AddDestroyEntityDelayed(component.lifetime)
 				.AddResource(component.resource);
 		}

@@ -45,24 +45,24 @@ public class CreatePlayerSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			             .AddRelativePosition(0.5f, -0.5f)
 			             .AddPosition(new Vector2(0.0f, 0.0f))
 			             .AddChild(parent)
-			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.Missile, component.homeMissileVelocity, CollisionTypes.Player)
+			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player)
 			             .AddResource(Resource.Weapon));
 			children.Add(_pool.CreateEntity()
 			             .AddRelativePosition(-0.5f, -0.5f)
 			             .AddPosition(new Vector2(0.0f, 0.0f))
 			             .AddChild(parent)
-			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.Missile, component.homeMissileVelocity, CollisionTypes.Player)
+			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player)
 			             .AddResource(Resource.Weapon));
 		}
 		if (component.hasSecondaryMissiles) {
 			Entity leftWeapon = _pool.CreateEntity()
-				.AddRelativePosition(-0.5f, 0.5f)
+				.AddRelativePosition(-0.25f, -0.25f)
 				.AddPosition(new Vector2(0.0f, 0.0f))
 				.AddChild(parent);
 			leftWeapon.isSecondaryWeapon = true;
 			
 			Entity rightWeapon = _pool.CreateEntity()
-				.AddRelativePosition(0.5f, 0.5f)
+				.AddRelativePosition(0.25f, -0.25f)
 				.AddPosition(new Vector2(0.0f, 0.0f))
 				.AddChild(parent);
 			rightWeapon.isSecondaryWeapon = true;

@@ -1,7 +1,7 @@
 <level version="1">
 	<enemy>
 		<wave value="5">
-			<wave count="30" x="-4" y="7" offset="0.1" speed="6.0" type="0" health="50" path="5"/>
+			<wave count="30" offset="0.1" speed="6.0" type="0" health="50" path="5"/>
 		</wave>
 	</enemy>
 	<dimensions x="-0.5" y="-2" width="1" height="100"/>

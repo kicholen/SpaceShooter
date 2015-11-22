@@ -32,7 +32,7 @@ public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
 			component.time -= deltaTime; 
 
 			if (component.time < 0.0f) {
-				_factory.CreateEnemyByType(component.type, new Vector2(0.0f, cameraPosition.y), new Vector2(), component.health, difficulty.missileSpeedBoostPercent, component.path);
+				_factory.CreateEnemyByType(component.type, new Vector2(0.0f, cameraPosition.y), component.health, difficulty.missileSpeedBoostPercent, component.path);
 				component.time = component.timeOffset;
 				component.count = component.count - 1;
 			}

@@ -38,8 +38,10 @@ public class LoadService : ILoadService {
 		phases.Enqueue(() => { gameService.InitGame(level); nextPhase(); });
 		if (firstGame) {
 			phases.Enqueue(() => { gameService.InitPool(Resource.Explosion, 4); nextPhase(); });
+			phases.Enqueue(() => { gameService.InitPool(Resource.ExplosionMissile, 10); nextPhase(); });
 			phases.Enqueue(() => { gameService.InitPool(Resource.MissileEnemy, 20); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(Resource.Missile, 20); nextPhase(); });
+			phases.Enqueue(() => { gameService.InitPool(Resource.MissilePrimary, 20); nextPhase(); });
+			phases.Enqueue(() => { gameService.InitPool(Resource.MissileSecondary, 40); nextPhase(); });
 			phases.Enqueue(() => { gameService.InitPool(Resource.Enemy, 10); nextPhase(); });
 			phases.Enqueue(() => { gameService.InitPool(Resource.Star, 10); nextPhase(); });
 			phases.Enqueue(() => { gameService.InitPool(Resource.Bonus, 3); nextPhase(); });

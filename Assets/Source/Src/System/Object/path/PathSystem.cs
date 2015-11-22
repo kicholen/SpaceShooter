@@ -8,7 +8,7 @@ public class PathSystem : IExecuteSystem, ISetPool {
 	Group _time;
 	Group _group;
 	
-	const float MIN_DISTANCE = 0.5f;
+	const float MIN_DISTANCE = 0.8f;
 	const float STEERING = 12.0f;
 	
 	public void SetPool(Pool pool) {
