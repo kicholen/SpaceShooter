@@ -23,20 +23,29 @@ public class PathSystem : IExecuteSystem, ISetPool {
 			PathComponent path = e.path;
 			List<Vector2> points = path.path.points;
 			if (path.node != points.Count) {
-				Vector2 currentPosition = e.position.pos;
+				PositionComponent position = e.position;
 				Vector2 desiredPosition = points[path.node] + new Vector2(0.0f, path.startY + (path.duration * 1.0f));
-				path.duration += deltaTime;
-				float speed = e.velocityLimit.maxVelocity;
+				if (path.node == 0) {
+					position.pos.Set(desiredPosition.x, desiredPosition.y);
+					path.node += 1;
+				}
+				else {
+					Vector2 currentPosition = position.pos;
+					path.duration += deltaTime;
+					float speed = e.velocityLimit.maxVelocity;
 
-				VelocityComponent velocity = e.velocity;
-				Vector2 steering = new Vector2((desiredPosition.x - currentPosition.x), (desiredPosition.y - currentPosition.y));
-				steering.Normalize();
-				steering *= speed / STEERING;
-				velocity.vel += steering;
-				velocity.vel.Normalize();
-				velocity.vel *= speed;
-				if (distance(currentPosition, desiredPosition) <= MIN_DISTANCE) {
-					path.node = path.node + 1;
+					VelocityComponent velocity = e.velocity;
+					Vector2 steering = new Vector2((desiredPosition.x - currentPosition.x), (desiredPosition.y - currentPosition.y));
+					steering.Normalize();
+					steering *= speed / STEERING;
+					velocity.vel += steering;
+					velocity.vel.Normalize();
+					velocity.vel *= speed;
+					//drawDebugCircle(e.gameObject.gameObject, points, path.startY + (path.duration * 1.0f));
+					
+					if (distance(currentPosition, desiredPosition) <= MIN_DISTANCE) {
+						path.node = path.node + 1;
+					}
 				}
 			}
 			else {

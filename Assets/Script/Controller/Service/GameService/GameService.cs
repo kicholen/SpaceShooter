@@ -108,10 +108,8 @@ public class GameService : IGameService {
 			.Add(pool.CreateVelocitySystem())
 			.Add(pool.CreateCollisionSystem())
 			.Add(pool.CreateMoveWithCameraSystem())
+			.Add(pool.CreatePathSystem())
 			.Add(pool.CreatePositionSystem())
-
-				// Path
-				.Add(pool.CreatePathSystem())
 
 				// laser
 				.Add(pool.CreateLaserSpawnerSystem())

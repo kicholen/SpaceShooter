@@ -4,6 +4,7 @@ using UnityEngine;
 public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
 
 	Pool _pool;
+	Group _camera;
 	Group _group;
 	Group _difficulty;
 	Group _time;
@@ -15,12 +16,14 @@ public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
 		_group = pool.GetGroup(Matcher.WaveSpawner);
 		_difficulty = pool.GetGroup(Matcher.DifficultyController);
 		_time = pool.GetGroup(Matcher.Time);
+		_camera = pool.GetGroup(Matcher.Camera);
 
 		_factory = new EnemyFactory();
 		_factory.SetPool(_pool, _pool.GetGroup(Matcher.PathModel));
 	}
 	
 	public void Execute() {
+		Vector3 cameraPosition = _camera.GetSingleEntity().position.pos;
 		DifficultyControllerComponent difficulty = _difficulty.GetSingleEntity().difficultyController;
 		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 
@@ -29,7 +32,7 @@ public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
 			component.time -= deltaTime; 
 
 			if (component.time < 0.0f) {
-				_factory.CreateEnemyByType(component.type, component.position, new Vector2(0.0f, 0.0f), component.health, difficulty.missileSpeedBoostPercent, component.path);
+				_factory.CreateEnemyByType(component.type, new Vector2(0.0f, cameraPosition.y), new Vector2(), component.health, difficulty.missileSpeedBoostPercent, component.path);
 				component.time = component.timeOffset;
 				component.count = component.count - 1;
 			}

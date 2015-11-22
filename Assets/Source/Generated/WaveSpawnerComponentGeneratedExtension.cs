@@ -12,11 +12,10 @@ namespace Entitas {
             _waveSpawnerComponentPool.Clear();
         }
 
-        public Entity AddWaveSpawner(int newCount, int newType, UnityEngine.Vector2 newPosition, float newTimeOffset, float newTime, float newSpeed, int newHealth, int newPath) {
+        public Entity AddWaveSpawner(int newCount, int newType, float newTimeOffset, float newTime, float newSpeed, int newHealth, int newPath) {
             var component = _waveSpawnerComponentPool.Count > 0 ? _waveSpawnerComponentPool.Pop() : new WaveSpawnerComponent();
             component.count = newCount;
             component.type = newType;
-            component.position = newPosition;
             component.timeOffset = newTimeOffset;
             component.time = newTime;
             component.speed = newSpeed;
@@ -25,12 +24,11 @@ namespace Entitas {
             return AddComponent(ComponentIds.WaveSpawner, component);
         }
 
-        public Entity ReplaceWaveSpawner(int newCount, int newType, UnityEngine.Vector2 newPosition, float newTimeOffset, float newTime, float newSpeed, int newHealth, int newPath) {
+        public Entity ReplaceWaveSpawner(int newCount, int newType, float newTimeOffset, float newTime, float newSpeed, int newHealth, int newPath) {
             var previousComponent = hasWaveSpawner ? waveSpawner : null;
             var component = _waveSpawnerComponentPool.Count > 0 ? _waveSpawnerComponentPool.Pop() : new WaveSpawnerComponent();
             component.count = newCount;
             component.type = newType;
-            component.position = newPosition;
             component.timeOffset = newTimeOffset;
             component.time = newTime;
             component.speed = newSpeed;
