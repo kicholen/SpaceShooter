@@ -25,7 +25,7 @@ public class AddGameObjectSystem : IReactiveSystem, ISetPool {
 					gameObject = UnityEngine.Object.Instantiate(res);
 				}
 				catch (Exception) {
-					Debug.Log("Cannot instantiate " + res);
+					Debug.Log("Cannot instantiate " + resourceName);
 				}
 			}
 			attachCollisionScript(e, gameObject);

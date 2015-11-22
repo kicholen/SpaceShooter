@@ -22,6 +22,9 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 	public void Execute() {
 		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
 		foreach (Entity e in _group.GetEntities()) {
+			if (e.position.pos.y == 0.0f) {
+				e.position.pos.y = 7.0f;
+			}
 			FirstBossComponent component = e.firstBoss;
 			component.age += deltaTime;
 			e.velocity.vel.Set(0.0f, 0.0f);
@@ -30,7 +33,7 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 
 			if (!tests) {
 				if (!e.hasLaserSpawner) {
-					//e.AddLaserSpawner(5.0f, 0.0f, 0.0f, new UnityEngine.Vector2(), CollisionTypes.Enemy, null);
+					e.AddLaserSpawner(5.0f, 0.0f, 0.0f, new UnityEngine.Vector2(), CollisionTypes.Enemy, null);
 				}
 				else {
 					LaserSpawnerComponent laser = e.laserSpawner;
@@ -41,8 +44,8 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 					}
 				}
 				if (!initalize) {
-					//e.AddCircleMissileRotatedSpawner(40, 8, 0, 10, 0.0f, 0.1f, Resource.MissileEnemy, 3.0f, CollisionTypes.Enemy);
-					e.AddCircleMissileSpawner(20, 2.0f, 0.05f, Resource.MissileEnemy, 4.0f, CollisionTypes.Enemy);
+					//e.AddCircleMissileRotatedSpawner(20, 8, 0, 10, 0.0f, 0.1f, Resource.MissileEnemy, 3.0f, CollisionTypes.Enemy);
+					//e.AddCircleMissileSpawner(20, 2.0f, 0.05f, Resource.MissileEnemy, 4.0f, CollisionTypes.Enemy);
 					//e.AddMultipleMissileSpawner(5, 5, 0.1f, 0.1f, 5.0f, 5.0f, Resource.MissileEnemy, 0.1f, velocity.x, -velocity.y, CollisionTypes.Enemy);
 					initalize = true;
 				}
