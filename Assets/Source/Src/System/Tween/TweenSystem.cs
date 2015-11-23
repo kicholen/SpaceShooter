@@ -14,18 +14,19 @@ public class TweenSystem : IExecuteSystem, ISetPool {
 
 		foreach (Entity e in _group.GetEntities()) {
 			TweenComponent tween = e.tween;
-			tween.time += deltaTime;
-			tween.current = ease(tween.ease, tween.time, tween.from, tween.to, tween.duration);
-			
-			if (tween.time > tween.duration) {
-				if (tween.onUpdate != null) {
-					tween.onUpdate(tween.to);
+			if (!tween.hasCompleted) {
+				tween.time += deltaTime;
+				tween.current = ease(tween.ease, tween.time, tween.from, tween.to, tween.duration);
+				
+				if (tween.time > tween.duration) {
+					if (tween.onUpdate != null) {
+						tween.onUpdate(e, tween.to);
+					}
+					tween.onComplete(e);
 				}
-				tween.onComplete();
-				e.isDestroyEntity = true;
-			}
-			else if (tween.onUpdate != null) {
-				tween.onUpdate(tween.current);
+				else if (tween.onUpdate != null) {
+					tween.onUpdate(e, tween.current);
+				}
 			}
 		}
 	}

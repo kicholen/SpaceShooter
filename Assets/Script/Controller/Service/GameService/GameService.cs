@@ -42,7 +42,8 @@ public class GameService : IGameService {
 		}
 	}
 
-	public void EndGame() {
+	public void EndGame(Entity e) {
+		e.isDestroyEntity = true;
 		controller.Services.ViewService.SetView(ViewTypes.LANDING);
 		pool.CreateEntity()
 			.IsEndGame(true);
@@ -103,6 +104,9 @@ public class GameService : IGameService {
 				// AI
 				.Add(pool.CreateFirstBossSystem())
 
+				// blockade
+				.Add(pool.CreateMovingBlockadeSystem())
+
 			// Physics
 			.Add(pool.CreateAccelerationSystem())
 			.Add(pool.CreateVelocitySystem())
@@ -110,6 +114,7 @@ public class GameService : IGameService {
 			.Add(pool.CreateMoveWithCameraSystem())
 			.Add(pool.CreatePathSystem())
 			.Add(pool.CreatePositionSystem())
+			.Add(pool.CreateRotateSystem())
 
 				// laser
 				.Add(pool.CreateLaserSpawnerSystem())

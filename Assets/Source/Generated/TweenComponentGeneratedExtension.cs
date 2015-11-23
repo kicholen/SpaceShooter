@@ -12,7 +12,7 @@ namespace Entitas {
             _tweenComponentPool.Clear();
         }
 
-        public Entity AddTween(float newTime, float newDuration, int newEase, float newFrom, float newTo, float newCurrent, System.Action<float> newOnUpdate, System.Action newOnComplete) {
+        public Entity AddTween(float newTime, float newDuration, int newEase, float newFrom, float newTo, float newCurrent, System.Action<Entitas.Entity, float> newOnUpdate, System.Action<Entitas.Entity> newOnComplete) {
             var component = _tweenComponentPool.Count > 0 ? _tweenComponentPool.Pop() : new TweenComponent();
             component.time = newTime;
             component.duration = newDuration;
@@ -25,7 +25,7 @@ namespace Entitas {
             return AddComponent(ComponentIds.Tween, component);
         }
 
-        public Entity ReplaceTween(float newTime, float newDuration, int newEase, float newFrom, float newTo, float newCurrent, System.Action<float> newOnUpdate, System.Action newOnComplete) {
+        public Entity ReplaceTween(float newTime, float newDuration, int newEase, float newFrom, float newTo, float newCurrent, System.Action<Entitas.Entity, float> newOnUpdate, System.Action<Entitas.Entity> newOnComplete) {
             var previousComponent = hasTween ? tween : null;
             var component = _tweenComponentPool.Count > 0 ? _tweenComponentPool.Pop() : new TweenComponent();
             component.time = newTime;

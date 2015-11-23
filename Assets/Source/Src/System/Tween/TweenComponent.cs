@@ -8,6 +8,7 @@ public class TweenComponent : IComponent {
 	public float from;
 	public float to;
 	public float current;
-	public Action<float> onUpdate;
-	public Action onComplete;
+	public bool hasCompleted;
+	public Action<Entity, float> onUpdate;
+	public Action<Entity> onComplete;
 }

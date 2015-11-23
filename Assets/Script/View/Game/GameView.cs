@@ -19,7 +19,7 @@ public class GameView : View, IView {
 	}
 
 	public override void Hide() {
-		OnHidden();
+		OnHidden(null);
 	}
 
 	void onGameSlow(GameSlowEvent e) {
@@ -27,6 +27,6 @@ public class GameView : View, IView {
 	}
 
 	void onPauseClicked() {
-		gameService.EndGame();
+		gameService.EndGame(null);
 	}
 }

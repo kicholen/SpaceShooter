@@ -30,10 +30,10 @@ public class View {
 		float from = rectTransform.localPosition.x - Screen.width;
 		pool.CreateEntity()
 			.AddTween(0.0f, 0.1f, EaseTypes.Linear, from, rectTransform.localPosition.x, 0.0f, onUpdate, OnShown);
-		onUpdate(from);
+		onUpdate(null, from);
 	}
 	
-	void onUpdate(float x) {
+	void onUpdate(Entity e, float x) {
 		rectTransform.localPosition = new Vector3(x, go.transform.localPosition.y);
 	}
 	
@@ -42,11 +42,17 @@ public class View {
 			.AddTween(0.0f, 0.1f, EaseTypes.Linear, rectTransform.localPosition.x, rectTransform.localPosition.x + Screen.width, 0.0f, onUpdate, OnHidden);
 	}
 	
-	public void OnShown() {
+	public void OnShown(Entity e) {
+		if (e != null) {
+			e.isDestroyEntity = true;
+		}
 		eventService.Dispatch<ViewShownEvent>(new ViewShownEvent());
 	}
 	
-	public void OnHidden() {
+	public void OnHidden(Entity e) {
+		if (e != null) {
+			e.isDestroyEntity = true;
+		}
 		eventService.Dispatch<ViewHiddenEvent>(new ViewHiddenEvent());
 	}
 	

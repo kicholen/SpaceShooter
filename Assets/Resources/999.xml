@@ -1,8 +1,8 @@
 <level version="1">
 	<enemy>
-		<wave value="5">
-			<wave count="30" offset="0.1" speed="6.0" type="0" health="50" path="5"/>
-		</wave>
+		<enemy value="3">
+			<enemy count="1" speed="0.0" type="7" health="2000" path="0"/>
+		</enemy>
 	</enemy>
 	<dimensions x="-0.5" y="-2" width="1" height="100"/>
 </level>

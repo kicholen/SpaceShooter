@@ -44,41 +44,43 @@ public static class ComponentIds {
     public const int MissileSpawner = 42;
     public const int MouseInput = 43;
     public const int MoveWithCamera = 44;
-    public const int MultipleMissileSpawner = 45;
-    public const int NonRemovable = 46;
-    public const int Parent = 47;
-    public const int ParticlesOnDeath = 48;
-    public const int ParticleSpawn = 49;
-    public const int Path = 50;
-    public const int PathModel = 51;
-    public const int PauseGame = 52;
-    public const int Player = 53;
-    public const int PlayerModel = 54;
-    public const int PoolableGO = 55;
-    public const int Position = 56;
-    public const int RegularCamera = 57;
-    public const int RelativePosition = 58;
-    public const int Resource = 59;
-    public const int SecondaryWeapon = 60;
-    public const int SettingsModel = 61;
-    public const int ShipModel = 62;
-    public const int SlowGame = 63;
-    public const int SmoothCamera = 64;
-    public const int SnapPosition = 65;
-    public const int Sound = 66;
-    public const int SoundOnDeath = 67;
-    public const int SpeedBonus = 68;
-    public const int StartGame = 69;
-    public const int StaticCamera = 70;
-    public const int Test = 71;
-    public const int Time = 72;
-    public const int Tween = 73;
-    public const int Velocity = 74;
-    public const int VelocityLimit = 75;
-    public const int WaveSpawner = 76;
-    public const int Weapon = 77;
+    public const int MovingBlockade = 45;
+    public const int MultipleMissileSpawner = 46;
+    public const int NonRemovable = 47;
+    public const int Parent = 48;
+    public const int ParticlesOnDeath = 49;
+    public const int ParticleSpawn = 50;
+    public const int Path = 51;
+    public const int PathModel = 52;
+    public const int PauseGame = 53;
+    public const int Player = 54;
+    public const int PlayerModel = 55;
+    public const int PoolableGO = 56;
+    public const int Position = 57;
+    public const int RegularCamera = 58;
+    public const int RelativePosition = 59;
+    public const int Resource = 60;
+    public const int Rotate = 61;
+    public const int SecondaryWeapon = 62;
+    public const int SettingsModel = 63;
+    public const int ShipModel = 64;
+    public const int SlowGame = 65;
+    public const int SmoothCamera = 66;
+    public const int SnapPosition = 67;
+    public const int Sound = 68;
+    public const int SoundOnDeath = 69;
+    public const int SpeedBonus = 70;
+    public const int StartGame = 71;
+    public const int StaticCamera = 72;
+    public const int Test = 73;
+    public const int Time = 74;
+    public const int Tween = 75;
+    public const int Velocity = 76;
+    public const int VelocityLimit = 77;
+    public const int WaveSpawner = 78;
+    public const int Weapon = 79;
 
-    public const int TotalComponents = 78;
+    public const int TotalComponents = 80;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -126,6 +128,7 @@ public static class ComponentIds {
         "MissileSpawner",
         "MouseInput",
         "MoveWithCamera",
+        "MovingBlockade",
         "MultipleMissileSpawner",
         "NonRemovable",
         "Parent",
@@ -141,6 +144,7 @@ public static class ComponentIds {
         "RegularCamera",
         "RelativePosition",
         "Resource",
+        "Rotate",
         "SecondaryWeapon",
         "SettingsModel",
         "ShipModel",
@@ -207,6 +211,7 @@ public static class ComponentIds {
         typeof(MissileSpawnerComponent),
         typeof(MouseInputComponent),
         typeof(MoveWithCamera),
+        typeof(MovingBlockadeComponent),
         typeof(MultipleMissileSpawnerComponent),
         typeof(NonRemovableComponent),
         typeof(ParentComponent),
@@ -222,6 +227,7 @@ public static class ComponentIds {
         typeof(RegularCameraComponent),
         typeof(RelativePositionComponent),
         typeof(ResourceComponent),
+        typeof(RotateComponent),
         typeof(SecondaryWeaponComponent),
         typeof(SettingsModelComponent),
         typeof(ShipModelComponent),

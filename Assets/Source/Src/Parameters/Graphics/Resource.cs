@@ -1,6 +1,7 @@
 public static class Resource {
 	public const string Player = "10_Player";
 	public const string Enemy = "200_Enemy";
+	public const string EnemySmall = "100_Enemy";
 	public const string MissilePrimary = "50_Missile";
 	public const string MissileSecondary = "25_Missile";
 	public const string MissileEnemy = "50_Missile_Enemy";
@@ -14,4 +15,5 @@ public static class Resource {
 	public const string Boss = "1000_Boss";
 	public const string Explosion = "Explosions/Explosion04c";
 	public const string ExplosionMissile = "Explosions/ExplosionMissile";
+	public const string Meteor = "200_Meteor";
 }

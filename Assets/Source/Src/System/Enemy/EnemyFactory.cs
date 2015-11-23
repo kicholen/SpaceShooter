@@ -9,26 +9,54 @@ using UnityEngine;
 	public void SetPool(Pool pool, Group paths) {
 		_pool = pool;
 		_paths = paths;
+		Random.seed = _pool.count;
 	}
 
 	public void CreateEnemyByType(int type, Vector2 position, int health, int missileSpeedBonus, int path, float speed = 5.0f) {
 		Entity e;
 		switch(type) {
-		case 0:
-			e = createStandardEnemy(type, position, health, speed);
+		case EnemyTypes.Normal:
+			e = createStandardEnemy(type, position, health, speed, Resource.Enemy);
 			e.isFaceDirection = true;
+			e.AddCameraShakeOnDeath(1);
 			e.AddMissileSpawner(0.0f, 2.5f, Resource.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 		break;
-		case 1:
-			e = createStandardEnemy(type, position, health, speed);
+		case EnemyTypes.Small:
+			e = createStandardEnemy(type, position, health, speed, Resource.EnemySmall);
 			e.isFaceDirection = true;
-			e.AddHomeMissileSpawner(0.0f, 2.0f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 		break;
-		case 101:
+		case EnemyTypes.HomeMissile:
+			e = createStandardEnemy(type, position, health, speed, Resource.Enemy);
+			e.isFaceDirection = true;
+			e.AddCameraShakeOnDeath(1);
+			e.AddHomeMissileSpawner(4.0f, 2.0f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			break;
+		case EnemyTypes.CircleMissile:
+			e = createStandardEnemy(type, position, health, speed, Resource.Enemy);
+			e.isFaceDirection = true;
+			e.AddCameraShakeOnDeath(1);
+			e.AddCircleMissileSpawner(5, 4.0f, 0.1f, Resource.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			break;
+		case EnemyTypes.CircleRotateMissile:
+			e = createStandardEnemy(type, position, health, speed, Resource.Enemy);
+			e.isFaceDirection = true;
+			e.AddCameraShakeOnDeath(1);
+			e.AddCircleMissileRotatedSpawner(6, 4, 0, 10, 4.0f, 0.1f, Resource.MissileEnemy,  3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			break;
+		case EnemyTypes.Meteor:
+			e = createStandardEnemy(type, position, health, speed, Resource.Meteor);
+			float randomAngle = Random.Range(-90.0f, 90.0f);
+			e.AddRotate(randomAngle, randomAngle);
+			break;
+		case EnemyTypes.MovingBlockade:
+			e = createStandardEnemy(type, position, health, speed, Resource.Blockade);
+			e.AddMovingBlockade(2.0f, -1.0f, 0.0f, 2.0f, 1.0f);
+			break;
+		case EnemyTypes.FirstBoss:
 			e = createFirstBoss(type, position, health, missileSpeedBonus);
 			break;
 		default:
-			e = createStandardEnemy(type, position, health, speed);
+			e = createStandardEnemy(type, position, health, speed, Resource.Enemy);
 		break;
 		}
 		if (path > 0) {
@@ -36,7 +64,7 @@ using UnityEngine;
 		}
 	}
 
-	Entity createStandardEnemy(int type, Vector2 position, int health, float speed) {
+	Entity createStandardEnemy(int type, Vector2 position, int health, float speed, string resource) {
 		Entity e = _pool.CreateEntity()
 			.AddEnemy(type)
 			.AddPosition(position)
@@ -45,9 +73,8 @@ using UnityEngine;
 			.AddHealth(health)
 			.AddCollision(CollisionTypes.Enemy)
 			.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed)
-			.AddCameraShakeOnDeath(1)
 			.AddExplosionOnDeath(1.0f, Resource.Explosion)
-			.AddResource(Resource.Enemy);
+			.AddResource(resource);
 		e.isNonRemovable = true;
 		e.isActive = true;
 
