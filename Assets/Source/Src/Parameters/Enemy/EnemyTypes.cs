@@ -5,6 +5,7 @@ public static class EnemyTypes {
 	public const int CircleMissile = 4;
 	public const int CircleRotateMissile = 5;
 	public const int Meteor = 6;
-	public const int MovingBlockade = 7;
+	public const int MovingBlock = 7;
+	public const int MovingBlockade = 8;
 	public const int FirstBoss = 101;
 }

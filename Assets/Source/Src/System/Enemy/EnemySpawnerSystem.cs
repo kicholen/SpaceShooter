@@ -46,12 +46,14 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 				while(innerNode != null) {
 					int enemyCount = Convert.ToInt16(innerNode.Attributes[0].Value);
 					if (enemyCount == 1) {
-						float speed = (float)Convert.ToDouble(innerNode.Attributes[1].Value);
-						int type = Convert.ToInt16(innerNode.Attributes[2].Value);
-						int health = Convert.ToInt16(innerNode.Attributes[3].Value) * (difficulty.hpBoostPercent + 100) / 100;
-						int path = Convert.ToInt16(innerNode.Attributes[4].Value);
+						float positionX = (float)Convert.ToDouble(innerNode.Attributes[1].Value);
+						float positionY = (float)Convert.ToDouble(innerNode.Attributes[2].Value);
+						float speed = (float)Convert.ToDouble(innerNode.Attributes[3].Value);
+						int type = Convert.ToInt16(innerNode.Attributes[4].Value);
+						int health = Convert.ToInt16(innerNode.Attributes[5].Value) * (difficulty.hpBoostPercent + 100) / 100;
+						int path = Convert.ToInt16(innerNode.Attributes[6].Value);
 
-						_factory.CreateEnemyByType(type, new Vector2(0.0f, cameraPosition.y), health, difficulty.missileSpeedBoostPercent, path, speed);
+						_factory.CreateEnemyByType(type, new Vector2(positionX, positionY), health, difficulty.missileSpeedBoostPercent, path, speed);
 					}
 					else {
 						float timeOffset = (float)Convert.ToDouble(innerNode.Attributes[1].Value);

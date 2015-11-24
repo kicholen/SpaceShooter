@@ -6,43 +6,37 @@
 		</wave>
 		
 		<wave value="6">
-			<enemy count="1" speed="4.0" type="2" health="200" path="8"/>
-		</wave>
-		<wave value="6">
-			<enemy count="1" speed="3.0" type="6" health="300" path="11"/>
+			<wave count="2" offset="0.2" speed="4.0" type="2" health="200" path="8"/>
+			<wave count="2" offset="0.2" speed="3.0" type="6" health="300" path="11"/>
 		</wave>
 		<wave value="6.5">
-			<enemy count="1" speed="4.0" type="2" health="200" path="9"/>
+			<wave count="2" offset="0.2" speed="4.0" type="2" health="200" path="9"/>
 		</wave>
 		<wave value="7">
-			<enemy count="1" speed="4.0" type="2" health="200" path="8"/>
+			<wave count="2" offset="0.2" speed="4.0" type="2" health="200" path="8"/>
 		</wave>
 		<wave value="7.5">
-			<enemy count="1" speed="4.0" type="2" health="200" path="9"/>
+			<wave count="2" offset="0.2" speed="4.0" type="2" health="200" path="9"/>
 		</wave>
 		<wave value="8">
-			<enemy count="1" speed="4.0" type="2" health="200" path="8"/>
-		</wave>
-		<wave value="8">
-			<enemy count="1" speed="3.0" type="6" health="300" path="11"/>
+			<wave count="2" offset="0.2" speed="4.0" type="2" health="200" path="8"/>
+			<wave count="2" offset="0.2" speed="3.0" type="6" health="300" path="11"/>
 		</wave>
 		<wave value="8.5">
-			<enemy count="1" speed="4.0" type="2" health="200" path="9"/>
+			<wave count="2" offset="0.2" speed="4.0" type="2" health="200" path="9"/>
 		</wave>
 		<wave value="9">
-			<enemy count="1" speed="4.0" type="2" health="200" path="8"/>
+			<wave count="2" offset="0.2" speed="4.0" type="2" health="200" path="8"/>
 		</wave>
 		<wave value="9.5">
-			<enemy count="1" speed="4.0" type="2" health="200" path="9"/>
+			<wave count="2" offset="0.2" speed="4.0" type="2" health="200" path="9"/>
 		</wave>
 		<wave value="10">
-			<enemy count="1" speed="4.0" type="2" health="200" path="8"/>
-		</wave>
-		<wave value="10">
-			<enemy count="1" speed="3.0" type="6" health="300" path="11"/>
+			<wave count="2" offset="0.2" speed="4.0" type="2" health="200" path="8"/>
+			<wave count="2" offset="0.2" speed="3.0" type="6" health="300" path="11"/>
 		</wave>
 		<wave value="10.5">
-			<enemy count="1" speed="4.0" type="2" health="200" path="9"/>
+			<wave count="2" offset="0.2" speed="4.0" type="2" health="200" path="9"/>
 		</wave>
 		
 		<wave value="12">
