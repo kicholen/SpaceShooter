@@ -54,33 +54,34 @@ public static class ComponentIds {
     public const int PathModel = 52;
     public const int PauseGame = 53;
     public const int Player = 54;
-    public const int PlayerModel = 55;
-    public const int PoolableGO = 56;
-    public const int Position = 57;
-    public const int RegularCamera = 58;
-    public const int RelativePosition = 59;
-    public const int Resource = 60;
-    public const int Rotate = 61;
-    public const int SecondaryWeapon = 62;
-    public const int SettingsModel = 63;
-    public const int ShipModel = 64;
-    public const int SlowGame = 65;
-    public const int SmoothCamera = 66;
-    public const int SnapPosition = 67;
-    public const int Sound = 68;
-    public const int SoundOnDeath = 69;
-    public const int SpeedBonus = 70;
-    public const int StartGame = 71;
-    public const int StaticCamera = 72;
-    public const int Test = 73;
-    public const int Time = 74;
-    public const int Tween = 75;
-    public const int Velocity = 76;
-    public const int VelocityLimit = 77;
-    public const int WaveSpawner = 78;
-    public const int Weapon = 79;
+    public const int PlayerHealthBar = 55;
+    public const int PlayerModel = 56;
+    public const int PoolableGO = 57;
+    public const int Position = 58;
+    public const int RegularCamera = 59;
+    public const int RelativePosition = 60;
+    public const int Resource = 61;
+    public const int Rotate = 62;
+    public const int SecondaryWeapon = 63;
+    public const int SettingsModel = 64;
+    public const int ShipModel = 65;
+    public const int SlowGame = 66;
+    public const int SmoothCamera = 67;
+    public const int SnapPosition = 68;
+    public const int Sound = 69;
+    public const int SoundOnDeath = 70;
+    public const int SpeedBonus = 71;
+    public const int StartGame = 72;
+    public const int StaticCamera = 73;
+    public const int Test = 74;
+    public const int Time = 75;
+    public const int Tween = 76;
+    public const int Velocity = 77;
+    public const int VelocityLimit = 78;
+    public const int WaveSpawner = 79;
+    public const int Weapon = 80;
 
-    public const int TotalComponents = 80;
+    public const int TotalComponents = 81;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -138,6 +139,7 @@ public static class ComponentIds {
         "PathModel",
         "PauseGame",
         "Player",
+        "PlayerHealthBar",
         "PlayerModel",
         "PoolableGO",
         "Position",
@@ -221,6 +223,7 @@ public static class ComponentIds {
         typeof(PathModelComponent),
         typeof(PauseGameComponent),
         typeof(PlayerComponent),
+        typeof(PlayerHealthBarComponent),
         typeof(PlayerModelComponent),
         typeof(PoolableGOComponent),
         typeof(PositionComponent),

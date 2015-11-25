@@ -15,7 +15,7 @@ using Entitas;public class ViewFactoryService : IViewFactoryService {
 		IView view = null;
 		switch (type) {
 			case ViewTypes.GAME:
-				view = new GameView(controller.Services.Pool, uiFactoryService, controller.Services.GameService, eventService);
+				view = new GameView(controller, controller.Services.Pool, uiFactoryService, controller.Services.GameService, eventService);
 			break;
 			case ViewTypes.INIT:
 				view = new InitView(controller.Services.Pool, uiFactoryService, eventService);

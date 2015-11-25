@@ -40,7 +40,6 @@ public class ViewService : IViewService {
 
 	void onViewHidden(ViewHiddenEvent e) {
 		currentView.Destroy();
-
 		currentView = nextView;
 		showCurrentView();
 	}

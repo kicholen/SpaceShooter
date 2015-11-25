@@ -12,7 +12,7 @@ namespace Entitas {
             _tweenComponentPool.Clear();
         }
 
-        public Entity AddTween(float newTime, float newDuration, int newEase, float newFrom, float newTo, float newCurrent, System.Action<Entitas.Entity, float> newOnUpdate, System.Action<Entitas.Entity> newOnComplete) {
+        public Entity AddTween(float newTime, float newDuration, int newEase, float newFrom, float newTo, float newCurrent, bool newHasCompleted, System.Action<Entitas.Entity, float> newOnUpdate, System.Action<Entitas.Entity> newOnComplete) {
             var component = _tweenComponentPool.Count > 0 ? _tweenComponentPool.Pop() : new TweenComponent();
             component.time = newTime;
             component.duration = newDuration;
@@ -20,12 +20,13 @@ namespace Entitas {
             component.from = newFrom;
             component.to = newTo;
             component.current = newCurrent;
+            component.hasCompleted = newHasCompleted;
             component.onUpdate = newOnUpdate;
             component.onComplete = newOnComplete;
             return AddComponent(ComponentIds.Tween, component);
         }
 
-        public Entity ReplaceTween(float newTime, float newDuration, int newEase, float newFrom, float newTo, float newCurrent, System.Action<Entitas.Entity, float> newOnUpdate, System.Action<Entitas.Entity> newOnComplete) {
+        public Entity ReplaceTween(float newTime, float newDuration, int newEase, float newFrom, float newTo, float newCurrent, bool newHasCompleted, System.Action<Entitas.Entity, float> newOnUpdate, System.Action<Entitas.Entity> newOnComplete) {
             var previousComponent = hasTween ? tween : null;
             var component = _tweenComponentPool.Count > 0 ? _tweenComponentPool.Pop() : new TweenComponent();
             component.time = newTime;
@@ -34,6 +35,7 @@ namespace Entitas {
             component.from = newFrom;
             component.to = newTo;
             component.current = newCurrent;
+            component.hasCompleted = newHasCompleted;
             component.onUpdate = newOnUpdate;
             component.onComplete = newOnComplete;
             ReplaceComponent(ComponentIds.Tween, component);

@@ -18,7 +18,7 @@ public class MovingBlockadeSystem : IExecuteSystem, ISetPool {
 			if (component.time <= 0.0f && !e.hasTween) {
 				component.time = component.duration;
 				PositionComponent position = e.position;
-				e.AddTween(0.0f, component.duration, EaseTypes.Linear, position.pos.x, position.pos.x + (component.offset * component.direction), 0.0f, (ent, value) => {
+				e.AddTween(0.0f, component.duration, EaseTypes.Linear, position.pos.x, position.pos.x + (component.offset * component.direction), 0.0f, false, (ent, value) => {
 					PositionComponent pos = ent.position;
 					pos.pos.x = value;
 				}, (ent) => {

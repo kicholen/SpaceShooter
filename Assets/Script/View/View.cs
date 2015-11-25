@@ -29,7 +29,7 @@ public class View {
 	public virtual void Show() {
 		float from = rectTransform.localPosition.x - Screen.width;
 		pool.CreateEntity()
-			.AddTween(0.0f, 0.1f, EaseTypes.Linear, from, rectTransform.localPosition.x, 0.0f, onUpdate, OnShown);
+			.AddTween(0.0f, 0.1f, EaseTypes.Linear, from, rectTransform.localPosition.x, 0.0f, false, onUpdate, OnShown);
 		onUpdate(null, from);
 	}
 	
@@ -39,7 +39,7 @@ public class View {
 	
 	public virtual void Hide() {
 		pool.CreateEntity()
-			.AddTween(0.0f, 0.1f, EaseTypes.Linear, rectTransform.localPosition.x, rectTransform.localPosition.x + Screen.width, 0.0f, onUpdate, OnHidden);
+			.AddTween(0.0f, 0.1f, EaseTypes.Linear, rectTransform.localPosition.x, rectTransform.localPosition.x + Screen.width, 0.0f, false, onUpdate, OnHidden);
 	}
 	
 	public void OnShown(Entity e) {

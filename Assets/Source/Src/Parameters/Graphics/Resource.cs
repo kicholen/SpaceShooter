@@ -16,4 +16,6 @@ public static class Resource {
 	public const string Explosion = "Explosions/Explosion04c";
 	public const string ExplosionMissile = "Explosions/ExplosionMissile";
 	public const string Meteor = "200_Meteor";
+
+	public const string HealthBar = "HealthBar";
 }

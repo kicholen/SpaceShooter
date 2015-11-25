@@ -36,6 +36,16 @@ public class CreatePlayerSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			.IsMoveWithCamera(true);
 		
 		player.AddParent(getPlayerChildren(player, playerModel));
+		createHealthBar(player);
+	}
+
+	void createHealthBar(Entity player) {
+		Entity e = _pool.CreateEntity()
+			.AddPlayerHealthBar((float)player.health.health, (float)player.health.health)
+			.AddResource(Resource.HealthBar)
+			.AddPosition(new Vector2())
+			.AddChild(player);
+		player.parent.children.Add(e);
 	}
 	
 	List<Entity> getPlayerChildren(Entity parent, PlayerModelComponent component) {
