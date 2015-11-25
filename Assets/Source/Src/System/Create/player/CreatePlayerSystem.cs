@@ -36,14 +36,14 @@ public class CreatePlayerSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			.IsMoveWithCamera(true);
 		
 		player.AddParent(getPlayerChildren(player, playerModel));
+		// create UI
 		createHealthBar(player);
 	}
 
 	void createHealthBar(Entity player) {
 		Entity e = _pool.CreateEntity()
 			.AddPlayerHealthBar((float)player.health.health, (float)player.health.health)
-			.AddResource(Resource.HealthBar)
-			.AddPosition(new Vector2())
+			.AddUIResource(UIResource.UIHealthBar)
 			.AddChild(player);
 		player.parent.children.Add(e);
 	}

@@ -5,6 +5,7 @@ public class ViewService : IViewService {
 	IViewFactoryService viewFactoryService;
 
 	Canvas canvas;
+	public Canvas Canvas { get { return canvas; } }
 	GameObject touchBlocker;
 	IView currentView;
 	IView nextView;

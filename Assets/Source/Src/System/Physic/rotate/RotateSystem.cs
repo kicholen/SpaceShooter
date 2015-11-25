@@ -17,7 +17,6 @@ public class RotateSystem : IExecuteSystem, ISetPool {
 		foreach (Entity e in _group.GetEntities()) {
 			RotateComponent component = e.rotate;
 			component.angle += component.rotateSpeed * deltaTime;
-			Debug.Log(component.angle);
 			e.gameObject.gameObject.transform.rotation = Quaternion.AngleAxis(component.angle, Vector3.forward);
 		}
 	}

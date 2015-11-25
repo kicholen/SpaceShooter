@@ -1,6 +1,6 @@
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealthBarSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Player, Matcher.Damage).OnEntityAdded(); } }
@@ -24,19 +24,9 @@ public class PlayerHealthBarSystem : IReactiveSystem, ISetPool {
 						PlayerHealthBarComponent component = bar.playerHealthBar;
 						int damage = e.damage.damage;
 						component.currentValue -= (float)damage;
-						GameObject go = bar.gameObject.gameObject;
-						Transform fgTransform = go.transform.FindChild("fg");
-						float height = go.GetComponent<SpriteRenderer>().bounds.size.y;
-						fgTransform.localScale = new Vector3(fgTransform.localScale.x, component.currentValue / component.totalValue, fgTransform.localScale.z);
-						fgTransform.localPosition = new Vector3(0.0f, (fgTransform.localScale.y - 1.0f) * height / 2.0f / go.transform.localScale.y, fgTransform.localPosition.z);
-					}
-					else {
-						Debug.Log("PlayerHealthBarSystem: should never be called");
+						bar.gameObject.gameObject.GetComponent<Slider>().value = component.currentValue / component.totalValue;
 					}
 				}
-			}
-			else {
-				Debug.Log("PlayerHealthBarSystem: should never be called");
 			}
 		}
 	}
