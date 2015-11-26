@@ -2,15 +2,8 @@ using Entitas;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class PlayerHealthBarSystem : IReactiveSystem, ISetPool {
+public class PlayerHealthBarSystem : IReactiveSystem {
 	public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Player, Matcher.Damage).OnEntityAdded(); } }
-	
-	Pool _pool;
-	Group _group;
-	
-	public void SetPool(Pool pool) {
-		_pool = pool;
-	}
 	
 	public void Execute(List<Entity> entities) {
 		for (int i = 0; i < entities.Count; i++) {

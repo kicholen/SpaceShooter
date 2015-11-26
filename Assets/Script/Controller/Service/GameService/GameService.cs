@@ -130,6 +130,7 @@ public class GameService : IGameService {
 				.Add(pool.CreateFaceDirectionSystem())
 				.Add(pool.CreateActiveSystem())
 				.Add(pool.CreatePlayerHealthBarSystem())
+				.Add(pool.CreateIndicatorSystem())
 				
 				// Object
 				.Add(pool.CreateHealthSystem())

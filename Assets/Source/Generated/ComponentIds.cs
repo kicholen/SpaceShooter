@@ -36,55 +36,57 @@ public static class ComponentIds {
     public const int Health = 34;
     public const int HomeMissile = 35;
     public const int HomeMissileSpawner = 36;
-    public const int Input = 37;
-    public const int Laser = 38;
-    public const int LaserSpawner = 39;
-    public const int LevelDimensions = 40;
-    public const int Magnet = 41;
-    public const int MaterialReference = 42;
-    public const int MissileSpawner = 43;
-    public const int MouseInput = 44;
-    public const int MoveWithCamera = 45;
-    public const int MovingBlockade = 46;
-    public const int MultipleMissileSpawner = 47;
-    public const int NonRemovable = 48;
-    public const int Parent = 49;
-    public const int ParticlesOnDeath = 50;
-    public const int ParticleSpawn = 51;
-    public const int Path = 52;
-    public const int PathModel = 53;
-    public const int PauseGame = 54;
-    public const int Player = 55;
-    public const int PlayerHealthBar = 56;
-    public const int PlayerModel = 57;
-    public const int PoolableGO = 58;
-    public const int Position = 59;
-    public const int RegularCamera = 60;
-    public const int RelativePosition = 61;
-    public const int Resource = 62;
-    public const int Rotate = 63;
-    public const int SecondaryWeapon = 64;
-    public const int SettingsModel = 65;
-    public const int ShipModel = 66;
-    public const int SlowGame = 67;
-    public const int SmoothCamera = 68;
-    public const int SnapPosition = 69;
-    public const int Sound = 70;
-    public const int SoundOnDeath = 71;
-    public const int SpeedBonus = 72;
-    public const int StartGame = 73;
-    public const int StaticCamera = 74;
-    public const int Test = 75;
-    public const int Time = 76;
-    public const int Tween = 77;
-    public const int UIFactoryService = 78;
-    public const int UIResource = 79;
-    public const int Velocity = 80;
-    public const int VelocityLimit = 81;
-    public const int WaveSpawner = 82;
-    public const int Weapon = 83;
+    public const int Indicator = 37;
+    public const int IndicatorPanel = 38;
+    public const int Input = 39;
+    public const int Laser = 40;
+    public const int LaserSpawner = 41;
+    public const int LevelDimensions = 42;
+    public const int Magnet = 43;
+    public const int MaterialReference = 44;
+    public const int MissileSpawner = 45;
+    public const int MouseInput = 46;
+    public const int MoveWithCamera = 47;
+    public const int MovingBlockade = 48;
+    public const int MultipleMissileSpawner = 49;
+    public const int NonRemovable = 50;
+    public const int Parent = 51;
+    public const int ParticlesOnDeath = 52;
+    public const int ParticleSpawn = 53;
+    public const int Path = 54;
+    public const int PathModel = 55;
+    public const int PauseGame = 56;
+    public const int Player = 57;
+    public const int PlayerHealthBar = 58;
+    public const int PlayerModel = 59;
+    public const int PoolableGO = 60;
+    public const int Position = 61;
+    public const int RegularCamera = 62;
+    public const int RelativePosition = 63;
+    public const int Resource = 64;
+    public const int Rotate = 65;
+    public const int SecondaryWeapon = 66;
+    public const int SettingsModel = 67;
+    public const int ShipModel = 68;
+    public const int SlowGame = 69;
+    public const int SmoothCamera = 70;
+    public const int SnapPosition = 71;
+    public const int Sound = 72;
+    public const int SoundOnDeath = 73;
+    public const int SpeedBonus = 74;
+    public const int StartGame = 75;
+    public const int StaticCamera = 76;
+    public const int Test = 77;
+    public const int Time = 78;
+    public const int Tween = 79;
+    public const int UIFactoryService = 80;
+    public const int UIResource = 81;
+    public const int Velocity = 82;
+    public const int VelocityLimit = 83;
+    public const int WaveSpawner = 84;
+    public const int Weapon = 85;
 
-    public const int TotalComponents = 84;
+    public const int TotalComponents = 86;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -124,6 +126,8 @@ public static class ComponentIds {
         "Health",
         "HomeMissile",
         "HomeMissileSpawner",
+        "Indicator",
+        "IndicatorPanel",
         "Input",
         "Laser",
         "LaserSpawner",
@@ -211,6 +215,8 @@ public static class ComponentIds {
         typeof(HealthComponent),
         typeof(HomeMissileComponent),
         typeof(HomeMissileSpawnerComponent),
+        typeof(IndicatorComponent),
+        typeof(IndicatorPanelComponent),
         typeof(InputComponent),
         typeof(LaserComponent),
         typeof(LaserSpawnerComponent),

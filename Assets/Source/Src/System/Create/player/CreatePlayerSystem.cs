@@ -38,12 +38,21 @@ public class CreatePlayerSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 		player.AddParent(getPlayerChildren(player, playerModel));
 		// create UI
 		createHealthBar(player);
+		createIndicatorPanel(player);
 	}
 
 	void createHealthBar(Entity player) {
 		Entity e = _pool.CreateEntity()
 			.AddPlayerHealthBar((float)player.health.health, (float)player.health.health)
 			.AddUIResource(UIResource.UIHealthBar)
+			.AddChild(player);
+		player.parent.children.Add(e);
+	}
+
+	void createIndicatorPanel(Entity player) {
+		Entity e = _pool.CreateEntity()
+			.IsIndicatorPanel(true)
+			.AddUIResource(UIResource.UIIndicator)
 			.AddChild(player);
 		player.parent.children.Add(e);
 	}

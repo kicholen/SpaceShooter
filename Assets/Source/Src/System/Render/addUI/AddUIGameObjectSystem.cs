@@ -21,7 +21,7 @@ public class AddUIGameObjectSystem : IReactiveSystem, ISetPool {
 			string resourceName = e.uIResource.name;
 			GameObject gameObject = getFromPool(resourceName);
 			if (gameObject == null) {
-				GameObject res = Resources.Load<GameObject>("Prefab/" + resourceName);
+				GameObject res = Resources.Load<GameObject>("Prefab/UI/Game/" + resourceName);
 				try {
 					gameObject = UnityEngine.Object.Instantiate(res);
 				}
