@@ -1,13 +1,13 @@
-using System.Xml;
 using UnityEngine;
+using System.Xml;
+#if !UNITY_WEBPLAYER && !UNITY_WEBGL
 using System.IO;
-using System.Xml.Serialization;
-using System;
-using Entitas;
+#endif
+using Newtonsoft.Json;
 
 public static class Utils
 {
-	const string xmlSufix = ".xml";
+	const string jsonSufix = ".json";
 
 	public static XmlNode LoadXml(string path) {
 		XmlDocument document = new XmlDocument();
@@ -16,50 +16,65 @@ public static class Utils
 		return document.FirstChild;
 	}
 
-	public static IComponent DeserializeComponent(Type type, string sufix = "") {
-		string path = type.Name;
+
+	public static T Deserialize<T>(string sufix = "") {
+		string path = typeof(T).Name;
 		if (sufix != "") {
 			path += "_" + sufix;
 		}
-		XmlSerializer serializer = new XmlSerializer(type);
-		if (File.Exists(Application.persistentDataPath + "/" + path + xmlSufix)) {
-			StreamReader streamReader = new StreamReader(Application.persistentDataPath + "/" + path + xmlSufix);
-			IComponent component = serializer.Deserialize(streamReader.BaseStream) as IComponent;
+		#if UNITY_WEBPLAYER || UNITY_WEBGL
+		if (PlayerPrefs.HasKey(path)) {
+			T component = JsonConvert.DeserializeObject<T>(PlayerPrefs.GetString(path));
+			return component;
+		}
+		else {
+			TextAsset textFile = Resources.Load<TextAsset>(path);
+			T component = JsonConvert.DeserializeObject<T>(textFile.text);
+			return component;
+		}
+		#else
+		JsonSerializer serializer = new JsonSerializer();
+		if (File.Exists(Application.persistentDataPath + "/" + path + jsonSufix)) {
+			TextReader streamReader = new StreamReader(Application.persistentDataPath + "/" + path + jsonSufix);
+			T component = serializer.Deserialize<T>(new JsonTextReader(streamReader));
 			streamReader.Dispose();
 			return component;
 		}
 		else {
 			#if UNITY_EDITOR
-				StreamReader streamReader = new StreamReader(Application.dataPath + "/Resources/" + path + xmlSufix);
-				IComponent component = serializer.Deserialize(streamReader.BaseStream) as IComponent;
-				streamReader.Dispose();
-				return component;
+			TextReader streamReader = new StreamReader(Application.dataPath + "/Resources/" + path + jsonSufix);
+			T component = serializer.Deserialize<T>(new JsonTextReader(streamReader));
+			streamReader.Dispose();
+			return component;
 			#elif UNITY_ANDROID
-				TextAsset textFile = Resources.Load<TextAsset>(path);
-				StringReader stringReader = new StringReader(textFile.text);
-				XmlReader xmlReader = XmlReader.Create(stringReader);
-				IComponent component = serializer.Deserialize(xmlReader) as IComponent;
-				stringReader.Dispose();
-				xmlReader.Close();
-				return component;
+			TextAsset textFile = Resources.Load<TextAsset>(path);
+			T component = JsonConvert.DeserializeObject<T>(textFile.text);
+			return component;
 			#endif
 		}
+		#endif
 	}
 
-	public static void SerializeComponent(IComponent component, string sufix = "") {
+	public static void Serialize(object value, string sufix = "") {
 		string path = "";
 		if (sufix != "") {
 			path += "_" + sufix;
 		}
 		#if UNITY_EDITOR
-			path = Application.dataPath + "/Resources/" + component.GetType().Name + path + xmlSufix;
+		path = Application.dataPath + "/Resources/" + value.GetType().Name + path + jsonSufix;
 		#elif UNITY_ANDROID
-			path = Application.persistentDataPath + "/" + component.GetType().Name + path + xmlSufix;
+		path = Application.persistentDataPath + "/" + component.GetType().Name + path + xmlSufix;
 		#endif
-		XmlSerializer serializer = new XmlSerializer(component.GetType());
+
+		#if UNITY_WEBPLAYER || UNITY_WEBGL
+		PlayerPrefs.SetString(path, JsonConvert.SerializeObject(value));
+		PlayerPrefs.Save();
+		#else
+		JsonSerializer serializer = new JsonSerializer();
 		StreamWriter streamWriter = new StreamWriter(path, false);
-		serializer.Serialize(streamWriter, component);
+		serializer.Serialize(streamWriter, value);
 		streamWriter.Close();
+		#endif
 	}
 }
 

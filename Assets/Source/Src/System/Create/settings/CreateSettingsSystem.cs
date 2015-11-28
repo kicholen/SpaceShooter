@@ -9,6 +9,6 @@ public class CreateSettingsSystem : IInitializeSystem, ISetPool {
 	
 	public void Initialize() {
 		_pool.CreateEntity()
-			.AddComponent(ComponentIds.SettingsModel, Utils.DeserializeComponent(typeof(SettingsModelComponent)));
+			.AddComponent(ComponentIds.SettingsModel, Utils.Deserialize<SettingsModelComponent>());
 	}
 }

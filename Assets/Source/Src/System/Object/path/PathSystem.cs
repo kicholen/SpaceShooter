@@ -24,7 +24,7 @@ public class PathSystem : IExecuteSystem, ISetPool {
 			List<Vector2> points = path.path.points;
 			if (path.node != points.Count) {
 				PositionComponent position = e.position;
-				Vector2 desiredPosition = points[path.node] + new Vector2(0.0f, path.startY + (path.duration * 1.0f));
+				Vector2 desiredPosition = points[path.node] + new Vector2(0.0f, path.startY + path.duration);
 				if (path.node == 0) {
 					position.pos.Set(desiredPosition.x, desiredPosition.y);
 					path.node += 1;

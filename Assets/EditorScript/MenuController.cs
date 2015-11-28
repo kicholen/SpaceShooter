@@ -14,16 +14,17 @@ public class MenuController : MonoBehaviour {
 	void Start () {
 		listGO = Instantiate(Resources.Load<GameObject>("EditorPrefab/List")).gameObject;
 		content = listGO.transform.FindChild("Scroll View/Viewport/Content");
-		getAvailablePaths();
+
+		setButtons();
+
 	}
 
 	void Update () {
 
 	}
 
-	List<string> getAvailablePaths() {
-		List<string> availablePaths = new List<string>();
-
+	void setButtons() {
+		#if !UNITY_WEBPLAYER && !UNITY_WEBGL
 		DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Resources/");
 		FileInfo[] fileInfos = directoryInfo.GetFiles();
 		string lfThis = typeof(PathModelComponent).Name;
@@ -44,8 +45,7 @@ public class MenuController : MonoBehaviour {
 		foreach (string path in paths) {
 			addButton(path);
 		}
-
-		return availablePaths;
+		#endif
 	}
 
 	void addButton(string name) {
@@ -64,7 +64,7 @@ public class MenuController : MonoBehaviour {
 	void onPathChosen() {
 		string xmlToLoad = EventSystem.current.currentSelectedGameObject.name;
 		string sufix = xmlToLoad.Split('_')[1].Split('.')[0];
-		EditorController.instance.component = (PathModelComponent)Utils.DeserializeComponent(typeof(PathModelComponent), sufix);
+		EditorController.instance.component = Utils.Deserialize<PathModelComponent>(sufix);
 		EditorController.instance.blockTouch = false;
 		EditorController.instance.sufix = sufix;
 		EditorController.instance.SetPathCreator();

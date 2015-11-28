@@ -34,8 +34,6 @@ public class SpeedBonusSystem : IExecuteSystem, ISetPool {
 					e.isDestroyEntity = true;
 				}
 				else {
-
-					component.savedVelocity = limit.maxVelocity;
 					limit.maxVelocity = component.velocity;
 				}
 			}

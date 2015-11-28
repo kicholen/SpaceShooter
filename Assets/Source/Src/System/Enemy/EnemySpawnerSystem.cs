@@ -1,7 +1,5 @@
 using Entitas;
 using UnityEngine;
-using System.Xml;
-using System;
 
 public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 
@@ -31,48 +29,24 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 	
 	void spawnIfCan(Entity e, Vector3 cameraPosition, DifficultyControllerComponent difficulty) {
 		EnemySpawnerComponent enemySpawner = e.enemySpawner;
-		XmlNode node = enemySpawner.node;
+		LevelModelComponent levelModel = enemySpawner.model;
 
-		if (enemySpawner.used && node != null) {
-			enemySpawner.node = enemySpawner.node.NextSibling;
-			node = enemySpawner.node;
-		}
-		if (node != null) {
-			enemySpawner.used = false;
-			XmlAttributeCollection attributes = node.Attributes;
-			float spawnBarrier = (float)Convert.ToDouble(attributes[0].Value);
-			if (spawnBarrier < cameraPosition.y) {
-				XmlNode innerNode = node.FirstChild;
-				while(innerNode != null) {
-					int enemyCount = Convert.ToInt16(innerNode.Attributes[0].Value);
-					if (enemyCount == 1) {
-						float positionX = (float)Convert.ToDouble(innerNode.Attributes[1].Value);
-						float positionY = (float)Convert.ToDouble(innerNode.Attributes[2].Value);
-						float speed = (float)Convert.ToDouble(innerNode.Attributes[3].Value);
-						int type = Convert.ToInt16(innerNode.Attributes[4].Value);
-						int health = Convert.ToInt16(innerNode.Attributes[5].Value) * (difficulty.hpBoostPercent + 100) / 100;
-						int path = Convert.ToInt16(innerNode.Attributes[6].Value);
-
-						_factory.CreateEnemyByType(type, new Vector2(positionX, positionY), health, difficulty.missileSpeedBoostPercent, path, speed);
-					}
-					else {
-						float timeOffset = (float)Convert.ToDouble(innerNode.Attributes[1].Value);
-						float speed = (float)Convert.ToDouble(innerNode.Attributes[2].Value);
-						int type = Convert.ToInt16(innerNode.Attributes[3].Value);
-						int health = Convert.ToInt16(innerNode.Attributes[4].Value) * (difficulty.hpBoostPercent + 100) / 100;
-						int path = Convert.ToInt16(innerNode.Attributes[5].Value);
-
-						_pool.CreateEntity()
-							.AddWaveSpawner(enemyCount, type, timeOffset, 0.0f, speed, health, path);
-					}
-					innerNode = innerNode.NextSibling;
-				}
-
-				enemySpawner.used = true;
+		if (levelModel.enemyIndex < levelModel.enemies.Count) {
+			EnemyModel enemyModel = levelModel.enemies[levelModel.enemyIndex];
+			if (enemyModel.spawnBarrier < cameraPosition.y) {
+				levelModel.enemyIndex += 1;
+				float healthMultiplier = (difficulty.hpBoostPercent + 100) / 100;
+				_factory.CreateEnemyByModel(enemyModel, difficulty.missileSpeedBoostPercent, healthMultiplier);
 			}
 		}
-		else {
-			// all enemies spawned
+
+		if (levelModel.waveIndex < levelModel.waves.Count) {
+			WaveModel waveModel = levelModel.waves[levelModel.waveIndex];
+			if (waveModel.spawnBarrier < cameraPosition.y) {
+				levelModel.waveIndex += 1;
+				_pool.CreateEntity()
+					.AddWaveSpawner(waveModel.count, waveModel.type, waveModel.spawnOffset, 0.0f, waveModel.speed, waveModel.health, waveModel.path);
+			}
 		}
 	}
 }

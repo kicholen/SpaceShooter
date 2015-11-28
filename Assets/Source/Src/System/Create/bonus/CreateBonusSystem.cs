@@ -12,7 +12,7 @@ public class CreateBonusSystem : IInitializeSystem, ISetPool {
 	public void Initialize() {
 		for (int i = 1; i <= BONUSES_COUNT; i++) {
 			_pool.CreateEntity()
-				.AddComponent(ComponentIds.BonusModel, Utils.DeserializeComponent(typeof(BonusModelComponent), i.ToString()));
+				.AddComponent(ComponentIds.BonusModel, Utils.Deserialize<BonusModelComponent>(i.ToString()));
 		}
 	}
 }

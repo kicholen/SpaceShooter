@@ -26,13 +26,15 @@ public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
 		Vector3 cameraPosition = _camera.GetSingleEntity().position.pos;
 		DifficultyControllerComponent difficulty = _difficulty.GetSingleEntity().difficultyController;
 		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
+		float healthMultiplier = (difficulty.hpBoostPercent + 100) / 100;
 
 		foreach (Entity e in _group.GetEntities()) {
 			WaveSpawnerComponent component = e.waveSpawner;
 			component.time -= deltaTime; 
 
 			if (component.time < 0.0f) {
-				_factory.CreateEnemyByType(component.type, new Vector2(0.0f, cameraPosition.y), component.health, difficulty.missileSpeedBoostPercent, component.path);
+				_factory.CreateEnemyByType(component.type, 0.0f, cameraPosition.y, (int)(component.health * healthMultiplier), 
+				                           difficulty.missileSpeedBoostPercent, component.path);
 				component.time = component.timeOffset;
 				component.count = component.count - 1;
 			}

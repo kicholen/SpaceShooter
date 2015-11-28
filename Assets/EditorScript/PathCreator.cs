@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
-using System.IO;
 using System.Collections;
+#if !UNITY_WEBPLAYER && !UNITY_WEBGL
+using System.IO;
+#endif
 
 public class PathCreator : MonoBehaviour {
 
@@ -118,7 +120,7 @@ public class PathCreator : MonoBehaviour {
 				top = position.y;
 			}
 		}
-		Utils.SerializeComponent(component, EditorController.instance.sufix);
+		Utils.Serialize(component, EditorController.instance.sufix);
 
 		Vector3 leftBottom = Camera.main.WorldToScreenPoint(new Vector3(left - SCREEN_OFFSET, bottom - SCREEN_OFFSET, 0.0f));
 		Vector3 rightTop = Camera.main.WorldToScreenPoint(new Vector3(right + SCREEN_OFFSET, top + SCREEN_OFFSET, 0.0f));
@@ -135,7 +137,9 @@ public class PathCreator : MonoBehaviour {
 		texture.Apply();
 		byte[] bytes = texture.EncodeToPNG();
 		Object.Destroy(texture);
+		#if !UNITY_WEBPLAYER && !UNITY_WEBGL
 		File.WriteAllBytes(Application.dataPath + "/Resources/" + component.GetType().Name + "_" + EditorController.instance.sufix + ".png", bytes);
+		#endif
 	}
 
 	void nextState() {

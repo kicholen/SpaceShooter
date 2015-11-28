@@ -15,7 +15,7 @@ public class CreatePlayerSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 	public void Initialize() {
 		_playerModel = _pool.GetGroup(Matcher.PlayerModel);
 		_pool.CreateEntity()
-			.AddComponent(ComponentIds.PlayerModel, Utils.DeserializeComponent(typeof(PlayerModelComponent)));
+			.AddComponent(ComponentIds.PlayerModel, Utils.Deserialize<PlayerModelComponent>());
 	}
 
 	public void Execute(List<Entity> entities) {

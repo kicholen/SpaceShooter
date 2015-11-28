@@ -2,17 +2,18 @@ using Entitas;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Xml;
-using System;
 
 public class CreateLevelSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.CreateLevel.OnEntityAdded(); } }
 
 	Pool _pool;
+	Group _group;
 	Group _players;
 	Group _cameras;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
+		_group = _pool.GetGroup(Matcher.LevelModel);
 		_players = _pool.GetGroup(Matcher.Player);
 		_cameras = _pool.GetGroup(Matcher.Camera);
 	}
@@ -22,23 +23,18 @@ public class CreateLevelSystem : IReactiveSystem, ISetPool {
 		e.isDestroyEntity = true;
 
 		CreateLevelComponent createLevel = e.createLevel;
-		XmlNode node = Utils.LoadXml(createLevel.level.ToString());
 
-		XmlNode enemyNode = node.FirstChild;
+		LevelModelComponent component = getLevelModelIfExists(createLevel.level.ToString());
+		if (component == null) {
+			component = Utils.Deserialize<LevelModelComponent>(createLevel.level.ToString());
+		}
+
 		_pool.CreateEntity()
-			.AddEnemySpawner(createLevel.level, false, enemyNode.FirstChild);
-
-		XmlNode sizeNode = enemyNode.NextSibling;
-		XmlAttributeCollection attributes = sizeNode.Attributes;
-
-		float x = (float)Convert.ToDouble(attributes[0].Value);
-		float y = (float)Convert.ToDouble(attributes[1].Value);
+			.AddEnemySpawner(createLevel.level, false, component);
 
 		Entity cameraEntity = _cameras.GetSingleEntity();
 		if (!cameraEntity.hasSnapPosition) {
-			float width = (float)Convert.ToDouble (attributes [2].Value);
-			float height = (float)Convert.ToDouble (attributes [3].Value);
-			cameraEntity.AddSnapPosition(x, y, width, height, false);
+			cameraEntity.AddSnapPosition(component.position.x, component.position.y, component.size.x, component.size.y, false);
 		}
 
 		Entity player = _players.GetSingleEntity();
@@ -46,7 +42,16 @@ public class CreateLevelSystem : IReactiveSystem, ISetPool {
 			Camera camera = cameraEntity.camera.camera;
 			float screenWidth = camera.orthographicSize * camera.aspect * 2.0f;
 			float screenHeight = camera.orthographicSize * 2.0f;
-			player.AddSnapPosition(x, y, screenWidth, screenHeight, true);
+			player.AddSnapPosition(component.position.x, component.position.y, screenWidth, screenHeight, true);
 		}
+	}
+
+	LevelModelComponent getLevelModelIfExists(string name) {
+		foreach (Entity e in _group.GetEntities()) {
+			if (name == e.levelModel.name) {
+				return e.levelModel;
+			}
+		}
+		return null;
 	}
 }

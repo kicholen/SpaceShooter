@@ -134,8 +134,18 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	}
 
 	void serialize() {
-		Utils.SerializeComponent(_settings.GetSingleEntity().settingsModel);
-		Utils.SerializeComponent(_playerModel.GetSingleEntity().playerModel);
+		Utils.Serialize(_settings.GetSingleEntity().settingsModel);
+		Utils.Serialize(_playerModel.GetSingleEntity().playerModel);
+
+		int i = 1;
+		foreach (Entity e in _pool.GetGroup(Matcher.BonusModel).GetEntities()) {
+			Utils.Serialize(e.bonusModel, i.ToString());
+		}
+
+		i = 1;
+		foreach (Entity e in _pool.GetGroup(Matcher.PathModel).GetEntities()) {
+			Utils.Serialize(e.pathModel, i.ToString());
+		}
 	}
 
 	void restart() {

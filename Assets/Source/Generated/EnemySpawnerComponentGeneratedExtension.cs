@@ -12,20 +12,20 @@ namespace Entitas {
             _enemySpawnerComponentPool.Clear();
         }
 
-        public Entity AddEnemySpawner(int newLevel, bool newUsed, System.Xml.XmlNode newNode) {
+        public Entity AddEnemySpawner(int newLevel, bool newUsed, LevelModelComponent newModel) {
             var component = _enemySpawnerComponentPool.Count > 0 ? _enemySpawnerComponentPool.Pop() : new EnemySpawnerComponent();
             component.level = newLevel;
             component.used = newUsed;
-            component.node = newNode;
+            component.model = newModel;
             return AddComponent(ComponentIds.EnemySpawner, component);
         }
 
-        public Entity ReplaceEnemySpawner(int newLevel, bool newUsed, System.Xml.XmlNode newNode) {
+        public Entity ReplaceEnemySpawner(int newLevel, bool newUsed, LevelModelComponent newModel) {
             var previousComponent = hasEnemySpawner ? enemySpawner : null;
             var component = _enemySpawnerComponentPool.Count > 0 ? _enemySpawnerComponentPool.Pop() : new EnemySpawnerComponent();
             component.level = newLevel;
             component.used = newUsed;
-            component.node = newNode;
+            component.model = newModel;
             ReplaceComponent(ComponentIds.EnemySpawner, component);
             if (previousComponent != null) {
                 _enemySpawnerComponentPool.Push(previousComponent);
