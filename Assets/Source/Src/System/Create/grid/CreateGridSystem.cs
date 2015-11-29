@@ -1,7 +1,9 @@
 using Entitas;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class CreateGridSystem : IInitializeSystem, ISetPool {
+public class CreateGridSystem : IInitializeSystem, IReactiveSystem, ISetPool {
+	public TriggerOnEvent trigger { get { return Matcher.CreateGrid.OnEntityAdded(); } }
 	Pool _pool;
 	
 	public void SetPool(Pool pool) {
@@ -9,14 +11,22 @@ public class CreateGridSystem : IInitializeSystem, ISetPool {
 	}
 	
 	public void Initialize() {
+
+	}
+
+	public void Execute(List<Entity> entities) {
+		entities[0].isDestroyEntity = true;
+
 		_pool.CreateEntity()
-			.AddGrid(GridTypes.Full, 5, 5, getEmptyGrid(5, 5))
-			.AddPosition(new Vector2(0.0f, 0.0f))
+			.AddGrid(GridTypes.Full, 1.0f, getEmptyGrid(8, 3))
+			.AddPosition(new Vector2(-2.0f, 8.0f))
+			.AddVelocity(new Vector2(0.0f, 0.0f))
+			.AddVelocityLimit(0.0f)
 			.IsMoveWithCamera(true);
 	}
 
 	GridState[,] getEmptyGrid(int x, int y) {
-		GridState[,] grid = new GridState[5,5];
+		GridState[,] grid = new GridState[x, y];
 		for (int i = 0; i < grid.GetLength(0); i++) {
 			for (int j = 0; j < grid.GetLength(1); j++) {
 				grid[i, j] = GridState.FREE;

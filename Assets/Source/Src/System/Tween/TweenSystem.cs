@@ -1,12 +1,10 @@
 using Entitas;
 
 public class TweenSystem : IExecuteSystem, ISetPool {
-	Pool _pool;
 	Group _group;
 	Group _time;
 
 	public void SetPool(Pool pool) {
-		_pool = pool;
 		_time = pool.GetGroup(Matcher.Time);
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.TweenPosition, Matcher.Position));
 	}

@@ -248,7 +248,7 @@ using UnityEngine;
 
 	void addGridIfNeeded(Entity e, int grid) {
 		if (grid > 0) {
-			e.AddGridField(GridFieldState.INACTIVE, grid, 0, 0);
+			e.AddGridField(GridFieldState.INACTIVE, grid, -1, -1);
 		}
 	}
 }

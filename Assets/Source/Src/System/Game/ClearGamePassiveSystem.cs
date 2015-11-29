@@ -10,6 +10,7 @@ public class ClearGamePassiveSystem {
 	Group _waveSpawners;
 	Group _cameraShakes;
 	Group _gameStats;
+	Group _grids;
 	Group _input;
 
 	public void Init(Pool pool) {
@@ -20,6 +21,7 @@ public class ClearGamePassiveSystem {
 		_waveSpawners = pool.GetGroup(Matcher.WaveSpawner);
 		_cameraShakes = pool.GetGroup(Matcher.CameraShake);
 		_gameStats = pool.GetGroup(Matcher.GameStats);
+		_grids = pool.GetGroup(Matcher.Grid);
 		_input = pool.GetGroup(Matcher.Input);
 	}
 	
@@ -62,6 +64,12 @@ public class ClearGamePassiveSystem {
 	protected void clearGameStats() {
 		foreach (Entity e in _gameStats.GetEntities()) {
 			e.ReplaceGameStats(0, 0, 0);
+		}
+	}
+
+	protected void clearGrids() {
+		foreach (Entity e in _grids.GetEntities()) {
+			e.isDestroyEntity = true;
 		}
 	}
 

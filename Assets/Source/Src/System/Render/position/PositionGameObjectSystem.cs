@@ -1,4 +1,3 @@
-using UnityEngine;
 using Entitas;
 
 public class PositionGameObjectSystem : IExecuteSystem, ISetPool {
@@ -10,7 +9,7 @@ public class PositionGameObjectSystem : IExecuteSystem, ISetPool {
 	
 	public void Execute() {
 		foreach (Entity e in _group.GetEntities()) {
-			e.gameObject.gameObject.transform.position = new Vector2().Set(e.position.pos);
+			e.gameObject.gameObject.transform.position = e.position.pos;
 		}
 	}
 }

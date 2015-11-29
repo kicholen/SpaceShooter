@@ -29,7 +29,8 @@ public class StartGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool
 		clearWaveSpawners();
 		clearCameraShakes();
 		clearGameStats();
-		
+
+		createGrid();
 		createPlayer();
 		setInput(true);
 	}
@@ -58,6 +59,11 @@ public class StartGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool
 		
 		_pool.CreateEntity()
 			.AddCreateLevel(level, "/Resources/Content/level/");
+	}
+
+	void createGrid() {
+		_pool.CreateEntity()
+			.IsCreateGrid(true);
 	}
 
 	void createPlayer() {

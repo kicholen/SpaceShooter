@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public enum GridState {
 	BUSY = 1,
@@ -7,7 +8,6 @@ public enum GridState {
 
 public class GridComponent : IComponent {
 	public int type;
-	public int sizeX;
-	public int sizeY;
+	public float fieldSize;
 	public GridState[,] grid;
 }

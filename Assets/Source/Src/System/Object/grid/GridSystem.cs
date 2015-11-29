@@ -1,6 +1,9 @@
 using Entitas;
 using UnityEngine;
 
+/*
+ * Anchor - top-left corner
+ */
 public class GridSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
 	Group _grid;
@@ -21,13 +24,19 @@ public class GridSystem : IExecuteSystem, ISetPool {
 				PositionComponent position = e.position;
 				Entity gridEntity = getGridEntity(component.type);
 				GridComponent grid = gridEntity.grid;
+				int previousX = component.x;
+				int previousY = component.y;
 				PositionComponent gridPosition = gridEntity.position;
-				int x;
-				int y;
-				findField(grid.grid, GridState.FREE, out x, out y);
-				e.gridField.state = GridFieldState.MOVE;
+				findField(grid.grid, GridState.FREE, out component.x, out component.y);
+				grid.grid[component.x, component.y] = GridState.BUSY;
+				if (previousX != -1) {
+					grid.grid[previousX, previousY] = GridState.FREE;
+				}
 
-				e.AddTweenPosition(0.0f, 2.0f, EaseTypes.Linear, new Vector2(position.pos.x, position.pos.y), new Vector2(x, position.pos.y), onComplete, null);
+				component.state = GridFieldState.MOVE;
+				Debug.Log(component.x + "x" + component.y);
+				Vector2 to = new Vector2(gridPosition.pos.x + (float)component.x * grid.fieldSize, gridPosition.pos.y - (float)component.y * grid.fieldSize);
+				e.AddTweenPosition(0.0f, 2.0f, EaseTypes.Linear, new Vector2(position.pos.x, position.pos.y), to, onComplete, null);
 			}
 			else if (component.state == GridFieldState.MOVE) {
 				// do nothing
@@ -39,8 +48,8 @@ public class GridSystem : IExecuteSystem, ISetPool {
 		if (entity.hasGridField) {
 			entity.gridField.state = GridFieldState.IDLE;
 			entity.velocity.vel.Set(0.0f, 0.0f);
-			//entity.RemoveVelocityLimit();
-			//entity.isMoveWithCamera = true;
+			entity.velocityLimit.maxVelocity = 0.0f;
+			entity.isMoveWithCamera = true;
 		}
 	}
 
