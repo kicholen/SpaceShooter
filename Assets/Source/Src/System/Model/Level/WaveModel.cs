@@ -6,4 +6,5 @@ public class WaveModel {
 	public int type;
 	public int health;
 	public int path;
+	public int grid;
 }

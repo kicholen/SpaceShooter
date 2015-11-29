@@ -13,7 +13,7 @@ public class InitView : View, IView {
 	}
 
 	public override void Show() {
-		OnShown(null);
+		OnShown();
 	}
 
 	public override void Destroy() {

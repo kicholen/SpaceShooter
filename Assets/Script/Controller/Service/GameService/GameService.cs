@@ -1,5 +1,6 @@
 ﻿using Entitas;
 using Entitas.Unity.VisualDebugging;
+using UnityEngine;
 
 public class GameService : IGameService {
     Systems systems;
@@ -54,7 +55,7 @@ public class GameService : IGameService {
 
 	void onGameEnded(GameEndedEvent e) {
 		pool.CreateEntity()
-			.AddTween(0.0f, 2.0f, EaseTypes.Linear, 0.0f, 1.0f, 0.0f, false, null, EndGame);
+			.AddDelayedCall(2.0f, EndGame);
 	}
 
     Systems CreateSystems() {
@@ -77,6 +78,7 @@ public class GameService : IGameService {
 				.Add(pool.CreateWeaponSystem())
 				.Add(pool.CreateCreateCameraSystem())
 				.Add(pool.CreateCreateLevelSystem())
+				.Add(pool.CreateCreateGridSystem())
 
 				// Spawners
 				.Add(pool.CreateSpawnMissileSystem())
@@ -111,6 +113,10 @@ public class GameService : IGameService {
 				// blockade
 				.Add(pool.CreateMovingBlockadeSystem())
 
+			// Tween
+			.Add(pool.CreateTweenSystem())
+			.Add(pool.CreateDelayedCallSystem())
+			
 			// Physics
 			.Add(pool.CreateAccelerationSystem())
 			.Add(pool.CreateVelocitySystem())
@@ -129,6 +135,7 @@ public class GameService : IGameService {
 				.Add(pool.CreateRemoveOutOfViewGOSystem())
 				.Add(pool.CreateFaceDirectionSystem())
 				.Add(pool.CreateActiveSystem())
+				.Add(pool.CreateGridSystem())
 				.Add(pool.CreatePlayerHealthBarSystem())
 				.Add(pool.CreateIndicatorSystem())
 				
@@ -180,8 +187,6 @@ public class GameService : IGameService {
 			.Add(pool.CreatePauseGameSystem())
 			.Add(pool.CreateEndGameSystem())
 			.Add(pool.CreateSlowGameSystem())
-
-			// Tween
-			.Add(pool.CreateTweenSystem());
+			.Add(pool.CreateCallOnFrameEndSystem());
     }
 }

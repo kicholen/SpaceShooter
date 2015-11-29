@@ -20,6 +20,7 @@ public class LevelView : View, IView {
 
 	void createLevels() {
 		levels.Add(1);
+		levels.Add(2);
 		levels.Add(101);
 		levels.Add(999);
 

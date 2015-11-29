@@ -31,7 +31,7 @@ public class MenuController : MonoBehaviour {
 
 		List<string> paths = new List<string>();
 		foreach (FileInfo fileInfo in fileInfos) {
-			if (fileInfo.Name.StartsWith(lfThis) && fileInfo.Name.IndexOf(".xml") > 0 && fileInfo.Name.IndexOf("meta") < 0) {
+			if (fileInfo.Name.StartsWith(lfThis) && fileInfo.Name.IndexOf(".json") > 0 && fileInfo.Name.IndexOf("meta") < 0) {
 				paths.Add(fileInfo.Name);
 			}
 		}
@@ -55,7 +55,7 @@ public class MenuController : MonoBehaviour {
 		go.GetComponent<Button>().onClick.AddListener(onPathChosen);
 		go.transform.FindChild("Text").GetComponent<Text>().text = name;
 
-		string thumbnailPath = "/Resources/" + name.Replace(".xml", ".png");
+		string thumbnailPath = "/Resources/" + name.Replace(".json", ".png");
 		if (File.Exists(Application.dataPath + thumbnailPath)) {
 			go.transform.FindChild("Thumbnail").GetComponent<Image>().sprite = Resources.Load<Sprite>(name.Split('.')[0]);
 		}

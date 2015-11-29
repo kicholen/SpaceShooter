@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public class MovingBlockadeSystem : IExecuteSystem, ISetPool {
 	Group _group;
@@ -15,18 +16,15 @@ public class MovingBlockadeSystem : IExecuteSystem, ISetPool {
 			MovingBlockadeComponent component = e.movingBlockade;
 			component.time -= deltaTime;
 
-			if (component.time <= 0.0f && !e.hasTween) {
+			if (component.time <= 0.0f && !e.hasTweenPosition) {
 				component.time = component.duration;
 				PositionComponent position = e.position;
-				e.AddTween(0.0f, component.duration, EaseTypes.Linear, position.pos.x, position.pos.x + (component.offset * component.direction), 0.0f, false, (ent, value) => {
-					PositionComponent pos = ent.position;
-					pos.pos.x = value;
-				}, (ent) => {
-					ent.RemoveTween();
+				Vector2 to = new Vector2(position.pos.x + (component.offset * component.direction), position.pos.y);
+				e.AddTweenPosition(0.0f, component.duration, EaseTypes.Linear, position.pos, to, (ent) => {
 					MovingBlockadeComponent cmp = ent.movingBlockade;
 					cmp.direction = -cmp.direction;
 					cmp.time = component.stopDuration;
-				});
+				}, null);
 			}
 		}
 	}

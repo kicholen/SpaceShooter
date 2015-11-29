@@ -8,4 +8,5 @@ public class WaveSpawnerComponent : IComponent {
 	public float speed;
 	public int health;
 	public int path;
+	public int grid;
 }

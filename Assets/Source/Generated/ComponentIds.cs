@@ -5,91 +5,93 @@ public static class ComponentIds {
     public const int Bonus = 3;
     public const int BonusModel = 4;
     public const int BonusOnDeath = 5;
-    public const int Camera = 6;
-    public const int CameraShake = 7;
-    public const int CameraShakeOnDeath = 8;
-    public const int Canvas = 9;
-    public const int Child = 10;
-    public const int CircleMissileRotatedSpawner = 11;
-    public const int CircleMissileSpawner = 12;
-    public const int Collision = 13;
-    public const int CollisionDeath = 14;
-    public const int CreateCamera = 15;
-    public const int CreateLevel = 16;
-    public const int CreatePlayer = 17;
-    public const int Damage = 18;
-    public const int DestroyEntity = 19;
-    public const int DestroyEntityDelayed = 20;
-    public const int DifficultyController = 21;
-    public const int DifficultyModel = 22;
-    public const int EndGame = 23;
-    public const int Enemy = 24;
-    public const int EnemySpawner = 25;
-    public const int EventService = 26;
-    public const int ExplosionOnDeath = 27;
-    public const int FaceDirection = 28;
-    public const int FindTarget = 29;
-    public const int FirstBoss = 30;
-    public const int FollowTarget = 31;
-    public const int GameObject = 32;
-    public const int GameStats = 33;
-    public const int Grid = 34;
-    public const int GridField = 35;
-    public const int Health = 36;
-    public const int HomeMissile = 37;
-    public const int HomeMissileSpawner = 38;
-    public const int Indicator = 39;
-    public const int IndicatorPanel = 40;
-    public const int Input = 41;
-    public const int Laser = 42;
-    public const int LaserSpawner = 43;
-    public const int LevelDimensions = 44;
-    public const int LevelModel = 45;
-    public const int Magnet = 46;
-    public const int MaterialReference = 47;
-    public const int MissileSpawner = 48;
-    public const int MouseInput = 49;
-    public const int MoveWithCamera = 50;
-    public const int MovingBlockade = 51;
-    public const int MultipleMissileSpawner = 52;
-    public const int NonRemovable = 53;
-    public const int Parent = 54;
-    public const int ParticlesOnDeath = 55;
-    public const int ParticleSpawn = 56;
-    public const int Path = 57;
-    public const int PathModel = 58;
-    public const int PauseGame = 59;
-    public const int Player = 60;
-    public const int PlayerHealthBar = 61;
-    public const int PlayerModel = 62;
-    public const int PoolableGO = 63;
-    public const int Position = 64;
-    public const int RegularCamera = 65;
-    public const int RelativePosition = 66;
-    public const int Resource = 67;
-    public const int Rotate = 68;
-    public const int SecondaryWeapon = 69;
-    public const int SettingsModel = 70;
-    public const int ShipModel = 71;
-    public const int SlowGame = 72;
-    public const int SmoothCamera = 73;
-    public const int SnapPosition = 74;
-    public const int Sound = 75;
-    public const int SoundOnDeath = 76;
-    public const int SpeedBonus = 77;
-    public const int StartGame = 78;
-    public const int StaticCamera = 79;
-    public const int Test = 80;
-    public const int Time = 81;
-    public const int Tween = 82;
-    public const int UIFactoryService = 83;
-    public const int UIResource = 84;
-    public const int Velocity = 85;
-    public const int VelocityLimit = 86;
-    public const int WaveSpawner = 87;
-    public const int Weapon = 88;
+    public const int CallOnFrameEnd = 6;
+    public const int Camera = 7;
+    public const int CameraShake = 8;
+    public const int CameraShakeOnDeath = 9;
+    public const int Canvas = 10;
+    public const int Child = 11;
+    public const int CircleMissileRotatedSpawner = 12;
+    public const int CircleMissileSpawner = 13;
+    public const int Collision = 14;
+    public const int CollisionDeath = 15;
+    public const int CreateCamera = 16;
+    public const int CreateLevel = 17;
+    public const int CreatePlayer = 18;
+    public const int Damage = 19;
+    public const int DelayedCall = 20;
+    public const int DestroyEntity = 21;
+    public const int DestroyEntityDelayed = 22;
+    public const int DifficultyController = 23;
+    public const int DifficultyModel = 24;
+    public const int EndGame = 25;
+    public const int Enemy = 26;
+    public const int EnemySpawner = 27;
+    public const int EventService = 28;
+    public const int ExplosionOnDeath = 29;
+    public const int FaceDirection = 30;
+    public const int FindTarget = 31;
+    public const int FirstBoss = 32;
+    public const int FollowTarget = 33;
+    public const int GameObject = 34;
+    public const int GameStats = 35;
+    public const int Grid = 36;
+    public const int GridField = 37;
+    public const int Health = 38;
+    public const int HomeMissile = 39;
+    public const int HomeMissileSpawner = 40;
+    public const int Indicator = 41;
+    public const int IndicatorPanel = 42;
+    public const int Input = 43;
+    public const int Laser = 44;
+    public const int LaserSpawner = 45;
+    public const int LevelDimensions = 46;
+    public const int LevelModel = 47;
+    public const int Magnet = 48;
+    public const int MaterialReference = 49;
+    public const int MissileSpawner = 50;
+    public const int MouseInput = 51;
+    public const int MoveWithCamera = 52;
+    public const int MovingBlockade = 53;
+    public const int MultipleMissileSpawner = 54;
+    public const int NonRemovable = 55;
+    public const int Parent = 56;
+    public const int ParticlesOnDeath = 57;
+    public const int ParticleSpawn = 58;
+    public const int Path = 59;
+    public const int PathModel = 60;
+    public const int PauseGame = 61;
+    public const int Player = 62;
+    public const int PlayerHealthBar = 63;
+    public const int PlayerModel = 64;
+    public const int PoolableGO = 65;
+    public const int Position = 66;
+    public const int RegularCamera = 67;
+    public const int RelativePosition = 68;
+    public const int Resource = 69;
+    public const int Rotate = 70;
+    public const int SecondaryWeapon = 71;
+    public const int SettingsModel = 72;
+    public const int ShipModel = 73;
+    public const int SlowGame = 74;
+    public const int SmoothCamera = 75;
+    public const int SnapPosition = 76;
+    public const int Sound = 77;
+    public const int SoundOnDeath = 78;
+    public const int SpeedBonus = 79;
+    public const int StartGame = 80;
+    public const int StaticCamera = 81;
+    public const int Test = 82;
+    public const int Time = 83;
+    public const int TweenPosition = 84;
+    public const int UIFactoryService = 85;
+    public const int UIResource = 86;
+    public const int Velocity = 87;
+    public const int VelocityLimit = 88;
+    public const int WaveSpawner = 89;
+    public const int Weapon = 90;
 
-    public const int TotalComponents = 89;
+    public const int TotalComponents = 91;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -98,6 +100,7 @@ public static class ComponentIds {
         "Bonus",
         "BonusModel",
         "BonusOnDeath",
+        "CallOnFrameEnd",
         "Camera",
         "CameraShake",
         "CameraShakeOnDeath",
@@ -111,6 +114,7 @@ public static class ComponentIds {
         "CreateLevel",
         "CreatePlayer",
         "Damage",
+        "DelayedCall",
         "DestroyEntity",
         "DestroyEntityDelayed",
         "DifficultyController",
@@ -174,7 +178,7 @@ public static class ComponentIds {
         "StaticCamera",
         "Test",
         "Time",
-        "Tween",
+        "TweenPosition",
         "UIFactoryService",
         "UIResource",
         "Velocity",
@@ -190,6 +194,7 @@ public static class ComponentIds {
         typeof(BonusComponent),
         typeof(BonusModelComponent),
         typeof(BonusOnDeathComponent),
+        typeof(CallOnFrameEndComponent),
         typeof(CameraComponent),
         typeof(CameraShakeComponent),
         typeof(CameraShakeOnDeathComponent),
@@ -203,6 +208,7 @@ public static class ComponentIds {
         typeof(CreateLevelComponent),
         typeof(CreatePlayerComponent),
         typeof(DamageComponent),
+        typeof(DelayedCallComponent),
         typeof(DestroyEntityComponent),
         typeof(DestroyEntityDelayedComponent),
         typeof(DifficultyControllerComponent),
@@ -266,7 +272,7 @@ public static class ComponentIds {
         typeof(StaticCameraComponent),
         typeof(TestComponent),
         typeof(TimeComponent),
-        typeof(TweenComponent),
+        typeof(TweenPositionComponent),
         typeof(UIFactoryServiceComponent),
         typeof(UIResourceComponent),
         typeof(VelocityComponent),

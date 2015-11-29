@@ -1,7 +1,6 @@
 using Entitas;
 using UnityEngine;
 using System.Collections.Generic;
-using System.Xml;
 
 public class CreateLevelSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.CreateLevel.OnEntityAdded(); } }
@@ -27,6 +26,12 @@ public class CreateLevelSystem : IReactiveSystem, ISetPool {
 		LevelModelComponent component = getLevelModelIfExists(createLevel.level.ToString());
 		if (component == null) {
 			component = Utils.Deserialize<LevelModelComponent>(createLevel.level.ToString());
+			_pool.CreateEntity()
+				.AddComponent(ComponentIds.LevelModel, component);
+		}
+		else {
+			component.enemyIndex = 0;
+			component.waveIndex = 0;
 		}
 
 		_pool.CreateEntity()

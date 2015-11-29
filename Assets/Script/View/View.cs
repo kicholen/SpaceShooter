@@ -5,6 +5,7 @@ public class View {
 	const float pixelsPerUnit = 100.0f;
 
 	RectTransform rectTransform;
+	Entity entity;
 
 	protected Pool pool;
 	protected EventService eventService;
@@ -20,6 +21,8 @@ public class View {
 		this.uiFactoryService = uiFactoryService;
 		go = uiFactoryService.CreatePrefab(prefab);
 		rectTransform = go.GetComponent<RectTransform>();
+		entity = pool.CreateEntity()
+				.AddPosition(rectTransform.localPosition);
 	}
 	
 	public void SetParent(Transform parent) {
@@ -27,36 +30,30 @@ public class View {
 	}
 	
 	public virtual void Show() {
-		float from = rectTransform.localPosition.x - Screen.width;
-		pool.CreateEntity()
-			.AddTween(0.0f, 0.1f, EaseTypes.Linear, from, rectTransform.localPosition.x, 0.0f, false, onUpdate, OnShown);
-		onUpdate(null, from);
+		Vector2 from = new Vector2(rectTransform.localPosition.x - Screen.width, rectTransform.localPosition.y);
+		entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, from, rectTransform.localPosition, OnShown, onUpdate);
+		rectTransform.localPosition = from;
 	}
 	
-	void onUpdate(Entity e, float x) {
-		rectTransform.localPosition = new Vector3(x, go.transform.localPosition.y);
+	void onUpdate(Entity e) {
+		rectTransform.localPosition = new Vector3(e.position.pos.x, e.position.pos.y);
 	}
 	
 	public virtual void Hide() {
-		pool.CreateEntity()
-			.AddTween(0.0f, 0.1f, EaseTypes.Linear, rectTransform.localPosition.x, rectTransform.localPosition.x + Screen.width, 0.0f, false, onUpdate, OnHidden);
+		Vector2 to = new Vector2(rectTransform.localPosition.x + Screen.width, rectTransform.localPosition.y);
+		entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, rectTransform.localPosition, to, OnHidden, onUpdate);
 	}
 	
-	public void OnShown(Entity e) {
-		if (e != null) {
-			e.isDestroyEntity = true;
-		}
+	public void OnShown(Entity e = null) {
 		eventService.Dispatch<ViewShownEvent>(new ViewShownEvent());
 	}
 	
-	public void OnHidden(Entity e) {
-		if (e != null) {
-			e.isDestroyEntity = true;
-		}
+	public void OnHidden(Entity e = null) {
 		eventService.Dispatch<ViewHiddenEvent>(new ViewHiddenEvent());
 	}
 	
 	public virtual void Destroy() {
+		entity.isDestroyEntity = true;
 		Object.Destroy(go);
 	}
 }

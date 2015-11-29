@@ -38,7 +38,7 @@ public class GameView : View, IView, IUpdateable {
 	public override void Hide() {
 		controller.Services.Updateables.Remove(this);
 		eventService.RemoveListener<GameSlowEvent>(onGameSlow);
-		OnHidden(null);
+		OnHidden();
 	}
 
 	void onGameSlow(GameSlowEvent e) {

@@ -28,7 +28,6 @@ public class RemoveGameObjectSystem : ISystem, ISetPool, IEnsureComponents {
 	}
 
 	void removeGameObject(GameObjectComponent component) {
-		component.gameObject.transform.parent = null;
 		component.gameObject.SetActive(false);
 		addToPool(component);
 	}

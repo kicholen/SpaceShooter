@@ -1,14 +1,13 @@
 using Entitas;
 using System;
+using UnityEngine;
 
-public class TweenComponent : IComponent {
+public class TweenPositionComponent : IComponent {
 	public float time;
 	public float duration;
 	public int ease;
-	public float from;
-	public float to;
-	public float current;
-	public bool hasCompleted;
-	public Action<Entity, float> onUpdate;
+	public Vector2 fromVector;
+	public Vector2 toVector;
 	public Action<Entity> onComplete;
+	public Action<Entity> onUpdate;
 }

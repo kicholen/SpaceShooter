@@ -34,7 +34,7 @@ public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
 
 			if (component.time < 0.0f) {
 				_factory.CreateEnemyByType(component.type, 0.0f, cameraPosition.y, (int)(component.health * healthMultiplier), 
-				                           difficulty.missileSpeedBoostPercent, component.path);
+				                           difficulty.missileSpeedBoostPercent, component.path, component.grid, component.speed);
 				component.time = component.timeOffset;
 				component.count = component.count - 1;
 			}

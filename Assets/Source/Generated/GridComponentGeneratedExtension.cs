@@ -12,7 +12,7 @@ namespace Entitas {
             _gridComponentPool.Clear();
         }
 
-        public Entity AddGrid(string newType, int newSizeX, int newSizeY, GridState[,] newGrid) {
+        public Entity AddGrid(int newType, int newSizeX, int newSizeY, GridState[,] newGrid) {
             var component = _gridComponentPool.Count > 0 ? _gridComponentPool.Pop() : new GridComponent();
             component.type = newType;
             component.sizeX = newSizeX;
@@ -21,7 +21,7 @@ namespace Entitas {
             return AddComponent(ComponentIds.Grid, component);
         }
 
-        public Entity ReplaceGrid(string newType, int newSizeX, int newSizeY, GridState[,] newGrid) {
+        public Entity ReplaceGrid(int newType, int newSizeX, int newSizeY, GridState[,] newGrid) {
             var previousComponent = hasGrid ? grid : null;
             var component = _gridComponentPool.Count > 0 ? _gridComponentPool.Pop() : new GridComponent();
             component.type = newType;
