@@ -1,5 +1,4 @@
 using Entitas;
-using UnityEngine;
 
 public enum GridState {
 	BUSY = 1,

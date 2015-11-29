@@ -18,7 +18,7 @@ public class CreateGridSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 		entities[0].isDestroyEntity = true;
 
 		_pool.CreateEntity()
-			.AddGrid(GridTypes.Full, 1.0f, getEmptyGrid(8, 3))
+			.AddGrid(GridTypes.Full, 1.0f, getEmptyGrid(7, 5))
 			.AddPosition(new Vector2(-2.0f, 8.0f))
 			.AddVelocity(new Vector2(0.0f, 0.0f))
 			.AddVelocityLimit(0.0f)

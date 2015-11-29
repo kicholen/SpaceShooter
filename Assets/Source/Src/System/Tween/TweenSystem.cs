@@ -10,16 +10,23 @@ public class TweenSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.deltaTime;
+		TimeComponent time = _time.GetSingleEntity().time;
+		float deltaTime = time.deltaTime;
+		float gameDeltaTime = time.gameDeltaTime;
 
 		foreach (Entity e in _group.GetEntities()) {
-			tweenPosition(e, deltaTime);
+			tweenPosition(e, deltaTime, gameDeltaTime);
 		}
 	}
 
-	void tweenPosition(Entity e, float deltaTime) {
+	void tweenPosition(Entity e, float deltaTime, float gameDeltaTime) {
 		TweenPositionComponent tween = e.tweenPosition;
-		tween.time += deltaTime;
+		if (tween.isInGame) {
+			tween.time += gameDeltaTime;
+		}
+		else {
+			tween.time += deltaTime;
+		}
 		
 		if (tween.time > tween.duration) {
 			e.position.pos.Set(tween.toVector.x, tween.toVector.y);

@@ -20,7 +20,7 @@ public class MovingBlockadeSystem : IExecuteSystem, ISetPool {
 				component.time = component.duration;
 				PositionComponent position = e.position;
 				Vector2 to = new Vector2(position.pos.x + (component.offset * component.direction), position.pos.y);
-				e.AddTweenPosition(0.0f, component.duration, EaseTypes.Linear, position.pos, to, (ent) => {
+				e.AddTweenPosition(0.0f, component.duration, EaseTypes.Linear, position.pos, to, true, (ent) => {
 					MovingBlockadeComponent cmp = ent.movingBlockade;
 					cmp.direction = -cmp.direction;
 					cmp.time = component.stopDuration;

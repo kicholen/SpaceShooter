@@ -63,7 +63,7 @@ public static class Utils
 		#if UNITY_EDITOR
 		path = Application.dataPath + "/Resources/" + value.GetType().Name + path + jsonSufix;
 		#elif UNITY_ANDROID
-		path = Application.persistentDataPath + "/" + component.GetType().Name + path + xmlSufix;
+		path = Application.persistentDataPath + "/" + value.GetType().Name + path + xmlSufix;
 		#endif
 
 		#if UNITY_WEBPLAYER || UNITY_WEBGL

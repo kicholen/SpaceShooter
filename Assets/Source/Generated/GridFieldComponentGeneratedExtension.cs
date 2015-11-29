@@ -12,8 +12,10 @@ namespace Entitas {
             _gridFieldComponentPool.Clear();
         }
 
-        public Entity AddGridField(GridFieldState newState, int newType, int newX, int newY) {
+        public Entity AddGridField(float newTime, float newFreezeDuration, GridFieldState newState, int newType, int newX, int newY) {
             var component = _gridFieldComponentPool.Count > 0 ? _gridFieldComponentPool.Pop() : new GridFieldComponent();
+            component.time = newTime;
+            component.freezeDuration = newFreezeDuration;
             component.state = newState;
             component.type = newType;
             component.x = newX;
@@ -21,9 +23,11 @@ namespace Entitas {
             return AddComponent(ComponentIds.GridField, component);
         }
 
-        public Entity ReplaceGridField(GridFieldState newState, int newType, int newX, int newY) {
+        public Entity ReplaceGridField(float newTime, float newFreezeDuration, GridFieldState newState, int newType, int newX, int newY) {
             var previousComponent = hasGridField ? gridField : null;
             var component = _gridFieldComponentPool.Count > 0 ? _gridFieldComponentPool.Pop() : new GridFieldComponent();
+            component.time = newTime;
+            component.freezeDuration = newFreezeDuration;
             component.state = newState;
             component.type = newType;
             component.x = newX;

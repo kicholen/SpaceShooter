@@ -27,6 +27,7 @@ public class EndGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool {
 		clearWaveSpawners();
 		clearCameraShakes();
 		clearGameStats();
+		clearGrids();
 		clearPlayer();
 		clearPause();
 		clearBlockade();

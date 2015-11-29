@@ -31,7 +31,7 @@ public class View {
 	
 	public virtual void Show() {
 		Vector2 from = new Vector2(rectTransform.localPosition.x - Screen.width, rectTransform.localPosition.y);
-		entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, from, rectTransform.localPosition, OnShown, onUpdate);
+		entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, from, rectTransform.localPosition, false, OnShown, onUpdate);
 		rectTransform.localPosition = from;
 	}
 	
@@ -41,7 +41,7 @@ public class View {
 	
 	public virtual void Hide() {
 		Vector2 to = new Vector2(rectTransform.localPosition.x + Screen.width, rectTransform.localPosition.y);
-		entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, rectTransform.localPosition, to, OnHidden, onUpdate);
+		entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, rectTransform.localPosition, to, false, OnHidden, onUpdate);
 	}
 	
 	public void OnShown(Entity e = null) {

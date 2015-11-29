@@ -12,19 +12,20 @@ namespace Entitas {
             _tweenPositionComponentPool.Clear();
         }
 
-        public Entity AddTweenPosition(float newTime, float newDuration, int newEase, UnityEngine.Vector2 newFromVector, UnityEngine.Vector2 newToVector, System.Action<Entitas.Entity> newOnComplete, System.Action<Entitas.Entity> newOnUpdate) {
+        public Entity AddTweenPosition(float newTime, float newDuration, int newEase, UnityEngine.Vector2 newFromVector, UnityEngine.Vector2 newToVector, bool newIsInGame, System.Action<Entitas.Entity> newOnComplete, System.Action<Entitas.Entity> newOnUpdate) {
             var component = _tweenPositionComponentPool.Count > 0 ? _tweenPositionComponentPool.Pop() : new TweenPositionComponent();
             component.time = newTime;
             component.duration = newDuration;
             component.ease = newEase;
             component.fromVector = newFromVector;
             component.toVector = newToVector;
+            component.isInGame = newIsInGame;
             component.onComplete = newOnComplete;
             component.onUpdate = newOnUpdate;
             return AddComponent(ComponentIds.TweenPosition, component);
         }
 
-        public Entity ReplaceTweenPosition(float newTime, float newDuration, int newEase, UnityEngine.Vector2 newFromVector, UnityEngine.Vector2 newToVector, System.Action<Entitas.Entity> newOnComplete, System.Action<Entitas.Entity> newOnUpdate) {
+        public Entity ReplaceTweenPosition(float newTime, float newDuration, int newEase, UnityEngine.Vector2 newFromVector, UnityEngine.Vector2 newToVector, bool newIsInGame, System.Action<Entitas.Entity> newOnComplete, System.Action<Entitas.Entity> newOnUpdate) {
             var previousComponent = hasTweenPosition ? tweenPosition : null;
             var component = _tweenPositionComponentPool.Count > 0 ? _tweenPositionComponentPool.Pop() : new TweenPositionComponent();
             component.time = newTime;
@@ -32,6 +33,7 @@ namespace Entitas {
             component.ease = newEase;
             component.fromVector = newFromVector;
             component.toVector = newToVector;
+            component.isInGame = newIsInGame;
             component.onComplete = newOnComplete;
             component.onUpdate = newOnUpdate;
             ReplaceComponent(ComponentIds.TweenPosition, component);
