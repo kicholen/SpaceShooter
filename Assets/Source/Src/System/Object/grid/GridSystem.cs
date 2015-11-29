@@ -52,16 +52,18 @@ public class GridSystem : IExecuteSystem, ISetPool {
 	}
 
 	void onEntityPathRemoved(Group group, Entity entity, int index, IComponent component) {
-		entity.gridField.state = GridFieldState.IDLE;
-		entity.velocity.vel.Set(0.0f, 0.0f);
-		entity.velocityLimit.maxVelocity = 0.0f;
-		entity.isMoveWithCamera = true;
+		if (entity.hasGridField) {
+			entity.gridField.state = GridFieldState.IDLE;
+			entity.velocity.vel.Set(0.0f, 0.0f);
+			entity.velocityLimit.maxVelocity = 0.0f;
+			entity.isMoveWithCamera = true;
+		}
 	}
 
 	void onEntityGridRemoved(Group group, Entity entity, int index, IComponent component) {
 		GridFieldComponent gridField = (GridFieldComponent)component;
 		Entity gridEntity = getGridEntity(gridField.type);
-		if (gridEntity != null) {
+		if (gridEntity != null && gridEntity.hasGrid) {
 			gridEntity.grid.grid[gridField.x, gridField.y] = GridState.FREE;
 		}
 	}
