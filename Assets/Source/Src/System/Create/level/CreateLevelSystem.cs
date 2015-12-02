@@ -43,12 +43,12 @@ public class CreateLevelSystem : IReactiveSystem, ISetPool {
 		}
 
 		Entity player = _players.GetSingleEntity();
-		if (!player.hasSnapPosition) {
-			Camera camera = cameraEntity.camera.camera;
-			float screenWidth = camera.orthographicSize * camera.aspect * 2.0f;
-			float screenHeight = camera.orthographicSize * 2.0f;
-			player.AddSnapPosition(component.position.x, component.position.y, screenWidth, screenHeight, true);
-		}
+		Camera camera = cameraEntity.camera.camera;
+		float screenWidth = camera.orthographicSize * camera.aspect * 2.0f;
+		float screenHeight = camera.orthographicSize * 2.0f;
+		player.AddSnapPosition(component.position.x, component.position.y, screenWidth, screenHeight, true);
+
+		createBackground(screenWidth, screenHeight);
 	}
 
 	LevelModelComponent getLevelModelIfExists(string name) {
@@ -58,5 +58,15 @@ public class CreateLevelSystem : IReactiveSystem, ISetPool {
 			}
 		}
 		return null;
+	}
+
+	void createBackground(float width, float height) {
+		_pool.CreateEntity()
+			.IsMoveWithCamera(true)
+			.AddVelocity(new Vector2())
+			.AddVelocityLimit(0.0f)
+			.AddPosition(new Vector2())
+			.AddResource(Resource.Background)
+			.AddBackground(Color.black, 20, new Vector2(width, height));
 	}
 }

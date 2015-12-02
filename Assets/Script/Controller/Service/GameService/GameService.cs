@@ -143,6 +143,7 @@ public class GameService : IGameService {
 				.Add(pool.CreateHealthSystem())
 				.Add(pool.CreateDeadPlayerSystem())
 				.Add(pool.CreateAlphaSystem())
+				.Add(pool.CreateBackgroundSystem())
 
 				// OnDeath Actions
 				.Add(pool.CreateBonusOnDeathSystem())

@@ -62,6 +62,9 @@ public class GridSystem : IExecuteSystem, ISetPool {
 
 	void onEntityGridRemoved(Group group, Entity entity, int index, IComponent component) {
 		GridFieldComponent gridField = (GridFieldComponent)component;
+		if (gridField.state == GridFieldState.INACTIVE) {
+			return;
+		}
 		Entity gridEntity = getGridEntity(gridField.type);
 		if (gridEntity != null && gridEntity.hasGrid) {
 			gridEntity.grid.grid[gridField.x, gridField.y] = GridState.FREE;

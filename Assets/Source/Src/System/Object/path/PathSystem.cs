@@ -5,6 +5,7 @@ using UnityEngine;
 public class PathSystem : IExecuteSystem, ISetPool {
 
 	Pool _pool;
+	Group _camera;
 	Group _time;
 	Group _group;
 	
@@ -13,18 +14,24 @@ public class PathSystem : IExecuteSystem, ISetPool {
 	
 	public void SetPool(Pool pool) {
 		_pool = pool;
+		_camera = _pool.GetGroup(Matcher.Camera);
 		_time = _pool.GetGroup(Matcher.Time);
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Path, Matcher.GameObject, Matcher.Velocity, Matcher.VelocityLimit, Matcher.Position));
 	}
 	
 	public void Execute() {
 		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
+		float cameraVelocity = 1.0f;
+		Entity camera = _camera.GetSingleEntity();
+		if (camera.hasVelocity) {
+			cameraVelocity = camera.velocity.vel.y;
+		}
 		foreach (Entity e in _group.GetEntities()) {
 			PathComponent path = e.path;
 			List<Vector2> points = path.path.points;
 			if (path.node != points.Count) {
 				PositionComponent position = e.position;
-				Vector2 desiredPosition = points[path.node] + new Vector2(0.0f, path.startY + path.duration);
+				Vector2 desiredPosition = points[path.node] + new Vector2(0.0f, path.startY + path.duration * cameraVelocity);
 				if (path.node == 0) {
 					position.pos.Set(desiredPosition.x, desiredPosition.y);
 					path.node += 1;
@@ -41,7 +48,7 @@ public class PathSystem : IExecuteSystem, ISetPool {
 					velocity.vel += steering;
 					velocity.vel.Normalize();
 					velocity.vel *= speed;
-					//drawDebugCircle(e.gameObject.gameObject, points, path.startY + (path.duration * 1.0f));
+					//drawDebugCircle(e.gameObject.gameObject, points, path.startY + (path.duration * cameraVelocity));
 					
 					if (distance(currentPosition, desiredPosition) <= MIN_DISTANCE) {
 						path.node = path.node + 1;

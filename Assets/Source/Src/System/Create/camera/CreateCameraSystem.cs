@@ -9,7 +9,6 @@ public class CreateCameraSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 	Group _group;
 	Group _player;
 	const float CAMERA_SPEED = 1.0f;
-	const float CAMERA_START_OFFSET = 2.0f;
 	const float CAMERA_START_Z = -10.0f;
 
 	public void SetPool(Pool pool) {
@@ -25,7 +24,7 @@ public class CreateCameraSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			.AddCamera(camera)
 			.AddStaticCamera(new Vector3(0.0f, 0.0f, CAMERA_START_Z))
 			.AddVelocity(new Vector2(0.0f, 0.0f))
-			.AddPosition(new Vector2(0.0f, CAMERA_START_OFFSET));
+			.AddPosition(new Vector2(0.0f, Config.CAMERA_START_OFFSET));
 	}
 
 	public void Execute(List<Entity> entities) {
