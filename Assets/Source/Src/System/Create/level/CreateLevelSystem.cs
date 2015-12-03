@@ -65,6 +65,7 @@ public class CreateLevelSystem : IReactiveSystem, ISetPool {
 			.IsMoveWithCamera(true)
 			.AddVelocity(new Vector2())
 			.AddVelocityLimit(0.0f)
+			.AddSortOrder(SortTypes.Background)
 			.AddPosition(new Vector2())
 			.AddResource(Resource.Background)
 			.AddBackground(Color.black, 20, new Vector2(width, height));

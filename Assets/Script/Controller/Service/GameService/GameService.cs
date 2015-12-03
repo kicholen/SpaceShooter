@@ -15,12 +15,12 @@ public class GameService : IGameService {
 
 	public void Init() {
 		controller.Services.EventService.AddListener<GameEndedEvent>(onGameEnded);
-		systems.Initialize();
 		pool.CreateEntity()
 			.AddEventService(controller.Services.EventService)
 			.AddUIFactoryService(controller.Services.UIFactoryService)
 			.AddCanvas(controller.Services.ViewService.Canvas);
 			
+		systems.Initialize();
 		controller.Services.Updateables.Add(this);
 	}
 
@@ -97,6 +97,9 @@ public class GameService : IGameService {
 			.Add(pool.CreateAddGameObjectSystem())
 			.Add(pool.CreateAddUIGameObjectSystem())
 			
+			// Sort order
+			.Add(pool.CreateSortOrderSystem())
+
         	// Input
 			.Add(pool.CreateCreateMouseInputSystem())
 			.Add(pool.CreateProcessInputSystem())
@@ -144,6 +147,7 @@ public class GameService : IGameService {
 				.Add(pool.CreateDeadPlayerSystem())
 				.Add(pool.CreateAlphaSystem())
 				.Add(pool.CreateBackgroundSystem())
+				.Add(pool.CreateGhostSystem())
 
 				// OnDeath Actions
 				.Add(pool.CreateBonusOnDeathSystem())

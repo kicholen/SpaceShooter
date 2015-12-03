@@ -36,6 +36,12 @@ public class RemoveGameObjectSystem : ISystem, ISetPool, IEnsureComponents {
 		string name = gameObjectComponent.path;
 		GameObject go = gameObjectComponent.gameObject;
 		go.transform.rotation = Quaternion.identity;
+		go.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+		SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
+		if (renderer != null) {
+			Color color = renderer.color;
+			renderer.color = new Color(color.r, color.g, color.b, 255);
+		}
 		bool wasObjectAdded = false;
 
 		foreach (Entity e in _poolGroup.GetEntities()) {

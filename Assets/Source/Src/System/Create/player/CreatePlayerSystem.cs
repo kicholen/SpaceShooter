@@ -33,6 +33,7 @@ public class CreatePlayerSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			.AddHealth(playerModel.health)
 			.AddResource(Resource.Player)
 			.AddExplosionOnDeath(1.0f, Resource.Explosion)
+			.AddGhost(0.0f, 0.1f, 0.3f) 
 			.IsMoveWithCamera(true);
 		
 		player.AddParent(getPlayerChildren(player, playerModel));
@@ -64,14 +65,12 @@ public class CreatePlayerSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			             .AddRelativePosition(0.5f, -0.5f)
 			             .AddPosition(new Vector2(0.0f, 0.0f))
 			             .AddChild(parent)
-			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player)
-			             .AddResource(Resource.Weapon));
+			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
 			children.Add(_pool.CreateEntity()
 			             .AddRelativePosition(-0.5f, -0.5f)
 			             .AddPosition(new Vector2(0.0f, 0.0f))
 			             .AddChild(parent)
-			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player)
-			             .AddResource(Resource.Weapon));
+			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
 		}
 		if (component.hasSecondaryMissiles) {
 			Entity leftWeapon = _pool.CreateEntity()
