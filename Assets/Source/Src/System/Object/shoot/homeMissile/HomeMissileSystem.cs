@@ -47,10 +47,13 @@ public class HomeMissileSystem : IExecuteSystem, ISetPool {
 		Vector2 position = e.position.pos;
 		Vector2 targetPosition = targetEntity.position.pos;
 		VelocityComponent velocity = e.velocity;
+		VelocityLimitComponent velocityLimit = e.velocityLimit;
 
-		float velocityX = (targetPosition.x - position.x) * 15.0f;
-		float velocityY = (targetPosition.y - position.y) * 15.0f;
+		float velocityX = (targetPosition.x - position.x);
+		float velocityY = (targetPosition.y - position.y);
 
-		velocity.vel.Set(Mathf.Lerp(velocity.vel.x, velocityX, deltaTime), Mathf.Lerp(velocity.vel.y, velocityY, deltaTime));
+		velocity.vel.Set(velocityX, velocityY);
+		velocity.vel.Normalize();
+		velocity.vel *= velocityLimit.maxVelocity;
 	}
 }

@@ -35,7 +35,9 @@ public class TweenSystem : IExecuteSystem, ISetPool {
 			}
 			e.AddCallOnFrameEnd((ent) => {
 				ent.RemoveTweenPosition();
-				tween.onComplete(ent);
+				if (tween.onComplete != null) {
+					tween.onComplete(ent);
+				}
 			});
 		}
 		else {

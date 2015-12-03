@@ -8,9 +8,8 @@ public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 	Pool _pool;
 	Group _group;
 	Group _players;
-	const float ACCELERATION = 1.0f;
-	const float FRICTION = 0.45f;
-	const float VELOCITY = 2.0f;
+
+	const float MAX_TWEEN_RADIUS = 1.0f;
 
 	const float TEST_VELOCITY = 5.0f;
 	const float TEST_RADIUS = 4.0f;
@@ -44,15 +43,13 @@ public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 		int amount = Random.Range(bonus.minAmount, bonus.maxAmount);
 
 		for (int i = 0; i < amount; i++) {
-			float velocityX = Random.Range(-VELOCITY, VELOCITY);
-			float velocityY = Random.Range(-VELOCITY, VELOCITY);
-			float acceX = velocityX > 0.0f ? -ACCELERATION : ACCELERATION;
-			float acceY = velocityY > 0.0f ? -ACCELERATION : ACCELERATION;
+			float offsetX = Random.Range(-MAX_TWEEN_RADIUS, MAX_TWEEN_RADIUS);
+			float offsetY = Random.Range(-MAX_TWEEN_RADIUS, MAX_TWEEN_RADIUS);
 			_pool.CreateEntity()
 				.AddBonus(bonus.type)
-				.AddVelocity(new Vector2(velocityX, velocityY))
-				.AddAcceleration(acceX, acceY, acceX > 0.0f ? -FRICTION : FRICTION, acceY > 0.0f ? -FRICTION : FRICTION, true)
-				.AddPosition(new Vector2().Set(position))
+				.AddVelocity(new Vector2())
+				.AddTweenPosition(0.0f, 2.0f, EaseTypes.Linear, new Vector2(position.x, position.y), new Vector2(position.x + offsetX, position.y + offsetY), true, null, null)
+				.AddPosition(new Vector2(position.x, position.y))
 				.AddHealth(0)
 				.AddCollision(CollisionTypes.Bonus)
 				.AddFollowTarget(follow)
