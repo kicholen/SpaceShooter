@@ -97,14 +97,7 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	}
 
 	void laserWeapon() {
-		Entity player = _playerGroup.GetSingleEntity();
-		
-		if (player.hasLaserSpawner) {
-			player.RemoveLaserSpawner();
-		}
-		else {
-			player.AddLaserSpawner(5.0f, 0.0f, 0.0f, new Vector2(), CollisionTypes.Player, null);
-		}
+
 	}
 
 	void pauseOrUnpauseGame() {

@@ -1,7 +1,7 @@
 using Entitas;
 using UnityEngine;
 
-public class PlayerInputSystem : IExecuteSystem, ISetPool {
+public class PlayerInputSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 	Pool _pool;
 	Group _group;
 	Group _players;
@@ -13,7 +13,11 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 		_players = _pool.GetGroup(Matcher.Player);
 		_slowGame = _pool.GetGroup(Matcher.SlowGame);
 	}
-	
+
+	public void Initialize() {
+		_pool.GetGroup(Matcher.EventService).GetSingleEntity().eventService.dispatcher.AddListener<GameActivateLaserEvent>(activateLaser);
+	}
+
 	public void Execute() {
 		Entity e = _group.GetSingleEntity();
 		InputComponent input = e.input;
@@ -74,6 +78,21 @@ public class PlayerInputSystem : IExecuteSystem, ISetPool {
 		if (_slowGame.count == 0) {
 			_pool.CreateEntity()
 				.AddSlowGame(0.3f);
+		}
+	}
+
+	void activateLaser(GameActivateLaserEvent e) {
+		Entity player = _players.GetSingleEntity();
+
+		if (!player.hasLaserSpawner) {
+			player.AddLaserSpawner(5.0f, 0.0f, 0.0f, new Vector2(), CollisionTypes.Player, null)
+				.AddDelayedCall(5.0f, deactivateLaser);
+		}
+	}
+
+	void deactivateLaser(Entity player) {
+		if (player!=null&&player.hasLaserSpawner) {
+			player.RemoveLaserSpawner();
 		}
 	}
 }

@@ -13,7 +13,8 @@ public class GameView : View, IView, IUpdateable {
 	: base(pool, uiFactoryService, eventService, "View/GameView") {
 		this.controller = controller;
 		this.gameService = gameService;
-		uiFactoryService.AddButton(go.transform, "PauseButton", onPauseClicked);
+		uiFactoryService.AddButton(go.transform, "Exit", onExitClicked);
+		uiFactoryService.AddButton(go.transform, "Laser", onLaserClicked);
 
 		eventService.AddListener<GameSlowEvent>(onGameSlow);
 		go.SetActive(false);
@@ -45,7 +46,11 @@ public class GameView : View, IView, IUpdateable {
 		go.SetActive(e.slow < 1.0f);
 	}
 
-	void onPauseClicked() {
+	void onExitClicked() {
 		gameService.EndGame(pool.CreateEntity());
+	}
+
+	void onLaserClicked() {
+		eventService.Dispatch<GameActivateLaserEvent>(new GameActivateLaserEvent());
 	}
 }
