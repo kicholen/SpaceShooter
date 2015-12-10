@@ -1,45 +1,51 @@
-﻿using Entitas;
+using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreatePlayerSystem : IInitializeSystem, IReactiveSystem, ISetPool {
-	public TriggerOnEvent trigger { get { return Matcher.CreatePlayer.OnEntityAdded(); } }
+public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
+	public TriggerOnEvent trigger { get { return Matcher.CreateShip.OnEntityAdded(); } }
 
 	Pool _pool;
-	Group _playerModel;
-	
+	Group _currentShip;
+
+	const int PLAYERS_COUNT = 2;
+
 	public void SetPool(Pool pool) {
 		_pool = pool;
 	}
 	
 	public void Initialize() {
-		_playerModel = _pool.GetGroup(Matcher.PlayerModel);
+		_currentShip = _pool.GetGroup(Matcher.CurrentShip);
+		for (int i = 1; i <= PLAYERS_COUNT; i++) {
+			_pool.CreateEntity()
+				.AddComponent(ComponentIds.ShipModel, Utils.Deserialize<ShipModelComponent>(i.ToString()));
+		}
 		_pool.CreateEntity()
-			.AddComponent(ComponentIds.PlayerModel, Utils.Deserialize<PlayerModelComponent>());
+			.AddCurrentShip(_pool.GetGroup(Matcher.ShipModel).GetEntities()[0].shipModel);
 	}
 
 	public void Execute(List<Entity> entities) {
 		entities[0].isDestroyEntity = true;
-		createPlayer(_playerModel.GetSingleEntity().playerModel);
+		createShip(_currentShip.GetSingleEntity().currentShip.model);
 	}
 
-	void createPlayer(PlayerModelComponent playerModel) {
-		Entity player = _pool.CreateEntity()
-			.AddPlayer(playerModel.name)
+	void createShip(ShipModelComponent shipModel) {
+		Entity ship = _pool.CreateEntity()
+			.AddPlayer(shipModel.name)
 			.AddPosition(new Vector2(0.0f, 0.0f))
 			.AddVelocity(new Vector2(0.0f, 0.0f))
-			.AddVelocityLimit(playerModel.maxVelocity)
+			.AddVelocityLimit(shipModel.maxVelocity)
 			.AddCollision(CollisionTypes.Player)
-			.AddHealth(playerModel.health)
+			.AddHealth(shipModel.health)
 			.AddResource(Resource.Player)
 			.AddExplosionOnDeath(1.0f, Resource.Explosion)
 			.AddGhost(0.0f, 0.1f, 0.3f) 
 			.IsMoveWithCamera(true);
 		
-		player.AddParent(getPlayerChildren(player, playerModel));
+		ship.AddParent(getShipChildren(ship, shipModel));
 		// create UI
-		createHealthBar(player);
-		createIndicatorPanel(player);
+		createHealthBar(ship);
+		createIndicatorPanel(ship);
 	}
 
 	void createHealthBar(Entity player) {
@@ -58,7 +64,7 @@ public class CreatePlayerSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 		player.parent.children.Add(e);
 	}
 	
-	List<Entity> getPlayerChildren(Entity parent, PlayerModelComponent component) {
+	List<Entity> getShipChildren(Entity parent, ShipModelComponent component) {
 		List<Entity> children = new List<Entity>();
 		if (component.hasHomeMissile) {
 			children.Add(_pool.CreateEntity()

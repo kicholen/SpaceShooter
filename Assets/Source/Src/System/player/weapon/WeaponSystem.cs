@@ -7,11 +7,11 @@ public class WeaponSystem : IReactiveSystem, ISetPool {
 	Group _group;
 
 	public void SetPool(Pool pool) {
-		_group = pool.GetGroup(Matcher.PlayerModel);
+		_group = pool.GetGroup(Matcher.CurrentShip);
 	}
 
 	public void Execute(List<Entity> entities) {
-		PlayerModelComponent component = _group.GetSingleEntity().playerModel;
+		ShipModelComponent component = _group.GetSingleEntity().currentShip.model;
 		foreach (Entity e in entities) {
 			if (e.isWeapon) {
 				e.AddMissileSpawner(0.0f, component.missileSpawnDelay, Resource.MissilePrimary, 0.0f, component.missileVelocity, CollisionTypes.Player);

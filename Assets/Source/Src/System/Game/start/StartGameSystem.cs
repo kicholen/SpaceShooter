@@ -31,7 +31,7 @@ public class StartGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool
 		clearGameStats();
 
 		createGrid();
-		createPlayer();
+		createShip();
 		setInput(true);
 	}
 	
@@ -66,8 +66,8 @@ public class StartGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool
 			.IsCreateGrid(true);
 	}
 
-	void createPlayer() {
+	void createShip() {
 		_pool.CreateEntity()
-			.IsCreatePlayer(true);
+			.IsCreateShip(true);
 	}
 }

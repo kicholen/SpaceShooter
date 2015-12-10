@@ -10,7 +10,6 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 	Group _timeGroup;
 	Group _pause;
 	Group _settings;
-	Group _playerModel;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
@@ -18,7 +17,6 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		_timeGroup = pool.GetGroup(Matcher.Time);
 		_pause = pool.GetGroup(Matcher.PauseGame);
 		_settings = pool.GetGroup(Matcher.SettingsModel);
-		_playerModel = pool.GetGroup(Matcher.PlayerModel);
 	}
 
 	public void Initialize() {
@@ -128,7 +126,7 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 
 	void serialize() {
 		Utils.Serialize(_settings.GetSingleEntity().settingsModel);
-		Utils.Serialize(_playerModel.GetSingleEntity().playerModel);
+		//Utils.Serialize(_playerModel.GetSingleEntity().playerModel);
 
 		int i = 1;
 		foreach (Entity e in _pool.GetGroup(Matcher.BonusModel).GetEntities()) {
