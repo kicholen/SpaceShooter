@@ -46,7 +46,7 @@ public class CircleMissileRotatedSpawnerSystem : IExecuteSystem, ISetPool {
 				.AddPosition(new Vector2().Set(position))
 				.AddVelocity(new Vector2(velocityX, velocityY))
 				.AddHealth(0)
-				.AddCollision(missile.collisionType)
+				.AddCollision(missile.collisionType, missile.damage)
 				.AddResource(missile.resource);
 			angle = angle + angleOffset;
 		}

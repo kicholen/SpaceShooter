@@ -38,7 +38,7 @@ public class MultipleMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			.AddPosition(new Vector2(position.x + offsetX, position.y))
 			.AddVelocity(new Vector2(missile.velocityX, missile.velocityY))
 			.AddHealth(0)
-			.AddCollision(missile.collisionType)
+			.AddCollision(missile.collisionType, missile.damage)
 			.AddResource(missile.resource);
 	}
 

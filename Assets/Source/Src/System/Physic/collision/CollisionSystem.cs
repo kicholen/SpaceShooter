@@ -1,14 +1,9 @@
 using Entitas;
-using System.Collections.Generic;
-using System;
 
 public class CollisionSystem : IExecuteSystem, ISetPool {
 
 	Group _group;
 	Group _difficulty;
-	Dictionary<string, int> savedDamage = new Dictionary<string, int>();
-
-	const string interlude = "_";
 
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Collision, Matcher.Health));
@@ -24,45 +19,16 @@ public class CollisionSystem : IExecuteSystem, ISetPool {
 	
 	void checkCollision(Entity e, DifficultyControllerComponent difficulty) {
 		CollisionScript collision = e.gameObject.gameObject.GetComponent<CollisionScript>();
-		Queue<string> queue = collision.queue;
-		if (queue.Count == 0) {
+		int damageTaken = collision.DamageTaken;
+		if (damageTaken == 0) {
 			return;
 		}
 
-		HealthComponent health = e.health;
-		int damage = getDamageDone(collision.queue, health.health);
 		if (!e.hasPlayer) {
-			damage = damage * (difficulty.dmgBoostPercent + 100) / 100;
+			damageTaken = damageTaken * (difficulty.dmgBoostPercent + 100) / 100;
 		}
-		if (damage > 0) {
-			e.AddDamage(damage);
+		if (damageTaken > 0) {
+			e.AddDamage(damageTaken);
 		}
-	}
-
-	int getDamageDone(Queue<string> queue, int health) {
-		bool flag = true;
-		int result = 0;
-		int value = 0;
-
-		while (flag) {
-			string colliderName = queue.Dequeue();
-			value = 0;
-			savedDamage.TryGetValue(colliderName, out value);
-			if (value > 0) {
-				result += value;
-			}
-			else {
-				int damage = Convert.ToInt16(colliderName.Substring(0, colliderName.IndexOf(interlude)));
-				savedDamage[colliderName] = damage;
-				result += damage;
-			}
-
-			if (queue.Count == 0 || result > health) {
-				queue.Clear();
-				flag = false;
-			}
-		}
-
-		return result;
 	}
 }

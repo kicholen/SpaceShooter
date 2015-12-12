@@ -12,9 +12,10 @@ namespace Entitas {
             _multipleMissileSpawnerComponentPool.Clear();
         }
 
-        public Entity AddMultipleMissileSpawner(int newAmount, int newCurrentAmount, float newTimeDelay, float newDelay, float newTime, float newSpawnDelay, string newResource, float newRandomPositionOffsetX, float newVelocityX, float newVelocityY, int newCollisionType) {
+        public Entity AddMultipleMissileSpawner(int newAmount, int newDamage, int newCurrentAmount, float newTimeDelay, float newDelay, float newTime, float newSpawnDelay, string newResource, float newRandomPositionOffsetX, float newVelocityX, float newVelocityY, int newCollisionType) {
             var component = _multipleMissileSpawnerComponentPool.Count > 0 ? _multipleMissileSpawnerComponentPool.Pop() : new MultipleMissileSpawnerComponent();
             component.amount = newAmount;
+            component.damage = newDamage;
             component.currentAmount = newCurrentAmount;
             component.timeDelay = newTimeDelay;
             component.delay = newDelay;
@@ -28,10 +29,11 @@ namespace Entitas {
             return AddComponent(ComponentIds.MultipleMissileSpawner, component);
         }
 
-        public Entity ReplaceMultipleMissileSpawner(int newAmount, int newCurrentAmount, float newTimeDelay, float newDelay, float newTime, float newSpawnDelay, string newResource, float newRandomPositionOffsetX, float newVelocityX, float newVelocityY, int newCollisionType) {
+        public Entity ReplaceMultipleMissileSpawner(int newAmount, int newDamage, int newCurrentAmount, float newTimeDelay, float newDelay, float newTime, float newSpawnDelay, string newResource, float newRandomPositionOffsetX, float newVelocityX, float newVelocityY, int newCollisionType) {
             var previousComponent = hasMultipleMissileSpawner ? multipleMissileSpawner : null;
             var component = _multipleMissileSpawnerComponentPool.Count > 0 ? _multipleMissileSpawnerComponentPool.Pop() : new MultipleMissileSpawnerComponent();
             component.amount = newAmount;
+            component.damage = newDamage;
             component.currentAmount = newCurrentAmount;
             component.timeDelay = newTimeDelay;
             component.delay = newDelay;

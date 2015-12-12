@@ -16,56 +16,56 @@ using UnityEngine;
 		Entity e;
 		switch(model.type) {
 		case EnemyTypes.Normal:
-			e = createStandardEnemy(model, healthMultiplier, Resource.Enemy);
+			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
 			e.isFaceDirection = true;
 			e.AddCameraShakeOnDeath(1);
-			e.AddMissileSpawner(0.0f, 2.5f, Resource.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddMissileSpawner(0.0f, model.damage, 2.5f, ResourceWithColliders.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.Small:
-			e = createStandardEnemy(model, healthMultiplier, Resource.EnemySmall);
+			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.EnemySmall);
 			e.isFaceDirection = true;
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.HomeMissile:
-			e = createStandardEnemy(model, healthMultiplier, Resource.Enemy);
+			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
 			e.isFaceDirection = true;
 			e.AddCameraShakeOnDeath(1);
-			e.AddHomeMissileSpawner(4.0f, 2.0f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddHomeMissileSpawner(4.0f, 2.0f, model.damage, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.CircleMissile:
-			e = createStandardEnemy(model, healthMultiplier, Resource.Enemy);
+			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
 			e.isFaceDirection = true;
 			e.AddCameraShakeOnDeath(1);
-			e.AddCircleMissileSpawner(5, 4.0f, 0.1f, Resource.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddCircleMissileSpawner(5, model.damage, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.CircleRotateMissile:
-			e = createStandardEnemy(model, healthMultiplier, Resource.Enemy);
+			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
 			e.isFaceDirection = true;
 			e.AddCameraShakeOnDeath(1);
-			e.AddCircleMissileRotatedSpawner(6, 4, 0, 10, 4.0f, 0.1f, Resource.MissileEnemy,  3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddCircleMissileRotatedSpawner(6, model.damage, 4, 0, 10, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy,  3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.Meteor:
-			e = createStandardEnemy(model, healthMultiplier, Resource.Enemy);
+			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
 			float randomAngle = Random.Range(-90.0f, 90.0f);
 			e.AddRotate(randomAngle, randomAngle);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.MovingBlock:
-			e = createStandardEnemy(model, healthMultiplier, Resource.Blockade);
+			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Blockade);
 			e.AddMovingBlockade(2.0f, -1.0f, 0.0f, model.speed, model.speed / 2.0f);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.MovingBlockade:
 			for (int i = 10; i > 0; i--) {
 				if (i == 5) {
-					e = createBlock(model.type, new Vector2(-4.0f + (float)i, model.posY), 1, Resource.Meteor);
+					e = createBlock(model.type, model.damage, new Vector2(-4.0f + (float)i, model.posY), 1, ResourceWithColliders.Meteor);
 				}
 				else {
-					e = createBlock(model.type, new Vector2(-4.0f + (float)i, model.posY), model.health, Resource.Blockade);
+					e = createBlock(model.type, model.damage, new Vector2(-4.0f + (float)i, model.posY), model.health, ResourceWithColliders.Blockade);
 				}
 				e.AddMovingBlockade(2.0f, -1.0f, 0.0f, model.speed, model.speed / 2.0f);
 			}
@@ -74,61 +74,61 @@ using UnityEngine;
 			e = createFirstBoss(model.type, model.posX, model.posY, model.health, missileSpeedBonus);
 			break;
 		default:
-			e = createStandardEnemy(model, healthMultiplier, Resource.Enemy);
+			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
 			break;
 		}
 	}
 
-	public void CreateEnemyByType(int type, float posX, float posY, int health, int missileSpeedBonus, int path, int grid, float speed = 5.0f) {
+	public void CreateEnemyByType(int type, float posX, float posY, int health, int missileSpeedBonus, int path, int grid, int damage = 10, float speed = 5.0f) {
 		Entity e;
 		switch(type) {
 		case EnemyTypes.Normal:
-			e = createStandardEnemy(type, posX, posY, health, speed, Resource.Enemy);
+			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
 			e.isFaceDirection = true;
 			e.AddCameraShakeOnDeath(1);
-			e.AddMissileSpawner(0.0f, 2.5f, Resource.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddMissileSpawner(0.0f, damage, 2.5f, ResourceWithColliders.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, posY, path);
 			addGridIfNeeded(e, grid);
 		break;
 		case EnemyTypes.Small:
-			e = createStandardEnemy(type, posX, posY, health, speed, Resource.EnemySmall);
+			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.EnemySmall);
 			e.isFaceDirection = true;
 			addPathIfNeeded(e, posY, path);
 			addGridIfNeeded(e, grid);
 		break;
 		case EnemyTypes.HomeMissile:
-			e = createStandardEnemy(type, posX, posY, health, speed, Resource.Enemy);
+			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
 			e.isFaceDirection = true;
 			e.AddCameraShakeOnDeath(1);
-			e.AddHomeMissileSpawner(4.0f, 2.0f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddHomeMissileSpawner(4.0f, 2.0f, damage, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, posY, path);
 			addGridIfNeeded(e, grid);
 			break;
 		case EnemyTypes.CircleMissile:
-			e = createStandardEnemy(type, posX, posY, health, speed, Resource.Enemy);
+			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
 			e.isFaceDirection = true;
 			e.AddCameraShakeOnDeath(1);
-			e.AddCircleMissileSpawner(5, 4.0f, 0.1f, Resource.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddCircleMissileSpawner(5, damage, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, posY, path);
 			addGridIfNeeded(e, grid);
 			break;
 		case EnemyTypes.CircleRotateMissile:
-			e = createStandardEnemy(type, posX, posY, health, speed, Resource.Enemy);
+			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
 			e.isFaceDirection = true;
 			e.AddCameraShakeOnDeath(1);
-			e.AddCircleMissileRotatedSpawner(6, 4, 0, 10, 4.0f, 0.1f, Resource.MissileEnemy,  3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddCircleMissileRotatedSpawner(6, damage, 4, 0, 10, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy,  3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, posY, path);
 			addGridIfNeeded(e, grid);
 			break;
 		case EnemyTypes.Meteor:
-			e = createStandardEnemy(type, posX, posY, health, speed, Resource.Meteor);
+			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Meteor);
 			float randomAngle = Random.Range(-90.0f, 90.0f);
 			e.AddRotate(randomAngle, randomAngle);
 			addPathIfNeeded(e, posY, path);
 			addGridIfNeeded(e, grid);
 			break;
 		case EnemyTypes.MovingBlock:
-			e = createStandardEnemy(type, posX, posY, health, speed, Resource.Blockade);
+			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Blockade);
 			e.AddMovingBlockade(2.0f, -1.0f, 0.0f, speed, speed / 2.0f);
 			addPathIfNeeded(e, posY, path);
 			addGridIfNeeded(e, grid);
@@ -136,10 +136,10 @@ using UnityEngine;
 		case EnemyTypes.MovingBlockade:
 			for (int i = 10; i > 0; i--) {
 				if (i == 5) {
-					e = createBlock(type, new Vector2(-4.0f + (float)i, posY), 1, Resource.Meteor);
+					e = createBlock(type, damage, new Vector2(-4.0f + (float)i, posY), 1, ResourceWithColliders.Meteor);
 				}
 				else {
-					e = createBlock(type, new Vector2(-4.0f + (float)i, posY), health, Resource.Blockade);
+					e = createBlock(type, damage, new Vector2(-4.0f + (float)i, posY), health, ResourceWithColliders.Blockade);
 				}
 				e.AddMovingBlockade(2.0f, -1.0f, 0.0f, speed, speed / 2.0f);
 			}
@@ -148,7 +148,7 @@ using UnityEngine;
 			e = createFirstBoss(type, posX, posY, health, missileSpeedBonus);
 			break;
 		default:
-			e = createStandardEnemy(type, posX, posY, health, speed, Resource.Enemy);
+			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
 		break;
 		}
 	}
@@ -159,46 +159,46 @@ using UnityEngine;
 			.AddPosition(new Vector2(model.posX, model.posY))
 			.AddVelocity(new Vector2())
 			.AddVelocityLimit(model.speed)
-			.AddResource(resource);
-		e.isNonRemovable = true;
-		e.isActive = true;
+			.AddResource(resource)
+			.AddCollision(CollisionTypes.Enemy, model.damage)
+			.IsNonRemovable(true)
+			.IsActive(true);
 		if (model.health >= 0) {
 			e.AddHealth((int)(model.health * healthMultiplier))
 				.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed)
-				.AddExplosionOnDeath(1.0f, Resource.Explosion)
-				.AddCollision(CollisionTypes.Enemy);
+				.AddExplosionOnDeath(1.0f, Resource.Explosion);
 		}
 		return e;
 	}
 
-	Entity createStandardEnemy(int type, float posX, float posY, int health, float speed, string resource) {
+	Entity createStandardEnemy(int type, int damage, float posX, float posY, int health, float speed, string resource) {
 		Entity e = _pool.CreateEntity()
 			.AddEnemy(type)
 			.AddPosition(new Vector2(posX, posY))
 			.AddVelocity(new Vector2())
 			.AddVelocityLimit(speed)
-			.AddResource(resource);
-		e.isNonRemovable = true;
-		e.isActive = true;
+			.AddResource(resource)
+			.AddCollision(CollisionTypes.Enemy, damage)
+			.IsNonRemovable(true)
+			.IsActive(true);
 		if (health >= 0) {
 			e.AddHealth(health)
 				.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed)
-				.AddExplosionOnDeath(1.0f, Resource.Explosion)
-				.AddCollision(CollisionTypes.Enemy);
+				.AddExplosionOnDeath(1.0f, Resource.Explosion);
 		}
 		return e;
 	}
 
-	Entity createBlock(int type, Vector2 position, int health, string resource) {
+	Entity createBlock(int type, int damage, Vector2 position, int health, string resource) {
 		Entity e = _pool.CreateEntity()
 			.AddEnemy(type)
 			.AddPosition(position)
-			.AddResource(resource);
+			.AddResource(resource)
+			.AddCollision(CollisionTypes.Enemy, damage);
 		if (health >= 0) {
 			e.AddHealth(health)
 				.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed)
-				.AddExplosionOnDeath(1.0f, Resource.Explosion)
-				.AddCollision(CollisionTypes.Enemy);
+				.AddExplosionOnDeath(1.0f, Resource.Explosion);
 		}
 		return e;
 	}
@@ -208,9 +208,9 @@ using UnityEngine;
 			.AddPosition(new Vector2(posX, posY))
 			.AddVelocity(new Vector2())
 			.AddVelocityLimit(5.0f)
-			.AddCollision(CollisionTypes.Enemy)
+			.AddCollision(CollisionTypes.Enemy, health)
 			.AddHealth(health)
-			.AddResource(Resource.Boss)
+			.AddResource(ResourceWithColliders.Boss)
 			.AddEnemy(type)
 			.AddFirstBoss(22.0f, 0.0f, 90.0f);
 		boss.isMoveWithCamera = true;
@@ -221,13 +221,13 @@ using UnityEngine;
 		             .AddRelativePosition(0.5f, 0.5f)
 		             .AddPosition(new Vector2(0.0f, 0.0f))
 		             .AddChild(boss)
-		             .AddHomeMissileSpawner(5.0f, 10f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy)
+		             .AddHomeMissileSpawner(5.0f, 10f, 10, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy)
 		             .AddResource(Resource.Weapon));
 		children.Add(_pool.CreateEntity()
 		             .AddRelativePosition(-0.5f, 0.5f)
 		             .AddPosition(new Vector2(0.0f, 0.0f))
 		             .AddChild(boss)
-		             .AddHomeMissileSpawner(5.0f, 10f, Resource.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy)
+		             .AddHomeMissileSpawner(5.0f, 10f, 10, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy)
 		             .AddResource(Resource.Weapon));
 		addNonRemovable(children);
 		boss.AddParent(children);

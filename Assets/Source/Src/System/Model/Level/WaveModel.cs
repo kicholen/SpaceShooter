@@ -7,4 +7,5 @@ public class WaveModel {
 	public int health;
 	public int path;
 	public int grid;
+	public int damage;
 }

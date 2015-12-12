@@ -29,7 +29,7 @@ public class SpawnMissileSystem : IExecuteSystem, ISetPool {
 			.AddPosition(new Vector2().Set(position))
 			.AddVelocity(new Vector2(missile.velocityX, missile.velocityY))
 			.AddHealth(0)
-			.AddCollision(missile.collisionType)
+			.AddCollision(missile.collisionType, missile.damage)
 			.AddExplosionOnDeath(1.5f, Resource.ExplosionMissile)
 			.AddResource(missile.resource);
 	}

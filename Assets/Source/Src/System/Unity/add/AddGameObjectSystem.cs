@@ -28,18 +28,11 @@ public class AddGameObjectSystem : IReactiveSystem, ISetPool {
 					Debug.Log("Cannot instantiate " + resourceName);
 				}
 			}
-			attachCollisionScript(e, gameObject);
 
-			gameObject.transform.SetParent (_viewContainer, false);
+			gameObject.transform.SetParent(_viewContainer, false);
 			e.AddGameObject(gameObject, resourceName);
 		}
     }
-
-	void attachCollisionScript(Entity e, GameObject gameObject) {
-		if (e.hasCollision && gameObject.GetComponent<CollisionScript>() == null) {
-			gameObject.AddComponent<CollisionScript>();
-		}
-	}
 
 	GameObject getFromPool(string name) {
 		foreach (Entity e in _poolGroup.GetEntities()) {

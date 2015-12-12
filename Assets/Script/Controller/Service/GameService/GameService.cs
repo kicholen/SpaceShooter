@@ -96,6 +96,7 @@ public class GameService : IGameService {
 			// AddGO
 			.Add(pool.CreateAddGameObjectSystem())
 			.Add(pool.CreateAddUIGameObjectSystem())
+			.Add(pool.CreateAddCollisionToGameObjectSystem())
 			
 			// Sort order
 			.Add(pool.CreateSortOrderSystem())

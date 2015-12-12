@@ -39,12 +39,12 @@ public class LoadService : ILoadService {
 		if (firstGame) {
 			phases.Enqueue(() => { gameService.InitPool(Resource.Explosion, 4); nextPhase(); });
 			phases.Enqueue(() => { gameService.InitPool(Resource.ExplosionMissile, 10); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(Resource.MissileEnemy, 20); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(Resource.MissilePrimary, 20); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(Resource.MissileSecondary, 40); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(Resource.Enemy, 10); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(Resource.Star, 10); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(Resource.Bonus, 3); nextPhase(); });
+			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.MissileEnemy, 20); nextPhase(); });
+			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.MissilePrimary, 20); nextPhase(); });
+			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.MissileSecondary, 40); nextPhase(); });
+			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.Enemy, 10); nextPhase(); });
+			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.Star, 10); nextPhase(); });
+			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.Bonus, 3); nextPhase(); });
 			firstGame = false;
 		}
 		phases.Enqueue(() => addViewListener());

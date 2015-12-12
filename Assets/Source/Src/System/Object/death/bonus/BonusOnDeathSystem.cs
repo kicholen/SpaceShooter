@@ -51,7 +51,7 @@ public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 				.AddTweenPosition(0.0f, 2.0f, EaseTypes.Linear, new Vector2(position.x, position.y), new Vector2(position.x + offsetX, position.y + offsetY), true, null, null)
 				.AddPosition(new Vector2(position.x, position.y))
 				.AddHealth(0)
-				.AddCollision(CollisionTypes.Bonus)
+				.AddCollision(CollisionTypes.Bonus, 0)
 				.AddFollowTarget(follow)
 				.AddMagnet(TEST_VELOCITY, TEST_RADIUS)
 				.AddResource(bonus.resource);

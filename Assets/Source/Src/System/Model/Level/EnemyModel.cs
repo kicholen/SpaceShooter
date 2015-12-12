@@ -6,4 +6,5 @@ public class EnemyModel {
 	public int type;
 	public int health;
 	public int path;
+	public int damage;
 }

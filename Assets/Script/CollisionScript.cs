@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public class CollisionScript : MonoBehaviour {
-	public Queue<string> queue = new Queue<string>();
+	public int Damage;
+	public int DamageTaken;
 
-	void OnTriggerEnter2D(Collider2D other) {
-		queue.Enqueue(other.name);
+	void OnTriggerEnter2D(Component other) {
+		DamageTaken += other.gameObject.GetComponent<CollisionScript>().Damage;
 	}
 }

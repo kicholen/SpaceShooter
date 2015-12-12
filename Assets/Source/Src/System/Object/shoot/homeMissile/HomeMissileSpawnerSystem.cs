@@ -27,10 +27,10 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			missile.time -= deltaTime;
 			if (missile.time < 0.0f) {
 				missile.time = missile.spawnDelay;
-				if (missile.collisionType == CollisionTypes.Player && canSpawnPlayer) {
+				if (missile.ownerCollisionType == CollisionTypes.Player && canSpawnPlayer) {
 					spawnMissile(missile, CollisionTypes.Enemy, e.position.pos);
 				}
-				else if (missile.collisionType == CollisionTypes.Enemy && canSpawnEnemy) {
+				else if (missile.ownerCollisionType == CollisionTypes.Enemy && canSpawnEnemy) {
 					spawnMissile(missile, CollisionTypes.Player, e.position.pos);
 				}
 			}
@@ -45,7 +45,7 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			.AddHealth(0)
 			.AddHomeMissile(0.0f, targetCollisionType)
 			.AddFindTarget(targetCollisionType)
-			.AddCollision(missile.collisionType)
+			.AddCollision(missile.ownerCollisionType, missile.damage)
 			.AddDestroyEntityDelayed(SELF_DESTRUCTION_TIME)
 			.IsFaceDirection(true)
 			.AddResource(missile.resource);

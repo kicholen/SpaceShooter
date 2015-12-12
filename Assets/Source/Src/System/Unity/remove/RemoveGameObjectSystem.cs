@@ -40,7 +40,7 @@ public class RemoveGameObjectSystem : ISystem, ISetPool, IEnsureComponents {
 		SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
 		if (renderer != null) {
 			Color color = renderer.color;
-			renderer.color = new Color(color.r, color.g, color.b, 255);
+			renderer.color = new Color(color.r, color.g, color.b, 1);
 		}
 		bool wasObjectAdded = false;
 

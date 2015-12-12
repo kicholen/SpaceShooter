@@ -2,6 +2,7 @@ using Entitas;
 
 public class CircleMissileRotatedSpawnerComponent : IComponent {
 	public int amount;
+	public int damage;
 	public int waves;
 	public int angle;
 	public int angleOffset;

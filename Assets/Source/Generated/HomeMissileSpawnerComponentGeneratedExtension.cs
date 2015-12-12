@@ -12,24 +12,26 @@ namespace Entitas {
             _homeMissileSpawnerComponentPool.Clear();
         }
 
-        public Entity AddHomeMissileSpawner(float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
+        public Entity AddHomeMissileSpawner(float newTime, float newSpawnDelay, int newDamage, string newResource, float newVelocity, int newOwnerCollisionType) {
             var component = _homeMissileSpawnerComponentPool.Count > 0 ? _homeMissileSpawnerComponentPool.Pop() : new HomeMissileSpawnerComponent();
             component.time = newTime;
             component.spawnDelay = newSpawnDelay;
+            component.damage = newDamage;
             component.resource = newResource;
             component.velocity = newVelocity;
-            component.collisionType = newCollisionType;
+            component.ownerCollisionType = newOwnerCollisionType;
             return AddComponent(ComponentIds.HomeMissileSpawner, component);
         }
 
-        public Entity ReplaceHomeMissileSpawner(float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
+        public Entity ReplaceHomeMissileSpawner(float newTime, float newSpawnDelay, int newDamage, string newResource, float newVelocity, int newOwnerCollisionType) {
             var previousComponent = hasHomeMissileSpawner ? homeMissileSpawner : null;
             var component = _homeMissileSpawnerComponentPool.Count > 0 ? _homeMissileSpawnerComponentPool.Pop() : new HomeMissileSpawnerComponent();
             component.time = newTime;
             component.spawnDelay = newSpawnDelay;
+            component.damage = newDamage;
             component.resource = newResource;
             component.velocity = newVelocity;
-            component.collisionType = newCollisionType;
+            component.ownerCollisionType = newOwnerCollisionType;
             ReplaceComponent(ComponentIds.HomeMissileSpawner, component);
             if (previousComponent != null) {
                 _homeMissileSpawnerComponentPool.Push(previousComponent);

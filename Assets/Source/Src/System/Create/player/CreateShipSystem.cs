@@ -35,9 +35,9 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			.AddPosition(new Vector2(0.0f, 0.0f))
 			.AddVelocity(new Vector2(0.0f, 0.0f))
 			.AddVelocityLimit(shipModel.maxVelocity)
-			.AddCollision(CollisionTypes.Player)
+			.AddCollision(CollisionTypes.Player, 10)
 			.AddHealth(shipModel.health)
-			.AddResource(Resource.Player)
+			.AddResource(ResourceWithColliders.Player)
 			.AddExplosionOnDeath(1.0f, Resource.Explosion)
 			.AddGhost(0.0f, 0.1f, 0.3f) 
 			.IsMoveWithCamera(true);
@@ -71,12 +71,12 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			             .AddRelativePosition(0.5f, -0.5f)
 			             .AddPosition(new Vector2(0.0f, 0.0f))
 			             .AddChild(parent)
-			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
 			children.Add(_pool.CreateEntity()
 			             .AddRelativePosition(-0.5f, -0.5f)
 			             .AddPosition(new Vector2(0.0f, 0.0f))
 			             .AddChild(parent)
-			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, Resource.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
 		}
 		if (component.hasSecondaryMissiles) {
 			Entity leftWeapon = _pool.CreateEntity()

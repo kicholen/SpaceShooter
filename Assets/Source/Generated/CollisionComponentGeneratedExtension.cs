@@ -12,16 +12,18 @@ namespace Entitas {
             _collisionComponentPool.Clear();
         }
 
-        public Entity AddCollision(int newCollide) {
+        public Entity AddCollision(int newCollide, int newDamage) {
             var component = _collisionComponentPool.Count > 0 ? _collisionComponentPool.Pop() : new CollisionComponent();
             component.collide = newCollide;
+            component.damage = newDamage;
             return AddComponent(ComponentIds.Collision, component);
         }
 
-        public Entity ReplaceCollision(int newCollide) {
+        public Entity ReplaceCollision(int newCollide, int newDamage) {
             var previousComponent = hasCollision ? collision : null;
             var component = _collisionComponentPool.Count > 0 ? _collisionComponentPool.Pop() : new CollisionComponent();
             component.collide = newCollide;
+            component.damage = newDamage;
             ReplaceComponent(ComponentIds.Collision, component);
             if (previousComponent != null) {
                 _collisionComponentPool.Push(previousComponent);

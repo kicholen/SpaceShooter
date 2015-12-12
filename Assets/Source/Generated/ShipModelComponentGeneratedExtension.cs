@@ -12,7 +12,7 @@ namespace Entitas {
             _shipModelComponentPool.Clear();
         }
 
-        public Entity AddShipModel(string newName, float newMaxVelocity, int newHealth, bool newHasLaser, float newLaserDamage, bool newHasMissile, float newMissileVelocity, float newMissileSpawnDelay, float newMissileDamage, bool newHasSecondaryMissiles, float newSecondaryMissileVelocity, float newSecondaryMissileSpawnDelay, float newSecondaryMissileDamage, bool newHasHomeMissile, float newHomeMissileVelocity, float newHomeMissileSpawnDelay, float newHomeMissileDamage, bool newHasMagnetField, float newMagnetRadius) {
+        public Entity AddShipModel(string newName, float newMaxVelocity, int newHealth, bool newHasLaser, int newLaserDamage, bool newHasMissile, float newMissileVelocity, float newMissileSpawnDelay, int newMissileDamage, bool newHasSecondaryMissiles, float newSecondaryMissileVelocity, float newSecondaryMissileSpawnDelay, int newSecondaryMissileDamage, bool newHasHomeMissile, float newHomeMissileVelocity, float newHomeMissileSpawnDelay, int newHomeMissileDamage, bool newHasMagnetField, float newMagnetRadius) {
             var component = _shipModelComponentPool.Count > 0 ? _shipModelComponentPool.Pop() : new ShipModelComponent();
             component.name = newName;
             component.maxVelocity = newMaxVelocity;
@@ -36,7 +36,7 @@ namespace Entitas {
             return AddComponent(ComponentIds.ShipModel, component);
         }
 
-        public Entity ReplaceShipModel(string newName, float newMaxVelocity, int newHealth, bool newHasLaser, float newLaserDamage, bool newHasMissile, float newMissileVelocity, float newMissileSpawnDelay, float newMissileDamage, bool newHasSecondaryMissiles, float newSecondaryMissileVelocity, float newSecondaryMissileSpawnDelay, float newSecondaryMissileDamage, bool newHasHomeMissile, float newHomeMissileVelocity, float newHomeMissileSpawnDelay, float newHomeMissileDamage, bool newHasMagnetField, float newMagnetRadius) {
+        public Entity ReplaceShipModel(string newName, float newMaxVelocity, int newHealth, bool newHasLaser, int newLaserDamage, bool newHasMissile, float newMissileVelocity, float newMissileSpawnDelay, int newMissileDamage, bool newHasSecondaryMissiles, float newSecondaryMissileVelocity, float newSecondaryMissileSpawnDelay, int newSecondaryMissileDamage, bool newHasHomeMissile, float newHomeMissileVelocity, float newHomeMissileSpawnDelay, int newHomeMissileDamage, bool newHasMagnetField, float newMagnetRadius) {
             var previousComponent = hasShipModel ? shipModel : null;
             var component = _shipModelComponentPool.Count > 0 ? _shipModelComponentPool.Pop() : new ShipModelComponent();
             component.name = newName;

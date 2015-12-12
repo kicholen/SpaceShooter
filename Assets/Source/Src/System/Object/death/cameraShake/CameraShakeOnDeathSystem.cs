@@ -5,11 +5,9 @@ using UnityEngine;
 public class CameraShakeOnDeathSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.CameraShakeOnDeath, Matcher.CollisionDeath).OnEntityAdded(); } }
 	
-	Pool _pool;
 	Group _group;
 	
 	public void SetPool(Pool pool) {
-		_pool = pool;
 		_group = pool.GetGroup(Matcher.Camera);
 	}
 	

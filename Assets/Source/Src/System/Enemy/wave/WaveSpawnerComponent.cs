@@ -9,4 +9,5 @@ public class WaveSpawnerComponent : IComponent {
 	public int health;
 	public int path;
 	public int grid;
+	public int damage;
 }

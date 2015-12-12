@@ -2,6 +2,7 @@ using Entitas;
 
 public class MultipleMissileSpawnerComponent : IComponent { // todo change stupid field names
 	public int amount;
+	public int damage;
 	public int currentAmount;
 	public float timeDelay;
 	public float delay;

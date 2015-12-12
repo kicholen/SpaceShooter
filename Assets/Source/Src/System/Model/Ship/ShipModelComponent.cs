@@ -7,22 +7,22 @@ public class ShipModelComponent : IComponent {
 	public int health;
 
 	public bool hasLaser;
-	public float laserDamage;
+	public int laserDamage;
 
 	public bool hasMissile;
 	public float missileVelocity;
 	public float missileSpawnDelay;
-	public float missileDamage;
+	public int missileDamage;
 
 	public bool hasSecondaryMissiles;
 	public float secondaryMissileVelocity;
 	public float secondaryMissileSpawnDelay;
-	public float secondaryMissileDamage;
+	public int secondaryMissileDamage;
 
 	public bool hasHomeMissile;
 	public float homeMissileVelocity;
 	public float homeMissileSpawnDelay;
-	public float homeMissileDamage;
+	public int homeMissileDamage;
 
 	public bool hasMagnetField;
 	public float magnetRadius;

@@ -12,9 +12,10 @@ namespace Entitas {
             _circleMissileRotatedSpawnerComponentPool.Clear();
         }
 
-        public Entity AddCircleMissileRotatedSpawner(int newAmount, int newWaves, int newAngle, int newAngleOffset, float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
+        public Entity AddCircleMissileRotatedSpawner(int newAmount, int newDamage, int newWaves, int newAngle, int newAngleOffset, float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
             var component = _circleMissileRotatedSpawnerComponentPool.Count > 0 ? _circleMissileRotatedSpawnerComponentPool.Pop() : new CircleMissileRotatedSpawnerComponent();
             component.amount = newAmount;
+            component.damage = newDamage;
             component.waves = newWaves;
             component.angle = newAngle;
             component.angleOffset = newAngleOffset;
@@ -26,10 +27,11 @@ namespace Entitas {
             return AddComponent(ComponentIds.CircleMissileRotatedSpawner, component);
         }
 
-        public Entity ReplaceCircleMissileRotatedSpawner(int newAmount, int newWaves, int newAngle, int newAngleOffset, float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
+        public Entity ReplaceCircleMissileRotatedSpawner(int newAmount, int newDamage, int newWaves, int newAngle, int newAngleOffset, float newTime, float newSpawnDelay, string newResource, float newVelocity, int newCollisionType) {
             var previousComponent = hasCircleMissileRotatedSpawner ? circleMissileRotatedSpawner : null;
             var component = _circleMissileRotatedSpawnerComponentPool.Count > 0 ? _circleMissileRotatedSpawnerComponentPool.Pop() : new CircleMissileRotatedSpawnerComponent();
             component.amount = newAmount;
+            component.damage = newDamage;
             component.waves = newWaves;
             component.angle = newAngle;
             component.angleOffset = newAngleOffset;

@@ -45,7 +45,7 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 			if (waveModel.spawnBarrier < cameraPosition.y) {
 				levelModel.waveIndex += 1;
 				_pool.CreateEntity()
-					.AddWaveSpawner(waveModel.count, waveModel.type, waveModel.spawnOffset, 0.0f, waveModel.speed, waveModel.health, waveModel.path, waveModel.grid);
+					.AddWaveSpawner(waveModel.count, waveModel.type, waveModel.spawnOffset, 0.0f, waveModel.speed, waveModel.health, waveModel.path, waveModel.grid, waveModel.damage);
 			}
 		}
 	}
