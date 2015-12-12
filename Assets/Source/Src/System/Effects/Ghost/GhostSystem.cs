@@ -2,10 +2,11 @@ using Entitas;
 using UnityEngine;
 
 public class GhostSystem : IExecuteSystem, ISetPool {
-
 	Pool _pool;
 	Group _group;
 	Group _time;
+
+	const string COLLIDERS_FOLDER_NAME = "Collider/";
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
@@ -26,12 +27,16 @@ public class GhostSystem : IExecuteSystem, ISetPool {
 				PositionComponent position = e.position;
 
 				_pool.CreateEntity()
-					.AddResource(resource.name)
+					.AddResource(getResourcePathWithoutColliders(resource.name))
 					.AddSortOrder(SortTypes.Effect)
 					.AddAlpha(ghost.duration, ghost.duration)
 					.AddPosition(new Vector2(position.pos.x, position.pos.y))
 					.AddDestroyEntityDelayed(ghost.duration);
 			}
 		}
+	}
+
+	string getResourcePathWithoutColliders(string resource) {
+		return resource.StartsWith(COLLIDERS_FOLDER_NAME, System.StringComparison.Ordinal) ? resource.Replace (COLLIDERS_FOLDER_NAME, "") : resource;
 	}
 }

@@ -2,7 +2,6 @@ using Entitas;
 using UnityEngine;
 
 public class GhostSystem : IExecuteSystem, ISetPool {
-
 	Pool _pool;
 	Group _group;
 	Group _time;
