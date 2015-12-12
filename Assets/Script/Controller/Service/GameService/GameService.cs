@@ -145,9 +145,7 @@ public class GameService : IGameService {
 				// Object
 				.Add(pool.CreateHealthSystem())
 				.Add(pool.CreateDeadPlayerSystem())
-				.Add(pool.CreateAlphaSystem())
 				.Add(pool.CreateBackgroundSystem())
-				.Add(pool.CreateGhostSystem())
 
 				// OnDeath Actions
 				.Add(pool.CreateBonusOnDeathSystem())
@@ -156,7 +154,10 @@ public class GameService : IGameService {
 				.Add(pool.CreateSoundOnDeathSystem())
 				.Add(pool.CreateExplosionOnDeathSystem())
 
-				// Particle
+				// Effects
+				.Add(pool.CreateAlphaSystem())
+				.Add(pool.CreateGhostSystem())
+				.Add(pool.CreateShakeSystem())
 				.Add(pool.CreateParticleSpawnSystem())
 
 				// bonus
@@ -175,9 +176,8 @@ public class GameService : IGameService {
 			.Add(pool.CreateRemoveGameObjectSystem())
 			
 			// Camera
-			.Add(pool.CreateRegularCameraSystem())
+			.Add(pool.CreateDefaultCameraSystem())
 			.Add(pool.CreateSmoothCameraSystem())
-			.Add(pool.CreateCameraShakeSystem())
 			
 			// Stats
 			.Add(pool.CreateGameStatsSystem())

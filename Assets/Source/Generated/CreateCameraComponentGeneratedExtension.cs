@@ -12,16 +12,18 @@ namespace Entitas {
             _createCameraComponentPool.Clear();
         }
 
-        public Entity AddCreateCamera(int newType) {
+        public Entity AddCreateCamera(int newType, bool newShouldClear) {
             var component = _createCameraComponentPool.Count > 0 ? _createCameraComponentPool.Pop() : new CreateCameraComponent();
             component.type = newType;
+            component.shouldReset = newShouldClear;
             return AddComponent(ComponentIds.CreateCamera, component);
         }
 
-        public Entity ReplaceCreateCamera(int newType) {
+        public Entity ReplaceCreateCamera(int newType, bool newShouldClear) {
             var previousComponent = hasCreateCamera ? createCamera : null;
             var component = _createCameraComponentPool.Count > 0 ? _createCameraComponentPool.Pop() : new CreateCameraComponent();
             component.type = newType;
+            component.shouldReset = newShouldClear;
             ReplaceComponent(ComponentIds.CreateCamera, component);
             if (previousComponent != null) {
                 _createCameraComponentPool.Push(previousComponent);

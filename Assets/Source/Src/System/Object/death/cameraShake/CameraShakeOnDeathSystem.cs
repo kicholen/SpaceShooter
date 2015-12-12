@@ -10,7 +10,7 @@ public class CameraShakeOnDeathSystem : IReactiveSystem, ISetPool {
 	
 	public void SetPool(Pool pool) {
 		_pool = pool;
-		//_group = pool.GetGroup(Matcher.BonusModel);
+		_group = pool.GetGroup(Matcher.Camera);
 	}
 	
 	public void Execute(List<Entity> entities) {
@@ -26,7 +26,9 @@ public class CameraShakeOnDeathSystem : IReactiveSystem, ISetPool {
 	}
 	
 	void shakeCamera() {
-		_pool.CreateEntity()
-			.AddCameraShake(new CameraShakeProperties());
+		Entity entity = _group.GetSingleEntity();
+		if (!entity.hasShake) {
+			entity.AddShake(new ShakeProperties());
+		}
 	}
 }

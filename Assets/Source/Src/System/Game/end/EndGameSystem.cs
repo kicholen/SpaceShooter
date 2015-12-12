@@ -36,7 +36,7 @@ public class EndGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool {
 	
 	void setCamera() {
 		_pool.CreateEntity()
-			.AddCreateCamera(CameraTypes.Static);
+			.AddCreateCamera(CameraTypes.Static, true);
 	}
 	
 	void clearLevel() {

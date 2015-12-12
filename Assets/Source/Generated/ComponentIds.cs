@@ -9,21 +9,21 @@ public static class ComponentIds {
     public const int BonusOnDeath = 7;
     public const int CallOnFrameEnd = 8;
     public const int Camera = 9;
-    public const int CameraShake = 10;
-    public const int CameraShakeOnDeath = 11;
-    public const int Canvas = 12;
-    public const int Child = 13;
-    public const int CircleMissileRotatedSpawner = 14;
-    public const int CircleMissileSpawner = 15;
-    public const int Collision = 16;
-    public const int CollisionDeath = 17;
-    public const int CreateCamera = 18;
-    public const int CreateGrid = 19;
-    public const int CreateLevel = 20;
-    public const int CreatePlayer = 21;
-    public const int CreateShip = 22;
-    public const int CurrentShip = 23;
-    public const int Damage = 24;
+    public const int CameraShakeOnDeath = 10;
+    public const int Canvas = 11;
+    public const int Child = 12;
+    public const int CircleMissileRotatedSpawner = 13;
+    public const int CircleMissileSpawner = 14;
+    public const int Collision = 15;
+    public const int CollisionDeath = 16;
+    public const int CreateCamera = 17;
+    public const int CreateGrid = 18;
+    public const int CreateLevel = 19;
+    public const int CreatePlayer = 20;
+    public const int CreateShip = 21;
+    public const int CurrentShip = 22;
+    public const int Damage = 23;
+    public const int DefaultCamera = 24;
     public const int DelayedCall = 25;
     public const int DestroyEntity = 26;
     public const int DestroyEntityDelayed = 27;
@@ -72,12 +72,12 @@ public static class ComponentIds {
     public const int PlayerModel = 70;
     public const int PoolableGO = 71;
     public const int Position = 72;
-    public const int RegularCamera = 73;
-    public const int RelativePosition = 74;
-    public const int Resource = 75;
-    public const int Rotate = 76;
-    public const int SecondaryWeapon = 77;
-    public const int SettingsModel = 78;
+    public const int RelativePosition = 73;
+    public const int Resource = 74;
+    public const int Rotate = 75;
+    public const int SecondaryWeapon = 76;
+    public const int SettingsModel = 77;
+    public const int Shake = 78;
     public const int ShipModel = 79;
     public const int SlowGame = 80;
     public const int SmoothCamera = 81;
@@ -111,7 +111,6 @@ public static class ComponentIds {
         "BonusOnDeath",
         "CallOnFrameEnd",
         "Camera",
-        "CameraShake",
         "CameraShakeOnDeath",
         "Canvas",
         "Child",
@@ -126,6 +125,7 @@ public static class ComponentIds {
         "CreateShip",
         "CurrentShip",
         "Damage",
+        "DefaultCamera",
         "DelayedCall",
         "DestroyEntity",
         "DestroyEntityDelayed",
@@ -174,12 +174,12 @@ public static class ComponentIds {
         "PlayerModel",
         "PoolableGO",
         "Position",
-        "RegularCamera",
         "RelativePosition",
         "Resource",
         "Rotate",
         "SecondaryWeapon",
         "SettingsModel",
+        "Shake",
         "ShipModel",
         "SlowGame",
         "SmoothCamera",
@@ -212,7 +212,6 @@ public static class ComponentIds {
         typeof(BonusOnDeathComponent),
         typeof(CallOnFrameEndComponent),
         typeof(CameraComponent),
-        typeof(CameraShakeComponent),
         typeof(CameraShakeOnDeathComponent),
         typeof(CanvasComponent),
         typeof(ChildComponent),
@@ -227,6 +226,7 @@ public static class ComponentIds {
         typeof(CreateShipComponent),
         typeof(CurrentShipComponent),
         typeof(DamageComponent),
+        typeof(DefaultCameraComponent),
         typeof(DelayedCallComponent),
         typeof(DestroyEntityComponent),
         typeof(DestroyEntityDelayedComponent),
@@ -275,12 +275,12 @@ public static class ComponentIds {
         typeof(PlayerModelComponent),
         typeof(PoolableGOComponent),
         typeof(PositionComponent),
-        typeof(RegularCameraComponent),
         typeof(RelativePositionComponent),
         typeof(ResourceComponent),
         typeof(RotateComponent),
         typeof(SecondaryWeaponComponent),
         typeof(SettingsModelComponent),
+        typeof(ShakeComponent),
         typeof(ShipModelComponent),
         typeof(SlowGameComponent),
         typeof(SmoothCameraComponent),

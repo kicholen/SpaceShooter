@@ -23,7 +23,7 @@ public class DeadPlayerSystem : IReactiveSystem, ISetPool {
 		input.isInputBlocked = true;
 
 		_pool.CreateEntity()
-			.AddCreateCamera(CameraTypes.Static);
+			.AddCreateCamera(CameraTypes.Static, false);
 
 		_eventService.GetSingleEntity().eventService.dispatcher.Dispatch<GameEndedEvent>(new GameEndedEvent(true));
 	}

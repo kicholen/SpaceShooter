@@ -41,15 +41,15 @@ public class StartGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool
 			if (e.hasSmoothCamera) {
 				e.smoothCamera.offset = new Vector3(0.0f, 0.0f, 0.0f);
 			}
-			else if (e.hasRegularCamera) {
-				e.regularCamera.offset = new Vector3(0.0f, 0.0f, 0.0f);
+			else if (e.hasDefaultCamera) {
+				e.defaultCamera.offset = new Vector3(0.0f, 0.0f, 0.0f);
 			}
 			else if (e.hasStaticCamera) {
 				e.staticCamera.offset = new Vector3(0.0f, 0.0f, 0.0f);
 			}
 		}
 		_pool.CreateEntity()
-			.AddCreateCamera(CameraTypes.Smooth);
+			.AddCreateCamera(CameraTypes.Smooth, false);
 	}
 	
 	void restartLevel(int level) {

@@ -66,15 +66,15 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		Vector2 playerPosition = _playerGroup.GetSingleEntity().position.pos;
 
 		if (e.hasSmoothCamera) {
-			e.AddRegularCamera(e.smoothCamera.offset)
+			e.AddDefaultCamera(e.smoothCamera.offset)
 				.RemoveVelocity();
 			e.RemoveSmoothCamera();
 		}
-		else if (e.hasRegularCamera) {
-			e.AddSmoothCamera(e.regularCamera.offset)
+		else if (e.hasDefaultCamera) {
+			e.AddSmoothCamera(e.defaultCamera.offset)
 				.AddVelocity(new Vector2(0.0f, 2.0f))
-				.ReplacePosition(new Vector2(playerPosition.x, playerPosition.y + e.regularCamera.offset.y));
-			e.RemoveRegularCamera();
+				.ReplacePosition(new Vector2(playerPosition.x, playerPosition.y + e.defaultCamera.offset.y));
+			e.RemoveDefaultCamera();
 		}
 	}
 
