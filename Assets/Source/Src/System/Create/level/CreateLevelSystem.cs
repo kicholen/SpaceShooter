@@ -35,7 +35,7 @@ public class CreateLevelSystem : IReactiveSystem, ISetPool {
 		}
 
 		_pool.CreateEntity()
-			.AddEnemySpawner(createLevel.level, false, component);
+			.AddEnemySpawner(component);
 
 		Entity cameraEntity = _cameras.GetSingleEntity();
 		if (!cameraEntity.hasSnapPosition) {

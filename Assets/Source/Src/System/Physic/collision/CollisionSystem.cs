@@ -30,5 +30,6 @@ public class CollisionSystem : IExecuteSystem, ISetPool {
 		if (damageTaken > 0) {
 			e.AddDamage(damageTaken);
 		}
+		collision.DamageTaken = 0;
 	}
 }
