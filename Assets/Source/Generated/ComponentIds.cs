@@ -51,54 +51,55 @@ public static class ComponentIds {
     public const int Input = 49;
     public const int Laser = 50;
     public const int LaserSpawner = 51;
-    public const int LevelDimensions = 52;
-    public const int LevelModel = 53;
-    public const int Magnet = 54;
-    public const int MaterialReference = 55;
-    public const int MissileSpawner = 56;
-    public const int MouseInput = 57;
-    public const int MoveWithCamera = 58;
-    public const int MovingBlockade = 59;
-    public const int MultipleMissileSpawner = 60;
-    public const int NonRemovable = 61;
-    public const int Parent = 62;
-    public const int ParticlesOnDeath = 63;
-    public const int ParticleSpawn = 64;
-    public const int Path = 65;
-    public const int PathModel = 66;
-    public const int PauseGame = 67;
-    public const int Player = 68;
-    public const int PlayerHealthBar = 69;
-    public const int PlayerModel = 70;
-    public const int PoolableGO = 71;
-    public const int Position = 72;
-    public const int RelativePosition = 73;
-    public const int Resource = 74;
-    public const int Rotate = 75;
-    public const int SecondaryWeapon = 76;
-    public const int SettingsModel = 77;
-    public const int Shake = 78;
-    public const int ShipModel = 79;
-    public const int SlowGame = 80;
-    public const int SmoothCamera = 81;
-    public const int SnapPosition = 82;
-    public const int SortOrder = 83;
-    public const int Sound = 84;
-    public const int SoundOnDeath = 85;
-    public const int SpeedBonus = 86;
-    public const int StartGame = 87;
-    public const int StaticCamera = 88;
-    public const int Test = 89;
-    public const int Time = 90;
-    public const int TweenPosition = 91;
-    public const int UIFactoryService = 92;
-    public const int UIResource = 93;
-    public const int Velocity = 94;
-    public const int VelocityLimit = 95;
-    public const int WaveSpawner = 96;
-    public const int Weapon = 97;
+    public const int LeaderFollower = 52;
+    public const int LevelDimensions = 53;
+    public const int LevelModel = 54;
+    public const int Magnet = 55;
+    public const int MaterialReference = 56;
+    public const int MissileSpawner = 57;
+    public const int MouseInput = 58;
+    public const int MoveWithCamera = 59;
+    public const int MovingBlockade = 60;
+    public const int MultipleMissileSpawner = 61;
+    public const int NonRemovable = 62;
+    public const int Parent = 63;
+    public const int ParticlesOnDeath = 64;
+    public const int ParticleSpawn = 65;
+    public const int Path = 66;
+    public const int PathModel = 67;
+    public const int PauseGame = 68;
+    public const int Player = 69;
+    public const int PlayerHealthBar = 70;
+    public const int PlayerModel = 71;
+    public const int PoolableGO = 72;
+    public const int Position = 73;
+    public const int RelativePosition = 74;
+    public const int Resource = 75;
+    public const int Rotate = 76;
+    public const int SecondaryWeapon = 77;
+    public const int SettingsModel = 78;
+    public const int Shake = 79;
+    public const int ShipModel = 80;
+    public const int SlowGame = 81;
+    public const int SmoothCamera = 82;
+    public const int SnapPosition = 83;
+    public const int SortOrder = 84;
+    public const int Sound = 85;
+    public const int SoundOnDeath = 86;
+    public const int SpeedBonus = 87;
+    public const int StartGame = 88;
+    public const int StaticCamera = 89;
+    public const int Test = 90;
+    public const int Time = 91;
+    public const int TweenPosition = 92;
+    public const int UIFactoryService = 93;
+    public const int UIResource = 94;
+    public const int Velocity = 95;
+    public const int VelocityLimit = 96;
+    public const int WaveSpawner = 97;
+    public const int Weapon = 98;
 
-    public const int TotalComponents = 98;
+    public const int TotalComponents = 99;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -153,6 +154,7 @@ public static class ComponentIds {
         "Input",
         "Laser",
         "LaserSpawner",
+        "LeaderFollower",
         "LevelDimensions",
         "LevelModel",
         "Magnet",
@@ -254,6 +256,7 @@ public static class ComponentIds {
         typeof(InputComponent),
         typeof(LaserComponent),
         typeof(LaserSpawnerComponent),
+        typeof(LeaderFollowerComponent),
         typeof(LevelDimensionsComponent),
         typeof(LevelModelComponent),
         typeof(MagnetComponent),

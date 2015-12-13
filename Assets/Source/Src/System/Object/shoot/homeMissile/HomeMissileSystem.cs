@@ -42,7 +42,7 @@ public class HomeMissileSystem : IExecuteSystem, ISetPool {
 			return;
 		}
 
-		var targetEntity = targetComponent.target;
+		Entity targetEntity = targetComponent.target;
 
 		Vector2 position = e.position.pos;
 		Vector2 targetPosition = targetEntity.position.pos;

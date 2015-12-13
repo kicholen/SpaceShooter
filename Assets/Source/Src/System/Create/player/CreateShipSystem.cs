@@ -67,36 +67,72 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 	List<Entity> getShipChildren(Entity parent, ShipModelComponent component) {
 		List<Entity> children = new List<Entity>();
 		if (component.hasHomeMissile) {
-			children.Add(_pool.CreateEntity()
-			             .AddRelativePosition(0.5f, -0.5f)
-			             .AddPosition(new Vector2(0.0f, 0.0f))
-			             .AddChild(parent)
-			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
-			children.Add(_pool.CreateEntity()
-			             .AddRelativePosition(-0.5f, -0.5f)
-			             .AddPosition(new Vector2(0.0f, 0.0f))
-			             .AddChild(parent)
-			             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+			addHomeMissile(children, parent, component);
 		}
 		if (component.hasSecondaryMissiles) {
-			Entity leftWeapon = _pool.CreateEntity()
-				.AddRelativePosition(-0.25f, -0.25f)
-				.AddPosition(new Vector2(0.0f, 0.0f))
-				.AddChild(parent);
-			leftWeapon.isSecondaryWeapon = true;
-			
-			Entity rightWeapon = _pool.CreateEntity()
-				.AddRelativePosition(0.25f, -0.25f)
-				.AddPosition(new Vector2(0.0f, 0.0f))
-				.AddChild(parent);
-			rightWeapon.isSecondaryWeapon = true;
-			
-			children.Add(leftWeapon);
-			children.Add(rightWeapon);
+			addSecondaryMissiles(children, parent);
 		}
-		
+		addHelperShips(children, parent, component);
+
 		addNonRemovable(children);
 		return children;
+	}
+
+	void addHomeMissile(List<Entity> children, Entity parent, ShipModelComponent component) {
+		children.Add(_pool.CreateEntity()
+		             .AddRelativePosition(0.5f, -0.5f)
+		             .AddPosition(new Vector2(0.0f, 0.0f))
+		             .AddChild(parent)
+		             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+		children.Add(_pool.CreateEntity()
+		             .AddRelativePosition(-0.5f, -0.5f)
+		             .AddPosition(new Vector2(0.0f, 0.0f))
+		             .AddChild(parent)
+		             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+	}
+
+	void addSecondaryMissiles(List<Entity> children, Entity parent) {
+		Entity leftWeapon = _pool.CreateEntity()
+			.AddRelativePosition(-0.25f, -0.25f)
+			.AddPosition(new Vector2(0.0f, 0.0f))
+			.AddChild(parent)
+			.IsSecondaryWeapon(true);
+		
+		Entity rightWeapon = _pool.CreateEntity()
+			.AddRelativePosition(0.25f, -0.25f)
+			.AddPosition(new Vector2(0.0f, 0.0f))
+			.AddChild(parent)
+			.IsSecondaryWeapon(true);
+		
+		children.Add(leftWeapon);
+		children.Add(rightWeapon);
+	}
+
+	void addHelperShips(List<Entity> children, Entity parent, ShipModelComponent component) {
+		children.Add(_pool.CreateEntity()
+			.AddPosition(new Vector2(0.0f, 0.0f))
+			.AddResource(Resource.Player)
+			.AddChild(parent)
+			.IsLeaderFollower(true)
+			.AddVelocity(new Vector2())
+			.AddVelocityLimit(3.0f)
+			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+		children.Add(_pool.CreateEntity()
+			.AddPosition(new Vector2(0.0f, 0.0f))
+			.AddResource(Resource.Player)
+			.AddChild(parent)
+            .IsLeaderFollower(true)
+			.AddVelocity(new Vector2())
+			.AddVelocityLimit(3.0f)
+			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+		children.Add(_pool.CreateEntity()
+			.AddPosition(new Vector2(0.0f, 0.0f))
+			.AddResource(Resource.Player)
+			.AddChild(parent)
+            .IsLeaderFollower(true)
+		    .AddVelocity(new Vector2())
+		    .AddVelocityLimit(3.0f)
+			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
 	}
 	
 	void addNonRemovable(List<Entity> entities) {

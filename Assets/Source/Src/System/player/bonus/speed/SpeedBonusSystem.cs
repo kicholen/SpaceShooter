@@ -17,6 +17,9 @@ public class SpeedBonusSystem : IExecuteSystem, ISetPool {
 	}
 
 	public void Execute() {
+		if (_group.count == 0) {
+			return;
+		}
 		Entity player = _player.GetSingleEntity();
 		if (player != null) {
 			float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;

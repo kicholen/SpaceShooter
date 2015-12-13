@@ -127,6 +127,7 @@ public class GameService : IGameService {
 			.Add(pool.CreateCollisionSystem())
 			.Add(pool.CreateMoveWithCameraSystem())
 			.Add(pool.CreatePathSystem())
+			.Add(pool.CreateHelperShipSystem())
 			.Add(pool.CreatePositionSystem())
 			.Add(pool.CreateRotateSystem())
 
