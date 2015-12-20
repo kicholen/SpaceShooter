@@ -110,28 +110,28 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 
 	void addHelperShips(List<Entity> children, Entity parent, ShipModelComponent component) {
 		children.Add(_pool.CreateEntity()
-			.AddPosition(new Vector2(0.0f, 0.0f))
+			.AddPosition(new Vector2(0.5f, 0.0f))
 			.AddResource(Resource.Player)
 			.AddChild(parent)
-			.IsLeaderFollower(true)
+		    .IsLeaderFollower(true)
 			.AddVelocity(new Vector2())
-			.AddVelocityLimit(3.0f)
+			.AddVelocityLimit(5.0f)
 			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
 		children.Add(_pool.CreateEntity()
-			.AddPosition(new Vector2(0.0f, 0.0f))
+			.AddPosition(new Vector2(0.0f, 0.5f))
 			.AddResource(Resource.Player)
 			.AddChild(parent)
             .IsLeaderFollower(true)
 			.AddVelocity(new Vector2())
-			.AddVelocityLimit(3.0f)
+			.AddVelocityLimit(5.5f)
 			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
 		children.Add(_pool.CreateEntity()
-			.AddPosition(new Vector2(0.0f, 0.0f))
+			.AddPosition(new Vector2(-0.5f, 0.0f))
 			.AddResource(Resource.Player)
 			.AddChild(parent)
             .IsLeaderFollower(true)
 		    .AddVelocity(new Vector2())
-		    .AddVelocityLimit(3.0f)
+		    .AddVelocityLimit(6.0f)
 			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
 	}
 	

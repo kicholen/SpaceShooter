@@ -1,22 +1,48 @@
 using Entitas;
+using System.Collections.Generic;
+using System;
 
-public class TweenSystem : IExecuteSystem, ISetPool {
+public class TweenSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 	Group _group;
 	Group _time;
 
+	public void Initialize() {
+		TweenComponent.RegisterAccessor(typeof(PositionComponent), typeof(PositionAccessor));
+	}
+
 	public void SetPool(Pool pool) {
 		_time = pool.GetGroup(Matcher.Time);
-		_group = pool.GetGroup(Matcher.AllOf(Matcher.TweenPosition, Matcher.Position));
+		_group = pool.GetGroup(Matcher.Tween);
 	}
 	
 	public void Execute() {
 		TimeComponent time = _time.GetSingleEntity().time;
-		float deltaTime = time.deltaTime;
 		float gameDeltaTime = time.gameDeltaTime;
+		float deltaTime = time.deltaTime;
 
 		foreach (Entity e in _group.GetEntities()) {
-			tweenPosition(e, deltaTime, gameDeltaTime);
+			TweenComponent tweenComponent = e.tween;
+			update(e, tweenComponent, tweenComponent.isInGame ? gameDeltaTime : deltaTime);
 		}
+	}
+
+	void update(Entity e, TweenComponent tweenComponent, float deltaTime) {
+		Dictionary<Type, Tween> tweens = tweenComponent.tweens;
+		foreach (Tween tween in tweens.Values) {
+			tween.Update(deltaTime);
+			if (tween.HasEnded()) {
+				onTweenEnded(e, tweenComponent, tween);
+			}
+		}
+	}
+
+	void onTweenEnded(Entity e, TweenComponent tweenComponent, Tween tween) {
+		e.AddCallOnFrameEnd((ent) => {
+			if (tween.OnComplete != null) {
+				tween.OnComplete(ent);
+			}
+			tweenComponent.RemoveTween(tween);
+		});
 	}
 
 	void tweenPosition(Entity e, float deltaTime, float gameDeltaTime) {

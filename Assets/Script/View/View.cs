@@ -22,6 +22,7 @@ public class View {
 		go = uiFactoryService.CreatePrefab(prefab);
 		rectTransform = go.GetComponent<RectTransform>();
 		entity = pool.CreateEntity()
+				.AddGameObject(go, "prefab")
 				.AddPosition(rectTransform.localPosition);
 	}
 	
@@ -31,7 +32,10 @@ public class View {
 	
 	public virtual void Show() {
 		Vector2 from = new Vector2(rectTransform.localPosition.x - Screen.width, rectTransform.localPosition.y);
-		entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, from, rectTransform.localPosition, false, OnShown, onUpdate);
+		entity.AddTween(false, new System.Collections.Generic.Dictionary<System.Type, Tween>());
+		TweenComponent component = (TweenComponent)entity.GetComponent(ComponentIds.Tween);
+		component.AddTween(entity.position, EaseTypes.Linear, 3, 0.1f, new float[] {from.x, from.y}, new float[] {rectTransform.localPosition.x, rectTransform.localPosition.y}); 
+		//entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, from, rectTransform.localPosition, false, OnShown, onUpdate);
 		rectTransform.localPosition = from;
 	}
 	
@@ -41,7 +45,10 @@ public class View {
 	
 	public virtual void Hide() {
 		Vector2 to = new Vector2(rectTransform.localPosition.x + Screen.width, rectTransform.localPosition.y);
-		entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, rectTransform.localPosition, to, false, OnHidden, onUpdate);
+		entity.AddTween(false, new System.Collections.Generic.Dictionary<System.Type, Tween>());
+		TweenComponent component = (TweenComponent)entity.GetComponent(ComponentIds.Tween);
+		component.AddTween(entity.position, EaseTypes.Linear, 3, 0.1f, new float[] {rectTransform.localPosition.x, rectTransform.localPosition.y}, new float[] {to.x, to.y}); 
+		//entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, rectTransform.localPosition, to, false, OnHidden, onUpdate);
 	}
 	
 	public void OnShown(Entity e = null) {
