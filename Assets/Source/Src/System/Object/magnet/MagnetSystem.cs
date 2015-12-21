@@ -17,8 +17,8 @@ public class MagnetSystem : IExecuteSystem, ISetPool {
 				Vector2 position = e.position.pos;
 
 				if (isPointInCircle(targetPosition.x, targetPosition.y, magnetComponent.radius, position.x, position.y)) {
-					if (e.hasTweenPosition) {
-						e.RemoveTweenPosition();
+					if (e.hasTween) {
+						e.RemoveTween();
 					}
 					VelocityComponent velocity = e.velocity;
 					velocity.vel.Set((targetPosition.x - position.x) * 5.0f, (targetPosition.y - position.y) * 5.0f);

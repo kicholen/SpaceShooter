@@ -1,5 +1,6 @@
 using UnityEngine;
 using Entitas;
+using System.Collections.Generic;
 
 public class View {
 	const float pixelsPerUnit = 100.0f;
@@ -22,8 +23,7 @@ public class View {
 		go = uiFactoryService.CreatePrefab(prefab);
 		rectTransform = go.GetComponent<RectTransform>();
 		entity = pool.CreateEntity()
-				.AddGameObject(go, "prefab")
-				.AddPosition(rectTransform.localPosition);
+			.AddGameObject(go, "blabla");
 	}
 	
 	public void SetParent(Transform parent) {
@@ -32,23 +32,21 @@ public class View {
 	
 	public virtual void Show() {
 		Vector2 from = new Vector2(rectTransform.localPosition.x - Screen.width, rectTransform.localPosition.y);
-		entity.AddTween(false, new System.Collections.Generic.Dictionary<System.Type, Tween>());
-		TweenComponent component = (TweenComponent)entity.GetComponent(ComponentIds.Tween);
-		component.AddTween(entity.position, EaseTypes.Linear, 3, 0.1f, new float[] {from.x, from.y}, new float[] {rectTransform.localPosition.x, rectTransform.localPosition.y}); 
-		//entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, from, rectTransform.localPosition, false, OnShown, onUpdate);
+		entity.AddTween(false, new List<Tween>());
+		entity.tween.AddTween(entity.gameObject, EaseTypes.Linear, GameObjectAccessorType.LOCAL_X, 0.1f)
+			.From(from.x)
+			.To(rectTransform.localPosition.x)
+			.SetEndCallback(OnShown);
 		rectTransform.localPosition = from;
-	}
-	
-	void onUpdate(Entity e) {
-		rectTransform.localPosition = new Vector3(e.position.pos.x, e.position.pos.y);
 	}
 	
 	public virtual void Hide() {
 		Vector2 to = new Vector2(rectTransform.localPosition.x + Screen.width, rectTransform.localPosition.y);
-		entity.AddTween(false, new System.Collections.Generic.Dictionary<System.Type, Tween>());
-		TweenComponent component = (TweenComponent)entity.GetComponent(ComponentIds.Tween);
-		component.AddTween(entity.position, EaseTypes.Linear, 3, 0.1f, new float[] {rectTransform.localPosition.x, rectTransform.localPosition.y}, new float[] {to.x, to.y}); 
-		//entity.AddTweenPosition(0.0f, 0.1f, EaseTypes.Linear, rectTransform.localPosition, to, false, OnHidden, onUpdate);
+		entity.AddTween(false, new List<Tween>());
+		entity.tween.AddTween(entity.gameObject, EaseTypes.Linear, GameObjectAccessorType.LOCAL_X, 0.1f)
+			.From(rectTransform.localPosition.x)
+			.To(to.x)
+			.SetEndCallback(OnHidden);
 	}
 	
 	public void OnShown(Entity e = null) {
@@ -60,7 +58,7 @@ public class View {
 	}
 	
 	public virtual void Destroy() {
-		entity.isDestroyEntity = true;
+		pool.DestroyEntity(entity);
 		Object.Destroy(go);
 	}
 }

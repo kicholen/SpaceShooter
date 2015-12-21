@@ -1,7 +1,7 @@
 using Entitas;
-using UnityEngine;
+using System.Collections.Generic;
 
-public class MovingBlockadeSystem : IExecuteSystem, ISetPool {
+public class MovingBlockadeSystem : IExecuteSystem, ISetPool { // further development of TweenSystem == this system useless
 	Group _group;
 	Group _time;
 	
@@ -16,15 +16,19 @@ public class MovingBlockadeSystem : IExecuteSystem, ISetPool {
 			MovingBlockadeComponent component = e.movingBlockade;
 			component.time -= deltaTime;
 
-			if (component.time <= 0.0f && !e.hasTweenPosition) {
+			if (component.time <= 0.0f && !e.hasTween) {
 				component.time = component.duration;
 				PositionComponent position = e.position;
-				Vector2 to = new Vector2(position.pos.x + (component.offset * component.direction), position.pos.y);
-				e.AddTweenPosition(0.0f, component.duration, EaseTypes.Linear, position.pos, to, true, (ent) => {
-					MovingBlockadeComponent cmp = ent.movingBlockade;
-					cmp.direction = -cmp.direction;
-					cmp.time = component.stopDuration;
-				}, null);
+				e.AddTween(true, new List<Tween>());
+				TweenComponent tweenComponent = e.tween;
+				tweenComponent.AddTween(position, EaseTypes.Linear, PositionAccessorType.X, component.duration)
+					.From(position.pos.x)
+					.To(position.pos.x + (component.offset * component.direction))
+					.SetEndCallback((ent) => {
+							MovingBlockadeComponent cmp = ent.movingBlockade;
+							cmp.direction = -cmp.direction;
+							cmp.time = component.stopDuration;
+					});
 			}
 		}
 	}

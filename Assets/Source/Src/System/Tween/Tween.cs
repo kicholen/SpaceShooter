@@ -8,8 +8,9 @@ public class Tween {
 
 	float time;
 	float duration;
-	float[] startValues;
-	float[] targetValues;
+	int valuesCount;
+	float[] startValues = new float[TWEEN_ATTRIBUTES_LIMIT];
+	float[] targetValues = new float[TWEEN_ATTRIBUTES_LIMIT];
 	float[] bufferValues = new float[TWEEN_ATTRIBUTES_LIMIT];
 	int ease;
 	int tweenType;
@@ -24,22 +25,46 @@ public class Tween {
 		this.duration = duration;
 	}
 
-	public void SetValues(float[] startValues, float[] targetValues) {
-		this.startValues = startValues;
-		this.targetValues = targetValues;
+	public Tween From(float firstValue, float secondValue) {
+		valuesCount = 2;
+		this.startValues[0] = firstValue;
+		this.startValues[1] = secondValue;
+		return this;
+	}
+
+	public Tween From(float value) {
+		valuesCount = 1;
+		this.startValues[0] = value;
+		return this;
+	}
+
+	public Tween To(float firstValue, float secondValue) {
+		this.targetValues[0] = firstValue;
+		this.targetValues[1] = secondValue;
+		return this;
+	}
+	
+	public Tween To(float value) {
+		this.targetValues[0] = value;
+		return this;
+	}
+
+	public Tween SetEndCallback(Action<Entity> callback) {
+		OnComplete = callback; 
+		return this;
 	}
 
 	public void Update(float deltaTime) {
 		time += deltaTime;
 
 		if (time > duration) {
-			for (int i = 0; i < TWEEN_ATTRIBUTES_LIMIT; i++) {
+			for (int i = 0; i < valuesCount; i++) {
 				accessor.SetValues(target, tweenType, targetValues);
 			}
 		}
 		else {
 			float t = linear(time / duration);
-			for (int i = 0; i < TWEEN_ATTRIBUTES_LIMIT; i++) {
+			for (int i = 0; i < valuesCount; i++) {
 				bufferValues[i] = startValues[i] + t * (targetValues[i] - startValues[i]);
 			}
 			accessor.SetValues(target, tweenType, bufferValues);

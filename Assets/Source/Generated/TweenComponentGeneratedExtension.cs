@@ -12,14 +12,14 @@ namespace Entitas {
             _tweenComponentPool.Clear();
         }
 
-        public Entity AddTween(bool newIsInGame, System.Collections.Generic.Dictionary<System.Type, Tween> newTweens) {
+        public Entity AddTween(bool newIsInGame, System.Collections.Generic.List<Tween> newTweens) {
             var component = _tweenComponentPool.Count > 0 ? _tweenComponentPool.Pop() : new TweenComponent();
             component.isInGame = newIsInGame;
             component.tweens = newTweens;
             return AddComponent(ComponentIds.Tween, component);
         }
 
-        public Entity ReplaceTween(bool newIsInGame, System.Collections.Generic.Dictionary<System.Type, Tween> newTweens) {
+        public Entity ReplaceTween(bool newIsInGame, System.Collections.Generic.List<Tween> newTweens) {
             var previousComponent = hasTween ? tween : null;
             var component = _tweenComponentPool.Count > 0 ? _tweenComponentPool.Pop() : new TweenComponent();
             component.isInGame = newIsInGame;

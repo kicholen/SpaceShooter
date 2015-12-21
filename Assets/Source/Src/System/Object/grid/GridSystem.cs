@@ -4,6 +4,9 @@ using UnityEngine;
 /*
  * Anchor - top-left corner
  */
+using System.Collections.Generic;
+
+
 public class GridSystem : IExecuteSystem, ISetPool {
 	Group _grid;
 	Group _time;
@@ -45,10 +48,12 @@ public class GridSystem : IExecuteSystem, ISetPool {
 		if (previousX != -1) {
 			grid.grid[previousX, previousY] = GridState.FREE;
 		}
-		
 		component.state = GridFieldState.TWEEN;
-		Vector2 to = new Vector2(gridPosition.pos.x + (float)component.x * grid.fieldSize, gridPosition.pos.y - (float)component.y * grid.fieldSize);
-		e.AddTweenPosition(0.0f, 3.0f, EaseTypes.Linear, new Vector2(position.pos.x, position.pos.y), to, true, onComplete, null);
+
+		e.AddTween(true, new List<Tween>());
+		e.tween.AddTween(position, EaseTypes.Linear, PositionAccessorType.XY, 3.0f)
+			.From(position.pos.x, position.pos.y)
+			.To(gridPosition.pos.x + (float)component.x * grid.fieldSize, gridPosition.pos.y - (float)component.y * grid.fieldSize);
 	}
 
 	void onEntityPathRemoved(Group group, Entity entity, int index, IComponent component) {

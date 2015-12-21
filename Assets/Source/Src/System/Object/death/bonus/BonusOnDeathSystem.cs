@@ -45,16 +45,19 @@ public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 		for (int i = 0; i < amount; i++) {
 			float offsetX = Random.Range(-MAX_TWEEN_RADIUS, MAX_TWEEN_RADIUS);
 			float offsetY = Random.Range(-MAX_TWEEN_RADIUS, MAX_TWEEN_RADIUS);
-			_pool.CreateEntity()
+			Entity bonusEntity = _pool.CreateEntity()
 				.AddBonus(bonus.type)
 				.AddVelocity(new Vector2())
-				.AddTweenPosition(0.0f, 2.0f, EaseTypes.Linear, new Vector2(position.x, position.y), new Vector2(position.x + offsetX, position.y + offsetY), true, null, null)
+				.AddTween(true, new List<Tween>())
 				.AddPosition(new Vector2(position.x, position.y))
 				.AddHealth(0)
 				.AddCollision(CollisionTypes.Bonus, 0)
 				.AddFollowTarget(follow)
 				.AddMagnet(TEST_VELOCITY, TEST_RADIUS)
 				.AddResource(bonus.resource);
+			bonusEntity.tween.AddTween(bonusEntity.position, EaseTypes.Linear, PositionAccessorType.XY, 2.0f)
+				.From(position.x, position.y)
+				.To(position.x + offsetX, position.y + offsetY);
 		}
 	}
 }

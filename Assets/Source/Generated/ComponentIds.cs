@@ -92,15 +92,14 @@ public static class ComponentIds {
     public const int Test = 90;
     public const int Time = 91;
     public const int Tween = 92;
-    public const int TweenPosition = 93;
-    public const int UIFactoryService = 94;
-    public const int UIResource = 95;
-    public const int Velocity = 96;
-    public const int VelocityLimit = 97;
-    public const int WaveSpawner = 98;
-    public const int Weapon = 99;
+    public const int UIFactoryService = 93;
+    public const int UIResource = 94;
+    public const int Velocity = 95;
+    public const int VelocityLimit = 96;
+    public const int WaveSpawner = 97;
+    public const int Weapon = 98;
 
-    public const int TotalComponents = 100;
+    public const int TotalComponents = 99;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -196,7 +195,6 @@ public static class ComponentIds {
         "Test",
         "Time",
         "Tween",
-        "TweenPosition",
         "UIFactoryService",
         "UIResource",
         "Velocity",
@@ -299,7 +297,6 @@ public static class ComponentIds {
         typeof(TestComponent),
         typeof(TimeComponent),
         typeof(TweenComponent),
-        typeof(TweenPositionComponent),
         typeof(UIFactoryServiceComponent),
         typeof(UIResourceComponent),
         typeof(VelocityComponent),
