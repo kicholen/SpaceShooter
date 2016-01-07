@@ -43,7 +43,11 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			.IsMoveWithCamera(true);
 		
 		ship.AddParent(getShipChildren(ship, shipModel));
-		// create UI
+
+		createUI(ship);
+	}
+
+	void createUI(Entity ship) {
 		createHealthBar(ship);
 		createIndicatorPanel(ship);
 	}
@@ -116,7 +120,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 		    .IsLeaderFollower(true)
 			.AddVelocity(new Vector2())
 			.AddVelocityLimit(5.0f)
-			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, CollisionTypes.Player));
 		children.Add(_pool.CreateEntity()
 			.AddPosition(new Vector2(0.0f, 0.5f))
 			.AddResource(Resource.Player)
@@ -124,7 +128,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
             .IsLeaderFollower(true)
 			.AddVelocity(new Vector2())
 			.AddVelocityLimit(5.5f)
-			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, CollisionTypes.Player));
 		children.Add(_pool.CreateEntity()
 			.AddPosition(new Vector2(-0.5f, 0.0f))
 			.AddResource(Resource.Player)
@@ -132,7 +136,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
             .IsLeaderFollower(true)
 		    .AddVelocity(new Vector2())
 		    .AddVelocityLimit(6.0f)
-			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, CollisionTypes.Player));
 	}
 	
 	void addNonRemovable(List<Entity> entities) {

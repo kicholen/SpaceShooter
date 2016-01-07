@@ -9,15 +9,15 @@ public class LoadView : View, IView {
 	: base(pool, uiFactoryService, eventService, "View/LoadView") {
 		progressBar = go.transform.FindChild("LoadingBar").GetComponent<Scrollbar>();
 		
-		eventService.AddListener<LoadProgressEvent>(onLoadProgress);
+		eventService.AddListener<PhaseProgressEvent>(onLoadProgress);
 	}
 	
 	public override void Destroy() {
 		base.Destroy();
-		eventService.RemoveListener<LoadProgressEvent>(onLoadProgress);
+		eventService.RemoveListener<PhaseProgressEvent>(onLoadProgress);
 	}
 
-	void onLoadProgress(LoadProgressEvent e) {
+	void onLoadProgress(PhaseProgressEvent e) {
 		progressBar.size = e.progress;
 	}
 }

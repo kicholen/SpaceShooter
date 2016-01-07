@@ -1,27 +1,26 @@
 ﻿using Entitas;
 using Entitas.Unity.VisualDebugging;
-using UnityEngine;
 
 public class GameService : IGameService {
+	IViewService viewService;
     Systems systems;
 	Pool pool;
-	Controller controller;
 
-	public GameService(Pool pool, Controller controller) {
+	public GameService(Pool pool, IViewService viewService) {
+		this.viewService = viewService;
 		this.pool = pool;
-		this.controller = controller;
 		systems = CreateSystems();
 	}
 
-	public void Init() {
-		controller.Services.EventService.AddListener<GameEndedEvent>(onGameEnded);
+	public void Init(IServices services) {
+		services.EventService.AddListener<GameEndedEvent>(onGameEnded);
 		pool.CreateEntity()
-			.AddEventService(controller.Services.EventService)
-			.AddUIFactoryService(controller.Services.UIFactoryService)
-			.AddCanvas(controller.Services.ViewService.Canvas);
+			.AddEventService(services.EventService)
+			.AddUIFactoryService(services.UIFactoryService)
+			.AddCanvas(services.ViewService.Canvas);
 			
 		systems.Initialize();
-		controller.Services.Updateables.Add(this);
+		services.Updateables.Add(this);
 	}
 
 	public void Update () {
@@ -48,7 +47,7 @@ public class GameService : IGameService {
 
 	public void EndGame(Entity e) {
 		e.isDestroyEntity = true;
-		controller.Services.ViewService.SetView(ViewTypes.LANDING);
+		viewService.SetView(ViewTypes.LANDING);
 		pool.CreateEntity()
 			.IsEndGame(true);
 	}

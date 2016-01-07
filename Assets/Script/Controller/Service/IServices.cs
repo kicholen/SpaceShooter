@@ -1,10 +1,11 @@
 using Entitas;
 using System.Collections.Generic;
 
-public interface IServices : IUpdateable {
-	Controller Controller { get; }
+public interface IServices : Updateable {
+	void Init();
+	IController Controller { get; }
 	Pool Pool { get;}
-	List<IUpdateable> Updateables { get; }
+	List<Updateable> Updateables { get; }
 	ILoadService LoadService { get; }
 	EventService EventService { get; }
 	IGameService GameService { get; }

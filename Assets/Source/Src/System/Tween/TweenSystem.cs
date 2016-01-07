@@ -1,6 +1,5 @@
 using Entitas;
 using System.Collections.Generic;
-using System;
 
 public class TweenSystem : IExecuteSystem, ISetPool {
 	Group _group;

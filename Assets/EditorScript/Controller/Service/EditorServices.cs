@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Entitas;
 
-public class Services : IServices {
-	Controller controller;
+public class EditorServices : IServices {
+	EditorController controller;
 	Pool pool;
 	List<Updateable> updateables = new List<Updateable>();
 	ILoadService loadService;
@@ -11,7 +11,7 @@ public class Services : IServices {
 	IViewService viewService;
 	IViewFactoryService viewFactoryService;
 	IUIFactoryService uiFactoryService;
-
+	
 	public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
 	public List<Updateable> Updateables { get { return updateables; } }
@@ -21,17 +21,17 @@ public class Services : IServices {
 	public IViewService ViewService { get { return viewService; } }
 	public IViewFactoryService ViewFactoryService { get { return viewFactoryService; } }
 	public IUIFactoryService UIFactoryService { get { return uiFactoryService; } }
-
-	public Services(Controller controller) {
+	
+	public EditorServices(EditorController controller) {
 		this.controller = controller;
 		pool = Pools.pool;
 		eventService = new EventService();
-
+		
 		uiFactoryService = new UIFactoryService();
 		viewFactoryService = new ViewFactoryService();
 		
 		viewService = new ViewService(eventService, uiFactoryService, viewFactoryService);
-
+		
 		loadService = new LoadService(eventService);
 		gameService = new GameService(pool, viewService);
 
@@ -42,7 +42,7 @@ public class Services : IServices {
 	public void Init() {
 		viewFactoryService.Init(this);
 	}
-
+	
 	public void Update () {
 		for (int i = 0; i < updateables.Count; i++) {
 			updateables[i].Update();

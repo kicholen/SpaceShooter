@@ -1,36 +1,31 @@
-using Entitas;public class ViewFactoryService : IViewFactoryService {
+public class ViewFactoryService : IViewFactoryService {
 
-	Controller controller;
-	Pool pool;
-	EventService eventService;
-	IUIFactoryService uiFactoryService;
+	IServices services;
 
-	public ViewFactoryService(Controller controller, EventService eventService, IUIFactoryService uiFactoryService) {
-		this.controller = controller;
-		this.eventService = eventService;
-		this.uiFactoryService = uiFactoryService;
+	public void Init(IServices services) {
+		this.services = services;
 	}
 
 	public IView CreateView(ViewTypes type) {
 		IView view = null;
 		switch (type) {
 			case ViewTypes.GAME:
-				view = new GameView(controller, controller.Services.Pool, uiFactoryService, controller.Services.GameService, eventService);
+				view = new GameView(services.Updateables, services.Pool, services.UIFactoryService, services.GameService, services.EventService);
 			break;
 			case ViewTypes.INIT:
-				view = new InitView(controller.Services.Pool, uiFactoryService, eventService);
+				view = new InitView(services.Pool, services.UIFactoryService, services.EventService);
 			break;
 			case ViewTypes.LANDING:
-				view = new LandingView(controller.Services.Pool, uiFactoryService, eventService, controller.Services.ViewService);
+				view = new LandingView(services.Pool, services.UIFactoryService, services.EventService, services.ViewService);
 			break;
 			case ViewTypes.LEVEL:
-				view = new LevelView(controller.Services.Pool, uiFactoryService, eventService, controller.Services.LoadService);
+				view = new LevelView(services.Pool, services.UIFactoryService, services.EventService, services.LoadService, services.ViewService, services.GameService);
 			break;
 			case ViewTypes.LOAD:
-				view = new LoadView(controller.Services.Pool, uiFactoryService, eventService);
+				view = new LoadView(services.Pool, services.UIFactoryService, services.EventService);
 			break;
 			case ViewTypes.SHIP:
-				view = new ShipView(controller.Services.Pool, uiFactoryService, eventService, controller.Services.ViewService);
+				view = new ShipView(services.Pool, services.UIFactoryService, services.EventService, services.ViewService);
 			break;
 		}
 

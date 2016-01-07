@@ -1,7 +1,7 @@
 using Entitas;
 
-public interface IGameService : IUpdateable {
-	void Init();
+public interface IGameService : Updateable {
+	void Init(IServices services);
 	void InitGame(int level);
 	void InitPool(string resource, int count);
 	void PlayGame();

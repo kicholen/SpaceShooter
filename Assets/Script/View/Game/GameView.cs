@@ -4,14 +4,14 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class GameView : View, IView, IUpdateable {
+public class GameView : View, IView, Updateable {
 
-	Controller controller;
+	List<Updateable> updateables; //todo change this one, for example replace with interface
 	IGameService gameService;
 	
-	public GameView(Controller controller, Pool pool, IUIFactoryService uiFactoryService, IGameService gameService, EventService eventService)
+	public GameView(List<Updateable> updateables, Pool pool, IUIFactoryService uiFactoryService, IGameService gameService, EventService eventService)
 	: base(pool, uiFactoryService, eventService, "View/GameView") {
-		this.controller = controller;
+		this.updateables = updateables;
 		this.gameService = gameService;
 		uiFactoryService.AddButton(go.transform, "Exit", onExitClicked);
 		uiFactoryService.AddButton(go.transform, "Laser", onLaserClicked);
@@ -19,7 +19,7 @@ public class GameView : View, IView, IUpdateable {
 		eventService.AddListener<GameSlowEvent>(onGameSlow);
 		go.SetActive(false);
 		
-		controller.Services.Updateables.Insert(0, this);
+		updateables.Insert(0, this);
 	}
 
 	public void Update() {
@@ -37,7 +37,7 @@ public class GameView : View, IView, IUpdateable {
 	}
 
 	public override void Hide() {
-		controller.Services.Updateables.Remove(this);
+		updateables.Remove(this);
 		eventService.RemoveListener<GameSlowEvent>(onGameSlow);
 		OnHidden();
 	}

@@ -1,1 +1,30 @@
-{"points":[{"x":5.006701,"y":0.0268006325,"normalized":{"x":0.999985635,"y":0.00535287568,"normalized":{"x":0.9999857,"y":0.005352876,"magnitude":1.0,"sqrMagnitude":1.0},"magnitude":0.99999994,"sqrMagnitude":0.99999994},"magnitude":5.006773,"sqrMagnitude":25.0677738},{"x":1.54941356,"y":-2.82244563,"normalized":{"x":0.48121956,"y":-0.8766001,"magnitude":1.0,"sqrMagnitude":1.0},"magnitude":3.21976423,"sqrMagnitude":10.3668814},{"x":-0.7621443,"y":-3.17420435,"normalized":{"x":-0.233470067,"y":-0.972364,"magnitude":1.0,"sqrMagnitude":1.0},"magnitude":3.26441979,"sqrMagnitude":10.6564369},{"x":-2.25293159,"y":-2.85594654,"normalized":{"x":-0.619345665,"y":-0.7851184,"normalized":{"x":-0.6193457,"y":-0.785118461,"magnitude":1.0,"sqrMagnitude":1.00000012},"magnitude":0.99999994,"sqrMagnitude":0.99999994},"magnitude":3.63759971,"sqrMagnitude":13.232131},{"x":-2.92294836,"y":-1.18090451,"normalized":{"x":-0.927188635,"y":-0.374594778,"magnitude":1.0,"sqrMagnitude":1.0},"magnitude":3.15248513,"sqrMagnitude":9.938163},{"x":2.2864325,"y":0.661641359,"normalized":{"x":0.960589,"y":0.277972519,"normalized":{"x":0.960589051,"y":0.277972549,"magnitude":1.0,"sqrMagnitude":1.00000012},"magnitude":0.99999994,"sqrMagnitude":0.99999994},"magnitude":2.3802402,"sqrMagnitude":5.665543},{"x":6.65829229,"y":2.33668327,"normalized":{"x":0.943580449,"y":0.33114326,"normalized":{"x":0.9435805,"y":0.3311433,"magnitude":1.0,"sqrMagnitude":1.0},"magnitude":0.99999994,"sqrMagnitude":0.99999994},"magnitude":7.05641174,"sqrMagnitude":49.7929459}]}
+{
+	"points": [{
+		"x": 5.006701,
+		"y": 0.0268006325
+	},
+	{
+		"x": 1.54941356,
+		"y": -2.82244563
+	},
+	{
+		"x": -0.7621443,
+		"y": -3.17420435
+	},
+	{
+		"x": -2.25293159,
+		"y": -2.85594654
+	},
+	{
+		"x": -2.92294836,
+		"y": -1.18090451
+	},
+	{
+		"x": 2.2864325,
+		"y": 0.661641359
+	},
+	{
+		"x": 6.65829229,
+		"y": 2.33668327
+	}]
+}

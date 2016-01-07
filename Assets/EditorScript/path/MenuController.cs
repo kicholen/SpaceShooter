@@ -24,7 +24,6 @@ public class MenuController : MonoBehaviour {
 	}
 
 	void setButtons() {
-		#if !UNITY_WEBPLAYER && !UNITY_WEBGL
 		DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Resources/");
 		FileInfo[] fileInfos = directoryInfo.GetFiles();
 		string lfThis = typeof(PathModelComponent).Name;
@@ -45,7 +44,6 @@ public class MenuController : MonoBehaviour {
 		foreach (string path in paths) {
 			addButton(path);
 		}
-		#endif
 	}
 
 	void addButton(string name) {

@@ -6,13 +6,17 @@ using Entitas;
 public class LevelView : View, IView {
 	
 	ILoadService loadService;
-
+	IViewService viewService;
+	IGameService gameService;
+	
 	Transform content;
 	List<int> levels = new List<int>();
 	
-	public LevelView(Pool pool, IUIFactoryService uiFactoryService, EventService eventService, ILoadService loadService) 
+	public LevelView(Pool pool, IUIFactoryService uiFactoryService, EventService eventService, ILoadService loadService, IViewService viewService, IGameService gameService) 
 	: base(pool, uiFactoryService, eventService, "View/LevelView") {
 		this.loadService = loadService;
+		this.viewService = viewService;
+		this.gameService = gameService;
 		content = go.transform.FindChild("Viewport/Content");
 
 		createLevels();
@@ -35,6 +39,6 @@ public class LevelView : View, IView {
 
 	void onLevelClicked() {
 		int level = System.Convert.ToInt16(EventSystem.current.currentSelectedGameObject.name);
-		loadService.ExecutePlayGame(level);
+		loadService.PrepareAndExecute(new StartGamePhase(viewService, gameService, level));
 	}
 }

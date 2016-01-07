@@ -1,79 +1,29 @@
-using System.Collections.Generic;
-using System;
-
 public class LoadService : ILoadService {
 
 	IViewService viewService;
 	EventService eventService;
 	IGameService gameService;
 
-	Queue<Action> phases;
-	int totalPhases;
-	int currentPhase;
+	int phasesInProgress;
+	public bool IsInProgress { get { return phasesInProgress > 0; } }
 
-	bool firstGame = true;
-
-	public LoadService(IViewService viewService, EventService eventService, IGameService gameService) {
-		this.viewService = viewService;
+	public LoadService(EventService eventService) {
 		this.eventService = eventService;
-		this.gameService = gameService;
+		addEventListeners();
 	}
 
-	public void ExecuteInit() {
-		phases = new Queue<Action>();
-		phases.Enqueue(() => addViewListener());
-		phases.Enqueue(() => viewService.SetView(ViewTypes.INIT));
-		phases.Enqueue(() => { gameService.Init(); nextPhase(); });
-		phases.Enqueue(() => addViewListener());
-		phases.Enqueue(() => viewService.SetView(ViewTypes.LANDING));
-
-		totalPhases = phases.Count;
-		nextPhase();
+	public void PrepareAndExecute(IPhase phase) {
+		phasesInProgress++;
+		phase.SetEventService(eventService);
+		phase.CreateActions();
+		phase.Execute();
 	}
 
-	public void ExecutePlayGame(int level) {
-		phases = new Queue<Action>();
-		phases.Enqueue(() => addViewListener());
-		phases.Enqueue(() => viewService.SetView(ViewTypes.LOAD));
-		phases.Enqueue(() => { gameService.InitGame(level); nextPhase(); });
-		if (firstGame) {
-			phases.Enqueue(() => { gameService.InitPool(Resource.Explosion, 4); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(Resource.ExplosionMissile, 10); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.MissileEnemy, 20); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.MissilePrimary, 20); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.MissileSecondary, 40); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.Enemy, 10); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.Star, 10); nextPhase(); });
-			phases.Enqueue(() => { gameService.InitPool(ResourceWithColliders.Bonus, 3); nextPhase(); });
-			firstGame = false;
-		}
-		phases.Enqueue(() => addViewListener());
-		phases.Enqueue(() => viewService.SetView(ViewTypes.GAME));
-		phases.Enqueue(() => { gameService.PlayGame(); nextPhase(); });
-
-		totalPhases = phases.Count;
-		nextPhase();
+	void addEventListeners() {
+		eventService.AddListener<PhaseFinishedEvent>(onPhaseFinished);
 	}
 
-	void addViewListener() {
-		eventService.AddListener<ViewShownEvent>(onViewShown);
-		nextPhase();
-	}
-
-	void onViewShown(ViewShownEvent e) {
-		eventService.RemoveListener<ViewShownEvent>(onViewShown);
-		nextPhase();
-	}
-
-	void nextPhase() {
-		currentPhase++;
-		if (phases.Count > 0) {
-			eventService.Dispatch<LoadProgressEvent>(new LoadProgressEvent((float)currentPhase/(float)totalPhases));
-			phases.Dequeue().Invoke();
-		}
-		else {
-			totalPhases = 0;
-			currentPhase = 0;
-		}
+	void onPhaseFinished(PhaseFinishedEvent phaseEvent) {
+		phasesInProgress--;
 	}
 }

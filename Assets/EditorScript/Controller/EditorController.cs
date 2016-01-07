@@ -1,6 +1,22 @@
 using UnityEngine;
 
-public class EditorController : MonoBehaviour {
+public class EditorController : MonoBehaviour, IController {
+
+	IServices services;
+	public IServices Services {
+		get {
+			return services;
+		}
+	}
+	
+	void Start () {
+		services = new EditorServices(this);
+	}
+	
+	void Update () {
+		services.Update();
+	}
+
 
 	public bool blockTouch = true;
 	public PathModelComponent component;
@@ -19,12 +35,12 @@ public class EditorController : MonoBehaviour {
 		}
 	}
 
-	void Update() {
+	/*void Update() {
 		if (Input.GetKeyDown(KeyCode.Escape) && menuController!=null) {
 			menuController.listGO.SetActive(true);
 			blockTouch = true;
 		}
-	}
+	}*/
 
 	public void init() {
 		blockTouch = true;

@@ -96,7 +96,7 @@ public class PathCreator : MonoBehaviour {
 
 	IEnumerator save() {
 		yield return new WaitForEndOfFrame();
-		#if !UNITY_WEBPLAYER && !UNITY_WEBGL
+
 		PathModelComponent component = new PathModelComponent();
 		component.points = new List<Vector2>();
 		float left = float.MaxValue;
@@ -138,6 +138,7 @@ public class PathCreator : MonoBehaviour {
 		byte[] bytes = texture.EncodeToPNG();
 		Object.Destroy(texture);
 
+		#if !UNITY_WEBPLAYER && !UNITY_WEBGL
 		File.WriteAllBytes(Application.dataPath + "/Resources/" + component.GetType().Name + "_" + EditorController.instance.sufix + ".png", bytes);
 		#endif
 	}
