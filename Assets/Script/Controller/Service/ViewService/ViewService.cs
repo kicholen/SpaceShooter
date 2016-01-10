@@ -11,7 +11,6 @@ public class ViewService : IViewService {
 	GameObject touchBlocker;
 	IView currentView;
 	IView nextView;
-	ViewTypes nextViewType;
 
 	public ViewService(EventService eventService, IUIFactoryService uiFactoryService) {
         factory = new ViewFactory();
@@ -23,18 +22,18 @@ public class ViewService : IViewService {
         factory.Init(services);
     }
 
-    public void SetView(ViewTypes type) {
-		nextViewType = type;
-
+    public IView SetView(ViewTypes type) {
 		if (currentView != null) {
 			touchBlocker.SetActive(true);
-			nextView = factory.Create(nextViewType);
+			nextView = factory.Create(type);
 			currentView.Hide();
+            return nextView;
 		}
 		else {
-			currentView = factory.Create(nextViewType);
+			currentView = factory.Create(type);
 			showCurrentView();
-		}
+            return currentView;
+        }
 	}
 
     void createCanvasAndTouchBlocker(IUIFactoryService uiFactoryService) {

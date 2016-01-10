@@ -12,6 +12,7 @@ public class EditorServices : IServices {
 	IUIFactoryService uiFactoryService;
     IPathService pathService;
     IWwwService wwwService;
+    IInfoService infoService;
 
     public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
@@ -23,6 +24,7 @@ public class EditorServices : IServices {
 	public IUIFactoryService UIFactoryService { get { return uiFactoryService; } }
     public IPathService PathService { get { return pathService; } }
     public IWwwService WwwService { get { return wwwService; } }
+    public IInfoService InfoService { get { return infoService; } }
 
     public EditorServices(IController controller) {
         this.controller = controller;
@@ -40,12 +42,14 @@ public class EditorServices : IServices {
         loadService = new LoadService(eventService);
         gameService = new GameService(pool, viewService);
         pathService = new PathService(wwwService);
+        infoService = new InfoService(viewService, uiFactoryService, eventService);
+        updateables.Add(infoService);
     }
 
     public void Init() {
         gameService.Init(this);
         viewService.Init(this);
-        ViewService.SetView(ViewTypes.EDITOR_PATH);
+        ViewService.SetView(ViewTypes.EDITOR_LANDING);
     }
 	
 	public void Update () {

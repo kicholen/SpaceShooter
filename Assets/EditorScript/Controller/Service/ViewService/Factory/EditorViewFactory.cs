@@ -7,8 +7,14 @@
     public override IView Create(ViewTypes type) {
         IView view = null;
         switch (type) {
+            case ViewTypes.EDITOR_LANDING:
+                view = new EditorView(services.ViewService);
+                break;
             case ViewTypes.EDITOR_PATH:
                 view = new PathView((services as EditorServices).PathService, services.ViewService);
+                break;
+            case ViewTypes.EDITOR_EDIT_PATH:
+                view = new EditPathView((services as EditorServices).PathService, services.ViewService);
                 break;
         }
         if (view == null) {

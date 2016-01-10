@@ -28,9 +28,4 @@ public class EditorController : MonoBehaviour, IController {
         FieldInfo fieldInfo = viewService.GetType().GetField("factory", BindingFlags.Instance | BindingFlags.NonPublic);
         fieldInfo.SetValue(viewService, new EditorViewFactory(Services));
     }
-
-	/*public void SetPathCreator() {
-		pathCreator = GameObject.FindGameObjectsWithTag("PathCreator")[0].GetComponent<PathCreator>();
-		pathCreator.SetGameObjectsFromLoadedOne();
-	}*/
 }

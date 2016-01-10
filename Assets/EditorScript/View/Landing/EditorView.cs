@@ -1,0 +1,26 @@
+﻿using UnityEngine;
+using UnityEngine.Events;
+
+public class EditorView : View, IView {
+
+    IViewService viewService;
+    Transform content;
+
+    public EditorView(IViewService viewService) : base("EditorView/Landing/LandingView") {
+        this.viewService = viewService;
+    }
+
+    public override void Init() {
+        base.Init();
+        content = getChild("Panel/Viewport/Content");
+        addButton("Edit Paths", () => viewService.SetView(ViewTypes.EDITOR_PATH));
+    }
+
+    void addButton(string text, UnityAction onClicked) {
+        GameObject go = uiFactoryService.CreatePrefab("EditorView/Button");
+        uiFactoryService.AddText(go.transform, "Text", text);
+        uiFactoryService.AddButton(go, onClicked);
+        go.name = text;
+        go.transform.SetParent(content.transform);
+    }
+}

@@ -4,9 +4,9 @@ public class GetPath : WwwRequest {
 
     public PathModelComponent Component;
 
-    public GetPath(string pathId) {
+    public GetPath(long id) {
         urlData.Add("paths");
-        urlData.Add(pathId);
+        urlData.Add(id.ToString());
     }
 
     public override void ParseResult() {

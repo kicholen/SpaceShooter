@@ -7,18 +7,27 @@ public class EditorGrid : MonoBehaviour {
 	public Material LineMaterial;
 	
 	List<Line> lines;
+    List<LineRenderer> lineRenderers = new List<LineRenderer>();
+    GameObject referenceGo;
 
 	const int GRID_SIZE = 20;
 	const float OPTIMAL_MAP_SIZE = 3.0f;
 	const float EPSILON = 0.005f;
 
-	void Start () {
+    void Start () {
 		createLines();
 		drawGrid();
 		createReferencePoint();
 	}
-	
-	void createLines () {
+
+    void OnDestroy() {
+        foreach (LineRenderer lineRenderer in lineRenderers) {
+            Destroy(lineRenderer.gameObject);
+        }
+        Destroy(referenceGo);
+    }
+
+    void createLines () {
 		lines = new List<Line>();
 
 		// y axis
@@ -45,17 +54,18 @@ public class EditorGrid : MonoBehaviour {
 	}
 
 	void createReferencePoint() {
-		GameObject go = Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/ReferencePoint"));
-		go.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+		referenceGo = Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Path/ReferencePoint"));
+		referenceGo.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
 	}
 
 	LineRenderer createLineRenderer(bool shouldExcel) {
 		LineRenderer lineRenderer = new GameObject().AddComponent<LineRenderer>();
 		lineRenderer.material = LineMaterial;
-		lineRenderer.SetWidth(0.05f, 0.05f);
+		lineRenderer.SetWidth(0.01f, 0.01f);
 		Color color = shouldExcel?Color.blue:Color.black;
 		lineRenderer.SetColors(color, color);
 		lineRenderer.SetVertexCount(2);
+        lineRenderers.Add(lineRenderer);
 		return lineRenderer;
 	}
 }

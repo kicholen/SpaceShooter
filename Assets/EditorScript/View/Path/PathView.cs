@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using System;
 
 public class PathView : View, IView {
 
@@ -17,6 +18,8 @@ public class PathView : View, IView {
         base.Init();
         content = getChild("Panel/Viewport/Content");
         pathService.LoadPathIds(onPathIdsLoaded);
+        uiFactoryService.AddButton(getChild("NewButton").gameObject, () => pathService.CreateNewPath(onPathLoaded));
+        uiFactoryService.AddButton(getChild("BackButton").gameObject, () => viewService.SetView(ViewTypes.EDITOR_LANDING));
     }
 
     void onPathIdsLoaded(List<string> pathIds) {
@@ -35,17 +38,10 @@ public class PathView : View, IView {
 
     void onPathClicked() {
         string pathId = EventSystem.current.currentSelectedGameObject.name;
-        pathService.LoadPathById(pathId, onPathLoaded);
-        //EditorController.instance.component = Utils.Deserialize<PathModelComponent>(sufix);
-        //EditorController.instance.SetPathCreator();
-        //EditorController.instance.menuController = this; changeView
-        //listGO.SetActive(false);
+        pathService.LoadPathById(Convert.ToInt64(pathId), onPathLoaded);
     }
 
-    void onPathLoaded(PathModelComponent component) {// todo
-        component = Utils.Deserialize<PathModelComponent>("10");
-        component.id = "42";
-        pathService.UpdatePath(component, () => { });
-        //viewService.SetView(ViewTypes.EDITOR_EDIT_PATH);
+    void onPathLoaded(PathModelComponent component) {
+        (viewService.SetView(ViewTypes.EDITOR_EDIT_PATH) as EditPathView).SetData(component);
     }
 }

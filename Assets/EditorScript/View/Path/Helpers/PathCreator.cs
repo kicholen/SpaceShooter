@@ -1,15 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
-using System.Collections;
 
 public class PathCreator : MonoBehaviour {
 
-	public Material LineMaterial;
-
 	const float SCREEN_OFFSET = 0.2f;
 
-    List<GameObject> gameObjects;
+    List<GameObject> gameObjects = new List<GameObject>();
 	GameObject dragging;
 	LineRenderer lineRenderer;
 	Vector3 currentPosition;
@@ -17,24 +14,49 @@ public class PathCreator : MonoBehaviour {
 	Stack<ChangeAction> changes = new Stack<ChangeAction>();
 	Stack<ChangeAction> backChanges = new Stack<ChangeAction>();
 
-    string pathId;
     PathModelComponent component;
+    Material lineMaterial;
+
+    public void Init(PathModelComponent component, Material material) {
+        this.component = component;
+        lineMaterial = material;
+        foreach (Vector2 position in component.points) {
+            currentPosition = new Vector3(position.x, position.y, 0.0f);
+            createNode();
+        }
+    }
+
+    public void Save() {
+        component.points = new List<Vector2>();
+        for (int i = 0; i < gameObjects.Count; i++) {
+            Vector3 position = gameObjects[i].transform.position;
+            component.points.Add(position);
+        }
+    }
 
     void Start () {
-		gameObject.tag = "PathCreator";
-		gameObjects = new List<GameObject>();
 		lineRenderer = new GameObject().AddComponent<LineRenderer>();
-		lineRenderer.material = LineMaterial;
+		lineRenderer.material = lineMaterial;
 		lineRenderer.SetWidth(0.05f, 0.05f);
-		lineRenderer.SetColors(Color.red, Color.red);
+		lineRenderer.SetColors(Color.yellow, Color.yellow);
 	}
 
-	void Update () {
-		if (Input.GetMouseButtonDown(0)) {
+    void OnDestroy() {
+        foreach (GameObject go in gameObjects) {
+            Destroy(go);
+        }
+        Destroy(lineRenderer.gameObject);
+        gameObjects.Clear();
+        dragging = null;
+        changes.Clear();
+        backChanges.Clear();
+    }
+
+    void Update () {
+		if (Input.GetMouseButtonDown(0) && !isGuiHit()) {
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 			if (hit.collider!=null) {
 				dragging = hit.collider.gameObject;
-				Debug.Log("hit");
 			}
 			else if (dragging != null) {
 				ChangeAction moveAction = new ChangeAction(dragging, gameObjects.IndexOf(dragging), ChangeState.MOVE);
@@ -58,9 +80,6 @@ public class PathCreator : MonoBehaviour {
 			dragging = null;
 			backChanges.Clear();
 		}
-		if (Input.GetKeyDown(KeyCode.O)) {
-			StartCoroutine(save());
-		}
 
 		if (Input.GetKeyDown(KeyCode.Y)) {
 			nextState();
@@ -72,7 +91,15 @@ public class PathCreator : MonoBehaviour {
 		drawLines();
 	}
 
-	void drawLines() {
+    bool isGuiHit() {
+        PointerEventData cursor = new PointerEventData(EventSystem.current);
+        cursor.position = Input.mousePosition;
+        List<RaycastResult> objectsHit = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(cursor, objectsHit);
+        return objectsHit.Count > 0;
+    }
+
+    void drawLines() {
 		lineRenderer.SetVertexCount(gameObjects.Count);
 		for (int i = 0; i < gameObjects.Count; i++) {
 			lineRenderer.SetPosition(i, gameObjects[i].transform.position);
@@ -80,7 +107,7 @@ public class PathCreator : MonoBehaviour {
 	}
 
 	void createNode() {
-		GameObject go = Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/point"));
+		GameObject go = Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Path/point"));
 		go.transform.position = currentPosition;
 		gameObjects.Add(go);
 		changes.Push(new ChangeAction(go, gameObjects.IndexOf(go), ChangeState.ADD));
@@ -89,35 +116,6 @@ public class PathCreator : MonoBehaviour {
 		
 	void onObjectClicked() {
 		dragging = EventSystem.current.currentSelectedGameObject;
-	}
-
-	IEnumerator save() {
-		yield return new WaitForEndOfFrame();
-
-		PathModelComponent component = new PathModelComponent();
-		component.points = new List<Vector2>();
-		float left = float.MaxValue;
-		float right = float.MinValue;
-		float bottom = float.MaxValue;
-		float top = float.MinValue;
-
-		for (int i = 0; i < gameObjects.Count; i++) {
-			Vector3 position = gameObjects[i].transform.position;
-			component.points.Add(position);
-			if (position.x < left) {
-				left = position.x;
-			}
-			if (position.x > right) {
-				right = position.x;
-			}
-			if (position.y < bottom) {
-				bottom = position.y;
-			}
-			if (position.y > top) {
-				top = position.y;
-			}
-		}
-		Utils.Serialize(component, pathId);
 	}
 
 	void nextState() {
@@ -167,23 +165,6 @@ public class PathCreator : MonoBehaviour {
 			break;
 		}
 		backChanges.Push(action);
-	}
-
-	public void SetGameObjectsFromLoadedOne() {
-		foreach (GameObject go in gameObjects) {
-			Destroy(go);
-		}
-		gameObjects.Clear();
-		dragging = null;
-		changes.Clear();
-		backChanges.Clear();
-
-		if (component != null) {
-			foreach (Vector2 position in component.points) {
-				currentPosition = new Vector3(position.x, position.y, 0.0f);
-				createNode();
-			}
-		}
 	}
 }
 
