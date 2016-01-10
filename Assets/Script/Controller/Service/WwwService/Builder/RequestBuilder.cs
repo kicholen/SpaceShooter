@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -12,12 +11,13 @@ public class RequestBuilder {
 
     WWW createWww(List<string> urlData, Dictionary<string, string> postData) {
         string url = createUrl(urlData);
+        Debug.Log(url);
         return isGETRequest(postData) ? createGETWww(url) : createPOSTWww(url, postData);
     }
 
     string createUrl(List<string> urlData) {
         StringBuilder builder = new StringBuilder();
-        builder.Append("http://localhost:8080/");
+        builder.Append(Facade.GetUrl());
         attachUrlData(builder, urlData);
         return builder.ToString();
     }

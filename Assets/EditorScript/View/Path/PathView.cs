@@ -15,7 +15,7 @@ public class PathView : View, IView {
 
     public override void Init() {
         base.Init();
-        content = go.transform.FindChild("Scroll View/Viewport/Content");
+        content = getChild("Panel/Viewport/Content");
         pathService.LoadPathIds(onPathIdsLoaded);
     }
 
@@ -26,7 +26,7 @@ public class PathView : View, IView {
     }
 
     void addButton(string id) {
-        GameObject go = uiFactoryService.CreatePrefab("Prefab/UI/EditorView/Button");
+        GameObject go = uiFactoryService.CreatePrefab("EditorView/Button");
         uiFactoryService.AddText(go.transform, "Text", id);
         uiFactoryService.AddButton(go, onPathClicked);
         go.name = id;
@@ -42,7 +42,10 @@ public class PathView : View, IView {
         //listGO.SetActive(false);
     }
 
-    void onPathLoaded(PathModelComponent component) {
-        viewService.SetView(ViewTypes.EDITOR_EDIT_PATH);
+    void onPathLoaded(PathModelComponent component) {// todo
+        component = Utils.Deserialize<PathModelComponent>("10");
+        component.id = "42";
+        pathService.UpdatePath(component, () => { });
+        //viewService.SetView(ViewTypes.EDITOR_EDIT_PATH);
     }
 }

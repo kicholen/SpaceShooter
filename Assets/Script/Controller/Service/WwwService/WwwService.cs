@@ -6,12 +6,12 @@ public class WwwService : MonoBehaviour, IWwwService {
 
     RequestBuilder builder = new RequestBuilder();
 
-    public void Send<T>(T request, Action<T> onSuccess, Action onFailure) where T : WwwRequest {
+    public void Send<T>(T request, Action<T> onSuccess, Action<string> onFailure) where T : WwwRequest {
         builder.Build(request);
         StartCoroutine(waitForRequest(request, onSuccess, onFailure));
     }
 
-    IEnumerator waitForRequest<T>(T request, Action<T> onSuccess, Action onFailure) where T : WwwRequest {
+    IEnumerator waitForRequest<T>(T request, Action<T> onSuccess, Action<string> onFailure) where T : WwwRequest {
         yield return request.Process();
 
         if (request.Successful()) {
@@ -19,7 +19,7 @@ public class WwwService : MonoBehaviour, IWwwService {
             onSuccess.Invoke(request);
         }
         else {
-            request.GetErrorMessage();
+            onFailure.Invoke(request.GetErrorMessage());
         }
     }
 }

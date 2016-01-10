@@ -3,5 +3,6 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class PathModelComponent : IComponent {
-	public List<Vector2> points;
+    public string id;
+    public List<Vector2> points;
 }

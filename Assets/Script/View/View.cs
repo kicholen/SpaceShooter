@@ -2,7 +2,7 @@ using UnityEngine;
 using Entitas;
 using System.Collections.Generic;
 
-public class View {
+public class View : BaseGui {
 	const float pixelsPerUnit = 100.0f;
 
 	RectTransform rectTransform;
@@ -12,7 +12,6 @@ public class View {
 	protected EventService eventService;
 	protected IUIFactoryService uiFactoryService;
 	
-	protected GameObject go;
     string prefabPath;
 
     public GameObject Go { get { return go; } }
@@ -68,8 +67,8 @@ public class View {
 		eventService.Dispatch<ViewHiddenEvent>(new ViewHiddenEvent());
 	}
 	
-	public virtual void Destroy() {
+	public override void Destroy() {
 		pool.DestroyEntity(entity);
-		Object.Destroy(go);
+        base.Destroy();
 	}
 }
