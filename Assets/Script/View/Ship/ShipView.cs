@@ -7,21 +7,25 @@ using UnityEngine.EventSystems;
 
 public class ShipView : View, IView {
 
+    IViewService viewService;
 	ShipModelComponent shipModel;
 
-	public ShipView(Pool pool, IUIFactoryService uiFactoryService, EventService eventService, IViewService viewService)
-	: base(pool, uiFactoryService, eventService, "View/ShipView") {
-		shipModel = pool.GetGroup(Matcher.ShipModel).GetEntities()[0].shipModel;
+    public ShipView(IViewService viewService) : base("View/ShipView") {
+        this.viewService = viewService;
+    }
 
-		GameObject button = uiFactoryService.CreatePrefab("Element/SimpleButton");
-		button.name = "Save";
-		button.transform.SetParent(go.transform, false);
-		uiFactoryService.AddText(button.transform, "Text", "Save");
-		uiFactoryService.AddButton(button, () => viewService.SetView(ViewTypes.LANDING));
-		setData();
-	}
+    public override void Init() {
+        base.Init();
+        shipModel = pool.GetGroup(Matcher.ShipModel).GetEntities()[0].shipModel;
+        GameObject button = uiFactoryService.CreatePrefab("Element/SimpleButton");
+        button.name = "Save";
+        button.transform.SetParent(go.transform, false);
+        uiFactoryService.AddText(button.transform, "Text", "Save");
+        uiFactoryService.AddButton(button, () => viewService.SetView(ViewTypes.LANDING));
+        setData();
+    }
 
-	void setData() {
+    void setData() {
 		FieldInfo[] fields = shipModel.GetType().GetFields();
 		for (int i = 0; i < fields.Length; i++) {
 			Type fieldType = fields[i].GetValue(shipModel).GetType();

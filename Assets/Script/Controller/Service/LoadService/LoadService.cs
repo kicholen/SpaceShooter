@@ -1,8 +1,5 @@
 public class LoadService : ILoadService {
-
-	IViewService viewService;
 	EventService eventService;
-	IGameService gameService;
 
 	int phasesInProgress;
 	public bool IsInProgress { get { return phasesInProgress > 0; } }

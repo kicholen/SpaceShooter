@@ -9,20 +9,23 @@ public class GameView : View, IView, Updateable {
 	List<Updateable> updateables; //todo change this one, for example replace with interface
 	IGameService gameService;
 	
-	public GameView(List<Updateable> updateables, Pool pool, IUIFactoryService uiFactoryService, IGameService gameService, EventService eventService)
-	: base(pool, uiFactoryService, eventService, "View/GameView") {
+	public GameView(List<Updateable> updateables, IGameService gameService) : base("View/GameView") {
 		this.updateables = updateables;
 		this.gameService = gameService;
-		uiFactoryService.AddButton(go.transform, "Exit", onExitClicked);
-		uiFactoryService.AddButton(go.transform, "Laser", onLaserClicked);
-
-		eventService.AddListener<GameSlowEvent>(onGameSlow);
-		go.SetActive(false);
-		
-		updateables.Insert(0, this);
 	}
 
-	public void Update() {
+    public override void Init() {
+        base.Init();
+        uiFactoryService.AddButton(go.transform, "Exit", onExitClicked);
+        uiFactoryService.AddButton(go.transform, "Laser", onLaserClicked);
+
+        eventService.AddListener<GameSlowEvent>(onGameSlow);
+        go.SetActive(false);
+
+        updateables.Insert(0, this);
+    }
+
+    public void Update() {
 		if (go.activeSelf) {
 			if (Input.GetMouseButtonDown(0)) {
 				PointerEventData cursor = new PointerEventData(EventSystem.current);

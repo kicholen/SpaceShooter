@@ -12,17 +12,19 @@ public class LevelView : View, IView {
 	Transform content;
 	List<int> levels = new List<int>();
 	
-	public LevelView(Pool pool, IUIFactoryService uiFactoryService, EventService eventService, ILoadService loadService, IViewService viewService, IGameService gameService) 
-	: base(pool, uiFactoryService, eventService, "View/LevelView") {
+	public LevelView(ILoadService loadService, IViewService viewService, IGameService gameService) : base("View/LevelView") {
 		this.loadService = loadService;
 		this.viewService = viewService;
 		this.gameService = gameService;
-		content = go.transform.FindChild("Viewport/Content");
-
-		createLevels();
 	}
 
-	void createLevels() {
+    public override void Init() {
+        base.Init();
+        content = go.transform.FindChild("Viewport/Content");
+        createLevels();
+    }
+
+    void createLevels() {
 		levels.Add(1);
 		levels.Add(2);
 		levels.Add(101);

@@ -45,7 +45,7 @@ public class EditorGrid : MonoBehaviour {
 	}
 
 	void createReferencePoint() {
-		GameObject go = Instantiate(Resources.Load<GameObject>("EditorPrefab/ReferencePoint"));
+		GameObject go = Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/ReferencePoint"));
 		go.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
 	}
 

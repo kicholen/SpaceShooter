@@ -10,6 +10,6 @@ public interface IServices : Updateable {
 	EventService EventService { get; }
 	IGameService GameService { get; }
 	IViewService ViewService { get; }
-	IViewFactoryService ViewFactoryService { get; }
 	IUIFactoryService UIFactoryService { get; }
+    IWwwService WwwService { get; }
 }

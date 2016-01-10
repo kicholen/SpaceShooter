@@ -1,3 +1,4 @@
+using System.Reflection;
 using UnityEngine;
 
 public class EditorController : MonoBehaviour, IController {
@@ -8,46 +9,28 @@ public class EditorController : MonoBehaviour, IController {
 			return services;
 		}
 	}
-	
-	void Start () {
+
+    public GameObject GameObject { get { return gameObject; } }
+    public MaterialStorage MaterialStorage { get { return GetComponent<MaterialStorage>(); } }
+
+    void Start () {
 		services = new EditorServices(this);
-	}
+        replaceFactoriesWithEditorOnes();
+        services.Init();
+    }
 	
 	void Update () {
 		services.Update();
 	}
 
+    void replaceFactoriesWithEditorOnes() {
+        ViewService viewService = services.ViewService as ViewService;
+        FieldInfo fieldInfo = viewService.GetType().GetField("factory", BindingFlags.Instance | BindingFlags.NonPublic);
+        fieldInfo.SetValue(viewService, new EditorViewFactory(Services));
+    }
 
-	public bool blockTouch = true;
-	public PathModelComponent component;
-	public string sufix;
-	public MenuController menuController;
-	PathCreator pathCreator;
-
-	static EditorController controller;
-	public static EditorController instance { 
-		get {
-			if (controller == null) {
-				controller = new GameObject().AddComponent<EditorController>();
-				controller.init();
-			}
-			return controller;
-		}
-	}
-
-	/*void Update() {
-		if (Input.GetKeyDown(KeyCode.Escape) && menuController!=null) {
-			menuController.listGO.SetActive(true);
-			blockTouch = true;
-		}
-	}*/
-
-	public void init() {
-		blockTouch = true;
-	}
-
-	public void SetPathCreator() {
+	/*public void SetPathCreator() {
 		pathCreator = GameObject.FindGameObjectsWithTag("PathCreator")[0].GetComponent<PathCreator>();
 		pathCreator.SetGameObjectsFromLoadedOne();
-	}
+	}*/
 }

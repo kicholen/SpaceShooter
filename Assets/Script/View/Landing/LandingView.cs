@@ -4,14 +4,17 @@ public class LandingView : View, IView {
 	
 	IViewService viewService;
 	
-	public LandingView(Pool pool, IUIFactoryService uiFactoryService, EventService eventService, IViewService viewService)
-	: base(pool, uiFactoryService, eventService, "View/LandingView") {
-		this.viewService = viewService;
-		uiFactoryService.AddButton(go.transform, "PlayButton", onPlayClicked);
-		uiFactoryService.AddButton(go.transform, "ShipButton", onShipClicked);
-	}
+	public LandingView(IViewService viewService) : base("View/LandingView") {
+        this.viewService = viewService;
+    }
 
-	void onPlayClicked() {
+    public override void Init() {
+        base.Init();
+        uiFactoryService.AddButton(go.transform, "PlayButton", onPlayClicked);
+        uiFactoryService.AddButton(go.transform, "ShipButton", onShipClicked);
+    }
+
+    void onPlayClicked() {
 		viewService.SetView(ViewTypes.LEVEL);
 	}
 

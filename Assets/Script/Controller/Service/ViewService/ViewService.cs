@@ -1,8 +1,10 @@
 using UnityEngine;
 
 public class ViewService : IViewService {
+    const string CANVAS_PREFAB_PATH = "Canvas";
+    const string TOUCHBLOCKER_PREFAB_PATH = "TouchBlocker";
 
-	IViewFactoryService viewFactoryService;
+    IViewFactory factory;
 
 	Canvas canvas;
 	public Canvas Canvas { get { return canvas; } }
@@ -11,31 +13,42 @@ public class ViewService : IViewService {
 	IView nextView;
 	ViewTypes nextViewType;
 
-	public ViewService(EventService eventService, IUIFactoryService uiFactoryService, IViewFactoryService viewFactoryService) {
-		this.viewFactoryService = viewFactoryService;
+	public ViewService(EventService eventService, IUIFactoryService uiFactoryService) {
+        factory = new ViewFactory();
+        createCanvasAndTouchBlocker(uiFactoryService);
+        addViewShowHiddenListeners(eventService);
+    }
 
-		canvas = uiFactoryService.CreatePrefab("Canvas").GetComponent<Canvas>();
-		touchBlocker = uiFactoryService.CreatePrefab("TouchBlocker");
-		touchBlocker.transform.SetParent(uiFactoryService.CreatePrefab("Canvas").transform, false); // new canvas cause unity says fu
-		eventService.AddListener<ViewShownEvent>(onViewShown);
-		eventService.AddListener<ViewHiddenEvent>(onViewHidden);
-	}
+    public void Init(IServices services) {
+        factory.Init(services);
+    }
 
-	public void SetView(ViewTypes type) {
+    public void SetView(ViewTypes type) {
 		nextViewType = type;
 
 		if (currentView != null) {
 			touchBlocker.SetActive(true);
-			nextView = viewFactoryService.CreateView(nextViewType);
+			nextView = factory.Create(nextViewType);
 			currentView.Hide();
 		}
 		else {
-			currentView = viewFactoryService.CreateView(nextViewType);
+			currentView = factory.Create(nextViewType);
 			showCurrentView();
 		}
 	}
 
-	void onViewShown(ViewShownEvent e) {
+    void createCanvasAndTouchBlocker(IUIFactoryService uiFactoryService) {
+        canvas = uiFactoryService.CreatePrefab(CANVAS_PREFAB_PATH).GetComponent<Canvas>();
+        touchBlocker = uiFactoryService.CreatePrefab(TOUCHBLOCKER_PREFAB_PATH);
+        touchBlocker.transform.SetParent(uiFactoryService.CreatePrefab(CANVAS_PREFAB_PATH).transform, false); // new canvas cause unity says fu
+    }
+
+    void addViewShowHiddenListeners(EventService eventService) {
+        eventService.AddListener<ViewShownEvent>(onViewShown);
+        eventService.AddListener<ViewHiddenEvent>(onViewHidden);
+    }
+
+    void onViewShown(ViewShownEvent e) {
 		touchBlocker.SetActive(false);
 	}
 

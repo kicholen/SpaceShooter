@@ -9,7 +9,10 @@ public class Controller : MonoBehaviour, IController {
 		}
 	}
 
-	void Start () {
+    public GameObject GameObject { get { return gameObject;  } }
+    public MaterialStorage MaterialStorage { get { return GetComponent<MaterialStorage>(); } }
+
+    void Start () {
 		services = new Services(this);
 		services.Init();
 		services.LoadService.PrepareAndExecute(new InitPhase(services));

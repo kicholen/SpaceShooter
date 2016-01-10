@@ -5,14 +5,15 @@ public class LoadView : View, IView {
 
 	Scrollbar progressBar;
 
-	public LoadView(Pool pool, IUIFactoryService uiFactoryService, EventService eventService)
-	: base(pool, uiFactoryService, eventService, "View/LoadView") {
-		progressBar = go.transform.FindChild("LoadingBar").GetComponent<Scrollbar>();
-		
-		eventService.AddListener<PhaseProgressEvent>(onLoadProgress);
-	}
-	
-	public override void Destroy() {
+	public LoadView() : base("View/LoadView") { }
+
+    public override void Init() {
+        base.Init();
+        progressBar = go.transform.FindChild("LoadingBar").GetComponent<Scrollbar>();
+        eventService.AddListener<PhaseProgressEvent>(onLoadProgress);
+    }
+
+    public override void Destroy() {
 		base.Destroy();
 		eventService.RemoveListener<PhaseProgressEvent>(onLoadProgress);
 	}

@@ -13,14 +13,25 @@ public class View {
 	protected IUIFactoryService uiFactoryService;
 	
 	protected GameObject go;
+    string prefabPath;
 
-	public GameObject Go { get { return go; } }
+    public GameObject Go { get { return go; } }
 
-	public View(Pool pool, IUIFactoryService uiFactoryService, EventService eventService, string prefab) {
-		this.pool = pool;
-		this.eventService = eventService;
-		this.uiFactoryService = uiFactoryService;
-		go = uiFactoryService.CreatePrefab(prefab);
+    public View(string prefabPath) {
+        this.prefabPath = prefabPath;
+    }
+
+    public void SetBaseServices(IUIFactoryService uiFactoryService, EventService eventService) {
+        this.uiFactoryService = uiFactoryService;
+        this.eventService = eventService;
+    }
+
+    public void SetPool(Pool pool) {
+        this.pool = pool;
+    }
+
+    public virtual void Init() {
+		go = uiFactoryService.CreatePrefab(prefabPath);
 		rectTransform = go.GetComponent<RectTransform>();
 		entity = pool.CreateEntity()
 			.AddGameObject(go, "blabla");

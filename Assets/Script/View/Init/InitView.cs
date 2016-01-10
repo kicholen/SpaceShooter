@@ -5,14 +5,15 @@ public class InitView : View, IView {
 
 	Scrollbar progressBar;
 
-	public InitView(Pool pool, IUIFactoryService uiFactoryService, EventService eventService)
-	: base(pool, uiFactoryService, eventService, "View/InitView") {
-		progressBar = go.transform.FindChild("LoadingBar").GetComponent<Scrollbar>();
+	public InitView() : base("View/InitView") { }
 
-		eventService.AddListener<PhaseProgressEvent>(onLoadProgress);
-	}
+    public override void Init() {
+        base.Init();
+        progressBar = go.transform.FindChild("LoadingBar").GetComponent<Scrollbar>();
+        eventService.AddListener<PhaseProgressEvent>(onLoadProgress);
+    }
 
-	public override void Show() {
+    public override void Show() {
 		OnShown();
 	}
 

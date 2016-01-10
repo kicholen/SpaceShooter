@@ -3,10 +3,6 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 	
 	public Camera camera;
-
-
-	void Start () {
-	}
 	
 	void Update () {
 		float offsetX = 0.0f;

@@ -2,15 +2,14 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using System.Collections;
-#if !UNITY_WEBPLAYER && !UNITY_WEBGL
-using System.IO;
-#endif
 
 public class PathCreator : MonoBehaviour {
 
 	public Material LineMaterial;
 
-	List<GameObject> gameObjects;
+	const float SCREEN_OFFSET = 0.2f;
+
+    List<GameObject> gameObjects;
 	GameObject dragging;
 	LineRenderer lineRenderer;
 	Vector3 currentPosition;
@@ -18,9 +17,10 @@ public class PathCreator : MonoBehaviour {
 	Stack<ChangeAction> changes = new Stack<ChangeAction>();
 	Stack<ChangeAction> backChanges = new Stack<ChangeAction>();
 
-	const float SCREEN_OFFSET = 0.2f;
+    string pathId;
+    PathModelComponent component;
 
-	void Start () {
+    void Start () {
 		gameObject.tag = "PathCreator";
 		gameObjects = new List<GameObject>();
 		lineRenderer = new GameObject().AddComponent<LineRenderer>();
@@ -30,9 +30,6 @@ public class PathCreator : MonoBehaviour {
 	}
 
 	void Update () {
-		if (EditorController.instance.blockTouch) {
-			return;
-		}
 		if (Input.GetMouseButtonDown(0)) {
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 			if (hit.collider!=null) {
@@ -83,7 +80,7 @@ public class PathCreator : MonoBehaviour {
 	}
 
 	void createNode() {
-		GameObject go = Object.Instantiate(Resources.Load<GameObject>("EditorPrefab/point"));
+		GameObject go = Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/point"));
 		go.transform.position = currentPosition;
 		gameObjects.Add(go);
 		changes.Push(new ChangeAction(go, gameObjects.IndexOf(go), ChangeState.ADD));
@@ -120,27 +117,7 @@ public class PathCreator : MonoBehaviour {
 				top = position.y;
 			}
 		}
-		Utils.Serialize(component, EditorController.instance.sufix);
-
-		Vector3 leftBottom = Camera.main.WorldToScreenPoint(new Vector3(left - SCREEN_OFFSET, bottom - SCREEN_OFFSET, 0.0f));
-		Vector3 rightTop = Camera.main.WorldToScreenPoint(new Vector3(right + SCREEN_OFFSET, top + SCREEN_OFFSET, 0.0f));
-		left = leftBottom.x;
-		bottom = leftBottom.y;
-		right = rightTop.x;
-		top = rightTop.y;
-
-		float width = right - left;
-		float height = top - bottom;
-
-		Texture2D texture = new Texture2D((int)width, (int)height, TextureFormat.RGB24, false);
-		texture.ReadPixels(new Rect(left, bottom, width, height), 0, 0);
-		texture.Apply();
-		byte[] bytes = texture.EncodeToPNG();
-		Object.Destroy(texture);
-
-		#if !UNITY_WEBPLAYER && !UNITY_WEBGL
-		File.WriteAllBytes(Application.dataPath + "/Resources/" + component.GetType().Name + "_" + EditorController.instance.sufix + ".png", bytes);
-		#endif
+		Utils.Serialize(component, pathId);
 	}
 
 	void nextState() {
@@ -201,7 +178,6 @@ public class PathCreator : MonoBehaviour {
 		changes.Clear();
 		backChanges.Clear();
 
-		PathModelComponent component = EditorController.instance.component;
 		if (component != null) {
 			foreach (Vector2 position in component.points) {
 				currentPosition = new Vector3(position.x, position.y, 0.0f);
