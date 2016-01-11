@@ -11,6 +11,7 @@ public class EditorServices : IServices {
 	IViewService viewService;
 	IUIFactoryService uiFactoryService;
     IPathService pathService;
+    ILevelService levelService;
     IWwwService wwwService;
     IInfoService infoService;
 
@@ -23,6 +24,7 @@ public class EditorServices : IServices {
 	public IViewService ViewService { get { return viewService; } }
 	public IUIFactoryService UIFactoryService { get { return uiFactoryService; } }
     public IPathService PathService { get { return pathService; } }
+    public ILevelService LevelService { get { return levelService; } }
     public IWwwService WwwService { get { return wwwService; } }
     public IInfoService InfoService { get { return infoService; } }
 
@@ -41,7 +43,8 @@ public class EditorServices : IServices {
         viewService = new ViewService(eventService, uiFactoryService);
         loadService = new LoadService(eventService);
         gameService = new GameService(pool, viewService);
-        pathService = new PathService(wwwService);
+        pathService = new PathService(wwwService, eventService);
+        levelService = new LevelService(wwwService, eventService);
         infoService = new InfoService(viewService, uiFactoryService, eventService);
         updateables.Add(infoService);
     }

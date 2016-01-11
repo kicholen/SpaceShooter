@@ -12,6 +12,7 @@ public class InfoService : IInfoService {
     }
 
     public void ShowInfo(string text) {
+        infoGo.transform.SetAsLastSibling();
         infoGo.SetActive(true);
         infoGo.GetComponentInChildren<Text>().text = text;
         time = textVisibleDuration;

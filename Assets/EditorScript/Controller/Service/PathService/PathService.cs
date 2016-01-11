@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PathService : IPathService {
-
     IWwwService wwwService;
+    EventService eventService;
 
-    public PathService(IWwwService wwwService) {
+    public PathService(IWwwService wwwService, EventService eventService) {
         this.wwwService = wwwService;
+        this.eventService = eventService;
     }
 
     public void LoadPathIds(Action<List<string>> onPathsLoaded) {
@@ -31,6 +31,6 @@ public class PathService : IPathService {
     }
 
     void onRequestFailed(string message) {
-        throw new NotImplementedException(message);
+        eventService.Dispatch<InfoBoxShowEvent>(new InfoBoxShowEvent(message));
     }
 }

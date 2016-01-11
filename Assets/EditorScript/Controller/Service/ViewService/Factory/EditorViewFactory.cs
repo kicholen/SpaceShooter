@@ -16,6 +16,9 @@
             case ViewTypes.EDITOR_EDIT_PATH:
                 view = new EditPathView((services as EditorServices).PathService, services.ViewService);
                 break;
+            case ViewTypes.EDITOR_LEVEL:
+                view = new LevelsView((services as EditorServices).LevelService, services.ViewService);
+                break;
         }
         if (view == null) {
             view = base.Create(type);

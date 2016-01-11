@@ -1,7 +1,5 @@
 ﻿public class DeletePath : WwwRequest {
 
-    public PathModelComponent Component;
-
     public DeletePath(long pathId) {
         urlData.Add("paths");
         urlData.Add("delete");

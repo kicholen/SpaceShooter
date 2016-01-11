@@ -1,5 +1,6 @@
 public enum ViewTypes
 {
+    EDITOR_LEVEL = -4,
     EDITOR_EDIT_PATH = -3,
     EDITOR_PATH = -2,
     EDITOR_LANDING = -1,
