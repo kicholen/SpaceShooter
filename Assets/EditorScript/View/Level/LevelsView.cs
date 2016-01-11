@@ -42,6 +42,6 @@ public class LevelsView : View, IView {
     }
 
     void onLevelLoaded(LevelModelComponent component) {
-        //(viewService.SetView(ViewTypes.EDITOR_EDIT_PATH) as EditPathView).SetData(component);
+        (viewService.SetView(ViewTypes.EDITOR_EDIT_LEVEL) as EditLevelView).SetData(component);
     }
 }

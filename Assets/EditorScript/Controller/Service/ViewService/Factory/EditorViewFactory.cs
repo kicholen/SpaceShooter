@@ -16,8 +16,11 @@
             case ViewTypes.EDITOR_EDIT_PATH:
                 view = new EditPathView((services as EditorServices).PathService, services.ViewService);
                 break;
-            case ViewTypes.EDITOR_LEVEL:
+            case ViewTypes.EDITOR_LEVELS:
                 view = new LevelsView((services as EditorServices).LevelService, services.ViewService);
+                break;
+            case ViewTypes.EDITOR_EDIT_LEVEL:
+                view = new EditLevelView((services as EditorServices).LevelService, services.ViewService);
                 break;
         }
         if (view == null) {
