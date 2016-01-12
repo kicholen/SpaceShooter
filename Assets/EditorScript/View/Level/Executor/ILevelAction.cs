@@ -1,3 +1,3 @@
-﻿public interface ILevelModifier {
+﻿public interface ILevelAction {
     void Execute(LevelModelComponent component);
 }

@@ -1,8 +1,8 @@
-﻿public class NameLevelModifier : ILevelModifier {
+﻿public class ChangeLevelNameAction : ILevelAction {
 
     string name;
 
-    public NameLevelModifier(string name) {
+    public ChangeLevelNameAction(string name) {
         this.name = name;
     }
 

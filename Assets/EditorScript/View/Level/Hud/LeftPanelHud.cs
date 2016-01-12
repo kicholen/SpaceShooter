@@ -1,15 +1,17 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class LeftPanelHud : BaseGui {
-
     Transform content;
-    LevelModifierExecutor executor;
+    EventService eventService;
+    LevelActionExecutor executor;
     LeftPanelViewState state;
 
-    public LeftPanelHud(Transform content, LevelModifierExecutor executor, Action onSave, Action onBack) {
+    public LeftPanelHud(Transform content, EventService eventService, LevelActionExecutor executor, Action onSave, Action onBack) {
         go = content.gameObject;
+        this.eventService = eventService;
         this.executor = executor;
         state = LeftPanelViewState.Hidden;
         setData(onSave, onBack);
@@ -18,6 +20,7 @@ public class LeftPanelHud : BaseGui {
     void setData(Action onSave, Action onBack) {
         content = getChild("ExtendPanel/Viewport/Content");
         addListeners(onSave, onBack);
+        fillContent();
         updateView();
     }
 
@@ -37,6 +40,43 @@ public class LeftPanelHud : BaseGui {
         bool shouldShowExtend = state == LeftPanelViewState.Shown;
         getChild("ExtendPanel").gameObject.SetActive(shouldShowExtend);
         getChild("ExtendButton").gameObject.SetActive(!shouldShowExtend);
+    }
+
+    void fillContent() {
+        createNameInptField().transform.SetParent(content, false);
+        createPositionElement().transform.SetParent(content, false);
+        createSizeElement().transform.SetParent(content, false);
+    }
+
+    GameObject createPositionElement() {
+        return new InputVectorElement("StartPosition", eventService, executor.getPosition(), (value) => {
+            executor.Execute(new ChangeStartPositionAction(value, executor.getPosition().y));
+        }, (value) => {
+            executor.Execute(new ChangeStartPositionAction(executor.getPosition().x, value));
+        }).Go;
+    }
+
+    GameObject createSizeElement() {
+        return new InputVectorElement("LevelSize", eventService, executor.getSize(), (value) => {
+            executor.Execute(new ChangeLevelDimensionAction(value, executor.getSize().y));
+        }, (value) => {
+            executor.Execute(new ChangeLevelDimensionAction(executor.getSize().x, value));
+        }).Go;
+    }
+
+    GameObject createNameInptField() {
+        return createInputElement(executor.getName(), (value) => {
+            executor.Execute(new ChangeLevelNameAction(value));
+        });
+    }
+
+    GameObject createInputElement(string defaultText, UnityAction<string> onValueChange) {
+        GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/InputElement"));
+        InputField input = gameObject.GetComponentInChildren<InputField>();
+        input.onValueChange.AddListener(onValueChange);
+        input.text = defaultText;
+
+        return gameObject;
     }
 }
 
