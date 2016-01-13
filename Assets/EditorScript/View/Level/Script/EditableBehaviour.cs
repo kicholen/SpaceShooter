@@ -9,6 +9,11 @@ public class EditableBehaviour : MonoBehaviour {
         SetSpawnBarrier(waveModel.spawnBarrier);
     }
 
+    public void SetEnemyModel(EnemyModel enemyModel) {
+        this.enemyModel = enemyModel;
+        SetSpawnBarrier(enemyModel.spawnBarrier);
+    }
+
     public void SetSpawnBarrier(float value) {
         waveModel.spawnBarrier = value;
         transform.position = new Vector3(0.0f, value, 0.0f);

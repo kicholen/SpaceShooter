@@ -4,11 +4,16 @@ using UnityEngine.EventSystems;
 
 public class ViewModifier : MonoBehaviour {
     LevelActionExecutor executor;
+    EditableElementsFactory factory;
     SelectedType type = SelectedType.None;
     GameObject dragging;
 
     public void SetExecutor(LevelActionExecutor executor) {
         this.executor = executor;
+    }
+
+    public void SetFactory(EditableElementsFactory factory) {
+        this.factory = factory;
     }
 
     public void SetSelectedType(SelectedType type) {
@@ -59,10 +64,9 @@ public class ViewModifier : MonoBehaviour {
     void createNodeByTypeIfNotNone() {
         if (type != SelectedType.None) {
             Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            GameObject go = Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/WaveElement"));
             AddWaveAction action = new AddWaveAction(position.y);
             executor.Execute(action);
-            go.AddComponent<EditableBehaviour>().SetWaveModel(action.getModel());
+            factory.CreateWaveElement(action.getModel());
         }
     }
 }
