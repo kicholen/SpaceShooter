@@ -6,7 +6,9 @@ public class ViewModifier : MonoBehaviour {
     LevelActionExecutor executor;
     EditableElementsFactory factory;
     SelectedType type = SelectedType.None;
-    GameObject dragging;
+    EventService eventService;
+
+    GameObject activeGo;
 
     public void SetExecutor(LevelActionExecutor executor) {
         this.executor = executor;
@@ -20,13 +22,17 @@ public class ViewModifier : MonoBehaviour {
         this.type = type;
     }
 
+    public void SetEventService(EventService eventService) {
+        this.eventService = eventService;
+    }
+
     void Update() {
         if (Input.GetMouseButtonDown(0) && !isGuiHit()) {
-            GameObject hitGO =getDraggingObjectIfHit();
+            GameObject hitGO = getDraggingObjectIfHit();
             if (hitGO != null) {
-                dragging = hitGO;
+                setActiveGo(hitGO);
             }
-            else if (dragging != null) {
+            else if (activeGo != null) {
                 setDraggingToMouseY();
             }
             else {
@@ -53,8 +59,8 @@ public class ViewModifier : MonoBehaviour {
 
     void setDraggingToMouseY() {
         Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        dragging.GetComponent<EditableBehaviour>().SetSpawnBarrier(position.y);
-        dragging = null;
+        activeGo.GetComponent<EditableBehaviour>().SetSpawnBarrier(position.y);
+        nullifyActiveGo();
     }
 
     bool isHitColliderEditable(RaycastHit2D hit) {
@@ -68,5 +74,18 @@ public class ViewModifier : MonoBehaviour {
             executor.Execute(action);
             factory.CreateWaveElement(action.getModel());
         }
+    }
+
+    void nullifyActiveGo() {
+        activeGo = null;
+        eventService.Dispatch<NoActiveModelEvent>(new NoActiveModelEvent());
+    }
+
+    void setActiveGo(GameObject hitGO) {
+        activeGo = hitGO;
+        if (activeGo.GetComponent<EditableBehaviour>().waveModel != null)
+            eventService.Dispatch<ActiveWaveModelChangeEvent>(new ActiveWaveModelChangeEvent(activeGo.GetComponent<EditableBehaviour>().waveModel));
+        else
+            eventService.Dispatch<ActiveEnemyModelChangeEvent>(new ActiveEnemyModelChangeEvent(activeGo.GetComponent<EditableBehaviour>().enemyModel));
     }
 }

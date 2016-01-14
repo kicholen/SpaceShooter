@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
 public class EditableBehaviour : MonoBehaviour {
-    WaveModel waveModel;
-    EnemyModel enemyModel;
+    public WaveModel waveModel;
+    public EnemyModel enemyModel;
 
     public void SetWaveModel(WaveModel waveModel) {
         this.waveModel = waveModel;

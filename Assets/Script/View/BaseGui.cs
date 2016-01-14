@@ -5,8 +5,12 @@ public class BaseGui {
     protected GameObject go;
 
     public void removeChildren() {
-        for (int i = go.transform.childCount - 1; i >= 0; i--) {
-            Object.Destroy(go.transform.GetChild(i).gameObject);
+        removeChildren(go);
+    }
+
+    protected void removeChildren(GameObject gameObject) {
+        for (int i = gameObject.transform.childCount - 1; i >= 0; i--) {
+            Object.Destroy(gameObject.transform.GetChild(i).gameObject);
         }
     }
 

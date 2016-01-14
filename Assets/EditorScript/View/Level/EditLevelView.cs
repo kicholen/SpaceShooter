@@ -1,6 +1,4 @@
-﻿using System;
-
-public class EditLevelView : View, IView {
+﻿public class EditLevelView : View, IView {
     ILevelService levelService;
     IViewService viewService;
 
@@ -12,6 +10,7 @@ public class EditLevelView : View, IView {
 
     LeftPanelHud leftPanelHud;
     RightPanelHud rightPanelHud;
+    RightBottomPanelHud rightBottomPanelHud;
 
     CameraController cameraController;
 
@@ -22,10 +21,10 @@ public class EditLevelView : View, IView {
 
     public void SetData(LevelModelComponent component) {
         this.component = component;
-        createModifiers(component);
         attachScripts();
-        createHud();
+        createModifiers(component);
         fillViewByComponent(component);
+        createHud();
     }
 
     void fillViewByComponent(LevelModelComponent component) {
@@ -43,6 +42,7 @@ public class EditLevelView : View, IView {
         modifier = go.AddComponent<ViewModifier>();
         modifier.SetExecutor(executor);
         modifier.SetFactory(factory);
+        modifier.SetEventService(eventService);
     }
 
     void attachScripts() {
@@ -52,6 +52,7 @@ public class EditLevelView : View, IView {
     void createHud() {
         leftPanelHud = new LeftPanelHud(getChild("LeftPanel"), eventService, executor, save, goToLevelsView);
         rightPanelHud = new RightPanelHud(getChild("RightPanel"), eventService, onSelectedTypeChange);
+        rightBottomPanelHud = new RightBottomPanelHud(getChild("RightBottomPanel"), eventService);
     }
 
     void onSelectedTypeChange(SelectedType type) {
