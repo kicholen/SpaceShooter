@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
 public class PathCreator : MonoBehaviour {
-
 	const float SCREEN_OFFSET = 0.2f;
 
     List<GameObject> gameObjects = new List<GameObject>();
@@ -34,7 +33,7 @@ public class PathCreator : MonoBehaviour {
         }
     }
 
-    void Start () {
+    void Start() {
 		lineRenderer = new GameObject().AddComponent<LineRenderer>();
 		lineRenderer.material = lineMaterial;
 		lineRenderer.SetWidth(0.05f, 0.05f);
@@ -52,7 +51,7 @@ public class PathCreator : MonoBehaviour {
         backChanges.Clear();
     }
 
-    void Update () {
+    void Update() {
 		if (Input.GetMouseButtonDown(0) && !isGuiHit()) {
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 			if (hit.collider!=null) {

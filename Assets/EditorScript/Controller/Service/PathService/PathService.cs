@@ -5,6 +5,8 @@ public class PathService : IPathService {
     IWwwService wwwService;
     EventService eventService;
 
+    List<PathModelComponent> paths;
+
     public PathService(IWwwService wwwService, EventService eventService) {
         this.wwwService = wwwService;
         this.eventService = eventService;
@@ -12,6 +14,22 @@ public class PathService : IPathService {
 
     public void LoadPathIds(Action<List<string>> onPathsLoaded) {
         wwwService.Send<GetPathIds>(new GetPathIds(), (request) => { onPathsLoaded(request.PathIds); }, onRequestFailed);
+    }
+
+    public void LoadPaths(Action onPathsLoaded) {
+        wwwService.Send<GetPaths>(new GetPaths(), (request) => {
+            paths = request.Paths;
+            onPathsLoaded();
+        }, onRequestFailed);
+    }
+
+    public PathModelComponent TryToGetPath(string name) {
+        PathModelComponent component = null;
+        foreach (PathModelComponent path in paths) {
+            if (name == path.name)
+                component = path;
+        }
+        return component;
     }
 
     public void LoadPathById(long id, Action<PathModelComponent> onPathLoaded) {

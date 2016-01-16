@@ -7,6 +7,7 @@ public class LeftPanelHud : BaseGui {
     Transform content;
     EventService eventService;
     LevelActionExecutor executor;
+
     LeftPanelViewState state;
 
     public LeftPanelHud(Transform content, EventService eventService, LevelActionExecutor executor, Action onSave, Action onBack) {
@@ -15,6 +16,10 @@ public class LeftPanelHud : BaseGui {
         this.executor = executor;
         state = LeftPanelViewState.Hidden;
         setData(onSave, onBack);
+    }
+
+    public void setDebugToggles(Action<bool> onPathViewChanged) {
+        createToggleElement("showPaths", (value) => onPathViewChanged(value)).transform.SetParent(content, false);
     }
 
     void setData(Action onSave, Action onBack) {
@@ -76,6 +81,16 @@ public class LeftPanelHud : BaseGui {
         InputField input = gameObject.GetComponentInChildren<InputField>();
         input.onValueChange.AddListener(onValueChange);
         input.text = defaultText;
+
+        return gameObject;
+    }
+
+    GameObject createToggleElement(string text, UnityAction<bool> onValueChange) {
+        GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/ToggleElement"));
+        gameObject.GetComponentInChildren<Text>().text = text;
+        Toggle toggle = gameObject.GetComponentInChildren<Toggle>();
+        toggle.isOn = false;
+        toggle.onValueChanged.AddListener(onValueChange);
 
         return gameObject;
     }

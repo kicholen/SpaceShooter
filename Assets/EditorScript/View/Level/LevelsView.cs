@@ -4,14 +4,16 @@ using System.Collections.Generic;
 using System;
 
 public class LevelsView : View, IView {
+    IPathService pathService;
 
     ILevelService levelService;
     IViewService viewService;
     Transform content;
 
-    public LevelsView(ILevelService levelService, IViewService viewService) : base("EditorView/Level/LevelsView") {
+    public LevelsView(ILevelService levelService, IViewService viewService, IPathService pathService) : base("EditorView/Level/LevelsView") {
         this.levelService = levelService;
         this.viewService = viewService;
+        this.pathService = pathService;
     }
 
     public override void Init() {
@@ -42,6 +44,8 @@ public class LevelsView : View, IView {
     }
 
     void onLevelLoaded(LevelModelComponent component) {
-        (viewService.SetView(ViewTypes.EDITOR_EDIT_LEVEL) as EditLevelView).SetData(component);
+        pathService.LoadPaths(() => {
+            (viewService.SetView(ViewTypes.EDITOR_EDIT_LEVEL) as EditLevelView).SetData(component);
+        });
     }
 }

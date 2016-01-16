@@ -1,6 +1,7 @@
 ﻿public class EditLevelView : View, IView {
     ILevelService levelService;
     IViewService viewService;
+    public static IPathService pathService;
 
     LevelModelComponent component;
 
@@ -14,9 +15,10 @@
 
     CameraController cameraController;
 
-    public EditLevelView(ILevelService levelService, IViewService viewService) : base("EditorView/Level/EditLevelView") {
+    public EditLevelView(ILevelService levelService, IViewService viewService, IPathService pathService) : base("EditorView/Level/EditLevelView") {
         this.levelService = levelService;
         this.viewService = viewService;
+        EditLevelView.pathService = pathService;
     }
 
     public void SetData(LevelModelComponent component) {
@@ -59,8 +61,16 @@
 
     void createHud() {
         leftPanelHud = new LeftPanelHud(getChild("LeftPanel"), eventService, executor, save, goToLevelsView);
+        leftPanelHud.setDebugToggles(changeDebugPathView);
         rightPanelHud = new RightPanelHud(getChild("RightPanel"), eventService, onSelectedTypeChange);
         rightBottomPanelHud = new RightBottomPanelHud(getChild("RightBottomPanel"), eventService);
+    }
+
+    void changeDebugPathView(bool show) {
+        if (show)
+            factory.addDebugPathBehavioursIfNotExists();
+        else
+            factory.removeDebugPathBehaviours();
     }
 
     void onSelectedTypeChange(SelectedType type) {

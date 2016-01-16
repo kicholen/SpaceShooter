@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public interface IPathService
 {
+    void LoadPaths(Action onPathsLoaded);
+    PathModelComponent TryToGetPath(string id);
     void LoadPathIds(Action<List<string>> onPathsLoaded);
     void LoadPathById(long id, Action<PathModelComponent> onPathLoaded);
     void CreateNewPath(Action<PathModelComponent> onPathCreated);
