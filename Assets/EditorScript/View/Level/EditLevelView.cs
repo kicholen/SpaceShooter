@@ -27,6 +27,14 @@
         createHud();
     }
 
+    public override void Destroy() {
+        base.Destroy();
+        rightBottomPanelHud.Destroy();
+        foreach (EditableBehaviour script in UnityEngine.Object.FindObjectsOfType<EditableBehaviour>()) {
+            UnityEngine.Object.Destroy(script.gameObject);
+        }
+    }
+
     void fillViewByComponent(LevelModelComponent component) {
         foreach (WaveModel model in component.waves) {
             factory.CreateWaveElement(model);

@@ -14,6 +14,11 @@ public class RightBottomPanelHud : BaseGui {
         addListeners();
     }
 
+    public override void Destroy() {
+        base.Destroy();
+        removeListeners();
+    }
+
     void prepareHud() {
         content = getChild("Viewport/Content");
         hideView();
@@ -28,9 +33,26 @@ public class RightBottomPanelHud : BaseGui {
     }
 
     void addListeners() {
-        eventService.AddListener<NoActiveModelEvent>((gameEvent) => hideView());
-        eventService.AddListener<ActiveWaveModelChangeEvent>((gameEvent) => updateViewWithWaveModel(gameEvent.model));
-        eventService.AddListener<ActiveEnemyModelChangeEvent>((gameEvent) => updateViewWithEnemyModel(gameEvent.model));
+        eventService.AddListener<NoActiveModelEvent>(onNoActiveModel);
+        eventService.AddListener<ActiveWaveModelChangeEvent>(onWaveModelChange);
+        eventService.AddListener<ActiveEnemyModelChangeEvent>(onEnemyModelChange);
+    }
+
+    void onNoActiveModel(NoActiveModelEvent gameEvent) {
+        hideView();
+    }
+    void onWaveModelChange(ActiveWaveModelChangeEvent gameEvent) {
+        updateViewWithWaveModel(gameEvent.model);
+    }
+
+    void onEnemyModelChange(ActiveEnemyModelChangeEvent gameEvent) {
+        updateViewWithEnemyModel(gameEvent.model);
+    }
+
+    void removeListeners() {
+        eventService.RemoveListener<NoActiveModelEvent>(onNoActiveModel);
+        eventService.RemoveListener<ActiveWaveModelChangeEvent>(onWaveModelChange);
+        eventService.RemoveListener<ActiveEnemyModelChangeEvent>(onEnemyModelChange);
     }
 
     void updateViewWithWaveModel(WaveModel waveModel) {
