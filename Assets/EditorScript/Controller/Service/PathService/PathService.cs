@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PathService : IPathService {
     IWwwService wwwService;
@@ -30,6 +31,10 @@ public class PathService : IPathService {
                 component = path;
         }
         return component;
+    }
+
+    public List<string> GetPathNames() {
+        return paths.Select(cmp => cmp.name).ToList<string>();
     }
 
     public void LoadPathById(long id, Action<PathModelComponent> onPathLoaded) {

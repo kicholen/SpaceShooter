@@ -86,13 +86,13 @@ public class LeftPanelHud : BaseGui {
     }
 
     GameObject createToggleElement(string text, UnityAction<bool> onValueChange) {
-        GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/ToggleElement"));
+        /*GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/ToggleElement"));
         gameObject.GetComponentInChildren<Text>().text = text;
         Toggle toggle = gameObject.GetComponentInChildren<Toggle>();
         toggle.isOn = false;
         toggle.onValueChanged.AddListener(onValueChange);
-
-        return gameObject;
+        */
+        return new GameObject();//gameObject;
     }
 }
 

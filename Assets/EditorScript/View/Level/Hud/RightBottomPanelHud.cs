@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.Linq;
 
 public class RightBottomPanelHud : BaseGui {
     Transform content;
@@ -98,13 +100,15 @@ public class RightBottomPanelHud : BaseGui {
     }
 
     GameObject createChangePathField() {
-        return createInputElement("path", waveExecutor.getPath().ToString(), (value) => {
+        return createDropdownElement("path", waveExecutor.getPath().ToString(), EditLevelView.pathService.GetPathNames(), (value) => {
             waveExecutor.Execute(new ChangeWavePathAction(value));
         });
     }
 
     GameObject createChangeGridField() {
-        return createInputElement("grid", waveExecutor.getGrid().ToString(), (value) => {
+        List<string> gridTypes = typeof(GridTypes).GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public)
+            .Select(fieldInfo => ((int)fieldInfo.GetRawConstantValue()).ToString()).ToList<string>();
+        return createDropdownElement("grid", waveExecutor.getGrid().ToString(), gridTypes, (value) => {
             waveExecutor.Execute(new ChangeWaveGridAction(value));
         });
     }
@@ -121,6 +125,16 @@ public class RightBottomPanelHud : BaseGui {
         InputField input = gameObject.GetComponentInChildren<InputField>();
         input.onValueChange.AddListener(onValueChange);
         input.text = defaultText;
+
+        return gameObject;
+    }
+
+    GameObject createDropdownElement(string infoText, string defaultText, List<string> names, UnityAction<string> onValueChange) {
+        GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/DropdownElement"));
+        gameObject.GetComponentInChildren<Dropdown>().value = System.Convert.ToInt32(defaultText);
+        gameObject.GetComponentInChildren<Dropdown>().options = names.Select(name => new Dropdown.OptionData(name)).ToList<Dropdown.OptionData>();
+        gameObject.transform.FindChild("Label").GetComponent<Text>().text = infoText;
+        gameObject.GetComponentInChildren<Dropdown>().onValueChanged.AddListener(value => onValueChange(value.ToString()));
 
         return gameObject;
     }
