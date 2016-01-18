@@ -1,4 +1,7 @@
-﻿public class EditLevelView : View, IView {
+﻿using Entitas;
+using System;
+
+public class EditLevelView : View, IView {
     ILevelService levelService;
     IViewService viewService;
     public static IPathService pathService;
@@ -62,6 +65,7 @@
     void createHud() {
         leftPanelHud = new LeftPanelHud(getChild("LeftPanel"), eventService, executor, save, goToLevelsView);
         leftPanelHud.setDebugToggles(changeDebugPathView);
+        leftPanelHud.setStartEndGameCallbacks(startGame, endGame);
         rightPanelHud = new RightPanelHud(getChild("RightPanel"), eventService, onSelectedTypeChange);
         rightBottomPanelHud = new RightBottomPanelHud(getChild("RightBottomPanel"), eventService);
     }
@@ -83,5 +87,20 @@
 
     void goToLevelsView() {
         viewService.SetView(ViewTypes.EDITOR_LEVELS);
+    }
+
+    void startGame() {
+        pool.GetGroup(Matcher.CurrentShip).GetSingleEntity().currentShip.model.health = int.MaxValue;
+        pool.CreateEntity()
+            .AddComponent(ComponentIds.LevelModel, component);
+
+        pool.CreateEntity()
+            .AddStartGame(Convert.ToInt16(component.name));
+    }
+
+    void endGame() {
+        pool.DestroyEntity(pool.GetGroup(Matcher.LevelModel).GetSingleEntity());
+        pool.CreateEntity()
+            .IsEndGame(true);
     }
 }

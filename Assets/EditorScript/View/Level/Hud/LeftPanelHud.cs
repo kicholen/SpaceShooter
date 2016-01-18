@@ -9,6 +9,7 @@ public class LeftPanelHud : BaseGui {
     LevelActionExecutor executor;
 
     LeftPanelViewState state;
+    bool isGameInProgress;
 
     public LeftPanelHud(Transform content, EventService eventService, LevelActionExecutor executor, Action onSave, Action onBack) {
         go = content.gameObject;
@@ -20,6 +21,19 @@ public class LeftPanelHud : BaseGui {
 
     public void setDebugToggles(Action<bool> onPathViewChanged) {
         createToggleElement("showPaths", (value) => onPathViewChanged(value)).transform.SetParent(content, false);
+    }
+
+    public void setStartEndGameCallbacks(Action startGame, Action endGame) {
+        getChild("ExtendPanel/StopStartGameButton").GetComponent<Button>().onClick.AddListener(() => {
+            if (isGameInProgress) {
+                endGame();
+                isGameInProgress = false;
+            }
+            else {
+                startGame();
+                isGameInProgress = true;
+            }
+        });
     }
 
     void setData(Action onSave, Action onBack) {
@@ -80,19 +94,19 @@ public class LeftPanelHud : BaseGui {
         gameObject.GetComponentInChildren<Text>().text = "LevelName";
         InputField input = gameObject.GetComponentInChildren<InputField>();
         input.onValueChange.AddListener(onValueChange);
-        input.text = defaultText;
+        input.text = defaultText == null ? "" : defaultText;
 
         return gameObject;
     }
 
     GameObject createToggleElement(string text, UnityAction<bool> onValueChange) {
-        /*GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/ToggleElement"));
+        GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/ToggleElement"));
         gameObject.GetComponentInChildren<Text>().text = text;
         Toggle toggle = gameObject.GetComponentInChildren<Toggle>();
         toggle.isOn = false;
         toggle.onValueChanged.AddListener(onValueChange);
-        */
-        return new GameObject();//gameObject;
+        
+        return gameObject;
     }
 }
 

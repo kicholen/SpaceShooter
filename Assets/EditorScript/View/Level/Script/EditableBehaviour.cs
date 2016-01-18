@@ -15,7 +15,12 @@ public class EditableBehaviour : MonoBehaviour {
     }
 
     public void SetSpawnBarrier(float value) {
-        waveModel.spawnBarrier = value;
+        if (waveModel != null) {
+            waveModel.spawnBarrier = value;
+        }
+        else {
+            enemyModel.spawnBarrier = value;
+        }
         transform.position = new Vector3(0.0f, value, 0.0f);
     }
 }

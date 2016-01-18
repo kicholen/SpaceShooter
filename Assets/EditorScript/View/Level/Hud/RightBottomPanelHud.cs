@@ -131,8 +131,8 @@ public class RightBottomPanelHud : BaseGui {
 
     GameObject createDropdownElement(string infoText, string defaultText, List<string> names, UnityAction<string> onValueChange) {
         GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/DropdownElement"));
-        gameObject.GetComponentInChildren<Dropdown>().value = System.Convert.ToInt32(defaultText);
         gameObject.GetComponentInChildren<Dropdown>().options = names.Select(name => new Dropdown.OptionData(name)).ToList<Dropdown.OptionData>();
+        gameObject.GetComponentInChildren<Dropdown>().value = names.IndexOf(defaultText);
         gameObject.transform.FindChild("Label").GetComponent<Text>().text = infoText;
         gameObject.GetComponentInChildren<Dropdown>().onValueChanged.AddListener(value => onValueChange(value.ToString()));
 

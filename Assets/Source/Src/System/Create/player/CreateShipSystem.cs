@@ -8,7 +8,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 	Pool _pool;
 	Group _currentShip;
 
-	const int PLAYERS_COUNT = 2;
+	const int SHIPS_COUNT = 2;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
@@ -16,7 +16,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 	
 	public void Initialize() {
 		_currentShip = _pool.GetGroup(Matcher.CurrentShip);
-		for (int i = 1; i <= PLAYERS_COUNT; i++) {
+		for (int i = 1; i <= SHIPS_COUNT; i++) {
 			_pool.CreateEntity()
 				.AddComponent(ComponentIds.ShipModel, Utils.Deserialize<ShipModelComponent>(i.ToString()));
 		}
