@@ -2,9 +2,10 @@
 using System;
 
 public class EditLevelView : View, IView {
+    public static IPathService pathService;
+
     ILevelService levelService;
     IViewService viewService;
-    public static IPathService pathService;
 
     LevelModelComponent component;
 

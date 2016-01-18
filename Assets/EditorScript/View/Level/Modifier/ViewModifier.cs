@@ -82,19 +82,32 @@ public class ViewModifier : MonoBehaviour {
     }
 
     void createNodeByTypeIfNotNone() {
-        if (type != SelectedType.None) {
-            Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            AddWaveAction action = new AddWaveAction(position.y);
-            executor.Execute(action);
-            factory.CreateWaveElement(action.getModel());
+        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        switch (type) {
+            case SelectedType.Wave:
+                AddWaveAction waveAction = new AddWaveAction(position.y);
+                executor.Execute(waveAction);
+                factory.CreateWaveElement(waveAction.getModel());
+                break;
+            case SelectedType.Enemy:
+                AddEnemyAction enemyAction = new AddEnemyAction(position.y);
+                executor.Execute(enemyAction);
+                factory.CreateEnemyElement(enemyAction.getModel());
+                break;
+            case SelectedType.None:
+            default:
+                break;
         }
     }
 
     void removeActiveNodeIfShould() {
         if (isNodeRemovable()) {
-            executor.Execute(activeGo.GetComponent<EditableBehaviour>().waveModel != null
-                ? new RemoveWaveAction(activeGo.GetComponent<EditableBehaviour>().waveModel)
-                : new RemoveWaveAction(activeGo.GetComponent<EditableBehaviour>().waveModel));
+            if (activeGo.GetComponent<EditableBehaviour>().waveModel != null) {
+                executor.Execute(new RemoveWaveAction(activeGo.GetComponent<EditableBehaviour>().waveModel));
+            }
+            else {
+                executor.Execute(new RemoveEnemyAction(activeGo.GetComponent<EditableBehaviour>().enemyModel));
+            }
             Destroy(activeGo);
             nullifyActiveGo();
         }

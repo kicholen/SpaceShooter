@@ -1,45 +1,44 @@
 ﻿using System;
 
-public class AddWaveAction : ILevelAction {
-    const int DEFAULT_COUNT = 3;
-    const float DEFAULT_SPAWN_OFFSET = 0.2f;
+public class AddEnemyAction : ILevelAction {
     const float DEFAULT_SPEED = 5.0f;
     const int DEFAULT_TYPE = 1;
     const int DEFAULT_HEALTH = 100;
     const int DEFAULT_PATH = 1;
-    const int DEFAULT_GRID = 0;
     const int DEFAULT_DAMAGE = 10;
+    const float DEFAULT_POSX = 0.0f;
 
     float spawnBarrier;
+    float posY;
 
-    WaveModel model;
+    EnemyModel model;
 
-    public AddWaveAction(float spawnBarrier) {
+    public AddEnemyAction(float spawnBarrier) {
         this.spawnBarrier = spawnBarrier;
+        this.posY = spawnBarrier;
     }
 
     public void Execute(LevelModelComponent component) {
-        model = createWaveModel();
-        component.waves.Add(model);
+        model = createEnemyModel();
+        component.enemies.Add(model);
     }
 
-    public WaveModel getModel() {
+    public EnemyModel getModel() {
         if (model == null) {
             throw new Exception("First call Execute");
         }
         return model;
     }
 
-    WaveModel createWaveModel() {
-        model = new WaveModel();
+    EnemyModel createEnemyModel() {
+        model = new EnemyModel();
         model.spawnBarrier = spawnBarrier;
-        model.count = DEFAULT_COUNT;
-        model.spawnOffset = DEFAULT_SPAWN_OFFSET;
+        model.posY = posY;
+        model.posX = DEFAULT_POSX;
         model.speed = DEFAULT_SPEED;
         model.type = DEFAULT_TYPE;
         model.health = DEFAULT_HEALTH;
         model.path = DEFAULT_PATH;
-        model.grid = DEFAULT_GRID;
         model.damage = DEFAULT_DAMAGE;
         return model;
     }

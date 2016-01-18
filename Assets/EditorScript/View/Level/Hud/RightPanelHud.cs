@@ -13,5 +13,6 @@ public class RightPanelHud : BaseGui {
 
     void addListeners(Action<SelectedType> onSelectedTypeChange) {
         getChild("WaveButton").GetComponent<Button>().onClick.AddListener(() => onSelectedTypeChange(SelectedType.Wave));
+        getChild("EnemyButton").GetComponent<Button>().onClick.AddListener(() => onSelectedTypeChange(SelectedType.Enemy));
     }
 }

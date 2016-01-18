@@ -1,0 +1,51 @@
+﻿using UnityEngine;
+
+public class RightBottomPanelEnemyViewUpdater : RightBottomPanelViewUpdaterBase {
+    EnemyActionExecutor enemyExecutor;
+
+    public void Update(Transform content, EnemyModel enemyModel) {
+        enemyExecutor = new EnemyActionExecutor(enemyModel);
+        createChangePositionXField().transform.SetParent(content, false);
+        createChangePositionYField().transform.SetParent(content, false);
+        createChangeSpeedField().transform.SetParent(content, false);
+        createChangeHealthField().transform.SetParent(content, false);
+        createChangePathField().transform.SetParent(content, false);
+        createChangeDamageField().transform.SetParent(content, false);
+    }
+
+    GameObject createChangePositionXField() {
+        return createInputElement("posX", enemyExecutor.GetPosX().ToString(), (value) => {
+            enemyExecutor.Execute(new ChangeEnemyPosXAction(value));
+        });
+    }
+
+    GameObject createChangePositionYField() {
+        return createInputElement("posY", enemyExecutor.GetPosY().ToString(), (value) => {
+            enemyExecutor.Execute(new ChangeEnemyPosYAction(value));
+        });
+    }
+
+    GameObject createChangeSpeedField() {
+        return createInputElement("speed", enemyExecutor.getSpeed().ToString(), (value) => {
+            enemyExecutor.Execute(new ChangeEnemySpeedAction(value));
+        });
+    }
+
+    GameObject createChangeHealthField() {
+        return createInputElement("health", enemyExecutor.getHealth().ToString(), (value) => {
+            enemyExecutor.Execute(new ChangeEnemyHealthAction(value));
+        });
+    }
+
+    GameObject createChangePathField() {
+        return createDropdownElement("path", enemyExecutor.getPath().ToString(), EditLevelView.pathService.GetPathNames(), (value) => {
+            enemyExecutor.Execute(new ChangeEnemyPathAction(value));
+        });
+    }
+
+    GameObject createChangeDamageField() {
+        return createInputElement("damage", enemyExecutor.getDamage().ToString(), (value) => {
+            enemyExecutor.Execute(new ChangeEnemyDamageAction(value));
+        });
+    }
+}

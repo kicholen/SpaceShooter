@@ -1,7 +1,4 @@
-﻿using System;
-
-public class RemoveWaveAction : ILevelAction {
-
+﻿public class RemoveWaveAction : ILevelAction {
     WaveModel model;
 
     public RemoveWaveAction(WaveModel model) {
