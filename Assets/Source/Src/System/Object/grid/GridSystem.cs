@@ -51,10 +51,11 @@ public class GridSystem : IExecuteSystem, ISetPool {
 		component.state = GridFieldState.TWEEN;
 
 		e.AddTween(true, new List<Tween>());
-		e.tween.AddTween(position, EaseTypes.Linear, PositionAccessorType.XY, 3.0f)
-			.From(position.pos.x, position.pos.y)
-			.To(gridPosition.pos.x + (float)component.x * grid.fieldSize, gridPosition.pos.y - (float)component.y * grid.fieldSize);
-	}
+        e.tween.AddTween(position, EaseTypes.Linear, PositionAccessorType.XY, 3.0f)
+            .From(position.pos.x, position.pos.y)
+            .To(gridPosition.pos.x + (float)component.x * grid.fieldSize, gridPosition.pos.y - (float)component.y * grid.fieldSize)
+            .SetEndCallback(onComplete);
+    }
 
 	void onEntityPathRemoved(Group group, Entity entity, int index, IComponent component) {
 		if (entity.hasGridField) {
