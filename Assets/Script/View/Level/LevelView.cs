@@ -25,12 +25,20 @@ public class LevelView : View, IView {
     }
 
     void createLevels() {
-		levels.Add(1);
+#if UNITY_EDITOR
+        System.IO.FileInfo[] infos = new System.IO.DirectoryInfo(Application.dataPath + "/Resources/").GetFiles();
+        foreach (System.IO.FileInfo info in infos) {
+            if (info.Name.StartsWith((typeof(LevelModelComponent)).Name) && info.Name.EndsWith(".json")) {
+                levels.Add(System.Convert.ToInt16(info.Name.Split('_')[1].Split('.')[0]));
+            }
+        }
+#else
+        levels.Add(1);
 		levels.Add(2);
 		levels.Add(101);
 		levels.Add(999);
-
-		for (int i = 0; i < levels.Count; i++) {
+#endif
+        for (int i = 0; i < levels.Count; i++) {
 			GameObject button = uiFactoryService.CreatePrefab("Element/SimpleButton");
 			button.name = levels[i].ToString();
 			button.transform.SetParent(content, false);
