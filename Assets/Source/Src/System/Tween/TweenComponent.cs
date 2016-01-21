@@ -6,7 +6,7 @@ public class TweenComponent : IComponent {
 	public bool isInGame;
 	public List<Tween> tweens;
 
-	public Tween AddTween(IComponent target, int ease, int tweenType, float duration) {
+	public Tween AddTween(IComponent target, Func<float, float> ease, int tweenType, float duration) {
 		Tween tween = new Tween();
 		tween.Setup(target, CreateAccessor(target), ease, tweenType, duration);
 		tweens.Add(tween);

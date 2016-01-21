@@ -12,12 +12,12 @@ public class Tween {
 	float[] startValues = new float[TWEEN_ATTRIBUTES_LIMIT];
 	float[] targetValues = new float[TWEEN_ATTRIBUTES_LIMIT];
 	float[] bufferValues = new float[TWEEN_ATTRIBUTES_LIMIT];
-	int ease;
+    Func<float, float> ease;
 	int tweenType;
 	IComponent target;
 	ITweenAccessor accessor;
 
-	public void Setup(IComponent target, ITweenAccessor accessor, int ease, int tweenType, float duration) {
+	public void Setup(IComponent target, ITweenAccessor accessor, Func<float, float> ease, int tweenType, float duration) {
 		this.target = target;
 		this.accessor = accessor;
 		this.ease = ease;
@@ -63,7 +63,7 @@ public class Tween {
 			}
 		}
 		else {
-			float t = linear(time / duration);
+			float t = ease(time / duration);
 			for (int i = 0; i < valuesCount; i++) {
 				bufferValues[i] = startValues[i] + t * (targetValues[i] - startValues[i]);
 			}
@@ -78,9 +78,5 @@ public class Tween {
 	void reset() {
 		target = null;
 		time = 0.0f;
-	}
-	
-	float linear(float t) {
-		return t;
 	}
 }

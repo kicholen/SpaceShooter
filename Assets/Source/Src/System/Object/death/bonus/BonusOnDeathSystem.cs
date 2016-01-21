@@ -55,7 +55,7 @@ public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 				.AddFollowTarget(follow)
 				.AddMagnet(TEST_VELOCITY, TEST_RADIUS)
 				.AddResource(bonus.resource);
-			bonusEntity.tween.AddTween(bonusEntity.position, EaseTypes.Linear, PositionAccessorType.XY, 2.0f)
+			bonusEntity.tween.AddTween(bonusEntity.position, EaseTypes.linear, PositionAccessorType.XY, 2.0f)
 				.From(position.x, position.y)
 				.To(position.x + offsetX, position.y + offsetY);
 		}

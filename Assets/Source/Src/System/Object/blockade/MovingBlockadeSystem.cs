@@ -21,7 +21,7 @@ public class MovingBlockadeSystem : IExecuteSystem, ISetPool { // further develo
 				PositionComponent position = e.position;
 				e.AddTween(true, new List<Tween>());
 				TweenComponent tweenComponent = e.tween;
-				tweenComponent.AddTween(position, EaseTypes.Linear, PositionAccessorType.X, component.duration)
+				tweenComponent.AddTween(position, EaseTypes.linear, PositionAccessorType.X, component.duration)
 					.From(position.pos.x)
 					.To(position.pos.x + (component.offset * component.direction))
 					.SetEndCallback((ent) => {
