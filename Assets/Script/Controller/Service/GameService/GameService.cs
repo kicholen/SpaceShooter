@@ -154,6 +154,7 @@ public class GameService : IGameService {
 				.Add(pool.CreateParticlesOnDeathSystem())
 				.Add(pool.CreateSoundOnDeathSystem())
 				.Add(pool.CreateExplosionOnDeathSystem())
+                .Add(pool.CreateTweenOnDeathSystem())
 
 				// Effects
 				.Add(pool.CreateAlphaSystem())

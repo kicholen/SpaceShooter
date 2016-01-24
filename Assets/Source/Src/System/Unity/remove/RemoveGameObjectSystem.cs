@@ -33,28 +33,37 @@ public class RemoveGameObjectSystem : ISystem, ISetPool, IEnsureComponents {
 	}
 
 	void addToPool(GameObjectComponent gameObjectComponent) {
-		string name = gameObjectComponent.path;
-		GameObject go = gameObjectComponent.gameObject;
-		go.transform.rotation = Quaternion.identity;
-		go.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-		SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
-		if (renderer != null) {
-			Color color = renderer.color;
-			renderer.color = new Color(color.r, color.g, color.b, 1);
-		}
-		bool wasObjectAdded = false;
+        string name = gameObjectComponent.path;
+        GameObject go = gameObjectComponent.gameObject;
+        resetGameObject(go);
+        bool wasObjectAdded = false;
 
-		foreach (Entity e in _poolGroup.GetEntities()) {
-			if (e.poolableGO.name.Equals(name)) {
-				wasObjectAdded = true;
-				e.poolableGO.queue.Enqueue(go);
-				break;
-			}
-		}
-		if (!wasObjectAdded) {
-			Entity e = _pool.CreateEntity()
-				.AddPoolableGO(name, new Queue<GameObject>());
-			e.poolableGO.queue.Enqueue(go);
-		}
-	}
+        foreach (Entity e in _poolGroup.GetEntities()) {
+            if (e.poolableGO.name.Equals(name)) {
+                wasObjectAdded = true;
+                e.poolableGO.queue.Enqueue(go);
+                break;
+            }
+        }
+        if (!wasObjectAdded) {
+            Entity e = _pool.CreateEntity()
+                .AddPoolableGO(name, new Queue<GameObject>());
+            e.poolableGO.queue.Enqueue(go);
+        }
+    }
+
+    void resetGameObject(GameObject go) {
+        go.transform.rotation = Quaternion.identity;
+        go.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        go.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        resetColor(go);
+    }
+
+    void resetColor(GameObject go) {
+        SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
+        if (renderer != null) {
+            Color color = renderer.color;
+            renderer.color = new Color(color.r, color.g, color.b, 1);
+        }
+    }
 }

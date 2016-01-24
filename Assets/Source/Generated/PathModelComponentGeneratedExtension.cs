@@ -12,15 +12,19 @@ namespace Entitas {
             _pathModelComponentPool.Clear();
         }
 
-        public Entity AddPathModel(System.Collections.Generic.List<UnityEngine.Vector2> newPoints) {
+        public Entity AddPathModel(long newId, string newName, System.Collections.Generic.List<UnityEngine.Vector2> newPoints) {
             var component = _pathModelComponentPool.Count > 0 ? _pathModelComponentPool.Pop() : new PathModelComponent();
+            component.id = newId;
+            component.name = newName;
             component.points = newPoints;
             return AddComponent(ComponentIds.PathModel, component);
         }
 
-        public Entity ReplacePathModel(System.Collections.Generic.List<UnityEngine.Vector2> newPoints) {
+        public Entity ReplacePathModel(long newId, string newName, System.Collections.Generic.List<UnityEngine.Vector2> newPoints) {
             var previousComponent = hasPathModel ? pathModel : null;
             var component = _pathModelComponentPool.Count > 0 ? _pathModelComponentPool.Pop() : new PathModelComponent();
+            component.id = newId;
+            component.name = newName;
             component.points = newPoints;
             ReplaceComponent(ComponentIds.PathModel, component);
             if (previousComponent != null) {

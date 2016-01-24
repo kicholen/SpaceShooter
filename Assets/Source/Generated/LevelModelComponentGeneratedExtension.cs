@@ -12,8 +12,9 @@ namespace Entitas {
             _levelModelComponentPool.Clear();
         }
 
-        public Entity AddLevelModel(string newName, System.Collections.Generic.List<WaveModel> newWaves, int newWaveIndex, System.Collections.Generic.List<EnemyModel> newEnemies, int newEnemyIndex, UnityEngine.Vector2 newPosition, UnityEngine.Vector2 newSize) {
+        public Entity AddLevelModel(long newId, string newName, System.Collections.Generic.List<WaveModel> newWaves, int newWaveIndex, System.Collections.Generic.List<EnemyModel> newEnemies, int newEnemyIndex, UnityEngine.Vector2 newPosition, UnityEngine.Vector2 newSize) {
             var component = _levelModelComponentPool.Count > 0 ? _levelModelComponentPool.Pop() : new LevelModelComponent();
+            component.id = newId;
             component.name = newName;
             component.waves = newWaves;
             component.waveIndex = newWaveIndex;
@@ -24,9 +25,10 @@ namespace Entitas {
             return AddComponent(ComponentIds.LevelModel, component);
         }
 
-        public Entity ReplaceLevelModel(string newName, System.Collections.Generic.List<WaveModel> newWaves, int newWaveIndex, System.Collections.Generic.List<EnemyModel> newEnemies, int newEnemyIndex, UnityEngine.Vector2 newPosition, UnityEngine.Vector2 newSize) {
+        public Entity ReplaceLevelModel(long newId, string newName, System.Collections.Generic.List<WaveModel> newWaves, int newWaveIndex, System.Collections.Generic.List<EnemyModel> newEnemies, int newEnemyIndex, UnityEngine.Vector2 newPosition, UnityEngine.Vector2 newSize) {
             var previousComponent = hasLevelModel ? levelModel : null;
             var component = _levelModelComponentPool.Count > 0 ? _levelModelComponentPool.Pop() : new LevelModelComponent();
+            component.id = newId;
             component.name = newName;
             component.waves = newWaves;
             component.waveIndex = newWaveIndex;
