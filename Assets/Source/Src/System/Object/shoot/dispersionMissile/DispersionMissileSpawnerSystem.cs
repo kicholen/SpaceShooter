@@ -18,11 +18,8 @@ public class DispersionMissileSpawnerSystem : IExecuteSystem, ISetPool {
             DispersionMissileSpawnerComponent missile = e.dispersionMissileSpawner;
             missile.time -= deltaTime;
             if (missile.time < 0.0f) {
-                missile.time -= deltaTime;
-                if (missile.time < 0.0f) {
-                    missile.time = missile.spawnDelay;
-                    spawnMissile(missile, e.position.pos);
-                }
+                missile.time = missile.spawnDelay;
+                spawnMissile(missile, e.position.pos);
             }
         }
     }

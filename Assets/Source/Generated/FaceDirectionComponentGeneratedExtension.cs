@@ -1,22 +1,38 @@
+using System.Collections.Generic;
+
 namespace Entitas {
     public partial class Entity {
-        static readonly FaceDirectionComponent faceDirectionComponent = new FaceDirectionComponent();
+        public FaceDirectionComponent faceDirection { get { return (FaceDirectionComponent)GetComponent(ComponentIds.FaceDirection); } }
 
-        public bool isFaceDirection {
-            get { return HasComponent(ComponentIds.FaceDirection); }
-            set {
-                if (value != isFaceDirection) {
-                    if (value) {
-                        AddComponent(ComponentIds.FaceDirection, faceDirectionComponent);
-                    } else {
-                        RemoveComponent(ComponentIds.FaceDirection);
-                    }
-                }
-            }
+        public bool hasFaceDirection { get { return HasComponent(ComponentIds.FaceDirection); } }
+
+        static readonly Stack<FaceDirectionComponent> _faceDirectionComponentPool = new Stack<FaceDirectionComponent>();
+
+        public static void ClearFaceDirectionComponentPool() {
+            _faceDirectionComponentPool.Clear();
         }
 
-        public Entity IsFaceDirection(bool value) {
-            isFaceDirection = value;
+        public Entity AddFaceDirection(bool newShouldUpdate) {
+            var component = _faceDirectionComponentPool.Count > 0 ? _faceDirectionComponentPool.Pop() : new FaceDirectionComponent();
+            component.shouldUpdate = newShouldUpdate;
+            return AddComponent(ComponentIds.FaceDirection, component);
+        }
+
+        public Entity ReplaceFaceDirection(bool newShouldUpdate) {
+            var previousComponent = hasFaceDirection ? faceDirection : null;
+            var component = _faceDirectionComponentPool.Count > 0 ? _faceDirectionComponentPool.Pop() : new FaceDirectionComponent();
+            component.shouldUpdate = newShouldUpdate;
+            ReplaceComponent(ComponentIds.FaceDirection, component);
+            if (previousComponent != null) {
+                _faceDirectionComponentPool.Push(previousComponent);
+            }
+            return this;
+        }
+
+        public Entity RemoveFaceDirection() {
+            var component = faceDirection;
+            RemoveComponent(ComponentIds.FaceDirection);
+            _faceDirectionComponentPool.Push(component);
             return this;
         }
     }

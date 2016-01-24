@@ -47,7 +47,7 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			.AddFindTarget(targetCollisionType)
 			.AddCollision(missile.ownerCollisionType, missile.damage)
 			.AddDestroyEntityDelayed(SELF_DESTRUCTION_TIME)
-			.IsFaceDirection(true)
+			.AddFaceDirection(true)
 			.AddResource(missile.resource);
 	}
 

@@ -17,38 +17,43 @@ using UnityEngine;
 		switch(model.type) {
 		case EnemyTypes.Normal:
 			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
-			e.isFaceDirection = true;
+            e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
 			e.AddMissileSpawner(0.0f, model.damage, 2.5f, ResourceWithColliders.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.Small:
 			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.EnemySmall);
-			e.isFaceDirection = true;
+			e.AddFaceDirection(true);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.HomeMissile:
 			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
-			e.isFaceDirection = true;
+			e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
 			e.AddHomeMissileSpawner(4.0f, 2.0f, model.damage, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.CircleMissile:
 			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
-			e.isFaceDirection = true;
+			e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
 			e.AddCircleMissileSpawner(5, model.damage, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.CircleRotateMissile:
 			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
-			e.isFaceDirection = true;
+			e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
 			e.AddCircleMissileRotatedSpawner(6, model.damage, 4, 0, 10, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy,  3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
-		case EnemyTypes.Meteor:
+        case EnemyTypes.TargetMissile:
+            e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
+            e.AddTargetMissileSpawner(6, model.damage, 6, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy, CollisionTypes.Player);
+            addPathIfNeeded(e, model.posY, model.path);
+            break;
+        case EnemyTypes.Meteor:
 			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
 			float randomAngle = Random.Range(-90.0f, 90.0f);
 			e.AddRotate(randomAngle, randomAngle);
@@ -84,7 +89,7 @@ using UnityEngine;
 		switch(type) {
 		case EnemyTypes.Normal:
 			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
-			e.isFaceDirection = true;
+			e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
 			e.AddMissileSpawner(0.0f, damage, 2.5f, ResourceWithColliders.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, posY, path);
@@ -92,13 +97,13 @@ using UnityEngine;
 		break;
 		case EnemyTypes.Small:
 			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.EnemySmall);
-			e.isFaceDirection = true;
+			e.AddFaceDirection(true);
 			addPathIfNeeded(e, posY, path);
 			addGridIfNeeded(e, grid);
 		break;
 		case EnemyTypes.HomeMissile:
 			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
-			e.isFaceDirection = true;
+			e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
 			e.AddHomeMissileSpawner(4.0f, 2.0f, damage, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, posY, path);
@@ -106,7 +111,7 @@ using UnityEngine;
 			break;
 		case EnemyTypes.CircleMissile:
 			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
-			e.isFaceDirection = true;
+			e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
 			e.AddCircleMissileSpawner(5, damage, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, posY, path);
@@ -114,13 +119,19 @@ using UnityEngine;
 			break;
 		case EnemyTypes.CircleRotateMissile:
 			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
-			e.isFaceDirection = true;
+			e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
 			e.AddCircleMissileRotatedSpawner(6, damage, 4, 0, 10, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy,  3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
 			addPathIfNeeded(e, posY, path);
 			addGridIfNeeded(e, grid);
 			break;
-		case EnemyTypes.Meteor:
+        case EnemyTypes.TargetMissile:
+            e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
+            e.AddTargetMissileSpawner(6, damage, 6, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy, CollisionTypes.Player);
+            addPathIfNeeded(e, posY, path);
+            addGridIfNeeded(e, grid);
+            break;
+        case EnemyTypes.Meteor:
 			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Meteor);
 			float randomAngle = Random.Range(-90.0f, 90.0f);
 			e.AddRotate(randomAngle, randomAngle);

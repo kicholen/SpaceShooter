@@ -7,5 +7,6 @@ public static class EnemyTypes {
 	public const int Meteor = 6;
 	public const int MovingBlock = 7;
 	public const int MovingBlockade = 8;
-	public const int FirstBoss = 101;
+	public const int TargetMissile = 9;
+    public const int FirstBoss = 101;
 }
