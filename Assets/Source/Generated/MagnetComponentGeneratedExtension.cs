@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher Magnet {
             get {
                 if (_matcherMagnet == null) {
-                    _matcherMagnet = Matcher.AllOf(ComponentIds.Magnet);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Magnet);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherMagnet = matcher;
                 }
 
                 return _matcherMagnet;

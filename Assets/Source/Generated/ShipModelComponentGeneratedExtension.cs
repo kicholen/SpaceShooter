@@ -79,7 +79,9 @@ namespace Entitas {
         public static IMatcher ShipModel {
             get {
                 if (_matcherShipModel == null) {
-                    _matcherShipModel = Matcher.AllOf(ComponentIds.ShipModel);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.ShipModel);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherShipModel = matcher;
                 }
 
                 return _matcherShipModel;

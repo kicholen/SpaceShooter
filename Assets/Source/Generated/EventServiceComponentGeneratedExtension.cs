@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher EventService {
             get {
                 if (_matcherEventService == null) {
-                    _matcherEventService = Matcher.AllOf(ComponentIds.EventService);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.EventService);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherEventService = matcher;
                 }
 
                 return _matcherEventService;

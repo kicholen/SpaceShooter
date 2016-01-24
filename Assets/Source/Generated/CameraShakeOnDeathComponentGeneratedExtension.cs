@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher CameraShakeOnDeath {
             get {
                 if (_matcherCameraShakeOnDeath == null) {
-                    _matcherCameraShakeOnDeath = Matcher.AllOf(ComponentIds.CameraShakeOnDeath);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.CameraShakeOnDeath);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherCameraShakeOnDeath = matcher;
                 }
 
                 return _matcherCameraShakeOnDeath;

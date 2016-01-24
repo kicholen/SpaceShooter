@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher Alpha {
             get {
                 if (_matcherAlpha == null) {
-                    _matcherAlpha = Matcher.AllOf(ComponentIds.Alpha);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Alpha);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherAlpha = matcher;
                 }
 
                 return _matcherAlpha;

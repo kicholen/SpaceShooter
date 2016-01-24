@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher SlowGame {
             get {
                 if (_matcherSlowGame == null) {
-                    _matcherSlowGame = Matcher.AllOf(ComponentIds.SlowGame);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.SlowGame);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherSlowGame = matcher;
                 }
 
                 return _matcherSlowGame;

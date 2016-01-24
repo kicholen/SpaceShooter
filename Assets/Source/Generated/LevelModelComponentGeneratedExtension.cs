@@ -57,7 +57,9 @@ namespace Entitas {
         public static IMatcher LevelModel {
             get {
                 if (_matcherLevelModel == null) {
-                    _matcherLevelModel = Matcher.AllOf(ComponentIds.LevelModel);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.LevelModel);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherLevelModel = matcher;
                 }
 
                 return _matcherLevelModel;

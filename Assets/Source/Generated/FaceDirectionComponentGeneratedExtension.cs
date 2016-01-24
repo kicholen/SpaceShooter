@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher FaceDirection {
             get {
                 if (_matcherFaceDirection == null) {
-                    _matcherFaceDirection = Matcher.AllOf(ComponentIds.FaceDirection);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.FaceDirection);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherFaceDirection = matcher;
                 }
 
                 return _matcherFaceDirection;

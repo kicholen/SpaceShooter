@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher Collision {
             get {
                 if (_matcherCollision == null) {
-                    _matcherCollision = Matcher.AllOf(ComponentIds.Collision);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Collision);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherCollision = matcher;
                 }
 
                 return _matcherCollision;

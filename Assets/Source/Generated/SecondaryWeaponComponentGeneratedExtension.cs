@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher SecondaryWeapon {
             get {
                 if (_matcherSecondaryWeapon == null) {
-                    _matcherSecondaryWeapon = Matcher.AllOf(ComponentIds.SecondaryWeapon);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.SecondaryWeapon);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherSecondaryWeapon = matcher;
                 }
 
                 return _matcherSecondaryWeapon;

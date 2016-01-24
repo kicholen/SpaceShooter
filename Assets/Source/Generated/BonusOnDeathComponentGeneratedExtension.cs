@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher BonusOnDeath {
             get {
                 if (_matcherBonusOnDeath == null) {
-                    _matcherBonusOnDeath = Matcher.AllOf(ComponentIds.BonusOnDeath);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.BonusOnDeath);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherBonusOnDeath = matcher;
                 }
 
                 return _matcherBonusOnDeath;

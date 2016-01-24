@@ -49,7 +49,9 @@ namespace Entitas {
         public static IMatcher SettingsModel {
             get {
                 if (_matcherSettingsModel == null) {
-                    _matcherSettingsModel = Matcher.AllOf(ComponentIds.SettingsModel);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.SettingsModel);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherSettingsModel = matcher;
                 }
 
                 return _matcherSettingsModel;

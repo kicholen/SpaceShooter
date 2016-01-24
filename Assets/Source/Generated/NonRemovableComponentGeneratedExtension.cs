@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher NonRemovable {
             get {
                 if (_matcherNonRemovable == null) {
-                    _matcherNonRemovable = Matcher.AllOf(ComponentIds.NonRemovable);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.NonRemovable);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherNonRemovable = matcher;
                 }
 
                 return _matcherNonRemovable;

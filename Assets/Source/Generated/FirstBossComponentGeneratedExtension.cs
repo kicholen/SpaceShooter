@@ -47,7 +47,9 @@ namespace Entitas {
         public static IMatcher FirstBoss {
             get {
                 if (_matcherFirstBoss == null) {
-                    _matcherFirstBoss = Matcher.AllOf(ComponentIds.FirstBoss);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.FirstBoss);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherFirstBoss = matcher;
                 }
 
                 return _matcherFirstBoss;

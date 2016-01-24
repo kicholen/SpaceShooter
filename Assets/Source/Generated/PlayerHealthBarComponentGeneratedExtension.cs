@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher PlayerHealthBar {
             get {
                 if (_matcherPlayerHealthBar == null) {
-                    _matcherPlayerHealthBar = Matcher.AllOf(ComponentIds.PlayerHealthBar);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.PlayerHealthBar);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherPlayerHealthBar = matcher;
                 }
 
                 return _matcherPlayerHealthBar;

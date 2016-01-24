@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher Bonus {
             get {
                 if (_matcherBonus == null) {
-                    _matcherBonus = Matcher.AllOf(ComponentIds.Bonus);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Bonus);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherBonus = matcher;
                 }
 
                 return _matcherBonus;

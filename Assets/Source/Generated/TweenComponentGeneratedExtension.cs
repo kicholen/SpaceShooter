@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher Tween {
             get {
                 if (_matcherTween == null) {
-                    _matcherTween = Matcher.AllOf(ComponentIds.Tween);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Tween);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherTween = matcher;
                 }
 
                 return _matcherTween;

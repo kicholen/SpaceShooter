@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher CreateShip {
             get {
                 if (_matcherCreateShip == null) {
-                    _matcherCreateShip = Matcher.AllOf(ComponentIds.CreateShip);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.CreateShip);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherCreateShip = matcher;
                 }
 
                 return _matcherCreateShip;

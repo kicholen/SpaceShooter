@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher Rotate {
             get {
                 if (_matcherRotate == null) {
-                    _matcherRotate = Matcher.AllOf(ComponentIds.Rotate);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Rotate);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherRotate = matcher;
                 }
 
                 return _matcherRotate;

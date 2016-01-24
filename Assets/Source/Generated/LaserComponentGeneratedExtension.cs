@@ -47,7 +47,9 @@ namespace Entitas {
         public static IMatcher Laser {
             get {
                 if (_matcherLaser == null) {
-                    _matcherLaser = Matcher.AllOf(ComponentIds.Laser);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Laser);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherLaser = matcher;
                 }
 
                 return _matcherLaser;

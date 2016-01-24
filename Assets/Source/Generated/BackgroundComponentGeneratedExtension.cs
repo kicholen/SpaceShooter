@@ -47,7 +47,9 @@ namespace Entitas {
         public static IMatcher Background {
             get {
                 if (_matcherBackground == null) {
-                    _matcherBackground = Matcher.AllOf(ComponentIds.Background);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Background);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherBackground = matcher;
                 }
 
                 return _matcherBackground;

@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher FollowTarget {
             get {
                 if (_matcherFollowTarget == null) {
-                    _matcherFollowTarget = Matcher.AllOf(ComponentIds.FollowTarget);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.FollowTarget);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherFollowTarget = matcher;
                 }
 
                 return _matcherFollowTarget;

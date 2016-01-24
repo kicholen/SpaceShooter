@@ -51,7 +51,9 @@ namespace Entitas {
         public static IMatcher SnapPosition {
             get {
                 if (_matcherSnapPosition == null) {
-                    _matcherSnapPosition = Matcher.AllOf(ComponentIds.SnapPosition);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.SnapPosition);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherSnapPosition = matcher;
                 }
 
                 return _matcherSnapPosition;

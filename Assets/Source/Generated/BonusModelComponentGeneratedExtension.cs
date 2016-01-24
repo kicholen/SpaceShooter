@@ -51,7 +51,9 @@ namespace Entitas {
         public static IMatcher BonusModel {
             get {
                 if (_matcherBonusModel == null) {
-                    _matcherBonusModel = Matcher.AllOf(ComponentIds.BonusModel);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.BonusModel);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherBonusModel = matcher;
                 }
 
                 return _matcherBonusModel;

@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher DelayedCall {
             get {
                 if (_matcherDelayedCall == null) {
-                    _matcherDelayedCall = Matcher.AllOf(ComponentIds.DelayedCall);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.DelayedCall);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherDelayedCall = matcher;
                 }
 
                 return _matcherDelayedCall;

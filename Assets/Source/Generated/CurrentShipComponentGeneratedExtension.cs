@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher CurrentShip {
             get {
                 if (_matcherCurrentShip == null) {
-                    _matcherCurrentShip = Matcher.AllOf(ComponentIds.CurrentShip);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.CurrentShip);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherCurrentShip = matcher;
                 }
 
                 return _matcherCurrentShip;

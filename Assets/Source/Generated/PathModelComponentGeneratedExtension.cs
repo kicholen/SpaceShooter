@@ -47,7 +47,9 @@ namespace Entitas {
         public static IMatcher PathModel {
             get {
                 if (_matcherPathModel == null) {
-                    _matcherPathModel = Matcher.AllOf(ComponentIds.PathModel);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.PathModel);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherPathModel = matcher;
                 }
 
                 return _matcherPathModel;

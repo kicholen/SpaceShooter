@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher Canvas {
             get {
                 if (_matcherCanvas == null) {
-                    _matcherCanvas = Matcher.AllOf(ComponentIds.Canvas);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Canvas);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherCanvas = matcher;
                 }
 
                 return _matcherCanvas;

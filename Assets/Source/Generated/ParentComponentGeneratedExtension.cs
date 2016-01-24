@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher Parent {
             get {
                 if (_matcherParent == null) {
-                    _matcherParent = Matcher.AllOf(ComponentIds.Parent);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Parent);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherParent = matcher;
                 }
 
                 return _matcherParent;

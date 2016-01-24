@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher PoolableGO {
             get {
                 if (_matcherPoolableGO == null) {
-                    _matcherPoolableGO = Matcher.AllOf(ComponentIds.PoolableGO);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.PoolableGO);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherPoolableGO = matcher;
                 }
 
                 return _matcherPoolableGO;

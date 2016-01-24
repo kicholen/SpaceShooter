@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher DestroyEntityDelayed {
             get {
                 if (_matcherDestroyEntityDelayed == null) {
-                    _matcherDestroyEntityDelayed = Matcher.AllOf(ComponentIds.DestroyEntityDelayed);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.DestroyEntityDelayed);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherDestroyEntityDelayed = matcher;
                 }
 
                 return _matcherDestroyEntityDelayed;

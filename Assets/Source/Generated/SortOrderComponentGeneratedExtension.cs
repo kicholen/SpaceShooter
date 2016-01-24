@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher SortOrder {
             get {
                 if (_matcherSortOrder == null) {
-                    _matcherSortOrder = Matcher.AllOf(ComponentIds.SortOrder);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.SortOrder);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherSortOrder = matcher;
                 }
 
                 return _matcherSortOrder;

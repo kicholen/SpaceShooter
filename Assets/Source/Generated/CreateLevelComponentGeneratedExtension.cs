@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher CreateLevel {
             get {
                 if (_matcherCreateLevel == null) {
-                    _matcherCreateLevel = Matcher.AllOf(ComponentIds.CreateLevel);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.CreateLevel);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherCreateLevel = matcher;
                 }
 
                 return _matcherCreateLevel;

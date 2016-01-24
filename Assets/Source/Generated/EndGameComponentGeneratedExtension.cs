@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher EndGame {
             get {
                 if (_matcherEndGame == null) {
-                    _matcherEndGame = Matcher.AllOf(ComponentIds.EndGame);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.EndGame);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherEndGame = matcher;
                 }
 
                 return _matcherEndGame;

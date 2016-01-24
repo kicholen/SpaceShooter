@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher SoundOnDeath {
             get {
                 if (_matcherSoundOnDeath == null) {
-                    _matcherSoundOnDeath = Matcher.AllOf(ComponentIds.SoundOnDeath);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.SoundOnDeath);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherSoundOnDeath = matcher;
                 }
 
                 return _matcherSoundOnDeath;

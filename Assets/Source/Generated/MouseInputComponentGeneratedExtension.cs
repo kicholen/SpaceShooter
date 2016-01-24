@@ -47,7 +47,9 @@ namespace Entitas {
         public static IMatcher MouseInput {
             get {
                 if (_matcherMouseInput == null) {
-                    _matcherMouseInput = Matcher.AllOf(ComponentIds.MouseInput);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.MouseInput);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherMouseInput = matcher;
                 }
 
                 return _matcherMouseInput;

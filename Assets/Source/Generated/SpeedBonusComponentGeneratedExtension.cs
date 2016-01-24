@@ -47,7 +47,9 @@ namespace Entitas {
         public static IMatcher SpeedBonus {
             get {
                 if (_matcherSpeedBonus == null) {
-                    _matcherSpeedBonus = Matcher.AllOf(ComponentIds.SpeedBonus);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.SpeedBonus);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherSpeedBonus = matcher;
                 }
 
                 return _matcherSpeedBonus;

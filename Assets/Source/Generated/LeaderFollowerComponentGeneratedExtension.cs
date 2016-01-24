@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher LeaderFollower {
             get {
                 if (_matcherLeaderFollower == null) {
-                    _matcherLeaderFollower = Matcher.AllOf(ComponentIds.LeaderFollower);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.LeaderFollower);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherLeaderFollower = matcher;
                 }
 
                 return _matcherLeaderFollower;

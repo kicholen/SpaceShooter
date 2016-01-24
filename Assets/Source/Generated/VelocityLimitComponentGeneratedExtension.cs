@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher VelocityLimit {
             get {
                 if (_matcherVelocityLimit == null) {
-                    _matcherVelocityLimit = Matcher.AllOf(ComponentIds.VelocityLimit);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.VelocityLimit);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherVelocityLimit = matcher;
                 }
 
                 return _matcherVelocityLimit;

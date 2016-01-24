@@ -51,7 +51,9 @@ namespace Entitas {
         public static IMatcher MovingBlockade {
             get {
                 if (_matcherMovingBlockade == null) {
-                    _matcherMovingBlockade = Matcher.AllOf(ComponentIds.MovingBlockade);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.MovingBlockade);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherMovingBlockade = matcher;
                 }
 
                 return _matcherMovingBlockade;

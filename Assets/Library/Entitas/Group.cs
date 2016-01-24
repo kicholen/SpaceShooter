@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Entitas {
     public class Group {
@@ -14,6 +15,7 @@ namespace Entitas {
         public IMatcher matcher { get { return _matcher; } }
 
         readonly IMatcher _matcher;
+
         readonly HashSet<Entity> _entities = new HashSet<Entity>(EntityEqualityComparer.comparer);
         Entity[] _entitiesCache;
         Entity _singleEntityCache;
@@ -39,6 +41,12 @@ namespace Entitas {
             }
         }
 
+        internal GroupChanged handleEntity(Entity entity) {
+            return _matcher.Matches(entity)
+                        ? addEntity(entity)
+                        : removeEntity(entity);
+        }
+
         public void UpdateEntity(Entity entity, int index, IComponent previousComponent, IComponent newComponent) {
             if (_entities.Contains(entity)) {
                 if (OnEntityRemoved != null) {
@@ -53,34 +61,42 @@ namespace Entitas {
             }
         }
 
-        void addEntitySilently(Entity entity) {
+        public void RemoveAllEventHandlers() {
+            OnEntityAdded = null;
+            OnEntityRemoved = null;
+            OnEntityUpdated = null;
+        }
+
+        bool addEntitySilently(Entity entity) {
             var added = _entities.Add(entity);
             if (added) {
                 _entitiesCache = null;
                 _singleEntityCache = null;
-                entity.Retain();
+                entity.Retain(this);
             }
+
+            return added;
         }
 
         void addEntity(Entity entity, int index, IComponent component) {
-            var added = _entities.Add(entity);
-            if (added) {
-                _entitiesCache = null;
-                _singleEntityCache = null;
-                entity.Retain();
-                if (OnEntityAdded != null) {
-                    OnEntityAdded(this, entity, index, component);
-                }
+            if (addEntitySilently(entity) && OnEntityAdded != null) {
+                OnEntityAdded(this, entity, index, component);
             }
         }
 
-        void removeEntitySilently(Entity entity) {
+        GroupChanged addEntity(Entity entity) {
+            return addEntitySilently(entity) ? OnEntityAdded : null;
+        }
+
+        bool removeEntitySilently(Entity entity) {
             var removed = _entities.Remove(entity);
             if (removed) {
                 _entitiesCache = null;
                 _singleEntityCache = null;
-                entity.Release();
+                entity.Release(this);
             }
+
+            return removed;
         }
 
         void removeEntity(Entity entity, int index, IComponent component) {
@@ -91,8 +107,12 @@ namespace Entitas {
                 if (OnEntityRemoved != null) {
                     OnEntityRemoved(this, entity, index, component);
                 }
-                entity.Release();
+                entity.Release(this);
             }
+        }
+
+        GroupChanged removeEntity(Entity entity) {
+            return removeEntitySilently(entity) ? OnEntityRemoved : null;
         }
 
         public bool ContainsEntity(Entity entity) {
@@ -119,7 +139,7 @@ namespace Entitas {
                 } else if (c == 0) {
                     return null;
                 } else {
-                    throw new SingleEntityException(_matcher);
+                    throw new GroupSingleEntityException(this);
                 }
             }
 
@@ -134,9 +154,10 @@ namespace Entitas {
         }
     }
 
-    public class SingleEntityException : Exception {
-        public SingleEntityException(IMatcher matcher) :
-            base("Multiple entities exist matching " + matcher) {
+    public class GroupSingleEntityException : EntitasException {
+        public GroupSingleEntityException(Group group) :
+            base("Cannot get the single entity from " + group + "!\nGroup contains " + group.count + " entities:",
+                string.Join("\n", group.GetEntities().Select(e => e.ToString()).ToArray())) {
         }
     }
 }

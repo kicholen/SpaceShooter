@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher CallOnFrameEnd {
             get {
                 if (_matcherCallOnFrameEnd == null) {
-                    _matcherCallOnFrameEnd = Matcher.AllOf(ComponentIds.CallOnFrameEnd);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.CallOnFrameEnd);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherCallOnFrameEnd = matcher;
                 }
 
                 return _matcherCallOnFrameEnd;

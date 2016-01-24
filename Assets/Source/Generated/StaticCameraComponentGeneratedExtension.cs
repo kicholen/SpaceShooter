@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher StaticCamera {
             get {
                 if (_matcherStaticCamera == null) {
-                    _matcherStaticCamera = Matcher.AllOf(ComponentIds.StaticCamera);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.StaticCamera);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherStaticCamera = matcher;
                 }
 
                 return _matcherStaticCamera;

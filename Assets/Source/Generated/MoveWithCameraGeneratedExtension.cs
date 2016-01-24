@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher MoveWithCamera {
             get {
                 if (_matcherMoveWithCamera == null) {
-                    _matcherMoveWithCamera = Matcher.AllOf(ComponentIds.MoveWithCamera);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.MoveWithCamera);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherMoveWithCamera = matcher;
                 }
 
                 return _matcherMoveWithCamera;

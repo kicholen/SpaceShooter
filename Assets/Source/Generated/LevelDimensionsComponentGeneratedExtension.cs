@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher LevelDimensions {
             get {
                 if (_matcherLevelDimensions == null) {
-                    _matcherLevelDimensions = Matcher.AllOf(ComponentIds.LevelDimensions);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.LevelDimensions);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherLevelDimensions = matcher;
                 }
 
                 return _matcherLevelDimensions;

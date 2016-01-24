@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher CreatePlayer {
             get {
                 if (_matcherCreatePlayer == null) {
-                    _matcherCreatePlayer = Matcher.AllOf(ComponentIds.CreatePlayer);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.CreatePlayer);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherCreatePlayer = matcher;
                 }
 
                 return _matcherCreatePlayer;

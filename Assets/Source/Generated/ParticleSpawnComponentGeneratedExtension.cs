@@ -49,7 +49,9 @@ namespace Entitas {
         public static IMatcher ParticleSpawn {
             get {
                 if (_matcherParticleSpawn == null) {
-                    _matcherParticleSpawn = Matcher.AllOf(ComponentIds.ParticleSpawn);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.ParticleSpawn);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherParticleSpawn = matcher;
                 }
 
                 return _matcherParticleSpawn;

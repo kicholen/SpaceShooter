@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher BackgroundStar {
             get {
                 if (_matcherBackgroundStar == null) {
-                    _matcherBackgroundStar = Matcher.AllOf(ComponentIds.BackgroundStar);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.BackgroundStar);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherBackgroundStar = matcher;
                 }
 
                 return _matcherBackgroundStar;

@@ -47,7 +47,9 @@ namespace Entitas {
         public static IMatcher Indicator {
             get {
                 if (_matcherIndicator == null) {
-                    _matcherIndicator = Matcher.AllOf(ComponentIds.Indicator);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Indicator);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherIndicator = matcher;
                 }
 
                 return _matcherIndicator;

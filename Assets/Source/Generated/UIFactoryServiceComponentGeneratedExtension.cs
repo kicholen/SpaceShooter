@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher UIFactoryService {
             get {
                 if (_matcherUIFactoryService == null) {
-                    _matcherUIFactoryService = Matcher.AllOf(ComponentIds.UIFactoryService);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.UIFactoryService);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherUIFactoryService = matcher;
                 }
 
                 return _matcherUIFactoryService;

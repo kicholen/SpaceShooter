@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher PauseGame {
             get {
                 if (_matcherPauseGame == null) {
-                    _matcherPauseGame = Matcher.AllOf(ComponentIds.PauseGame);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.PauseGame);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherPauseGame = matcher;
                 }
 
                 return _matcherPauseGame;

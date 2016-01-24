@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher CreateGrid {
             get {
                 if (_matcherCreateGrid == null) {
-                    _matcherCreateGrid = Matcher.AllOf(ComponentIds.CreateGrid);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.CreateGrid);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherCreateGrid = matcher;
                 }
 
                 return _matcherCreateGrid;

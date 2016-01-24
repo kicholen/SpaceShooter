@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher FindTarget {
             get {
                 if (_matcherFindTarget == null) {
-                    _matcherFindTarget = Matcher.AllOf(ComponentIds.FindTarget);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.FindTarget);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherFindTarget = matcher;
                 }
 
                 return _matcherFindTarget;

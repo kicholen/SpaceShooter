@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher Damage {
             get {
                 if (_matcherDamage == null) {
-                    _matcherDamage = Matcher.AllOf(ComponentIds.Damage);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Damage);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherDamage = matcher;
                 }
 
                 return _matcherDamage;

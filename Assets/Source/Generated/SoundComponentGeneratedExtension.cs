@@ -47,7 +47,9 @@ namespace Entitas {
         public static IMatcher Sound {
             get {
                 if (_matcherSound == null) {
-                    _matcherSound = Matcher.AllOf(ComponentIds.Sound);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Sound);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherSound = matcher;
                 }
 
                 return _matcherSound;

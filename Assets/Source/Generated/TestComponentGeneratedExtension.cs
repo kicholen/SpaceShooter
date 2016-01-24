@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher Test {
             get {
                 if (_matcherTest == null) {
-                    _matcherTest = Matcher.AllOf(ComponentIds.Test);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Test);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherTest = matcher;
                 }
 
                 return _matcherTest;

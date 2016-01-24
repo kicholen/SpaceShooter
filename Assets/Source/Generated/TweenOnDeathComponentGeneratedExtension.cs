@@ -45,7 +45,9 @@ namespace Entitas {
         public static IMatcher TweenOnDeath {
             get {
                 if (_matcherTweenOnDeath == null) {
-                    _matcherTweenOnDeath = Matcher.AllOf(ComponentIds.TweenOnDeath);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.TweenOnDeath);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherTweenOnDeath = matcher;
                 }
 
                 return _matcherTweenOnDeath;

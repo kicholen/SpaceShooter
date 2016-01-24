@@ -49,7 +49,9 @@ namespace Entitas {
         public static IMatcher DifficultyController {
             get {
                 if (_matcherDifficultyController == null) {
-                    _matcherDifficultyController = Matcher.AllOf(ComponentIds.DifficultyController);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.DifficultyController);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherDifficultyController = matcher;
                 }
 
                 return _matcherDifficultyController;

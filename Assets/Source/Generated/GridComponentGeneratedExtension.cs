@@ -47,7 +47,9 @@ namespace Entitas {
         public static IMatcher Grid {
             get {
                 if (_matcherGrid == null) {
-                    _matcherGrid = Matcher.AllOf(ComponentIds.Grid);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Grid);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherGrid = matcher;
                 }
 
                 return _matcherGrid;

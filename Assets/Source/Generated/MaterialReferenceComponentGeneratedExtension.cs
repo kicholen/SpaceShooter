@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher MaterialReference {
             get {
                 if (_matcherMaterialReference == null) {
-                    _matcherMaterialReference = Matcher.AllOf(ComponentIds.MaterialReference);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.MaterialReference);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherMaterialReference = matcher;
                 }
 
                 return _matcherMaterialReference;

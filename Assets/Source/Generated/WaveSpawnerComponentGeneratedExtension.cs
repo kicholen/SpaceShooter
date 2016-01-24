@@ -59,7 +59,9 @@ namespace Entitas {
         public static IMatcher WaveSpawner {
             get {
                 if (_matcherWaveSpawner == null) {
-                    _matcherWaveSpawner = Matcher.AllOf(ComponentIds.WaveSpawner);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.WaveSpawner);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherWaveSpawner = matcher;
                 }
 
                 return _matcherWaveSpawner;

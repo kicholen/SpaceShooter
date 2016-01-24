@@ -55,7 +55,9 @@ namespace Entitas {
         public static IMatcher CircleMissileSpawner {
             get {
                 if (_matcherCircleMissileSpawner == null) {
-                    _matcherCircleMissileSpawner = Matcher.AllOf(ComponentIds.CircleMissileSpawner);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.CircleMissileSpawner);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherCircleMissileSpawner = matcher;
                 }
 
                 return _matcherCircleMissileSpawner;

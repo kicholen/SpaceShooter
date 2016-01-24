@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher CollisionDeath {
             get {
                 if (_matcherCollisionDeath == null) {
-                    _matcherCollisionDeath = Matcher.AllOf(ComponentIds.CollisionDeath);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.CollisionDeath);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherCollisionDeath = matcher;
                 }
 
                 return _matcherCollisionDeath;

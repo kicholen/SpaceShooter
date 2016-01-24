@@ -51,7 +51,9 @@ namespace Entitas {
         public static IMatcher Time {
             get {
                 if (_matcherTime == null) {
-                    _matcherTime = Matcher.AllOf(ComponentIds.Time);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Time);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherTime = matcher;
                 }
 
                 return _matcherTime;

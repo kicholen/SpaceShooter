@@ -49,7 +49,9 @@ namespace Entitas {
         public static IMatcher Path {
             get {
                 if (_matcherPath == null) {
-                    _matcherPath = Matcher.AllOf(ComponentIds.Path);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Path);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherPath = matcher;
                 }
 
                 return _matcherPath;

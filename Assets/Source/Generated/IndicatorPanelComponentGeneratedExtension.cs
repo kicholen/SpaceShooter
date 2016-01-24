@@ -27,7 +27,9 @@ namespace Entitas {
         public static IMatcher IndicatorPanel {
             get {
                 if (_matcherIndicatorPanel == null) {
-                    _matcherIndicatorPanel = Matcher.AllOf(ComponentIds.IndicatorPanel);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.IndicatorPanel);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherIndicatorPanel = matcher;
                 }
 
                 return _matcherIndicatorPanel;

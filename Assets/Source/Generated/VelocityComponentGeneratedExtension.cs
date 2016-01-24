@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher Velocity {
             get {
                 if (_matcherVelocity == null) {
-                    _matcherVelocity = Matcher.AllOf(ComponentIds.Velocity);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Velocity);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherVelocity = matcher;
                 }
 
                 return _matcherVelocity;

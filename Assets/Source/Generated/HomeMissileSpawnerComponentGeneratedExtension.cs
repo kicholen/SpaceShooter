@@ -53,7 +53,9 @@ namespace Entitas {
         public static IMatcher HomeMissileSpawner {
             get {
                 if (_matcherHomeMissileSpawner == null) {
-                    _matcherHomeMissileSpawner = Matcher.AllOf(ComponentIds.HomeMissileSpawner);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.HomeMissileSpawner);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherHomeMissileSpawner = matcher;
                 }
 
                 return _matcherHomeMissileSpawner;

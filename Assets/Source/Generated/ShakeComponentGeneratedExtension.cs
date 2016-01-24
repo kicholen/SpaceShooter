@@ -43,7 +43,9 @@ namespace Entitas {
         public static IMatcher Shake {
             get {
                 if (_matcherShake == null) {
-                    _matcherShake = Matcher.AllOf(ComponentIds.Shake);
+                    var matcher = (Matcher)Matcher.AllOf(ComponentIds.Shake);
+                    matcher.componentNames = ComponentIds.componentNames;
+                    _matcherShake = matcher;
                 }
 
                 return _matcherShake;
