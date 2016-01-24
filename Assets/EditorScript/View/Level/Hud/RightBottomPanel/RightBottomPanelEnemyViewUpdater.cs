@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class RightBottomPanelEnemyViewUpdater : RightBottomPanelViewUpdaterBase {
     EnemyActionExecutor enemyExecutor;
@@ -11,6 +13,7 @@ public class RightBottomPanelEnemyViewUpdater : RightBottomPanelViewUpdaterBase 
         createChangeHealthField().transform.SetParent(content, false);
         createChangePathField().transform.SetParent(content, false);
         createChangeDamageField().transform.SetParent(content, false);
+        createChangeTypeField().transform.SetParent(content, false);
     }
 
     GameObject createChangePositionXField() {
@@ -46,6 +49,14 @@ public class RightBottomPanelEnemyViewUpdater : RightBottomPanelViewUpdaterBase 
     GameObject createChangeDamageField() {
         return createInputElement("damage", enemyExecutor.getDamage().ToString(), (value) => {
             enemyExecutor.Execute(new ChangeEnemyDamageAction(value));
+        });
+    }
+
+    GameObject createChangeTypeField() {
+        List<string> types = typeof(EnemyTypes).GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public)
+            .Select(fieldInfo => ((int)fieldInfo.GetRawConstantValue()).ToString()).ToList<string>();
+        return createDropdownElement("type", enemyExecutor.getType().ToString(), types, (value) => {
+            enemyExecutor.Execute(new ChangeEnemyTypeAction(value));
         });
     }
 }

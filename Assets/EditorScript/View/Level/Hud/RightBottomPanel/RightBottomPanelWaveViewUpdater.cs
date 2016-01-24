@@ -14,6 +14,7 @@ public class RightBottomPanelWaveViewUpdater : RightBottomPanelViewUpdaterBase {
         createChangePathField().transform.SetParent(content, false);
         createChangeGridField().transform.SetParent(content, false);
         createChangeDamageField().transform.SetParent(content, false);
+        createChangeTypeField().transform.SetParent(content, false);
     }
 
     GameObject createChangeWaveCountField() {
@@ -51,6 +52,14 @@ public class RightBottomPanelWaveViewUpdater : RightBottomPanelViewUpdaterBase {
             .Select(fieldInfo => ((int)fieldInfo.GetRawConstantValue()).ToString()).ToList<string>();
         return createDropdownElement("grid", waveExecutor.getGrid().ToString(), gridTypes, (value) => {
             waveExecutor.Execute(new ChangeWaveGridAction(value));
+        });
+    }
+
+    GameObject createChangeTypeField() {
+        List<string> types = typeof(EnemyTypes).GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public)
+            .Select(fieldInfo => ((int)fieldInfo.GetRawConstantValue()).ToString()).ToList<string>();
+        return createDropdownElement("type", waveExecutor.getType().ToString(), types, (value) => {
+            waveExecutor.Execute(new ChangeWaveTypeAction(value));
         });
     }
 

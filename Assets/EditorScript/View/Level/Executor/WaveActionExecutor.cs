@@ -36,4 +36,8 @@
     public int getDamage() {
         return model.damage;
     }
+
+    public int getType() {
+        return model.type;
+    }
 }
