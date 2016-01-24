@@ -89,6 +89,7 @@ public class GameService : IGameService {
 				.Add(pool.CreateHomeMissileSystem())
 				.Add(pool.CreateEnemySpawnerSystem())
 				.Add(pool.CreateWaveSpawnerSystem())
+                .Add(pool.CreateDispersionMissileSpawnerSystem())
 
 			.Add(pool.CreateTimeSystem())
 

@@ -20,9 +20,9 @@ public class WeaponSystem : IReactiveSystem, ISetPool {
 					for (int i = 0; i < children.Count; i++) {
 						Entity child = children[i];
 						if (child.isSecondaryWeapon) {
-							child.AddMissileSpawner(0.0f, component.secondaryMissileDamage, component.missileSpawnDelay, ResourceWithColliders.MissileSecondary, 0.0f, component.missileVelocity, CollisionTypes.Player);
-						}
-					}
+                            child.AddMissileSpawner(0.0f, component.secondaryMissileDamage, component.missileSpawnDelay, ResourceWithColliders.MissileSecondary, 0.0f, component.missileVelocity, CollisionTypes.Player);
+                        }
+                    }
 				}
 			}
 			else {

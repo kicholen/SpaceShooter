@@ -4,7 +4,7 @@ using Entitas;
  * Anchor - top-left corner
  */
 using System.Collections.Generic;
-
+using UnityEngine;
 
 public class GridSystem : IExecuteSystem, ISetPool {
 	Group _grid;
@@ -42,7 +42,7 @@ public class GridSystem : IExecuteSystem, ISetPool {
 		int previousX = component.x;
 		int previousY = component.y;
 		PositionComponent gridPosition = gridEntity.position;
-		findField(grid.grid, GridState.FREE, out component.x, out component.y);
+        findRandomField(grid.grid, GridState.FREE, out component.x, out component.y);
 		grid.grid[component.x, component.y] = GridState.BUSY;
 		if (previousX != -1) {
 			grid.grid[previousX, previousY] = GridState.FREE;
@@ -103,4 +103,24 @@ public class GridSystem : IExecuteSystem, ISetPool {
 		x = 0;
 		y = 0;
 	}
+
+    void findRandomField(GridState[,] grid, GridState state, out int x, out int y) {
+        List<Point2D> freeFields = new List<Point2D>();
+        for (int i = 0; i < grid.GetLength(0); i++) {
+            for (int j = 0; j < grid.GetLength(1); j++) {
+                if (grid[i, j] == state) {
+                    freeFields.Add(new Point2D(i, j));
+                }
+            }
+        }
+        if (freeFields.Count > 0) {
+            Point2D point = freeFields[Random.Range(0, freeFields.Count - 1)];
+            x = point.x;
+            y = point.y;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+    }
 }

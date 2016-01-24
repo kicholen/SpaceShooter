@@ -2,7 +2,9 @@ using Entitas;
 using UnityEngine;
 
 public class MagnetSystem : IExecuteSystem, ISetPool {
-	Group _group;
+    const float POWER_OF_TWO = 2.0f;
+
+    Group _group;
 
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Magnet, Matcher.FollowTarget, Matcher.Velocity, Matcher.Position));
@@ -21,14 +23,14 @@ public class MagnetSystem : IExecuteSystem, ISetPool {
 						e.RemoveTween();
 					}
 					VelocityComponent velocity = e.velocity;
-					velocity.vel.Set((targetPosition.x - position.x) * 5.0f, (targetPosition.y - position.y) * 5.0f);
+					velocity.vel.Set((targetPosition.x - position.x), (targetPosition.y - position.y));
 				}
 			}
 		}
 	}
 
 	bool isPointInCircle(float centerX, float centerY, float radiusPower, float x, float y) {
-		float distance = Mathf.Pow(centerX - x, 2.0f) + Mathf.Pow(centerY - y, 2.0f);
+		float distance = Mathf.Pow(centerX - x, POWER_OF_TWO) + Mathf.Pow(centerY - y, POWER_OF_TWO);
 		return distance < radiusPower;
 	}
 }
