@@ -18,7 +18,7 @@ public class AddGameObjectSystem : IReactiveSystem, ISetPool {
         for (int i = 0; i < entities.Count; i++) {
 			Entity e = entities[i];
 			string resourceName = e.resource.name;
-			GameObject gameObject = getFromPool(resourceName);
+            GameObject gameObject = null;//getFromPool(resourceName);
 			if (gameObject == null) {
 				GameObject res = Resources.Load<GameObject>("Prefab/" + resourceName);
 				try {
@@ -29,12 +29,12 @@ public class AddGameObjectSystem : IReactiveSystem, ISetPool {
 				}
 			}
 
-			gameObject.transform.SetParent(_viewContainer, false);
+            gameObject.transform.SetParent(_viewContainer, false);
 			e.AddGameObject(gameObject, resourceName);
 		}
     }
 
-	GameObject getFromPool(string name) {
+    GameObject getFromPool(string name) {
 		foreach (Entity e in _poolGroup.GetEntities()) {
 			PoolableGOComponent poolGo = e.poolableGO;
 			if (poolGo.name.Equals(name) && poolGo.queue.Count > 0) {

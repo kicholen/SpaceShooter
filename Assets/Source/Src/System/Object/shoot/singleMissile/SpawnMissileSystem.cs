@@ -31,6 +31,7 @@ public class SpawnMissileSystem : IExecuteSystem, ISetPool {
 			.AddHealth(0)
 			.AddCollision(missile.collisionType, missile.damage)
 			.AddExplosionOnDeath(1.5f, Resource.ExplosionMissile)
+            .AddFaceDirection(false)
 			.AddResource(missile.resource);
 	}
 

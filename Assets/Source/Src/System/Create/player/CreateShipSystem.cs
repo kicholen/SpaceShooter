@@ -76,7 +76,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 		if (component.hasSecondaryMissiles) {
 			addSecondaryMissiles(children, parent);
 		}
-		addHelperShips(children, parent, component);
+		//addHelperShips(children, parent, component);
 
 		addNonRemovable(children);
 		return children;
@@ -87,12 +87,12 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 		             .AddRelativePosition(0.5f, -0.5f)
 		             .AddPosition(new Vector2(0.0f, 0.0f))
 		             .AddChild(parent)
-		             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+		             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, new Vector2(component.homeMissileVelocity * 0.6f, -1.2f), 0.25f, 3.0f, CollisionTypes.Player));
 		children.Add(_pool.CreateEntity()
 		             .AddRelativePosition(-0.5f, -0.5f)
 		             .AddPosition(new Vector2(0.0f, 0.0f))
 		             .AddChild(parent)
-		             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissilePrimary, component.homeMissileVelocity, CollisionTypes.Player));
+		             .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, new Vector2(-component.homeMissileVelocity * 0.6f, -1.2f), 0.25f, 3.0f, CollisionTypes.Player));
 	}
 
 	void addSecondaryMissiles(List<Entity> children, Entity parent) {
@@ -120,7 +120,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 		    .IsLeaderFollower(true)
 			.AddVelocity(new Vector2())
 			.AddVelocityLimit(5.0f)
-			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, CollisionTypes.Player));
+            .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, new Vector2(-component.homeMissileVelocity, -1.0f), 1.0f, 3.0f, CollisionTypes.Player));
 		children.Add(_pool.CreateEntity()
 			.AddPosition(new Vector2(0.0f, 0.5f))
 			.AddResource(Resource.Player)
@@ -128,7 +128,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
             .IsLeaderFollower(true)
 			.AddVelocity(new Vector2())
 			.AddVelocityLimit(5.5f)
-			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, CollisionTypes.Player));
+            .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, new Vector2(-component.homeMissileVelocity, -1.0f), 1.0f, 3.0f, CollisionTypes.Player));
 		children.Add(_pool.CreateEntity()
 			.AddPosition(new Vector2(-0.5f, 0.0f))
 			.AddResource(Resource.Player)
@@ -136,7 +136,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
             .IsLeaderFollower(true)
 		    .AddVelocity(new Vector2())
 		    .AddVelocityLimit(6.0f)
-			.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, CollisionTypes.Player));
+            .AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, new Vector2(-component.homeMissileVelocity, -1.0f), 1.0f, 3.0f, CollisionTypes.Player));
 	}
 	
 	void addNonRemovable(List<Entity> entities) {

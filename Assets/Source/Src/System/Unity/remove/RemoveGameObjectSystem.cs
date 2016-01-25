@@ -1,6 +1,7 @@
 using UnityEngine;
 using Entitas;
 using System.Collections.Generic;
+using System;
 
 public class RemoveGameObjectSystem : ISystem, ISetPool, IEnsureComponents {
 	public IMatcher ensureComponents { get { return Matcher.GameObject; } }

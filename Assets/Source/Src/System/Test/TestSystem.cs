@@ -90,7 +90,7 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 			player.RemoveHomeMissileSpawner();
 		}
 		else {
-			player.AddHomeMissileSpawner(0.0f, 1.0f, 10, ResourceWithColliders.MissilePrimary, 5.0f, CollisionTypes.Player);
+            player.AddHomeMissileSpawner(0.0f, 0.2f, 10, ResourceWithColliders.MissileHoming, 7.0f, new Vector2(7.0f, -0.8f), 0.4f, 3.0f, CollisionTypes.Player);
 		}
 	}
 

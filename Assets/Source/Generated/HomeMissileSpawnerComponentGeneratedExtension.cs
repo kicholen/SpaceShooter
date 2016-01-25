@@ -12,18 +12,21 @@ namespace Entitas {
             _homeMissileSpawnerComponentPool.Clear();
         }
 
-        public Entity AddHomeMissileSpawner(float newTime, float newSpawnDelay, int newDamage, string newResource, float newVelocity, int newOwnerCollisionType) {
+        public Entity AddHomeMissileSpawner(float newTime, float newSpawnDelay, int newDamage, string newResource, float newVelocity, UnityEngine.Vector2 newStartVelocity, float newFollowDelay, float newSelfDestructionDelay, int newOwnerCollisionType) {
             var component = _homeMissileSpawnerComponentPool.Count > 0 ? _homeMissileSpawnerComponentPool.Pop() : new HomeMissileSpawnerComponent();
             component.time = newTime;
             component.spawnDelay = newSpawnDelay;
             component.damage = newDamage;
             component.resource = newResource;
             component.velocity = newVelocity;
+            component.startVelocity = newStartVelocity;
+            component.followDelay = newFollowDelay;
+            component.selfDestructionDelay = newSelfDestructionDelay;
             component.ownerCollisionType = newOwnerCollisionType;
             return AddComponent(ComponentIds.HomeMissileSpawner, component);
         }
 
-        public Entity ReplaceHomeMissileSpawner(float newTime, float newSpawnDelay, int newDamage, string newResource, float newVelocity, int newOwnerCollisionType) {
+        public Entity ReplaceHomeMissileSpawner(float newTime, float newSpawnDelay, int newDamage, string newResource, float newVelocity, UnityEngine.Vector2 newStartVelocity, float newFollowDelay, float newSelfDestructionDelay, int newOwnerCollisionType) {
             var previousComponent = hasHomeMissileSpawner ? homeMissileSpawner : null;
             var component = _homeMissileSpawnerComponentPool.Count > 0 ? _homeMissileSpawnerComponentPool.Pop() : new HomeMissileSpawnerComponent();
             component.time = newTime;
@@ -31,6 +34,9 @@ namespace Entitas {
             component.damage = newDamage;
             component.resource = newResource;
             component.velocity = newVelocity;
+            component.startVelocity = newStartVelocity;
+            component.followDelay = newFollowDelay;
+            component.selfDestructionDelay = newSelfDestructionDelay;
             component.ownerCollisionType = newOwnerCollisionType;
             ReplaceComponent(ComponentIds.HomeMissileSpawner, component);
             if (previousComponent != null) {

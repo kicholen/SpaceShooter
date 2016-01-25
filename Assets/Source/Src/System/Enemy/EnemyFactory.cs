@@ -31,7 +31,7 @@ using UnityEngine;
 			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
 			e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
-			e.AddHomeMissileSpawner(4.0f, 2.0f, model.damage, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddHomeMissileSpawner(4.0f, 2.0f, model.damage, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.CircleMissile:
@@ -50,6 +50,8 @@ using UnityEngine;
 			break;
         case EnemyTypes.TargetMissile:
             e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
+            e.AddFaceDirection(true);
+            e.AddCameraShakeOnDeath(1);
             e.AddTargetMissileSpawner(6, model.damage, 6, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy, CollisionTypes.Player);
             addPathIfNeeded(e, model.posY, model.path);
             break;
@@ -105,7 +107,7 @@ using UnityEngine;
 			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
 			e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
-			e.AddHomeMissileSpawner(4.0f, 2.0f, damage, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddHomeMissileSpawner(4.0f, 2.0f, damage, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy);
 			addPathIfNeeded(e, posY, path);
 			addGridIfNeeded(e, grid);
 			break;
@@ -127,6 +129,8 @@ using UnityEngine;
 			break;
         case EnemyTypes.TargetMissile:
             e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
+            e.AddFaceDirection(true);
+            e.AddCameraShakeOnDeath(1);
             e.AddTargetMissileSpawner(6, damage, 6, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy, CollisionTypes.Player);
             addPathIfNeeded(e, posY, path);
             addGridIfNeeded(e, grid);
@@ -232,13 +236,13 @@ using UnityEngine;
 		             .AddRelativePosition(0.5f, 0.5f)
 		             .AddPosition(new Vector2(0.0f, 0.0f))
 		             .AddChild(boss)
-		             .AddHomeMissileSpawner(5.0f, 10f, 10, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy)
+		             .AddHomeMissileSpawner(5.0f, 10f, 10, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy)
 		             .AddResource(Resource.Weapon));
 		children.Add(_pool.CreateEntity()
 		             .AddRelativePosition(-0.5f, 0.5f)
 		             .AddPosition(new Vector2(0.0f, 0.0f))
 		             .AddChild(boss)
-		             .AddHomeMissileSpawner(5.0f, 10f, 10, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy)
+		             .AddHomeMissileSpawner(5.0f, 10f, 10, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy)
 		             .AddResource(Resource.Weapon));
 		addNonRemovable(children);
 		boss.AddParent(children);

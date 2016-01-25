@@ -8,9 +8,7 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 	Group _enemies;
 	Group _player;
 
-	const float SELF_DESTRUCTION_TIME = 3.0f;
-
-	public void SetPool(Pool pool) {
+    public void SetPool(Pool pool) {
 		_pool = pool;
 		_missiles = _pool.GetGroup(Matcher.HomeMissileSpawner);
 		_time = pool.GetGroup(Matcher.Time);
@@ -39,16 +37,16 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 	
 	void spawnMissile(HomeMissileSpawnerComponent missile, int targetCollisionType, Vector2 position) {
 		_pool.CreateEntity()
-			.AddPosition(new Vector2().Set(position))
-			.AddVelocity(new Vector2(0.0f, 0.0f))
-			.AddVelocityLimit(missile.velocity)
+			.AddPosition(new Vector2(position.x, position.y))
+			.AddVelocity(missile.startVelocity)
 			.AddHealth(0)
-			.AddHomeMissile(0.0f, targetCollisionType)
+			.AddHomeMissile(missile.followDelay, missile.velocity, targetCollisionType)
 			.AddFindTarget(targetCollisionType)
 			.AddCollision(missile.ownerCollisionType, missile.damage)
-			.AddDestroyEntityDelayed(SELF_DESTRUCTION_TIME)
+			.AddDestroyEntityDelayed(missile.selfDestructionDelay)
 			.AddFaceDirection(true)
-			.AddResource(missile.resource);
+            .AddExplosionOnDeath(1.5f, Resource.ExplosionMissile)
+            .AddResource(missile.resource);
 	}
 
 	bool canSpawnPlayerMissile() {

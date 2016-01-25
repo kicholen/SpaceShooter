@@ -12,17 +12,19 @@ namespace Entitas {
             _homeMissileComponentPool.Clear();
         }
 
-        public Entity AddHomeMissile(float newRandom, int newTargetCollisionType) {
+        public Entity AddHomeMissile(float newDelay, float newSpeed, int newTargetCollisionType) {
             var component = _homeMissileComponentPool.Count > 0 ? _homeMissileComponentPool.Pop() : new HomeMissileComponent();
-            component.random = newRandom;
+            component.delay = newDelay;
+            component.speed = newSpeed;
             component.targetCollisionType = newTargetCollisionType;
             return AddComponent(ComponentIds.HomeMissile, component);
         }
 
-        public Entity ReplaceHomeMissile(float newRandom, int newTargetCollisionType) {
+        public Entity ReplaceHomeMissile(float newDelay, float newSpeed, int newTargetCollisionType) {
             var previousComponent = hasHomeMissile ? homeMissile : null;
             var component = _homeMissileComponentPool.Count > 0 ? _homeMissileComponentPool.Pop() : new HomeMissileComponent();
-            component.random = newRandom;
+            component.delay = newDelay;
+            component.speed = newSpeed;
             component.targetCollisionType = newTargetCollisionType;
             ReplaceComponent(ComponentIds.HomeMissile, component);
             if (previousComponent != null) {
