@@ -49,7 +49,9 @@ public class ClearGamePassiveSystem {
 
     protected void clearMissileSpawners() {
         foreach (Entity e in _missileSpawners.GetEntities()) {
-            e.isDestroyEntity = true;
+            if (!e.hasChild) {
+                e.isDestroyEntity = true;
+            }
         }
     }
 

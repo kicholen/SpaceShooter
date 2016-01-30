@@ -18,7 +18,7 @@ public class AddGameObjectSystem : IReactiveSystem, ISetPool {
         for (int i = 0; i < entities.Count; i++) {
 			Entity e = entities[i];
 			string resourceName = e.resource.name;
-            GameObject gameObject = null;//getFromPool(resourceName);
+            GameObject gameObject = getFromPool(resourceName);
 			if (gameObject == null) {
 				GameObject res = Resources.Load<GameObject>("Prefab/" + resourceName);
 				try {

@@ -33,7 +33,7 @@ public class View : BaseGui {
 		go = uiFactoryService.CreatePrefab(prefabPath);
 		rectTransform = go.GetComponent<RectTransform>();
 		entity = pool.CreateEntity()
-			.AddGameObject(go, "blabla");
+			.AddGameObject(go, "View");
 	}
 	
 	public void SetParent(Transform parent) {

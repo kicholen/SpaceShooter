@@ -34,6 +34,10 @@ public class LeftPanelHud : BaseGui {
                 isGameInProgress = true;
             }
         });
+        getChild("ExtendPanel/BackButton").GetComponent<Button>().onClick.AddListener(() => {
+            if (isGameInProgress)
+                endGame();
+        });
     }
 
     void setData(Action onSave, Action onBack) {

@@ -63,7 +63,9 @@ public class ViewModifier : MonoBehaviour {
     }
 
     void setActiveGo(GameObject hitGO) {
+        nullifyActiveGo();
         activeGo = hitGO;
+        activeGo.GetComponent<SpriteRenderer>().color = Color.red;
         if (activeGo.GetComponent<EditableBehaviour>().waveModel != null)
             eventService.Dispatch<ActiveWaveModelChangeEvent>(new ActiveWaveModelChangeEvent(activeGo.GetComponent<EditableBehaviour>().waveModel));
         else
@@ -77,7 +79,10 @@ public class ViewModifier : MonoBehaviour {
     }
 
     void nullifyActiveGo() {
-        activeGo = null;
+        if (activeGo != null) {
+            activeGo.GetComponent<SpriteRenderer>().color = Color.white;
+            activeGo = null;
+        }
         eventService.Dispatch<NoActiveModelEvent>(new NoActiveModelEvent());
     }
 
