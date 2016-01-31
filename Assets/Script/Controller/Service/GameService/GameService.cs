@@ -166,6 +166,7 @@ public class GameService : IGameService {
 				.Add(pool.CreateShakeSystem())
 				.Add(pool.CreateParticleSpawnSystem())
                 .Add(pool.CreateShieldCollisionSystem())
+                .Add(pool.CreateShieldCollisionEffectSystem())
 
                 // bonus
                 .Add(pool.CreateActivateBonusSystem())

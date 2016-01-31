@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Entitas;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using UnityEngine;
 
-namespace Assets.Source.Src.System.Effects.ShieldCollision {
-    class ShieldCollisionComponent {
-    }
+public class ShieldCollisionComponent : IComponent {
+    public float time;
+    public float duration;
+    public Queue<Vector2> collisionsPosition;
 }

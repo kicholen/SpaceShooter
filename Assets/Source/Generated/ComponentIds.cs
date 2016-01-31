@@ -81,7 +81,7 @@ public static class ComponentIds {
     public const int SecondaryWeapon = 79;
     public const int SettingsModel = 80;
     public const int Shake = 81;
-    public const int Shield = 82;
+    public const int ShieldCollision = 82;
     public const int ShipModel = 83;
     public const int SlowGame = 84;
     public const int SmoothCamera = 85;
@@ -190,7 +190,7 @@ public static class ComponentIds {
         "SecondaryWeapon",
         "SettingsModel",
         "Shake",
-        "Shield",
+        "ShieldCollision",
         "ShipModel",
         "SlowGame",
         "SmoothCamera",
@@ -298,7 +298,7 @@ public static class ComponentIds {
         typeof(SecondaryWeaponComponent),
         typeof(SettingsModelComponent),
         typeof(ShakeComponent),
-        typeof(ShieldComponent),
+        typeof(ShieldCollisionComponent),
         typeof(ShipModelComponent),
         typeof(SlowGameComponent),
         typeof(SmoothCameraComponent),

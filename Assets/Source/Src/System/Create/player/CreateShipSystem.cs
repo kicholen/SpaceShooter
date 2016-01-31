@@ -90,8 +90,8 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
             .AddRelativePosition(0.0f, 0.0f)
             .AddChild(parent)
             .AddCollision(CollisionTypes.Player, 10)
-            .AddHealth(component.health)
-            .IsShield(true)
+            .AddHealth(component.health * 100)
+            .AddShieldCollision(0.0f, 0.1f, new Queue<Vector2>())
             .IsCollisionPosition(true)
             .AddResource(ResourceWithColliders.PlayerShield));
     }

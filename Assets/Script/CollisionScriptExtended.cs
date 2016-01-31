@@ -2,9 +2,9 @@
 using UnityEngine;
 
 public class CollisionScriptExtended : MonoBehaviour {
-    public List<Vector2> Position = new List<Vector2>();
+    public Queue<Vector2> Position = new Queue<Vector2>();
 
-    void OnTriggerEnter2D(Component other) {
-        Position.Add(other.gameObject.transform.position);
+    void OnCollisionEnter2D(Collision2D collision) {
+        Position.Enqueue(collision.contacts[0].point);
     }
 }

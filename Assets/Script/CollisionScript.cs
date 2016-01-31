@@ -4,7 +4,7 @@ public class CollisionScript : MonoBehaviour {
 	public int Damage;
 	public int DamageTaken;
 
-	void OnTriggerEnter2D(Component other) {
-		DamageTaken += other.gameObject.GetComponent<CollisionScript>().Damage;
+	void OnCollisionEnter2D(Collision2D collision) {
+		DamageTaken += collision.collider.GetComponent<CollisionScript>().Damage;
 	}
 }
