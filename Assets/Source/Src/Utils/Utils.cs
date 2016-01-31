@@ -62,15 +62,15 @@ public static class Utils
 		}
 		#if UNITY_EDITOR
 		path = Application.dataPath + "/Resources/" + value.GetType().Name + path + jsonSufix;
-		#elif UNITY_ANDROID
-		path = Application.persistentDataPath + "/" + value.GetType().Name + path + xmlSufix;
-		#endif
+#elif UNITY_ANDROID
+		path = Application.persistentDataPath + "/" + value.GetType().Name + path + jsonSufix;
+#endif
 
-		#if UNITY_WEBPLAYER || UNITY_WEBGL
+#if UNITY_WEBPLAYER || UNITY_WEBGL
 		PlayerPrefs.SetString(path, JsonConvert.SerializeObject(value));
 		PlayerPrefs.Save();
-		#else
-		JsonSerializer serializer = new JsonSerializer();
+#else
+        JsonSerializer serializer = new JsonSerializer();
 		StreamWriter streamWriter = new StreamWriter(path, false);
 		serializer.Serialize(streamWriter, value);
 		streamWriter.Close();

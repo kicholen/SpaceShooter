@@ -99,9 +99,10 @@ public class GameService : IGameService {
 			.Add(pool.CreateAddGameObjectSystem())
 			.Add(pool.CreateAddUIGameObjectSystem())
 			.Add(pool.CreateAddCollisionToGameObjectSystem())
-			
-			// Sort order
-			.Add(pool.CreateSortOrderSystem())
+			.Add(pool.CreateAddCollisionPositionToGOSystem())
+
+            // Sort order
+            .Add(pool.CreateSortOrderSystem())
 
         	// Input
 			.Add(pool.CreateCreateMouseInputSystem())
@@ -164,9 +165,10 @@ public class GameService : IGameService {
 				.Add(pool.CreateGhostSystem())
 				.Add(pool.CreateShakeSystem())
 				.Add(pool.CreateParticleSpawnSystem())
+                .Add(pool.CreateShieldCollisionSystem())
 
-				// bonus
-				.Add(pool.CreateActivateBonusSystem())
+                // bonus
+                .Add(pool.CreateActivateBonusSystem())
 				.Add(pool.CreateSpeedBonusSystem())
 
 			// RelativePositionGO

@@ -1,6 +1,7 @@
 public static class ResourceWithColliders {
 	public const string Player = "Collider/Player";
-	public const string Enemy = "Collider/Enemy";
+	public const string PlayerShield = "Collider/PlayerShield";
+    public const string Enemy = "Collider/Enemy";
 	public const string EnemySmall = "Collider/SmallEnemy";
 	public const string MissilePrimary = "Collider/Missile";
 	public const string MissileHoming = "Collider/HomingMissile";

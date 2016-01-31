@@ -1,6 +1,7 @@
 using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.CreateShip.OnEntityAdded(); } }
@@ -76,13 +77,26 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 		if (component.hasSecondaryMissiles) {
 			addSecondaryMissiles(children, parent);
 		}
-		//addHelperShips(children, parent, component);
+        //addHelperShips(children, parent, component);
+        addShield(children, parent, component);
 
 		addNonRemovable(children);
 		return children;
 	}
 
-	void addHomeMissile(List<Entity> children, Entity parent, ShipModelComponent component) {
+    void addShield(List<Entity> children, Entity parent, ShipModelComponent component) {
+        children.Add(_pool.CreateEntity()
+            .AddPosition(new Vector2(0.0f, 0.0f))
+            .AddRelativePosition(0.0f, 0.0f)
+            .AddChild(parent)
+            .AddCollision(CollisionTypes.Player, 10)
+            .AddHealth(component.health)
+            .IsShield(true)
+            .IsCollisionPosition(true)
+            .AddResource(ResourceWithColliders.PlayerShield));
+    }
+
+    void addHomeMissile(List<Entity> children, Entity parent, ShipModelComponent component) {
 		children.Add(_pool.CreateEntity()
 		             .AddRelativePosition(0.5f, -0.5f)
 		             .AddPosition(new Vector2(0.0f, 0.0f))

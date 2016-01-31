@@ -2,7 +2,7 @@ using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 
-	public class EnemyFactory {
+public class EnemyFactory {
 	Pool _pool;
 	Group _paths;
 
