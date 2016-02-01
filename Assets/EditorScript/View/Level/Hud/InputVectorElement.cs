@@ -18,7 +18,7 @@ public class InputVectorElement : BaseGui {
 
     void addListenerToInputFieldAndSetStartValue(string childPath, Action<float> onChange, float startValue) {
         InputField input = getChild(childPath).GetComponentInChildren<InputField>();
-        input.onValueChange.AddListener((value) => {
+        input.onValueChanged.AddListener((value) => {
             onChange(getFloatValueFromString(value));
         });
         input.text = startValue.ToString();

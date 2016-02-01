@@ -96,16 +96,17 @@ public static class ComponentIds {
     public const int TargetMissileSpawner = 94;
     public const int Test = 95;
     public const int Time = 96;
-    public const int Tween = 97;
-    public const int TweenOnDeath = 98;
-    public const int UIFactoryService = 99;
-    public const int UIResource = 100;
-    public const int Velocity = 101;
-    public const int VelocityLimit = 102;
-    public const int WaveSpawner = 103;
-    public const int Weapon = 104;
+    public const int Trail = 97;
+    public const int Tween = 98;
+    public const int TweenOnDeath = 99;
+    public const int UIFactoryService = 100;
+    public const int UIResource = 101;
+    public const int Velocity = 102;
+    public const int VelocityLimit = 103;
+    public const int WaveSpawner = 104;
+    public const int Weapon = 105;
 
-    public const int TotalComponents = 105;
+    public const int TotalComponents = 106;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -205,6 +206,7 @@ public static class ComponentIds {
         "TargetMissileSpawner",
         "Test",
         "Time",
+        "Trail",
         "Tween",
         "TweenOnDeath",
         "UIFactoryService",
@@ -313,6 +315,7 @@ public static class ComponentIds {
         typeof(TargetMissileSpawnerComponent),
         typeof(TestComponent),
         typeof(TimeComponent),
+        typeof(TrailComponent),
         typeof(TweenComponent),
         typeof(TweenOnDeathComponent),
         typeof(UIFactoryServiceComponent),

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class ChangeWaveHealthAction : IWaveAction {
     const int defaultHealth = 50;
@@ -10,6 +11,7 @@ public class ChangeWaveHealthAction : IWaveAction {
             this.health = Convert.ToInt16(health);
         }
         catch (FormatException exception) {
+            Debug.Log(exception.Message);
             this.health = defaultHealth;
         }
     }

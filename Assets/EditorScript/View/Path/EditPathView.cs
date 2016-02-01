@@ -7,8 +7,6 @@ public class EditPathView : View, IView {
 
     PathModelComponent component;
 
-    EditorGrid gridScript;
-    CameraController cameraScript;
     PathCreator pathCreatorScript;
 
     public EditPathView(IPathService pathService, IViewService viewService) : base("EditorView/Path/EditPathView") {
@@ -47,8 +45,8 @@ public class EditPathView : View, IView {
     }
 
     void attachScripts() {
-        gridScript = go.AddComponent<EditorGrid>();
-        cameraScript = go.AddComponent<CameraController>();
+        go.AddComponent<EditorGrid>();
+        go.AddComponent<CameraController>();
         pathCreatorScript = go.AddComponent<PathCreator>();
     }
 

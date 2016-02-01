@@ -5,7 +5,6 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
 	Group _group;
 	Group _time;
-	Group _player;
 
 	const float EPSILON = 0.005f;
 
@@ -16,7 +15,6 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 		_pool = pool;
 		_group = pool.GetGroup(Matcher.FirstBoss);
 		_time = _pool.GetGroup(Matcher.Time);
-		_player = pool.GetGroup(Matcher.Player);
 	}
 	
 	public void Execute() {

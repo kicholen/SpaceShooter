@@ -2,7 +2,10 @@ using Entitas;
 using UnityEngine;
 
 public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
-	Pool _pool;
+    const float homeMissileTrailDuration = 0.3f;
+    const float explosionOnDeathDuration = 1.5f;
+
+    Pool _pool;
 	Group _time;
 	Group _missiles;
 	Group _enemies;
@@ -45,7 +48,8 @@ public class HomeMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			.AddCollision(missile.ownerCollisionType, missile.damage)
 			.AddDestroyEntityDelayed(missile.selfDestructionDelay)
 			.AddFaceDirection(true)
-            .AddExplosionOnDeath(1.5f, Resource.ExplosionMissile)
+            .AddExplosionOnDeath(explosionOnDeathDuration, Resource.ExplosionMissile)
+            .AddTrail(homeMissileTrailDuration)
             .AddResource(missile.resource);
 	}
 

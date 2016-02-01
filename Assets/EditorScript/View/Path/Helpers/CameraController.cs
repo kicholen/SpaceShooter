@@ -1,11 +1,10 @@
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
-
-    public Camera camera;
+    public Camera mainCamera;
 	
     void Start() {
-        camera = Camera.main;
+        mainCamera = Camera.main;
     }
 
 	void Update () {
@@ -24,14 +23,14 @@ public class CameraController : MonoBehaviour {
 		else if (Input.GetKey(KeyCode.D)) {
 			offsetX += 0.1f;
 		}
-		Vector3 position = camera.transform.position;
-		camera.transform.position = new Vector3(position.x + offsetX, position.y + offsetY, position.z);
+		Vector3 position = mainCamera.transform.position;
+		mainCamera.transform.position = new Vector3(position.x + offsetX, position.y + offsetY, position.z);
 
 		if(Input.GetKey(KeyCode.KeypadPlus)) {
-			camera.orthographicSize -= .1f;
+			mainCamera.orthographicSize -= .1f;
 		}
 		if(Input.GetKey(KeyCode.KeypadMinus)) {
-			camera.orthographicSize += .1f;
+			mainCamera.orthographicSize += .1f;
 		}
 	}
 }

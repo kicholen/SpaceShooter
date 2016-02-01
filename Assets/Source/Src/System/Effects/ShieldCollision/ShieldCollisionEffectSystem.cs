@@ -12,15 +12,16 @@ public class ShieldCollisionEffectSystem : IExecuteSystem, ISetPool {
     }
 
     public void Execute() {
+        float deltaTime = time.GetSingleEntity().time.gameDeltaTime;
         foreach (Entity e in group.GetEntities())
-            update(e);
+            update(e, deltaTime);
     }
 
-    void update(Entity e) {
+    void update(Entity e, float deltaTime) {
         ShieldCollisionComponent component = e.shieldCollision;
         GameObject gameObject = e.gameObject.gameObject;
         if (component.time > 0.0f)
-            setShaderPower(component, gameObject);
+            setShaderPower(component, gameObject, deltaTime);
         else if (component.collisionsPosition.Count > 0)
             setHitVectorAndRestTime(component, gameObject);
         else
@@ -32,11 +33,11 @@ public class ShieldCollisionEffectSystem : IExecuteSystem, ISetPool {
         component.time = component.duration;
     }
 
-    void setShaderPower(ShieldCollisionComponent component, GameObject gameObject) {
+    void setShaderPower(ShieldCollisionComponent component, GameObject gameObject, float deltaTime) {
         Material shaderMaterial = getShaderMaterial(gameObject);
         shaderMaterial.SetFloat("_Power", maxPower * component.time / component.duration);
 
-        component.time -= time.GetSingleEntity().time.gameDeltaTime;
+        component.time -= deltaTime;
     }
 
     void setHitVector(ShieldCollisionComponent component, GameObject gameObject) {

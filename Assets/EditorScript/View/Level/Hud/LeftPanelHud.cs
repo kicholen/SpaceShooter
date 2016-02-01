@@ -97,7 +97,7 @@ public class LeftPanelHud : BaseGui {
         GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/InputElement"));
         gameObject.GetComponentInChildren<Text>().text = "LevelName";
         InputField input = gameObject.GetComponentInChildren<InputField>();
-        input.onValueChange.AddListener(onValueChange);
+        input.onValueChanged.AddListener(onValueChange);
         input.text = defaultText == null ? "" : defaultText;
 
         return gameObject;

@@ -9,7 +9,7 @@ public class RightBottomPanelViewUpdaterBase {
         GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/InputElement"));
         gameObject.GetComponentInChildren<Text>().text = infoText;
         InputField input = gameObject.GetComponentInChildren<InputField>();
-        input.onValueChange.AddListener(onValueChange);
+        input.onValueChanged.AddListener(onValueChange);
         input.text = defaultText;
 
         return gameObject;

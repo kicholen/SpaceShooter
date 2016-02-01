@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class ChangeEnemyDamageAction : IEnemyAction {
     const int defaultDmg = 10;
@@ -10,6 +11,7 @@ public class ChangeEnemyDamageAction : IEnemyAction {
             this.damage = Convert.ToInt16(damage);
         }
         catch (FormatException exception) {
+            Debug.Log(exception.Message);
             this.damage = defaultDmg;
         }
     }

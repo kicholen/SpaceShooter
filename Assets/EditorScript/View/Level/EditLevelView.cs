@@ -14,10 +14,7 @@ public class EditLevelView : View, IView {
     EditableElementsFactory factory;
 
     LeftPanelHud leftPanelHud;
-    RightPanelHud rightPanelHud;
     RightBottomPanelHud rightBottomPanelHud;
-
-    CameraController cameraController;
 
     public EditLevelView(ILevelService levelService, IViewService viewService, IPathService pathService) : base("EditorView/Level/EditLevelView") {
         this.levelService = levelService;
@@ -60,14 +57,14 @@ public class EditLevelView : View, IView {
     }
 
     void attachScripts() {
-        cameraController = go.AddComponent<CameraController>();
+        go.AddComponent<CameraController>();
     }
 
     void createHud() {
         leftPanelHud = new LeftPanelHud(getChild("LeftPanel"), eventService, executor, save, goToLevelsView);
         leftPanelHud.setDebugToggles(changeDebugPathView);
         leftPanelHud.setStartEndGameCallbacks(startGame, endGame);
-        rightPanelHud = new RightPanelHud(getChild("RightPanel"), eventService, onSelectedTypeChange);
+        new RightPanelHud(getChild("RightPanel"), onSelectedTypeChange);
         rightBottomPanelHud = new RightBottomPanelHud(getChild("RightBottomPanel"), eventService);
     }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class ChangeWaveDamageAction : IWaveAction {
     const int defaultDmg = 10;
@@ -10,6 +11,7 @@ public class ChangeWaveDamageAction : IWaveAction {
             this.damage = Convert.ToInt16(damage);
         }
         catch (FormatException exception) {
+            Debug.Log(exception.Message);
             this.damage = defaultDmg;
         }
     }

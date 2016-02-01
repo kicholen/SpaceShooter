@@ -3,11 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class RightPanelHud : BaseGui {
-    EventService eventService;
-
-    public RightPanelHud(Transform content, EventService eventService, Action<SelectedType> onSelectedTypeChange) {
+    public RightPanelHud(Transform content, Action<SelectedType> onSelectedTypeChange) {
         go = content.gameObject;
-        this.eventService = eventService;
         addListeners(onSelectedTypeChange);
     }
 

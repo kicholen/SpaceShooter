@@ -8,7 +8,7 @@ public class HelperShipSystem : IExecuteSystem, ISetPool {
 	const float LEADER_BEHIND_DIST = 0.5f;
 	const float SLOWING_RADIUS = 1.6f;
 	const float STEERING = 8.0f;
-	const float SEPERATION_RADIUS = 0.5f;
+	const float SEPERATION_RADIUS_POW = 0.25f;
 
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.LeaderFollower, Matcher.Child));
@@ -50,12 +50,11 @@ public class HelperShipSystem : IExecuteSystem, ISetPool {
 
 	Vector2 seperationSteeringForce(Entity e, PositionComponent position, List<Entity> children) {
 		Vector2 desiredVelocity = new Vector2();
-		int neighbourCount = 0;
 		for (int i = 0; i < children.Count; i++) {
 			Entity child = children[i];
 			if (child.isLeaderFollower && child != e) {
 				Vector2 diff = position.pos - child.position.pos;
-				if (diff.sqrMagnitude < SEPERATION_RADIUS*SEPERATION_RADIUS) {
+				if (diff.sqrMagnitude < SEPERATION_RADIUS_POW) {
 					desiredVelocity += diff;
 				}
 			}
