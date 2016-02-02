@@ -24,17 +24,16 @@ public class LevelsView : View, IView {
         uiFactoryService.AddButton(getChild("BackButton").gameObject, () => viewService.SetView(ViewTypes.EDITOR_LANDING));
     }
 
-    void onLevelIdsLoaded(List<string> levelIds) {
-        foreach (string id in levelIds) {
-            addButton(id);
-        }
+    void onLevelIdsLoaded(Dictionary<long, string> levelIds) {
+        foreach (KeyValuePair<long, string> pair in levelIds)
+            addButton(pair);
     }
 
-    void addButton(string id) {
+    void addButton(KeyValuePair<long, string> pair) {
         GameObject go = uiFactoryService.CreatePrefab("EditorView/Button");
-        uiFactoryService.AddText(go.transform, "Text", id);
+        uiFactoryService.AddText(go.transform, "Text", pair.Value);
         uiFactoryService.AddButton(go, onLevelClicked);
-        go.name = id;
+        go.name = pair.Key.ToString();
         go.transform.SetParent(content.transform);
     }
 

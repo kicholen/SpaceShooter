@@ -60,7 +60,7 @@ public class GameService : IGameService {
     Systems CreateSystems() {
         #if (UNITY_EDITOR)
         return new DebugSystems()
-			.Add(pool.CreateTestSystem())
+			//.Add(pool.CreateTestSystem())
         #else
         return new Systems()
         #endif

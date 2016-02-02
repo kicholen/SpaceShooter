@@ -23,7 +23,7 @@ public class CreateLevelSystem : IReactiveSystem, ISetPool {
 
 		CreateLevelComponent createLevel = e.createLevel;
 
-		LevelModelComponent component = getLevelModelIfExists(createLevel.level.ToString());
+		LevelModelComponent component = getLevelModelIfExists(createLevel.level);
 		if (component == null) {
 			component = Utils.Deserialize<LevelModelComponent>(createLevel.level.ToString());
 			_pool.CreateEntity()
@@ -51,9 +51,9 @@ public class CreateLevelSystem : IReactiveSystem, ISetPool {
 		createBackground(screenWidth, screenHeight);
 	}
 
-	LevelModelComponent getLevelModelIfExists(string name) {
+	LevelModelComponent getLevelModelIfExists(int id) {
 		foreach (Entity e in _group.GetEntities()) {
-			if (name == e.levelModel.name) {
+			if (id == e.levelModel.id) {
 				return e.levelModel;
 			}
 		}

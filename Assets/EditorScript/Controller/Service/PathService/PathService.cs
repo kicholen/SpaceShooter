@@ -13,7 +13,7 @@ public class PathService : IPathService {
         this.eventService = eventService;
     }
 
-    public void LoadPathIds(Action<List<string>> onPathsLoaded) {
+    public void LoadPathIds(Action<Dictionary<long, string>> onPathsLoaded) {
         wwwService.Send<GetPathIds>(new GetPathIds(), (request) => { onPathsLoaded(request.PathIds); }, onRequestFailed);
     }
 

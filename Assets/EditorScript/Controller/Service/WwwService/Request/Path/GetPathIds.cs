@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 public class GetPathIds : WwwRequest {
 
-    public List<string> PathIds;
+    public Dictionary<long, string> PathIds;
 
     public GetPathIds() {
         urlData.Add("paths");
     }
 
     public override void ParseResult() {
-        PathIds = JsonConvert.DeserializeObject<List<string>>(result);
+        PathIds = JsonConvert.DeserializeObject<Dictionary<long, string>>(result);
     }
 }

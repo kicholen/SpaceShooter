@@ -236,13 +236,13 @@ public class EnemyFactory {
 		             .AddRelativePosition(0.5f, 0.5f)
 		             .AddPosition(new Vector2(0.0f, 0.0f))
 		             .AddChild(boss)
-		             .AddHomeMissileSpawner(5.0f, 10f, 10, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy)
+		             .AddHomeMissileSpawner(5.0f, 10f, 10, ResourceWithColliders.MissileEnemyHoming, 2.0f * (missileSpeedBonus + 100) / 100, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy)
 		             .AddResource(Resource.Weapon));
 		children.Add(_pool.CreateEntity()
 		             .AddRelativePosition(-0.5f, 0.5f)
 		             .AddPosition(new Vector2(0.0f, 0.0f))
 		             .AddChild(boss)
-		             .AddHomeMissileSpawner(5.0f, 10f, 10, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy)
+		             .AddHomeMissileSpawner(5.0f, 10f, 10, ResourceWithColliders.MissileEnemyHoming, 2.0f * (missileSpeedBonus + 100) / 100, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy)
 		             .AddResource(Resource.Weapon));
 		addNonRemovable(children);
 		boss.AddParent(children);

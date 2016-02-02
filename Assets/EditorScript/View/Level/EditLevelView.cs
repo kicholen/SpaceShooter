@@ -93,7 +93,7 @@ public class EditLevelView : View, IView {
             .AddComponent(ComponentIds.LevelModel, component);
 
         pool.CreateEntity()
-            .AddStartGame(Convert.ToInt16(component.name));
+            .AddStartGame(Convert.ToInt16(component.id));
     }
 
     void endGame() {

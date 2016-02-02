@@ -22,7 +22,7 @@ public class LevelService : ILevelService {
         wwwService.Send<GetLevel>(new GetLevel(id), (request) => { onLevelLoaded(request.Component); }, onRequestFailed);
     }
 
-    public void LoadLevelIds(Action<List<string>> onLevelIdsLoaded) {
+    public void LoadLevelIds(Action<Dictionary<long, string>> onLevelIdsLoaded) {
         wwwService.Send<GetLevelIds>(new GetLevelIds(), (request) => { onLevelIdsLoaded(request.LevelIds); }, onRequestFailed);
     }
 

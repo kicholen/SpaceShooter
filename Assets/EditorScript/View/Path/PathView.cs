@@ -22,17 +22,16 @@ public class PathView : View, IView {
         uiFactoryService.AddButton(getChild("BackButton").gameObject, () => viewService.SetView(ViewTypes.EDITOR_LANDING));
     }
 
-    void onPathIdsLoaded(List<string> pathIds) {
-        foreach (string id in pathIds) {
-            addButton(id);
-        }
+    void onPathIdsLoaded(Dictionary<long, string> pathIds) {
+        foreach (KeyValuePair<long, string> pair in pathIds)
+            addButton(pair);
     }
 
-    void addButton(string id) {
+    void addButton(KeyValuePair<long, string> pair) {
         GameObject go = uiFactoryService.CreatePrefab("EditorView/Button");
-        uiFactoryService.AddText(go.transform, "Text", id);
+        uiFactoryService.AddText(go.transform, "Text", pair.Value);
         uiFactoryService.AddButton(go, onPathClicked);
-        go.name = id;
+        go.name = pair.Key.ToString();
         go.transform.SetParent(content.transform);
     }
 
