@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,7 +18,9 @@ public class RightBottomPanelViewUpdaterBase {
 
     protected GameObject createDropdownElement(string infoText, string defaultText, List<string> names, UnityAction<string> onValueChange) {
         GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/DropdownElement"));
-        gameObject.GetComponentInChildren<Dropdown>().options = names.Select(name => new Dropdown.OptionData(name)).ToList<Dropdown.OptionData>();
+        List<Dropdown.OptionData> options = names.Select(name => new Dropdown.OptionData(name)).ToList<Dropdown.OptionData>();
+        options.Sort((x, y) => Convert.ToInt16(x.text).CompareTo(Convert.ToInt16(y.text)));
+        gameObject.GetComponentInChildren<Dropdown>().options = options;
         gameObject.GetComponentInChildren<Dropdown>().value = names.IndexOf(defaultText);
         gameObject.transform.FindChild("Label").GetComponent<Text>().text = infoText;
         gameObject.GetComponentInChildren<Dropdown>().onValueChanged.AddListener(value => onValueChange(value.ToString()));
