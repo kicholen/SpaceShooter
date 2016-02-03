@@ -21,7 +21,7 @@ public class PathSystem : IExecuteSystem, ISetPool {
 	
 	public void Execute() {
 		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
-		float cameraVelocity = 1.0f;
+		float cameraVelocity = Config.CAMERA_SPEED;
 		Entity camera = _camera.GetSingleEntity();
 		if (camera.hasVelocity) {
 			cameraVelocity = camera.velocity.vel.y;

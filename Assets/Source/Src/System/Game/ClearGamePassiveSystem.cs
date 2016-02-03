@@ -65,9 +65,7 @@ public class ClearGamePassiveSystem {
 	
 	protected void clearCameraShakes() {
 		foreach (Entity e in _shakes.GetEntities()) {
-			if (!e.hasChild) {
-				e.isDestroyEntity = true;
-			}
+            e.RemoveShake();
 		}
 	}
 	
