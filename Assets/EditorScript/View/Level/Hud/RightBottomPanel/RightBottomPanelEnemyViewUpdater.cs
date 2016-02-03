@@ -41,7 +41,10 @@ public class RightBottomPanelEnemyViewUpdater : RightBottomPanelViewUpdaterBase 
     }
 
     GameObject createChangePathField() {
-        return createDropdownElement("path", enemyExecutor.getPath().ToString(), EditLevelView.pathService.GetPathNames(), (value) => {
+        List<string> options = EditLevelView.pathService.GetPathNames();
+        options.Add("0");
+        return createDropdownElement("path", enemyExecutor.getPath().ToString(), options, (value) => {
+            Debug.Log(value);
             enemyExecutor.Execute(new ChangeEnemyPathAction(value));
         });
     }

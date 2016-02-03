@@ -43,7 +43,7 @@ public class EditorServices : IServices {
         viewService = new ViewService(eventService, uiFactoryService);
         loadService = new LoadService(eventService);
         gameService = new GameService(pool, viewService);
-        pathService = new PathService(wwwService, eventService);
+        pathService = new PathService(pool, wwwService, eventService);
         levelService = new LevelService(wwwService, eventService);
         infoService = new InfoService(viewService, uiFactoryService, eventService);
         updateables.Add(infoService);

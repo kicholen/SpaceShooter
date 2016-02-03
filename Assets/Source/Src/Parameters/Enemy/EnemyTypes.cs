@@ -1,5 +1,6 @@
 public static class EnemyTypes {
-	public const int Normal = 1;
+    public const int FirstBoss = 0;
+    public const int Normal = 1;
 	public const int Small = 2;
 	public const int HomeMissile = 3;
 	public const int CircleMissile = 4;
@@ -8,5 +9,4 @@ public static class EnemyTypes {
 	public const int MovingBlock = 7;
 	public const int MovingBlockade = 8;
 	public const int TargetMissile = 9;
-    public const int FirstBoss = 101;
 }
