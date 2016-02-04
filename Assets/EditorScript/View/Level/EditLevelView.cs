@@ -16,7 +16,8 @@ public class EditLevelView : View, IView {
     LeftPanelHud leftPanelHud;
     RightBottomPanelHud rightBottomPanelHud;
 
-    public EditLevelView(ILevelService levelService, IViewService viewService, IPathService pathService) : base("EditorView/Level/EditLevelView") {
+    public EditLevelView(Pool pool, ILevelService levelService, IViewService viewService, IPathService pathService) : base("EditorView/Level/EditLevelView") {
+        this.pool = pool;
         this.levelService = levelService;
         this.viewService = viewService;
         EditLevelView.pathService = pathService;
@@ -49,7 +50,7 @@ public class EditLevelView : View, IView {
 
     void createModifiers(LevelModelComponent component) {
         executor = new LevelActionExecutor(component);
-        factory = new EditableElementsFactory();
+        factory = new EditableElementsFactory(pool.GetGroup(Matcher.MaterialReference).GetSingleEntity().materialReference.storage.Default);
         modifier = go.AddComponent<ViewModifier>();
         modifier.SetExecutor(executor);
         modifier.SetFactory(factory);

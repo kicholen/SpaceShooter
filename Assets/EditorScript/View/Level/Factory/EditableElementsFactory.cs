@@ -2,6 +2,11 @@
 
 public class EditableElementsFactory {
     bool shouldAddDebugPath = false;
+    Material material;
+
+    public EditableElementsFactory(Material material) {
+        this.material = material;
+    }
 
     public GameObject CreateWaveElement(WaveModel model) {
         GameObject go = Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/WaveElement"));
@@ -19,16 +24,18 @@ public class EditableElementsFactory {
 
     void addDebugPathIfShould(GameObject go) {
         if (shouldAddDebugPath) {
-            go.AddComponent<DebugPathBehaviour>();
+            DebugPathBehaviour script = go.AddComponent<DebugPathBehaviour>();
+            script.Init(material);
         }
     }
 
     public void addDebugPathBehavioursIfNotExists() {
         shouldAddDebugPath = true;
         foreach (EditableBehaviour behaviour in UnityEngine.Object.FindObjectsOfType<EditableBehaviour>()) {
-            DebugPathBehaviour debugPath = behaviour.GetComponent<DebugPathBehaviour>();
-            if (debugPath == null) {
-                behaviour.gameObject.AddComponent<DebugPathBehaviour>();
+            DebugPathBehaviour script = behaviour.GetComponent<DebugPathBehaviour>();
+            if (script == null) {
+                script = behaviour.gameObject.AddComponent<DebugPathBehaviour>();
+                script.Init(material);
             }
         }
     }

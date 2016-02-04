@@ -20,7 +20,7 @@
                 view = new LevelsView((services as EditorServices).LevelService, services.ViewService, (services as EditorServices).PathService);
                 break;
             case ViewTypes.EDITOR_EDIT_LEVEL:
-                view = new EditLevelView((services as EditorServices).LevelService, services.ViewService, (services as EditorServices).PathService);
+                view = new EditLevelView(services.Pool, (services as EditorServices).LevelService, services.ViewService, (services as EditorServices).PathService);
                 break;
         }
         if (view == null) {

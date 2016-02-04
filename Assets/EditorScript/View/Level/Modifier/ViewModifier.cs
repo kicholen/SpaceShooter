@@ -66,10 +66,8 @@ public class ViewModifier : MonoBehaviour {
         nullifyActiveGo();
         activeGo = hitGO;
         activeGo.GetComponent<SpriteRenderer>().color = Color.red;
-        if (activeGo.GetComponent<EditableBehaviour>().waveModel != null)
-            eventService.Dispatch<ActiveWaveModelChangeEvent>(new ActiveWaveModelChangeEvent(activeGo.GetComponent<EditableBehaviour>().waveModel));
-        else
-            eventService.Dispatch<ActiveEnemyModelChangeEvent>(new ActiveEnemyModelChangeEvent(activeGo.GetComponent<EditableBehaviour>().enemyModel));
+        markDebugPathBehaviourAsActive();
+        dispatchOnSelectedEvents();
     }
 
     void setDraggingToMouseY() {
@@ -81,6 +79,7 @@ public class ViewModifier : MonoBehaviour {
     void nullifyActiveGo() {
         if (activeGo != null) {
             activeGo.GetComponent<SpriteRenderer>().color = Color.white;
+            markDebugPathBehaviourAsInactive();
             activeGo = null;
         }
         eventService.Dispatch<NoActiveModelEvent>(new NoActiveModelEvent());
@@ -116,6 +115,25 @@ public class ViewModifier : MonoBehaviour {
             Destroy(activeGo);
             nullifyActiveGo();
         }
+    }
+
+    void dispatchOnSelectedEvents() {
+        if (activeGo.GetComponent<EditableBehaviour>().waveModel != null)
+            eventService.Dispatch<ActiveWaveModelChangeEvent>(new ActiveWaveModelChangeEvent(activeGo.GetComponent<EditableBehaviour>().waveModel));
+        else
+            eventService.Dispatch<ActiveEnemyModelChangeEvent>(new ActiveEnemyModelChangeEvent(activeGo.GetComponent<EditableBehaviour>().enemyModel));
+    }
+
+    void markDebugPathBehaviourAsActive() {
+        DebugPathBehaviour debugBehaviour = activeGo.GetComponent<DebugPathBehaviour>();
+        if (debugBehaviour != null)
+            debugBehaviour.SetActive();
+    }
+
+    void markDebugPathBehaviourAsInactive() {
+        DebugPathBehaviour debugBehaviour = activeGo.GetComponent<DebugPathBehaviour>();
+        if (debugBehaviour != null)
+            debugBehaviour.setInactive();
     }
 
     bool isNodeRemovable() {

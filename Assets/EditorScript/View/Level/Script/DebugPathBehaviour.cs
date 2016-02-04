@@ -9,6 +9,15 @@ public class DebugPathBehaviour : MonoBehaviour {
     public void Init(Material material) {
         this.material = material;
         lineRenderer = gameObject.AddComponent<LineRenderer>();
+        setLineRenderer();
+    }
+
+    public void SetActive() {
+        setLineRendererColors(Color.red);
+    }
+
+    public void setInactive() {
+        setLineRendererColors(Color.yellow);
     }
 
     void Update() {
@@ -41,9 +50,6 @@ public class DebugPathBehaviour : MonoBehaviour {
     void updateLineRenderer(int path, float offsetY) {
         PathModelComponent component = EditLevelView.pathService.TryToGetPath(path.ToString());
         if (component != null) {
-            if (lineRenderer == null) {
-                lineRenderer = createLineRenderer();
-            }
             lineRenderer.SetVertexCount(component.points.Count);
             for (int i = 0; i < component.points.Count; i++) {
                 lineRenderer.SetPosition(i, new Vector2(component.points[i].x, component.points[i].y + offsetY));
@@ -51,12 +57,13 @@ public class DebugPathBehaviour : MonoBehaviour {
         }
     }
 
-    LineRenderer createLineRenderer() {
-        LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
+    void setLineRenderer() {
         lineRenderer.material = material;
         lineRenderer.SetWidth(0.05f, 0.05f);
-        lineRenderer.SetColors(Color.yellow, Color.yellow);
+        setLineRendererColors(Color.yellow);
+    }
 
-        return lineRenderer;
+    void setLineRendererColors(Color color) {
+        lineRenderer.SetColors(color, color);
     }
 }
