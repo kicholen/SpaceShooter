@@ -15,6 +15,7 @@ public class EditLevelView : View, IView {
 
     LeftPanelHud leftPanelHud;
     RightBottomPanelHud rightBottomPanelHud;
+    RightLevelSliderHud rightLevelSliderHud;
 
     public EditLevelView(Pool pool, ILevelService levelService, IViewService viewService, IPathService pathService) : base("EditorView/Level/EditLevelView") {
         this.pool = pool;
@@ -34,6 +35,7 @@ public class EditLevelView : View, IView {
     public override void Destroy() {
         base.Destroy();
         rightBottomPanelHud.Destroy();
+        rightLevelSliderHud.Destroy();
         foreach (EditableBehaviour script in UnityEngine.Object.FindObjectsOfType<EditableBehaviour>()) {
             UnityEngine.Object.Destroy(script.gameObject);
         }
@@ -67,6 +69,7 @@ public class EditLevelView : View, IView {
         leftPanelHud.setStartEndGameCallbacks(startGame, endGame);
         new RightPanelHud(getChild("RightPanel"), onSelectedTypeChange);
         rightBottomPanelHud = new RightBottomPanelHud(getChild("RightBottomPanel"), eventService);
+        rightLevelSliderHud = new RightLevelSliderHud(getChild("LevelSlider"), pool, component);
     }
 
     void changeDebugPathView(bool show) {
