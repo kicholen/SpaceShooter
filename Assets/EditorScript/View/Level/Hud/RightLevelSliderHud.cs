@@ -1,5 +1,4 @@
-﻿using System;
-using Entitas;
+﻿using Entitas;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +13,6 @@ public class RightLevelSliderHud : BaseGui {
         this.component = component;
         camera = Camera.main;
         addOnValueChangeListener();
-    }
-
-    public override void Destroy() {
-        
     }
 
     void addOnValueChangeListener() {

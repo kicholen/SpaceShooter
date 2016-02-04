@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Entitas;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,6 +8,7 @@ public class ViewModifier : MonoBehaviour {
     EditableElementsFactory factory;
     SelectedType type = SelectedType.None;
     EventService eventService;
+    Pool pool;
 
     GameObject activeGo;
 
@@ -26,13 +28,17 @@ public class ViewModifier : MonoBehaviour {
         this.eventService = eventService;
     }
 
+    public void SetPool(Pool pool) {
+        this.pool = pool;
+    }
+
     void Update() {
         createNewNodeIfCan();
         removeActiveNodeIfShould();
     }
 
     void createNewNodeIfCan() {
-        if (Input.GetMouseButtonDown(0) && !isGuiHit()) {
+        if (isActive()) {
             GameObject hitGO = getDraggingObjectIfHit();
             if (hitGO != null) {
                 setActiveGo(hitGO);
@@ -44,6 +50,10 @@ public class ViewModifier : MonoBehaviour {
                 createNodeByTypeIfNotNone();
             }
         }
+    }
+
+    bool isActive() {
+        return Input.GetMouseButtonDown(0) && !isGuiHit() && !isGameInProgress();
     }
 
     GameObject getDraggingObjectIfHit() {
@@ -142,5 +152,9 @@ public class ViewModifier : MonoBehaviour {
 
     bool isHitColliderEditable(RaycastHit2D hit) {
         return hit.collider != null && hit.collider.GetComponent<EditableBehaviour>();
+    }
+
+    bool isGameInProgress() {
+        return pool.GetGroup(Matcher.Player).count > 0;
     }
 }

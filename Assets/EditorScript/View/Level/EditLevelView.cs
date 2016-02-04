@@ -55,10 +55,15 @@ public class EditLevelView : View, IView {
     void createModifiers(LevelModelComponent component) {
         executor = new LevelActionExecutor(component);
         factory = new EditableElementsFactory(pool.GetGroup(Matcher.MaterialReference).GetSingleEntity().materialReference.storage.Default);
+        createViewModifier();
+    }
+
+    void createViewModifier() {
         modifier = go.AddComponent<ViewModifier>();
         modifier.SetExecutor(executor);
         modifier.SetFactory(factory);
         modifier.SetEventService(eventService);
+        modifier.SetPool(pool);
     }
 
     void attachScripts() {
@@ -101,6 +106,7 @@ public class EditLevelView : View, IView {
     }
 
     void startGame() {
+        eventService.Dispatch<NoActiveModelEvent>(new NoActiveModelEvent());
         pool.GetGroup(Matcher.CurrentShip).GetSingleEntity().currentShip.model.health = int.MaxValue;
         pool.CreateEntity()
             .AddComponent(ComponentIds.LevelModel, component);
