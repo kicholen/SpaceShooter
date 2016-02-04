@@ -1,5 +1,7 @@
 ﻿using Entitas;
 using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class EditLevelView : View, IView {
     public static IPathService pathService;
@@ -65,7 +67,7 @@ public class EditLevelView : View, IView {
 
     void createHud() {
         leftPanelHud = new LeftPanelHud(getChild("LeftPanel"), eventService, executor, save, goToLevelsView);
-        leftPanelHud.setDebugToggles(changeDebugPathView);
+        leftPanelHud.setDebugToggles(changeDebugPathView, changeDebugTimeView);
         leftPanelHud.setStartEndGameCallbacks(startGame, endGame);
         new RightPanelHud(getChild("RightPanel"), onSelectedTypeChange);
         rightBottomPanelHud = new RightBottomPanelHud(getChild("RightBottomPanel"), eventService);
@@ -77,6 +79,13 @@ public class EditLevelView : View, IView {
             factory.addDebugPathBehavioursIfNotExists();
         else
             factory.removeDebugPathBehaviours();
+    }
+
+    void changeDebugTimeView(bool show) {
+        if (show)
+            showTimeElement(calculateLevelTime());
+        else
+            hideTimeElement();
     }
 
     void onSelectedTypeChange(SelectedType type) {
@@ -104,5 +113,31 @@ public class EditLevelView : View, IView {
         pool.DestroyEntity(pool.GetGroup(Matcher.LevelModel).GetSingleEntity());
         pool.CreateEntity()
             .IsEndGame(true);
+    }
+
+    void hideTimeElement() {
+        getTimeElementGO().SetActive(false);
+    }
+
+    void showTimeElement(float time) {
+        GameObject timeElement = getTimeElementGO();
+        timeElement.SetActive(true);
+        timeElement.GetComponent<Text>().text = "~" + time + "s";
+    }
+
+    float calculateLevelTime() {
+        float maxY = 0.0f;
+        foreach (EnemyModel enemy in component.enemies) {
+            maxY = enemy.posY > maxY ? enemy.posY : maxY;
+        }
+        foreach (WaveModel wave in component.waves) {
+            maxY = wave.spawnBarrier > maxY ? wave.spawnBarrier : maxY;
+        }
+
+        return maxY * Config.CAMERA_SPEED;
+    }
+
+    GameObject getTimeElementGO() {
+        return getChild("TimeElement").gameObject;
     }
 }
