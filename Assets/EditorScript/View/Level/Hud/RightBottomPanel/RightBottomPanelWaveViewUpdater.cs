@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class RightBottomPanelWaveViewUpdater : RightBottomPanelViewUpdaterBase {
+public class RightBottomPanelWaveViewUpdater : EditorViewUpdaterBase {
     WaveActionExecutor waveExecutor;
 
     public void Update(Transform content, WaveModel waveModel) {
@@ -42,7 +42,9 @@ public class RightBottomPanelWaveViewUpdater : RightBottomPanelViewUpdaterBase {
     }
 
     GameObject createChangePathField() {
-        return createDropdownElement("path", waveExecutor.getPath().ToString(), EditLevelView.pathService.GetPathNames(), (value) => {
+        List<string> options = EditLevelView.pathService.GetPathNames();
+        options.Add("0");
+        return createDropdownElement("path", waveExecutor.getPath().ToString(), options, (value) => {
             waveExecutor.Execute(new ChangeWavePathAction(value));
         });
     }

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class RightBottomPanelEnemyViewUpdater : RightBottomPanelViewUpdaterBase {
+public class RightBottomPanelEnemyViewUpdater : EditorViewUpdaterBase {
     EnemyActionExecutor enemyExecutor;
 
     public void Update(Transform content, EnemyModel enemyModel) {

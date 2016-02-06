@@ -15,6 +15,7 @@ public class EditorView : View, IView {
         content = getChild("Panel/Viewport/Content");
         addButton("Edit Paths", () => viewService.SetView(ViewTypes.EDITOR_PATH));
         addButton("Edit Levels", () => viewService.SetView(ViewTypes.EDITOR_LEVELS));
+        addButton("Edit Enemies", () => viewService.SetView(ViewTypes.EDITOR_ENEMIES));
     }
 
     void addButton(string text, UnityAction onClicked) {

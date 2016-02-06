@@ -22,6 +22,12 @@
             case ViewTypes.EDITOR_EDIT_LEVEL:
                 view = new EditLevelView(services.Pool, (services as EditorServices).LevelService, services.ViewService, (services as EditorServices).PathService);
                 break;
+            case ViewTypes.EDITOR_EDIT_ENEMY:
+                view = new EditEnemyView(services.Pool, services.ViewService, (services as EditorServices).EnemyService);
+                break;
+            case ViewTypes.EDITOR_ENEMIES:
+                view = new EnemiesView(services.Pool, services.ViewService, (services as EditorServices).EnemyService);
+                break;
         }
         if (view == null) {
             view = base.Create(type);

@@ -9,4 +9,3 @@ public interface IUIFactoryService
 	void AddText(Transform transform, string path, string lockit);
 	Vector2 Dimensions { get; }
 }
-
