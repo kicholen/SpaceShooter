@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Linq;
+using System;
 
 public class EditableElementsFactory {
     bool shouldAddDebugPath = false;
@@ -9,14 +11,14 @@ public class EditableElementsFactory {
     }
 
     public GameObject CreateWaveElement(WaveModel model) {
-        GameObject go = Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/WaveElement"));
+        GameObject go = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/WaveElement"));
         go.AddComponent<EditableBehaviour>().SetWaveModel(model);
         addDebugPathIfShould(go);
         return go;
     }
 
     public GameObject CreateEnemyElement(EnemyModel model) {
-        GameObject go = Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/WaveElement"));
+        GameObject go = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/EnemyElement"));
         go.AddComponent<EditableBehaviour>().SetEnemyModel(model);
         addDebugPathIfShould(go);
         return go;
@@ -27,6 +29,14 @@ public class EditableElementsFactory {
             DebugPathBehaviour script = go.AddComponent<DebugPathBehaviour>();
             script.Init(material);
         }
+    }
+
+    public void refreshNumeration() {
+        shouldAddDebugPath = true;
+        EditableBehaviour[] behaviours = UnityEngine.Object.FindObjectsOfType<EditableBehaviour>();
+        Array.Sort(behaviours, (x, y) => x.spawnBarrier().CompareTo(y.spawnBarrier()));
+        for (int i = 0; i < behaviours.Length; i++)
+            behaviours[i].GetComponentInChildren<TextMesh>().text = i.ToString();
     }
 
     public void addDebugPathBehavioursIfNotExists() {

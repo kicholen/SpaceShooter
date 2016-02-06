@@ -50,6 +50,7 @@ public class EditLevelView : View, IView {
         foreach (EnemyModel model in component.enemies) {
             factory.CreateEnemyElement(model);
         }
+        factory.refreshNumeration();
     }
 
     void createModifiers(LevelModelComponent component) {

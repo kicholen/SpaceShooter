@@ -23,4 +23,8 @@ public class EditableBehaviour : MonoBehaviour {
         }
         transform.position = new Vector3(0.0f, value, 0.0f);
     }
+
+    public float spawnBarrier() {
+        return waveModel != null ? waveModel.spawnBarrier : enemyModel.spawnBarrier;
+    }
 }

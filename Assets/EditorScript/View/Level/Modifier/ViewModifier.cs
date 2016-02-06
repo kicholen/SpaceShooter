@@ -75,7 +75,7 @@ public class ViewModifier : MonoBehaviour {
     void setActiveGo(GameObject hitGO) {
         nullifyActiveGo();
         activeGo = hitGO;
-        activeGo.GetComponent<SpriteRenderer>().color = Color.red;
+        activeGo.GetComponent<SpriteRenderer>().color = Color.cyan;
         markDebugPathBehaviourAsActive();
         dispatchOnSelectedEvents();
     }
@@ -83,6 +83,7 @@ public class ViewModifier : MonoBehaviour {
     void setDraggingToMouseY() {
         Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         activeGo.GetComponent<EditableBehaviour>().SetSpawnBarrier(position.y);
+        factory.refreshNumeration();
         nullifyActiveGo();
     }
 
@@ -102,11 +103,13 @@ public class ViewModifier : MonoBehaviour {
                 AddWaveAction waveAction = new AddWaveAction(position.y);
                 executor.Execute(waveAction);
                 factory.CreateWaveElement(waveAction.getModel());
+                factory.refreshNumeration();
                 break;
             case SelectedType.Enemy:
                 AddEnemyAction enemyAction = new AddEnemyAction(position.y);
                 executor.Execute(enemyAction);
                 factory.CreateEnemyElement(enemyAction.getModel());
+                factory.refreshNumeration();
                 break;
             case SelectedType.None:
             default:
@@ -122,6 +125,7 @@ public class ViewModifier : MonoBehaviour {
             else {
                 executor.Execute(new RemoveEnemyAction(activeGo.GetComponent<EditableBehaviour>().enemyModel));
             }
+            factory.refreshNumeration();
             Destroy(activeGo);
             nullifyActiveGo();
         }
