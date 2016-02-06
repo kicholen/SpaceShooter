@@ -34,7 +34,7 @@ public class EditableElementsFactory {
     public void refreshNumeration() {
         shouldAddDebugPath = true;
         EditableBehaviour[] behaviours = UnityEngine.Object.FindObjectsOfType<EditableBehaviour>();
-        Array.Sort(behaviours, (x, y) => x.spawnBarrier().CompareTo(y.spawnBarrier()));
+        Array.Sort(behaviours, (x, y) => x.SpawnBarrier.CompareTo(y.SpawnBarrier));
         for (int i = 0; i < behaviours.Length; i++)
             behaviours[i].GetComponentInChildren<TextMesh>().text = i.ToString();
     }

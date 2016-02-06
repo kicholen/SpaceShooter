@@ -99,6 +99,7 @@ public class EditLevelView : View, IView {
     }
 
     void save() {
+        endGame();
         levelService.UpdateLevel(component, goToLevelsView);
     }
 
@@ -109,6 +110,7 @@ public class EditLevelView : View, IView {
     void startGame() {
         eventService.Dispatch<NoActiveModelEvent>(new NoActiveModelEvent());
         pool.GetGroup(Matcher.CurrentShip).GetSingleEntity().currentShip.model.health = int.MaxValue;
+        go.AddComponent<HighlightCurrentNodeBehaviour>();
         pool.CreateEntity()
             .AddComponent(ComponentIds.LevelModel, component);
 
@@ -117,6 +119,7 @@ public class EditLevelView : View, IView {
     }
 
     void endGame() {
+        UnityEngine.Object.Destroy(go.GetComponent<HighlightCurrentNodeBehaviour>());
         pool.DestroyEntity(pool.GetGroup(Matcher.LevelModel).GetSingleEntity());
         pool.CreateEntity()
             .IsEndGame(true);

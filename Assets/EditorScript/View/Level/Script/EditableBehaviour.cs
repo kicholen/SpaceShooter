@@ -4,6 +4,8 @@ public class EditableBehaviour : MonoBehaviour {
     public WaveModel waveModel;
     public EnemyModel enemyModel;
 
+    public float SpawnBarrier { get { return waveModel != null ? waveModel.spawnBarrier : enemyModel.spawnBarrier; } }
+
     public void SetWaveModel(WaveModel waveModel) {
         this.waveModel = waveModel;
         SetSpawnBarrier(waveModel.spawnBarrier);
@@ -22,9 +24,5 @@ public class EditableBehaviour : MonoBehaviour {
             enemyModel.spawnBarrier = value;
         }
         transform.position = new Vector3(0.0f, value, 0.0f);
-    }
-
-    public float spawnBarrier() {
-        return waveModel != null ? waveModel.spawnBarrier : enemyModel.spawnBarrier;
     }
 }
