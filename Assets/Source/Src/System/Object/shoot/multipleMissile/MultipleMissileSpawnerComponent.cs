@@ -1,6 +1,7 @@
 using Entitas;
+using UnityEngine;
 
-public class MultipleMissileSpawnerComponent : IComponent { // todo change stupid field names
+public class MultipleMissileSpawnerComponent : IComponent {
 	public int amount;
 	public int damage;
 	public int currentAmount;
@@ -10,7 +11,6 @@ public class MultipleMissileSpawnerComponent : IComponent { // todo change stupi
 	public float spawnDelay;
 	public string resource;
 	public float randomPositionOffsetX;
-	public float velocityX;
-	public float velocityY;
+	public Vector2 startVelocity;
 	public int collisionType;
 }

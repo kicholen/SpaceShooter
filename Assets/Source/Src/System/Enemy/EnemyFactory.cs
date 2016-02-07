@@ -19,7 +19,7 @@ public class EnemyFactory {
 			e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
             e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
-			e.AddMissileSpawner(0.0f, model.damage, 2.5f, ResourceWithColliders.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddMissileSpawner(0.0f, model.damage, 2.5f, ResourceWithColliders.MissileEnemy, new Vector2(0.0f, -4.0f * (missileSpeedBonus + 100) / 100), CollisionTypes.Enemy);
 			addPathIfNeeded(e, model.posY, model.path);
 			break;
 		case EnemyTypes.Small:
@@ -93,7 +93,7 @@ public class EnemyFactory {
 			e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
 			e.AddFaceDirection(true);
 			e.AddCameraShakeOnDeath(1);
-			e.AddMissileSpawner(0.0f, damage, 2.5f, ResourceWithColliders.MissileEnemy, 0.0f, -4.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+			e.AddMissileSpawner(0.0f, damage, 2.5f, ResourceWithColliders.MissileEnemy, new Vector2(0.0f, -4.0f * (missileSpeedBonus + 100) / 100), CollisionTypes.Enemy);
 			addPathIfNeeded(e, posY, path);
 			addGridIfNeeded(e, grid);
 		break;

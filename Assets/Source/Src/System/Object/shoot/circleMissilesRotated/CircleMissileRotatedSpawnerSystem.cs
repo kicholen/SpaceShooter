@@ -1,9 +1,6 @@
 using Entitas;
 using UnityEngine;
 
-/**
- * Spawner is removed on finish.
- */
 public class CircleMissileRotatedSpawnerSystem : IExecuteSystem, ISetPool {
 	Pool _pool;
 	Group _time;

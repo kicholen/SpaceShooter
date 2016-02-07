@@ -12,7 +12,7 @@ namespace Entitas {
             _multipleMissileSpawnerComponentPool.Clear();
         }
 
-        public Entity AddMultipleMissileSpawner(int newAmount, int newDamage, int newCurrentAmount, float newTimeDelay, float newDelay, float newTime, float newSpawnDelay, string newResource, float newRandomPositionOffsetX, float newVelocityX, float newVelocityY, int newCollisionType) {
+        public Entity AddMultipleMissileSpawner(int newAmount, int newDamage, int newCurrentAmount, float newTimeDelay, float newDelay, float newTime, float newSpawnDelay, string newResource, float newRandomPositionOffsetX, UnityEngine.Vector2 newStartVelocity, int newCollisionType) {
             var component = _multipleMissileSpawnerComponentPool.Count > 0 ? _multipleMissileSpawnerComponentPool.Pop() : new MultipleMissileSpawnerComponent();
             component.amount = newAmount;
             component.damage = newDamage;
@@ -23,13 +23,12 @@ namespace Entitas {
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
             component.randomPositionOffsetX = newRandomPositionOffsetX;
-            component.velocityX = newVelocityX;
-            component.velocityY = newVelocityY;
+            component.startVelocity = newStartVelocity;
             component.collisionType = newCollisionType;
             return AddComponent(ComponentIds.MultipleMissileSpawner, component);
         }
 
-        public Entity ReplaceMultipleMissileSpawner(int newAmount, int newDamage, int newCurrentAmount, float newTimeDelay, float newDelay, float newTime, float newSpawnDelay, string newResource, float newRandomPositionOffsetX, float newVelocityX, float newVelocityY, int newCollisionType) {
+        public Entity ReplaceMultipleMissileSpawner(int newAmount, int newDamage, int newCurrentAmount, float newTimeDelay, float newDelay, float newTime, float newSpawnDelay, string newResource, float newRandomPositionOffsetX, UnityEngine.Vector2 newStartVelocity, int newCollisionType) {
             var previousComponent = hasMultipleMissileSpawner ? multipleMissileSpawner : null;
             var component = _multipleMissileSpawnerComponentPool.Count > 0 ? _multipleMissileSpawnerComponentPool.Pop() : new MultipleMissileSpawnerComponent();
             component.amount = newAmount;
@@ -41,8 +40,7 @@ namespace Entitas {
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
             component.randomPositionOffsetX = newRandomPositionOffsetX;
-            component.velocityX = newVelocityX;
-            component.velocityY = newVelocityY;
+            component.startVelocity = newStartVelocity;
             component.collisionType = newCollisionType;
             ReplaceComponent(ComponentIds.MultipleMissileSpawner, component);
             if (previousComponent != null) {

@@ -11,13 +11,13 @@ public class EnemyLeftPanelHud : EditorViewUpdaterBase {
     EnemyWeaponActionExecutor weaponExecutor;
     Entity entity;
 
-    public EnemyLeftPanelHud(Transform content, EventService eventService, EnemyModelCmpActionExecutor executor, Entity entity) {
+    public EnemyLeftPanelHud(Transform content, EventService eventService, EnemyModelCmpActionExecutor executor, Entity entity, EnemyModelComponent component) {
         go = content.gameObject;
         this.content = content;
         this.eventService = eventService;
         this.executor = executor;
         this.entity = entity;
-        weaponExecutor = new EnemyWeaponActionExecutor(entity);
+        weaponExecutor = new EnemyWeaponActionExecutor(entity, component);
         setData();
     }
 
@@ -29,9 +29,10 @@ public class EnemyLeftPanelHud : EditorViewUpdaterBase {
     GameObject createChangeEnemyWeapon() {
         List<string> types = typeof(WeaponTypes).GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public)
                     .Select(fieldInfo => ((int)fieldInfo.GetRawConstantValue()).ToString()).ToList<string>();
-        return createDropdownElement("type", executor.getType().ToString(), types, (value) => {
-            weaponExecutor.Execute(getActionBasedOnType(Convert.ToInt16(value)));
+        return createDropdownElement("type", executor.getWeapon().ToString(), types, (value) => {
             executor.Execute(new ChangeEnemyModelWeaponAction(value));
+            weaponExecutor.Execute(getActionBasedOnType(Convert.ToInt16(value)));
+            eventService.Dispatch<EnemyWeaponChangedEvent>(new EnemyWeaponChangedEvent());
         });
     }
 

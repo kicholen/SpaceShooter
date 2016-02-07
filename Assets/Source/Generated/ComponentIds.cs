@@ -33,80 +33,82 @@ public static class ComponentIds {
     public const int DispersionMissileSpawner = 31;
     public const int EndGame = 32;
     public const int Enemy = 33;
-    public const int EnemySpawner = 34;
-    public const int EventService = 35;
-    public const int ExplosionOnDeath = 36;
-    public const int FaceDirection = 37;
-    public const int FindTarget = 38;
-    public const int FirstBoss = 39;
-    public const int FollowTarget = 40;
-    public const int GameObject = 41;
-    public const int GameStats = 42;
-    public const int Ghost = 43;
-    public const int Grid = 44;
-    public const int GridField = 45;
-    public const int Health = 46;
-    public const int HomeMissile = 47;
-    public const int HomeMissileSpawner = 48;
-    public const int Indicator = 49;
-    public const int IndicatorPanel = 50;
-    public const int Input = 51;
-    public const int Laser = 52;
-    public const int LaserSpawner = 53;
-    public const int LeaderFollower = 54;
-    public const int LevelDimensions = 55;
-    public const int LevelModel = 56;
-    public const int Magnet = 57;
-    public const int MaterialReference = 58;
-    public const int MissileSpawner = 59;
-    public const int MouseInput = 60;
-    public const int MoveWithCamera = 61;
-    public const int MovingBlockade = 62;
-    public const int MultipleMissileSpawner = 63;
-    public const int NonRemovable = 64;
-    public const int Parent = 65;
-    public const int ParticlesOnDeath = 66;
-    public const int ParticleSpawn = 67;
-    public const int Path = 68;
-    public const int PathModel = 69;
-    public const int PauseGame = 70;
-    public const int Player = 71;
-    public const int PlayerHealthBar = 72;
-    public const int PlayerModel = 73;
-    public const int PoolableGO = 74;
-    public const int Position = 75;
-    public const int RelativePosition = 76;
-    public const int Resource = 77;
-    public const int Rotate = 78;
-    public const int SecondaryWeapon = 79;
-    public const int SettingsModel = 80;
-    public const int Shake = 81;
-    public const int ShieldCollision = 82;
-    public const int ShipModel = 83;
-    public const int SlowGame = 84;
-    public const int SmoothCamera = 85;
-    public const int SnapPosition = 86;
-    public const int SortOrder = 87;
-    public const int Sound = 88;
-    public const int SoundOnDeath = 89;
-    public const int SpeedBonus = 90;
-    public const int StartGame = 91;
-    public const int StaticCamera = 92;
-    public const int TargetMissile = 93;
-    public const int TargetMissileSpawner = 94;
-    public const int Test = 95;
-    public const int Time = 96;
-    public const int Trail = 97;
-    public const int Tween = 98;
-    public const int TweenOnDeath = 99;
-    public const int UIFactoryService = 100;
-    public const int UIResource = 101;
-    public const int Velocity = 102;
-    public const int VelocityLimit = 103;
-    public const int WaveSpawner = 104;
-    public const int Weapon = 105;
+    public const int EnemyModel = 34;
+    public const int EnemySpawner = 35;
+    public const int EventService = 36;
+    public const int ExplosionOnDeath = 37;
+    public const int FaceDirection = 38;
+    public const int FindTarget = 39;
+    public const int FirstBoss = 40;
+    public const int FollowTarget = 41;
+    public const int GameObject = 42;
+    public const int GameStats = 43;
+    public const int Ghost = 44;
+    public const int Grid = 45;
+    public const int GridField = 46;
+    public const int Health = 47;
+    public const int HomeMissile = 48;
+    public const int HomeMissileSpawner = 49;
+    public const int Indicator = 50;
+    public const int IndicatorPanel = 51;
+    public const int Input = 52;
+    public const int Laser = 53;
+    public const int LaserSpawner = 54;
+    public const int LeaderFollower = 55;
+    public const int LevelDimensions = 56;
+    public const int LevelModel = 57;
+    public const int Magnet = 58;
+    public const int MaterialReference = 59;
+    public const int MissileSpawner = 60;
+    public const int MouseInput = 61;
+    public const int MoveWithCamera = 62;
+    public const int MovingBlockade = 63;
+    public const int MultipleMissileSpawner = 64;
+    public const int NonRemovable = 65;
+    public const int Parent = 66;
+    public const int ParticlesOnDeath = 67;
+    public const int ParticleSpawn = 68;
+    public const int Path = 69;
+    public const int PathModel = 70;
+    public const int PauseGame = 71;
+    public const int Player = 72;
+    public const int PlayerHealthBar = 73;
+    public const int PlayerModel = 74;
+    public const int PoolableGO = 75;
+    public const int Position = 76;
+    public const int RelativePosition = 77;
+    public const int Resource = 78;
+    public const int Rotate = 79;
+    public const int SecondaryWeapon = 80;
+    public const int SettingsModel = 81;
+    public const int Shake = 82;
+    public const int ShieldCollision = 83;
+    public const int ShipModel = 84;
+    public const int SlowGame = 85;
+    public const int SmoothCamera = 86;
+    public const int SnapPosition = 87;
+    public const int SortOrder = 88;
+    public const int Sound = 89;
+    public const int SoundOnDeath = 90;
+    public const int SpeedBonus = 91;
+    public const int StartGame = 92;
+    public const int StaticCamera = 93;
+    public const int TargetMissile = 94;
+    public const int TargetMissileSpawner = 95;
+    public const int Test = 96;
+    public const int Thunder = 97;
+    public const int Time = 98;
+    public const int Trail = 99;
+    public const int Tween = 100;
+    public const int TweenOnDeath = 101;
+    public const int UIFactoryService = 102;
+    public const int UIResource = 103;
+    public const int Velocity = 104;
+    public const int VelocityLimit = 105;
+    public const int WaveSpawner = 106;
+    public const int Weapon = 107;
 
-    public const int TotalComponents = 106;
+    public const int TotalComponents = 108;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -143,6 +145,7 @@ public static class ComponentIds {
         "DispersionMissileSpawner",
         "EndGame",
         "Enemy",
+        "EnemyModel",
         "EnemySpawner",
         "EventService",
         "ExplosionOnDeath",
@@ -205,6 +208,7 @@ public static class ComponentIds {
         "TargetMissile",
         "TargetMissileSpawner",
         "Test",
+        "Thunder",
         "Time",
         "Trail",
         "Tween",
@@ -252,6 +256,7 @@ public static class ComponentIds {
         typeof(DispersionMissileSpawnerComponent),
         typeof(EndGameComponent),
         typeof(EnemyComponent),
+        typeof(EnemyModelComponent),
         typeof(EnemySpawnerComponent),
         typeof(EventServiceComponent),
         typeof(ExplosionOnDeathComponent),
@@ -314,6 +319,7 @@ public static class ComponentIds {
         typeof(TargetMissileComponent),
         typeof(TargetMissileSpawnerComponent),
         typeof(TestComponent),
+        typeof(ThunderComponent),
         typeof(TimeComponent),
         typeof(TrailComponent),
         typeof(TweenComponent),

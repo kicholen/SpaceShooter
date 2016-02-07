@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class ChangeEnemyModelWeaponAction : IEnemyModelCmpAction {
     int weapon;
@@ -8,5 +9,27 @@ public class ChangeEnemyModelWeaponAction : IEnemyModelCmpAction {
     }
     public void Execute(EnemyModelComponent model) {
         model.weapon = weapon;
+        setDefaultParameters(model);
+    }
+
+    void setDefaultParameters(EnemyModelComponent model) {
+        model.amount = 5;
+        model.time = 0.5f;
+        model.spawnDelay = 2.0f;
+        model.weaponResource = getDefaultResource(model);
+        model.velocity = 2.0f;
+        model.angle = 10;
+        model.angleOffset = 20;
+        model.waves = 5;
+        model.startVelocity = new Vector2(0.0f, -2.0f);
+        model.followDelay = 1.0f;
+        model.selfDestructionDelay = 3.0f;
+        model.timeDelay = 2.0f;
+        model.delay = 2.0f;
+        model.randomPositionOffsetX = 0.2f;
+    }
+
+    string getDefaultResource(EnemyModelComponent model) {
+        return model.weapon == WeaponTypes.Home ? ResourceWithColliders.MissileEnemyHoming : ResourceWithColliders.MissileEnemy;
     }
 }

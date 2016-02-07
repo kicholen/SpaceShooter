@@ -16,8 +16,9 @@ public class Tween {
 	int tweenType;
 	IComponent target;
 	ITweenAccessor accessor;
+    bool pingPong;
 
-	public void Setup(IComponent target, ITweenAccessor accessor, Func<float, float> ease, int tweenType, float duration) {
+    public void Setup(IComponent target, ITweenAccessor accessor, Func<float, float> ease, int tweenType, float duration) {
 		this.target = target;
 		this.accessor = accessor;
 		this.ease = ease;
@@ -52,15 +53,21 @@ public class Tween {
 	public Tween SetEndCallback(Action<Entity> callback) {
 		OnComplete = callback; 
 		return this;
-	}
+    }
 
-	public void Update(float deltaTime) {
+    public void PingPong() {
+        pingPong = true;
+    }
+
+    public void Update(float deltaTime) {
 		time += deltaTime;
 
 		if (time > duration) {
 			for (int i = 0; i < valuesCount; i++) {
 				accessor.SetValues(target, tweenType, targetValues);
 			}
+            if (pingPong)
+                restartAndSwapValues();
 		}
 		else {
 			float t = ease(time / duration);
@@ -71,11 +78,22 @@ public class Tween {
 		}
 	}
 
-	public bool HasEnded() {
+    public bool HasEnded() {
 		return time > duration;
-	}
+    }
 
-	void reset() {
+    void restartAndSwapValues() {
+        time = 0.0f;
+        for (int i = 0; i < valuesCount; i++) {
+            bufferValues[i] = startValues[i];
+        }
+        for (int i = 0; i < valuesCount; i++) {
+            startValues[i] = targetValues[i];
+            targetValues[i] = bufferValues[i];
+        }
+    }
+
+    void reset() {
 		target = null;
 		time = 0.0f;
 	}

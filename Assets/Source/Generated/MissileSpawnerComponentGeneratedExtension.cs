@@ -12,27 +12,25 @@ namespace Entitas {
             _missileSpawnerComponentPool.Clear();
         }
 
-        public Entity AddMissileSpawner(float newTime, int newDamage, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, int newCollisionType) {
+        public Entity AddMissileSpawner(float newTime, int newDamage, float newSpawnDelay, string newResource, UnityEngine.Vector2 newVelocity, int newCollisionType) {
             var component = _missileSpawnerComponentPool.Count > 0 ? _missileSpawnerComponentPool.Pop() : new MissileSpawnerComponent();
             component.time = newTime;
             component.damage = newDamage;
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
-            component.velocityX = newVelocityX;
-            component.velocityY = newVelocityY;
+            component.velocity = newVelocity;
             component.collisionType = newCollisionType;
             return AddComponent(ComponentIds.MissileSpawner, component);
         }
 
-        public Entity ReplaceMissileSpawner(float newTime, int newDamage, float newSpawnDelay, string newResource, float newVelocityX, float newVelocityY, int newCollisionType) {
+        public Entity ReplaceMissileSpawner(float newTime, int newDamage, float newSpawnDelay, string newResource, UnityEngine.Vector2 newVelocity, int newCollisionType) {
             var previousComponent = hasMissileSpawner ? missileSpawner : null;
             var component = _missileSpawnerComponentPool.Count > 0 ? _missileSpawnerComponentPool.Pop() : new MissileSpawnerComponent();
             component.time = newTime;
             component.damage = newDamage;
             component.spawnDelay = newSpawnDelay;
             component.resource = newResource;
-            component.velocityX = newVelocityX;
-            component.velocityY = newVelocityY;
+            component.velocity = newVelocity;
             component.collisionType = newCollisionType;
             ReplaceComponent(ComponentIds.MissileSpawner, component);
             if (previousComponent != null) {

@@ -23,7 +23,7 @@ public class MultipleMissileSpawnerSystem : IExecuteSystem, ISetPool {
 					missile.delay = missile.timeDelay;
 					spawnMissile(missile, e.position.pos);
 					missile.currentAmount--;
-					if (missile.currentAmount == 0) {
+					if (missile.currentAmount < 0) {
 						missile.time = missile.spawnDelay;
 						missile.currentAmount = missile.amount;
 					}
@@ -36,7 +36,7 @@ public class MultipleMissileSpawnerSystem : IExecuteSystem, ISetPool {
 		float offsetX = Random.Range(-missile.randomPositionOffsetX, missile.randomPositionOffsetX);
 		_pool.CreateEntity()
 			.AddPosition(new Vector2(position.x + offsetX, position.y))
-			.AddVelocity(new Vector2(missile.velocityX, missile.velocityY))
+			.AddVelocity(new Vector2().Set(missile.startVelocity))
 			.AddHealth(0)
 			.AddCollision(missile.collisionType, missile.damage)
 			.AddResource(missile.resource);

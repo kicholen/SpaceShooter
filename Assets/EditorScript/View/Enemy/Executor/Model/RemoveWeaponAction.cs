@@ -1,7 +1,7 @@
 ﻿using Entitas;
 
 public class RemoveWeaponAction : IEnemyWeaponAction {
-    public virtual void Execute(Entity entity) {
+    public virtual void Execute(Entity entity, EnemyModelComponent component) {
         if (entity.hasCircleMissileSpawner)
             entity.RemoveCircleMissileSpawner();
         if (entity.hasCircleMissileRotatedSpawner)

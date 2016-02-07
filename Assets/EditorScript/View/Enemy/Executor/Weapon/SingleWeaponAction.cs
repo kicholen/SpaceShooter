@@ -1,8 +1,8 @@
 ﻿using Entitas;
 
 public class SingleWeaponAction : RemoveWeaponAction {
-    public override void Execute(Entity entity) {
-        base.Execute(entity);
-        entity.AddMissileSpawner(0.0f, 100, 2.5f, ResourceWithColliders.MissileEnemy, 0.0f, 4.0f, CollisionTypes.Enemy);
+    public override void Execute(Entity entity, EnemyModelComponent model) {
+        base.Execute(entity, model);
+        entity.AddMissileSpawner(model.time, 0, model.spawnDelay, model.weaponResource, model.startVelocity, CollisionTypes.Enemy);
     }
 }

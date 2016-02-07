@@ -120,9 +120,15 @@ public class EditLevelView : View, IView {
 
     void endGame() {
         UnityEngine.Object.Destroy(go.GetComponent<HighlightCurrentNodeBehaviour>());
-        //pool.DestroyEntity(pool.GetGroup(Matcher.LevelModel).GetSingleEntity());
-        pool.CreateEntity()
-            .IsEndGame(true);
+        if (isGameInProgress()) {
+            pool.DestroyEntity(pool.GetGroup(Matcher.LevelModel).GetSingleEntity());
+            pool.CreateEntity()
+                .IsEndGame(true);
+        }
+    }
+
+    bool isGameInProgress() {
+        return pool.GetGroup(Matcher.Player).count > 0;
     }
 
     void hideTimeElement() {

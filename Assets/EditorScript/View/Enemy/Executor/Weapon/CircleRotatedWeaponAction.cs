@@ -1,8 +1,8 @@
 ﻿using Entitas;
 
 public class CircleRotatedWeaponAction : RemoveWeaponAction {
-    public override void Execute(Entity entity) {
-        base.Execute(entity);
-        entity.AddCircleMissileRotatedSpawner(5, 100, 5, 10, 20, 0.5f, 2.0f, ResourceWithColliders.MissileEnemy, 2.0f, CollisionTypes.Enemy);
+    public override void Execute(Entity entity, EnemyModelComponent model) {
+        base.Execute(entity, model);
+        entity.AddCircleMissileRotatedSpawner(model.amount, 0, model.waves, model.angle, model.angleOffset, model.time, model.spawnDelay, model.weaponResource, model.velocity, CollisionTypes.Enemy);
     }
 }
