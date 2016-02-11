@@ -73,7 +73,7 @@ public class EditLevelView : View, IView {
 
     void createHud() {
         leftPanelHud = new LeftPanelHud(getChild("LeftPanel"), eventService, executor, delete, save, goToLevelsView);
-        leftPanelHud.setDebugToggles(changeDebugPathView, changeDebugTimeView);
+        leftPanelHud.setDebugToggles(changeDebugPathView, changeDebugTimeView, showDebugGrid);
         leftPanelHud.setStartEndGameCallbacks(startGame, endGame);
         new RightPanelHud(getChild("RightPanel"), onSelectedTypeChange);
         rightBottomPanelHud = new RightBottomPanelHud(getChild("RightBottomPanel"), eventService);
@@ -92,6 +92,13 @@ public class EditLevelView : View, IView {
             showTimeElement(calculateLevelTime());
         else
             hideTimeElement();
+    }
+
+    void showDebugGrid(bool show) {
+        if (show)
+            go.AddComponent<EditorGrid>();
+        else
+            UnityEngine.Object.Destroy(go.GetComponent<EditorGrid>());
     }
 
     void onSelectedTypeChange(SelectedType type) {

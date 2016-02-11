@@ -19,9 +19,10 @@ public class LeftPanelHud : BaseGui {
         setData(onDelete, onSave, onBack);
     }
 
-    public void setDebugToggles(Action<bool> onPathViewChanged, Action<bool> onTimeViewChanged) {
+    public void setDebugToggles(Action<bool> onPathViewChanged, Action<bool> onTimeViewChanged, Action<bool> onGridViewChanged) {
         createToggleElement("showPaths", (value) => onPathViewChanged(value)).transform.SetParent(content, false);
         createToggleElement("showTime", (value) => onTimeViewChanged(value)).transform.SetParent(content, false);
+        createToggleElement("showGrid", (value) => onGridViewChanged(value)).transform.SetParent(content, false);
     }
 
     public void setStartEndGameCallbacks(Action startGame, Action endGame) {
