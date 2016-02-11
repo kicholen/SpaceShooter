@@ -11,7 +11,7 @@ public class BackgroundSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 
 	public void SetPool(Pool pool) {
 		_pool = pool;
-		_group = _pool.GetGroup(Matcher.Background);
+        _group = _pool.GetGroup(Matcher.AllOf(Matcher.Background, Matcher.GameObject));
 		_star = pool.GetGroup(Matcher.BackgroundStar);
 	}
 
@@ -23,15 +23,20 @@ public class BackgroundSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 		for (int i = 0; i < _group.count; i++) {
 			Entity entity = _group.GetSingleEntity();
 			BackgroundComponent component = entity.background;
+            setScale(component, entity.gameObject);
 
-			if (component.starsCount > _star.count) {
+            if (component.starsCount > _star.count) {
 				PositionComponent position = entity.position;
 				spawnStar(component, position);
 			}
 		}
 	}
 
-	void spawnStar(BackgroundComponent component, PositionComponent position) {
+    void setScale(BackgroundComponent component, GameObjectComponent gameObject) {
+        gameObject.gameObject.transform.localScale = new Vector2(15, 25);
+    }
+
+    void spawnStar(BackgroundComponent component, PositionComponent position) {
 		Entity e = _pool.CreateEntity()
 			.AddVelocity(new Vector2(0.0f, -Random.Range(2.0f, 3.0f)))
 			.AddPosition(new Vector2(Random.Range(position.pos.x + component.dimension.x / 2.0f, position.pos.x - component.dimension.x / 2.0f), 

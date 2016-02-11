@@ -19,7 +19,7 @@ public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
 		_camera = pool.GetGroup(Matcher.Camera);
 
 		_factory = new EnemyFactory();
-		_factory.SetPool(_pool, _pool.GetGroup(Matcher.PathModel));
+		_factory.SetPool(_pool, _pool.GetGroup(Matcher.PathModel), _pool.GetGroup(Matcher.EnemyModel));
 	}
 	
 	public void Execute() {

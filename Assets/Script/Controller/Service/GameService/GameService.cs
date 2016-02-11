@@ -71,7 +71,8 @@ public class GameService : IGameService {
 	            // Initialize
 				.Add(pool.CreateCreateBonusSystem())
 				.Add(pool.CreateCreatePathSystem())
-				.Add(pool.CreateCreateDifficultySystem())
+				.Add(pool.CreateCreateEnemySystem())
+                .Add(pool.CreateCreateDifficultySystem())
 				.Add(pool.CreateCreateSettingsSystem())
 	            .Add(pool.CreateCreateShipSystem())
 				.Add(pool.CreateWeaponSystem())

@@ -1,0 +1,1 @@
+{"id":459,"type":1,"resource":"Collider/SmallEnemy","weapon":2,"amount":5,"time":0.5,"spawnDelay":0.2,"weaponResource":"Collider/EnemyMissile","velocity":2.0,"angle":10,"angleOffset":20,"waves":5,"startVelocity":{"x":0.0,"y":-2.0},"followDelay":1.0,"selfDestructionDelay":3.0,"timeDelay":2.0,"delay":2.0,"randomPositionOffsetX":0.2}

@@ -15,7 +15,7 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 		_camera = pool.GetGroup(Matcher.Camera);
 		_difficulty = pool.GetGroup(Matcher.DifficultyController);
 		_factory = new EnemyFactory();
-		_factory.SetPool(_pool, _pool.GetGroup(Matcher.PathModel));
+		_factory.SetPool(_pool, _pool.GetGroup(Matcher.PathModel), _pool.GetGroup(Matcher.EnemyModel));
 	}
 	
 	public void Execute() {
