@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class PathView : View, IView {
 
@@ -23,7 +24,9 @@ public class PathView : View, IView {
     }
 
     void onPathIdsLoaded(Dictionary<long, string> pathIds) {
-        foreach (KeyValuePair<long, string> pair in pathIds)
+        List<KeyValuePair<long, string>> list = pathIds.ToList();
+        list.Sort((first, second) => first.Key.CompareTo(second.Key));
+        foreach (KeyValuePair<long, string> pair in list)
             addButton(pair);
     }
 

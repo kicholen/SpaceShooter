@@ -9,6 +9,10 @@
         modifier.Execute(model);
     }
 
+    public float GetSpawnBarrier() {
+        return model.spawnBarrier;
+    }
+
     public int GetCount() {
         return model.count;
     }

@@ -39,7 +39,7 @@ public class MultipleMissileSpawnerSystem : IExecuteSystem, ISetPool {
 			.AddVelocity(new Vector2().Set(missile.startVelocity))
 			.AddHealth(0)
 			.AddCollision(missile.collisionType, missile.damage)
-			.AddResource(missile.resource);
+            .AddFaceDirection(false)
+            .AddResource(missile.resource);
 	}
-
 }

@@ -18,6 +18,7 @@ public class EnemyLeftPanelHud : EditorViewUpdaterBase {
         this.executor = executor;
         this.entity = entity;
         weaponExecutor = new EnemyWeaponActionExecutor(entity, component);
+        weaponExecutor.Execute(getActionBasedOnType(executor.getWeapon()));
         setData();
     }
 
@@ -29,7 +30,7 @@ public class EnemyLeftPanelHud : EditorViewUpdaterBase {
     GameObject createChangeEnemyWeapon() {
         List<string> types = typeof(WeaponTypes).GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public)
                     .Select(fieldInfo => ((int)fieldInfo.GetRawConstantValue()).ToString()).ToList<string>();
-        return createDropdownElement("type", executor.getWeapon().ToString(), types, (value) => {
+        return createDropdownElement("weapon", executor.getWeapon().ToString(), types, (value) => {
             executor.Execute(new ChangeEnemyModelWeaponAction(value));
             weaponExecutor.Execute(getActionBasedOnType(Convert.ToInt16(value)));
             eventService.Dispatch<EnemyWeaponChangedEvent>(new EnemyWeaponChangedEvent());
@@ -42,9 +43,9 @@ public class EnemyLeftPanelHud : EditorViewUpdaterBase {
         types.Remove(ResourceWithColliders.Player);
         types.Remove(ResourceWithColliders.PlayerShield);
         types.Remove(ResourceWithColliders.Blockade);
-        return createDropdownElementOfString("type", executor.getType().ToString(), types, (value) => {
+        return createDropdownElementOfString("resource", executor.getResource().ToString(), types, (value) => {
             setResource(value, types[Convert.ToInt16(value)]);
-            executor.Execute(new ChangeEnemyModelResourceAction(value));
+            executor.Execute(new ChangeEnemyModelResourceAction(types[Convert.ToInt16(value)]));
         });
     }
 

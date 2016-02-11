@@ -72,7 +72,7 @@ public class EditLevelView : View, IView {
     }
 
     void createHud() {
-        leftPanelHud = new LeftPanelHud(getChild("LeftPanel"), eventService, executor, save, goToLevelsView);
+        leftPanelHud = new LeftPanelHud(getChild("LeftPanel"), eventService, executor, delete, save, goToLevelsView);
         leftPanelHud.setDebugToggles(changeDebugPathView, changeDebugTimeView);
         leftPanelHud.setStartEndGameCallbacks(startGame, endGame);
         new RightPanelHud(getChild("RightPanel"), onSelectedTypeChange);
@@ -101,6 +101,11 @@ public class EditLevelView : View, IView {
     void save() {
         endGame();
         levelService.UpdateLevel(component, goToLevelsView);
+    }
+
+    void delete() {
+        endGame();
+        levelService.DeleteLevel(component.id, goToLevelsView);
     }
 
     void goToLevelsView() {

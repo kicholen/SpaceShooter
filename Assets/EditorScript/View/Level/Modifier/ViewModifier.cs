@@ -83,7 +83,6 @@ public class ViewModifier : MonoBehaviour {
     void setDraggingToMouseY() {
         Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         activeGo.GetComponent<EditableBehaviour>().SetSpawnBarrier(position.y);
-        factory.refreshNumeration();
         nullifyActiveGo();
     }
 

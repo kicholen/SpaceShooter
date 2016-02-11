@@ -33,6 +33,7 @@ public class DispersionMissileSpawnerSystem : IExecuteSystem, ISetPool {
                 .AddVelocity(new Vector2(missile.velocity * angle, missile.velocity))
                 .AddHealth(0)
                 .AddCollision(missile.collisionType, missile.damage)
+                .AddFaceDirection(false)
                 .AddResource(missile.resource);
             angle = -angle;
         }

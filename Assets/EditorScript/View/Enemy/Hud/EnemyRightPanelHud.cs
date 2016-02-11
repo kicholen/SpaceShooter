@@ -16,6 +16,7 @@ public class EnemyRightPanelHud : EditorViewUpdaterBase {
         this.eventService = eventService;
         this.component = component;
         create(entity, component);
+        createFieldsBasedOnWeaponType();
     }
 
     void create(Entity entity, EnemyModelComponent component) {

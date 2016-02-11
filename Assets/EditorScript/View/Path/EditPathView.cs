@@ -29,6 +29,11 @@ public class EditPathView : View, IView {
         uiFactoryService.AddButton(getChild("SaveButton").gameObject, save);
         uiFactoryService.AddButton(getChild("BackButton").gameObject, goToPathView);
         uiFactoryService.AddButton(getChild("InfoButton").gameObject, showInfoBox);
+        uiFactoryService.AddButton(getChild("DeleteButton").gameObject, delete);
+    }
+
+    void delete() {
+        pathService.DeletePath(component.id, goToPathView);
     }
 
     void save() {

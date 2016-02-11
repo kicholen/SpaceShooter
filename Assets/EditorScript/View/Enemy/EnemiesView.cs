@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class EnemiesView : View, IView {
     IViewService viewService;
@@ -24,7 +25,9 @@ public class EnemiesView : View, IView {
     }
 
     void onEnemiesLoaded(Dictionary<long, string> enemyIds) {
-        foreach (KeyValuePair<long, string> pair in enemyIds)
+        List<KeyValuePair<long, string>> list = enemyIds.ToList();
+        list.Sort((first, second) => first.Key.CompareTo(second.Key));
+        foreach (KeyValuePair<long, string> pair in list)
             addButton(pair);
     }
 

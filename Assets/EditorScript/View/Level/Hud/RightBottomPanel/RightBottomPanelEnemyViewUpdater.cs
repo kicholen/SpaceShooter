@@ -7,6 +7,7 @@ public class RightBottomPanelEnemyViewUpdater : EditorViewUpdaterBase {
 
     public void Update(Transform content, EnemyModel enemyModel) {
         enemyExecutor = new EnemyActionExecutor(enemyModel);
+        createChangeSpawnBarrierField().transform.SetParent(content, false);
         createChangePositionXField().transform.SetParent(content, false);
         createChangePositionYField().transform.SetParent(content, false);
         createChangeSpeedField().transform.SetParent(content, false);
@@ -14,6 +15,12 @@ public class RightBottomPanelEnemyViewUpdater : EditorViewUpdaterBase {
         createChangePathField().transform.SetParent(content, false);
         createChangeDamageField().transform.SetParent(content, false);
         createChangeTypeField().transform.SetParent(content, false);
+    }
+
+    GameObject createChangeSpawnBarrierField() {
+        return createInputElement("spawnBarrier", enemyExecutor.GetSpawnBarrier().ToString(), (value) => {
+            enemyExecutor.Execute(new ChangeEnemySpawnBarrierAction(value));
+        });
     }
 
     GameObject createChangePositionXField() {

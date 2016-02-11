@@ -65,12 +65,17 @@ public class EditEnemyView : View, IView {
     }
 
     void addSaveBackListeners() {
-        uiFactoryService.AddButton(getChild("SaveButton").gameObject, () => saveAndBack());
-        uiFactoryService.AddButton(getChild("BackButton").gameObject, () => goToLandingView());
+        uiFactoryService.AddButton(getChild("SaveButton").gameObject, saveAndBack);
+        uiFactoryService.AddButton(getChild("BackButton").gameObject, goToLandingView);
+        uiFactoryService.AddButton(getChild("DeleteButton").gameObject, deleteAndBack);
     }
 
     void saveAndBack() {
         saveEnemy(goToLandingView);
+    }
+
+    void deleteAndBack() {
+        enemyService.DeleteEnemy(component.id, goToLandingView);
     }
 
     void saveEnemy(Action onSaveSuccess) {

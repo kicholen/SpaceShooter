@@ -6,7 +6,7 @@ using UnityEngine;
 public class AddGameObjectSystem : IReactiveSystem, ISetPool {
     public TriggerOnEvent trigger { get { return Matcher.Resource.OnEntityAdded(); } }
 
-    readonly Transform _viewContainer = new GameObject("Views").transform;
+    readonly Transform container = new GameObject("Views").transform;
 
 	Group _poolGroup;
 
@@ -29,7 +29,7 @@ public class AddGameObjectSystem : IReactiveSystem, ISetPool {
 				}
 			}
 
-            gameObject.transform.SetParent(_viewContainer, false);
+            gameObject.transform.SetParent(container, false);
 			e.AddGameObject(gameObject, resourceName);
 		}
     }

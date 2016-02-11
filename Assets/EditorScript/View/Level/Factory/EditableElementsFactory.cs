@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Linq;
 using System;
 
 public class EditableElementsFactory {
@@ -12,14 +11,18 @@ public class EditableElementsFactory {
 
     public GameObject CreateWaveElement(WaveModel model) {
         GameObject go = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/WaveElement"));
-        go.AddComponent<EditableBehaviour>().SetWaveModel(model);
+        EditableBehaviour editableBehaviour = go.AddComponent<EditableBehaviour>();
+        editableBehaviour.SetOnSpawnBarrierChangedCallback(refreshNumeration);
+        editableBehaviour.SetWaveModel(model);
         addDebugPathIfShould(go);
         return go;
     }
 
     public GameObject CreateEnemyElement(EnemyModel model) {
         GameObject go = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/EnemyElement"));
-        go.AddComponent<EditableBehaviour>().SetEnemyModel(model);
+        EditableBehaviour editableBehaviour = go.AddComponent<EditableBehaviour>();
+        editableBehaviour.SetOnSpawnBarrierChangedCallback(refreshNumeration);
+        editableBehaviour.SetEnemyModel(model);
         addDebugPathIfShould(go);
         return go;
     }

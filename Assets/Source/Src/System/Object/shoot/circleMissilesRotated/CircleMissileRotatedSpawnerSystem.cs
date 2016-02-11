@@ -21,10 +21,6 @@ public class CircleMissileRotatedSpawnerSystem : IExecuteSystem, ISetPool {
 				component.time = component.spawnDelay;
 				spawnMissiles(component, e.position.pos);
 				component.angle += component.angleOffset;
-				component.waves--;
-				if (component.waves == 0) {
-					e.RemoveCircleMissileRotatedSpawner();
-				}
 			}
 		}
 	}
@@ -44,7 +40,8 @@ public class CircleMissileRotatedSpawnerSystem : IExecuteSystem, ISetPool {
 				.AddVelocity(new Vector2(velocityX, velocityY))
 				.AddHealth(0)
 				.AddCollision(missile.collisionType, missile.damage)
-				.AddResource(missile.resource);
+				.AddFaceDirection(false)
+                .AddResource(missile.resource);
 			angle = angle + angleOffset;
 		}
 	}

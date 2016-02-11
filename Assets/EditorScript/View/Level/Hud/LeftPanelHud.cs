@@ -11,12 +11,12 @@ public class LeftPanelHud : BaseGui {
     LeftPanelViewState state;
     bool isGameInProgress;
 
-    public LeftPanelHud(Transform content, EventService eventService, LevelActionExecutor executor, Action onSave, Action onBack) {
+    public LeftPanelHud(Transform content, EventService eventService, LevelActionExecutor executor, Action onDelete, Action onSave, Action onBack) {
         go = content.gameObject;
         this.eventService = eventService;
         this.executor = executor;
         state = LeftPanelViewState.Hidden;
-        setData(onSave, onBack);
+        setData(onDelete, onSave, onBack);
     }
 
     public void setDebugToggles(Action<bool> onPathViewChanged, Action<bool> onTimeViewChanged) {
@@ -41,18 +41,19 @@ public class LeftPanelHud : BaseGui {
         });
     }
 
-    void setData(Action onSave, Action onBack) {
+    void setData(Action onDelete, Action onSave, Action onBack) {
         content = getChild("ExtendPanel/Viewport/Content");
-        addListeners(onSave, onBack);
+        addListeners(onDelete, onSave, onBack);
         fillContent();
         updateView();
     }
 
-    void addListeners(Action onSave, Action onBack) {
+    void addListeners(Action onDelete, Action onSave, Action onBack) {
         getChild("ExtendButton").GetComponent<Button>().onClick.AddListener(changeStateAndUpdateView);
         getChild("ExtendPanel/HideButton").GetComponent<Button>().onClick.AddListener(changeStateAndUpdateView);
         getChild("ExtendPanel/SaveButton").GetComponent<Button>().onClick.AddListener(() => onSave());
         getChild("ExtendPanel/BackButton").GetComponent<Button>().onClick.AddListener(() => onBack());
+        getChild("ExtendPanel/DeleteButton").GetComponent<Button>().onClick.AddListener(() => onDelete());
     }
 
     void changeStateAndUpdateView() {

@@ -7,6 +7,7 @@ public class RightBottomPanelWaveViewUpdater : EditorViewUpdaterBase {
 
     public void Update(Transform content, WaveModel waveModel) {
         waveExecutor = new WaveActionExecutor(waveModel);
+        createChangeSpawnBarrierField().transform.SetParent(content, false);
         createChangeWaveCountField().transform.SetParent(content, false);
         createChangeWaveSpawnOffsetField().transform.SetParent(content, false);
         createChangeSpeedField().transform.SetParent(content, false);
@@ -15,6 +16,12 @@ public class RightBottomPanelWaveViewUpdater : EditorViewUpdaterBase {
         createChangeGridField().transform.SetParent(content, false);
         createChangeDamageField().transform.SetParent(content, false);
         createChangeTypeField().transform.SetParent(content, false);
+    }
+
+    GameObject createChangeSpawnBarrierField() {
+        return createInputElement("spawnBarrier", waveExecutor.GetSpawnBarrier().ToString(), (value) => {
+            waveExecutor.Execute(new ChangeWaveSpawnBarrierAction(value));
+        });
     }
 
     GameObject createChangeWaveCountField() {

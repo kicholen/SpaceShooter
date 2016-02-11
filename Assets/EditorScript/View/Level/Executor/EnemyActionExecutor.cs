@@ -9,6 +9,10 @@
         modifier.Execute(model);
     }
 
+    public float GetSpawnBarrier() {
+        return model.spawnBarrier;
+    }
+
     public float GetPosX() {
         return model.posX;
     }
