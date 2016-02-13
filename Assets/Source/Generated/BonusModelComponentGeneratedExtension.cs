@@ -12,8 +12,9 @@ namespace Entitas {
             _bonusModelComponentPool.Clear();
         }
 
-        public Entity AddBonusModel(int newType, int newMinAmount, int newMaxAmount, float newProbability, string newResource) {
+        public Entity AddBonusModel(int newId, int newType, int newMinAmount, int newMaxAmount, float newProbability, string newResource) {
             var component = _bonusModelComponentPool.Count > 0 ? _bonusModelComponentPool.Pop() : new BonusModelComponent();
+            component.id = newId;
             component.type = newType;
             component.minAmount = newMinAmount;
             component.maxAmount = newMaxAmount;
@@ -22,9 +23,10 @@ namespace Entitas {
             return AddComponent(ComponentIds.BonusModel, component);
         }
 
-        public Entity ReplaceBonusModel(int newType, int newMinAmount, int newMaxAmount, float newProbability, string newResource) {
+        public Entity ReplaceBonusModel(int newId, int newType, int newMinAmount, int newMaxAmount, float newProbability, string newResource) {
             var previousComponent = hasBonusModel ? bonusModel : null;
             var component = _bonusModelComponentPool.Count > 0 ? _bonusModelComponentPool.Pop() : new BonusModelComponent();
+            component.id = newId;
             component.type = newType;
             component.minAmount = newMinAmount;
             component.maxAmount = newMaxAmount;

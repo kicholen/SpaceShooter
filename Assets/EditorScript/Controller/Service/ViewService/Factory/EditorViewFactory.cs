@@ -18,7 +18,8 @@
                 break;
             case ViewTypes.EDITOR_LEVELS:
                 view = new LevelsView((services as EditorServices).LevelService, services.ViewService,
-                    (services as EditorServices).PathService, (services as EditorServices).EnemyService);
+                    (services as EditorServices).PathService, (services as EditorServices).EnemyService,
+                    (services as EditorServices).BonusService, (services as EditorServices).DifficultyService);
                 break;
             case ViewTypes.EDITOR_EDIT_LEVEL:
                 view = new EditLevelView(services.Pool, (services as EditorServices).LevelService, services.ViewService, (services as EditorServices).PathService);
@@ -28,6 +29,18 @@
                 break;
             case ViewTypes.EDITOR_ENEMIES:
                 view = new EnemiesView(services.Pool, services.ViewService, (services as EditorServices).EnemyService);
+                break;
+            case ViewTypes.EDITOR_EDIT_DIFFICULTY:
+                view = new EditDifficultyView(services.Pool, services.ViewService, (services as EditorServices).DifficultyService);
+                break;
+            case ViewTypes.EDITOR_DIFFICULTIES:
+                view = new DifficultiesView(services.Pool, services.ViewService, (services as EditorServices).DifficultyService);
+                break;
+            case ViewTypes.EDITOR_EDIT_BONUS:
+                view = new EditBonusView(services.Pool, services.ViewService, (services as EditorServices).BonusService);
+                break;
+            case ViewTypes.EDITOR_BONUSES:
+                view = new BonusesView(services.Pool, services.ViewService, (services as EditorServices).BonusService);
                 break;
         }
         if (view == null) {

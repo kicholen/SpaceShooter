@@ -16,6 +16,8 @@ public class EditorView : View, IView {
         addButton("Edit Paths", () => viewService.SetView(ViewTypes.EDITOR_PATH));
         addButton("Edit Levels", () => viewService.SetView(ViewTypes.EDITOR_LEVELS));
         addButton("Edit Enemies", () => viewService.SetView(ViewTypes.EDITOR_ENEMIES));
+        addButton("Edit Bonuses", () => viewService.SetView(ViewTypes.EDITOR_BONUSES));
+        addButton("Edit Difficulties", () => viewService.SetView(ViewTypes.EDITOR_DIFFICULTIES));
     }
 
     void addButton(string text, UnityAction onClicked) {

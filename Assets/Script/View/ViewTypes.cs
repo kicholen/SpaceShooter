@@ -1,5 +1,9 @@
 public enum ViewTypes
 {
+    EDITOR_BONUSES = -11,
+    EDITOR_EDIT_BONUS = -10,
+    EDITOR_DIFFICULTIES = -9,
+    EDITOR_EDIT_DIFFICULTY = -8,
     EDITOR_ENEMIES = -7,
     EDITOR_EDIT_ENEMY = -6,
     EDITOR_EDIT_LEVEL = -5,

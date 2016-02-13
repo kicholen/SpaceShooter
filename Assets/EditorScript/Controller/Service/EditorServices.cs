@@ -13,6 +13,8 @@ public class EditorServices : IServices {
     IPathService pathService;
     ILevelService levelService;
     IEnemyService enemyService;
+    IBonusService bonusService;
+    IDifficultyService difficultyService;
     IWwwService wwwService;
     IInfoService infoService;
 
@@ -27,6 +29,8 @@ public class EditorServices : IServices {
     public IPathService PathService { get { return pathService; } }
     public ILevelService LevelService { get { return levelService; } }
     public IEnemyService EnemyService { get { return enemyService; } }
+    public IBonusService BonusService { get { return bonusService; } }
+    public IDifficultyService DifficultyService { get { return difficultyService; } }
     public IWwwService WwwService { get { return wwwService; } }
     public IInfoService InfoService { get { return infoService; } }
 
@@ -48,6 +52,8 @@ public class EditorServices : IServices {
         pathService = new PathService(pool, wwwService, eventService);
         levelService = new LevelService(wwwService, eventService);
         enemyService = new EnemyService(pool, wwwService, eventService);
+        bonusService = new BonusService(pool, wwwService, eventService);
+        difficultyService = new DifficultyService(pool, wwwService, eventService);
         infoService = new InfoService(viewService, uiFactoryService, eventService);
         updateables.Add(infoService);
     }

@@ -8,14 +8,19 @@ public class LevelsView : View, IView {
     ILevelService levelService;
     IViewService viewService;
     IEnemyService enemyService;
+    IBonusService bonusService;
+    IDifficultyService difficultyService;
 
     Transform content;
 
-    public LevelsView(ILevelService levelService, IViewService viewService, IPathService pathService, IEnemyService enemyService) : base("EditorView/Level/LevelsView") {
+    public LevelsView(ILevelService levelService, IViewService viewService, IPathService pathService, IEnemyService enemyService,
+        IBonusService bonusService, IDifficultyService difficultyService) : base("EditorView/Level/LevelsView") {
         this.levelService = levelService;
         this.viewService = viewService;
         this.pathService = pathService;
         this.enemyService = enemyService;
+        this.bonusService = bonusService;
+        this.difficultyService = difficultyService;
     }
 
     public override void Init() {
@@ -47,7 +52,11 @@ public class LevelsView : View, IView {
     void onLevelLoaded(LevelModelComponent component) {
         pathService.LoadPaths(() => {
             enemyService.LoadEnemies(() => {
-                (viewService.SetView(ViewTypes.EDITOR_EDIT_LEVEL) as EditLevelView).SetData(component);
+                bonusService.LoadBonuses(() => {
+                    difficultyService.LoadDifficulties(() => {
+                        (viewService.SetView(ViewTypes.EDITOR_EDIT_LEVEL) as EditLevelView).SetData(component);
+                    });
+                });
             });
         });
     }

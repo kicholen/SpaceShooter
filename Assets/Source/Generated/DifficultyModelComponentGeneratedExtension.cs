@@ -12,8 +12,9 @@ namespace Entitas {
             _difficultyModelComponentPool.Clear();
         }
 
-        public Entity AddDifficultyModel(int newType, int newHpBoostPercent, int newDmgBoostPercent, int newMissileSpeedBoostPercent) {
+        public Entity AddDifficultyModel(int newId, int newType, int newHpBoostPercent, int newDmgBoostPercent, int newMissileSpeedBoostPercent) {
             var component = _difficultyModelComponentPool.Count > 0 ? _difficultyModelComponentPool.Pop() : new DifficultyModelComponent();
+            component.id = newId;
             component.type = newType;
             component.hpBoostPercent = newHpBoostPercent;
             component.dmgBoostPercent = newDmgBoostPercent;
@@ -21,9 +22,10 @@ namespace Entitas {
             return AddComponent(ComponentIds.DifficultyModel, component);
         }
 
-        public Entity ReplaceDifficultyModel(int newType, int newHpBoostPercent, int newDmgBoostPercent, int newMissileSpeedBoostPercent) {
+        public Entity ReplaceDifficultyModel(int newId, int newType, int newHpBoostPercent, int newDmgBoostPercent, int newMissileSpeedBoostPercent) {
             var previousComponent = hasDifficultyModel ? difficultyModel : null;
             var component = _difficultyModelComponentPool.Count > 0 ? _difficultyModelComponentPool.Pop() : new DifficultyModelComponent();
+            component.id = newId;
             component.type = newType;
             component.hpBoostPercent = newHpBoostPercent;
             component.dmgBoostPercent = newDmgBoostPercent;
