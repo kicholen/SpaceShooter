@@ -46,7 +46,7 @@ public class BackgroundSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 			.AddSortOrder(SortTypes.Background)
 			.AddAlpha(6.0f, 6.0f);
 		if (shouldAddTrail) {
-			e.AddGhost(0.0f, 0.1f, 1.0f);
+			e.AddGhost(0.0f, 0.1f, 0.4f);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class BackgroundSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 		if (speedEvent.enabled && !shouldAddTrail) {
 			shouldAddTrail = true;
 			foreach (Entity e in _star.GetEntities()) {
-				e.AddGhost(0.0f, 0.1f, 1.0f);
+				e.AddGhost(0.0f, 0.1f, 0.4f);
 			}
 		}
 		else if (!speedEvent.enabled && shouldAddTrail) {

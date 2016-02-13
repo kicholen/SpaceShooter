@@ -23,7 +23,7 @@ public class GameService : IGameService {
 		services.Updateables.Add(this);
 	}
 
-	public void Update () {
+	public void Update() {
 		systems.Execute();
 	}
 
@@ -58,150 +58,149 @@ public class GameService : IGameService {
 	}
 
     Systems CreateSystems() {
-        #if (UNITY_EDITOR)
+#if (UNITY_EDITOR)
         return new DebugSystems()
-			//.Add(pool.CreateTestSystem())
-        #else
+#else
         return new Systems()
-        #endif
+#endif
 
-				// Settings stuff
-				.Add(pool.CreateDifficultyControllerSystem())
+            .Add(pool.CreateTimeSystem())
 
-	            // Initialize
-				.Add(pool.CreateCreateBonusSystem())
-				.Add(pool.CreateCreatePathSystem())
-				.Add(pool.CreateCreateEnemySystem())
+                // Settings stuff
+                .Add(pool.CreateDifficultyControllerSystem())
+
+                // Initialize
+                .Add(pool.CreateCreateBonusSystem())
+                .Add(pool.CreateCreatePathSystem())
+                .Add(pool.CreateCreateEnemySystem())
                 .Add(pool.CreateCreateDifficultySystem())
-				.Add(pool.CreateCreateSettingsSystem())
-	            .Add(pool.CreateCreateShipSystem())
-				.Add(pool.CreateWeaponSystem())
-				.Add(pool.CreateCreateCameraSystem())
-				.Add(pool.CreateCreateLevelSystem())
-				.Add(pool.CreateCreateGridSystem())
+                .Add(pool.CreateCreateSettingsSystem())
+                .Add(pool.CreateCreateShipSystem())
+                .Add(pool.CreateWeaponSystem())
+                .Add(pool.CreateCreateCameraSystem())
+                .Add(pool.CreateCreateLevelSystem())
+                .Add(pool.CreateCreateGridSystem())
 
-				// Spawners
-				.Add(pool.CreateSpawnMissileSystem())
-				.Add(pool.CreateMultipleMissileSpawnerSystem())
-				.Add(pool.CreateCircleMissileSpawnerSystem())
-				.Add(pool.CreateCircleMissileRotatedSpawnerSystem())
-				.Add(pool.CreateHomeMissileSpawnerSystem())
-				.Add(pool.CreateFindTargetSystem())
-				.Add(pool.CreateHomeMissileSystem())
-				.Add(pool.CreateEnemySpawnerSystem())
-				.Add(pool.CreateWaveSpawnerSystem())
+                // Spawners
+                .Add(pool.CreateSpawnMissileSystem())
+                .Add(pool.CreateMultipleMissileSpawnerSystem())
+                .Add(pool.CreateCircleMissileSpawnerSystem())
+                .Add(pool.CreateCircleMissileRotatedSpawnerSystem())
+                .Add(pool.CreateHomeMissileSpawnerSystem())
+                .Add(pool.CreateFindTargetSystem())
+                .Add(pool.CreateHomeMissileSystem())
+                .Add(pool.CreateEnemySpawnerSystem())
+                .Add(pool.CreateWaveSpawnerSystem())
                 .Add(pool.CreateDispersionMissileSpawnerSystem())
                 .Add(pool.CreateTargetMissileSpawnerSystem())
                 .Add(pool.CreateTargetMissileSystem())
 
-            .Add(pool.CreateTimeSystem())
-
-			// AddGO
-			.Add(pool.CreateAddGameObjectSystem())
-			.Add(pool.CreateAddUIGameObjectSystem())
-			.Add(pool.CreateAddCollisionToGameObjectSystem())
-			.Add(pool.CreateAddCollisionPositionToGOSystem())
+            // AddGO
+            .Add(pool.CreateAddGameObjectSystem())
+            .Add(pool.CreateAddUIGameObjectSystem())
+            .Add(pool.CreateAddCollisionToGameObjectSystem())
+            .Add(pool.CreateAddCollisionPositionToGOSystem())
 
             // Sort order
             .Add(pool.CreateSortOrderSystem())
 
-        	// Input
-			.Add(pool.CreateCreateMouseInputSystem())
-			.Add(pool.CreateProcessInputSystem())
-			
-				// Input player
-				.Add(pool.CreatePlayerInputSystem())
+            // Input
+            .Add(pool.CreateCreateMouseInputSystem())
+            .Add(pool.CreateProcessInputSystem())
 
-				// magnet
-				.Add(pool.CreateMagnetSystem())
+                // Input player
+                .Add(pool.CreatePlayerInputSystem())
 
-				// AI
-				.Add(pool.CreateFirstBossSystem())
+                // magnet
+                .Add(pool.CreateMagnetSystem())
 
-				// blockade
-				.Add(pool.CreateMovingBlockadeSystem())
+                // AI
+                .Add(pool.CreateFirstBossSystem())
 
-			// Tween
-			.Add(pool.CreateTweenSystem())
-			.Add(pool.CreateDelayedCallSystem())
-			
-			// Physics
-			.Add(pool.CreateAccelerationSystem())
-			.Add(pool.CreateVelocitySystem())
-			.Add(pool.CreateCollisionSystem())
-			.Add(pool.CreateMoveWithCameraSystem())
-			.Add(pool.CreatePathSystem())
-			.Add(pool.CreateHelperShipSystem())
-			.Add(pool.CreatePositionSystem())
-			.Add(pool.CreateRotateSystem())
+                // blockade
+                .Add(pool.CreateMovingBlockadeSystem())
 
-				// laser
-				.Add(pool.CreateLaserSpawnerSystem())
-				.Add(pool.CreateLaserSystem())
+            // Tween
+            .Add(pool.CreateTweenSystem())
+            .Add(pool.CreateDelayedCallSystem())
 
-				// Physics not so much
-				.Add(pool.CreateSnapPositionSystem())
-				.Add(pool.CreateRemoveOutOfViewGOSystem())
-				.Add(pool.CreateFaceDirectionSystem())
-				.Add(pool.CreateActiveSystem())
-				.Add(pool.CreateGridSystem())
-				.Add(pool.CreatePlayerHealthBarSystem())
-				.Add(pool.CreateIndicatorSystem())
-				
-				// Object
-				.Add(pool.CreateHealthSystem())
-				.Add(pool.CreateDeadPlayerSystem())
-				.Add(pool.CreateBackgroundSystem())
+            // Physics
+            .Add(pool.CreateAccelerationSystem())
+            .Add(pool.CreateVelocitySystem())
+            .Add(pool.CreateCollisionSystem())
+            .Add(pool.CreateMoveWithCameraSystem())
+            .Add(pool.CreatePathSystem())
+            .Add(pool.CreateHelperShipSystem())
+            .Add(pool.CreatePositionSystem())
+            .Add(pool.CreateRotateSystem())
 
-				// OnDeath Actions
-				.Add(pool.CreateBonusOnDeathSystem())
-				.Add(pool.CreateCameraShakeOnDeathSystem())
-				.Add(pool.CreateParticlesOnDeathSystem())
-				.Add(pool.CreateSoundOnDeathSystem())
-				.Add(pool.CreateExplosionOnDeathSystem())
+                // laser
+                .Add(pool.CreateLaserSpawnerSystem())
+                .Add(pool.CreateLaserSystem())
+
+                // Physics not so much
+                .Add(pool.CreateSnapPositionSystem())
+                .Add(pool.CreateRemoveOutOfViewGOSystem())
+                .Add(pool.CreateFaceDirectionSystem())
+                .Add(pool.CreateActiveSystem())
+                .Add(pool.CreateGridSystem())
+                .Add(pool.CreatePlayerHealthBarSystem())
+                .Add(pool.CreateIndicatorSystem())
+
+                // Object
+                .Add(pool.CreateHealthSystem())
+                .Add(pool.CreateDeadPlayerSystem())
+                .Add(pool.CreateBackgroundSystem())
+
+                // OnDeath Actions
+                .Add(pool.CreateBonusOnDeathSystem())
+                .Add(pool.CreateCameraShakeOnDeathSystem())
+                .Add(pool.CreateParticlesOnDeathSystem())
+                .Add(pool.CreateSoundOnDeathSystem())
+                .Add(pool.CreateExplosionOnDeathSystem())
                 .Add(pool.CreateTweenOnDeathSystem())
 
-				// Effects
-				.Add(pool.CreateAlphaSystem())
-				.Add(pool.CreateGhostSystem())
-				.Add(pool.CreateShakeSystem())
-				.Add(pool.CreateParticleSpawnSystem())
+                // Effects
+                .Add(pool.CreateAlphaSystem())
+                .Add(pool.CreateGhostSystem())
+                .Add(pool.CreateShakeSystem())
+                .Add(pool.CreateParticleSpawnSystem())
                 .Add(pool.CreateShieldCollisionSystem())
                 .Add(pool.CreateShieldCollisionEffectSystem())
                 .Add(pool.CreateTrailSystem())
 
                 // bonus
                 .Add(pool.CreateActivateBonusSystem())
-				.Add(pool.CreateSpeedBonusSystem())
+                .Add(pool.CreateSpeedBonusSystem())
 
-			// RelativePositionGO
-			.Add(pool.CreateRelativePositionSystem())
+            // RelativePositionGO
+            .Add(pool.CreateRelativePositionSystem())
 
-			// PositionGO
-			.Add(pool.CreatePositionGameObjectSystem())
+            // PositionGO
+            .Add(pool.CreatePositionGameObjectSystem())
 
-			.Add(pool.CreateStartGameSystem())
-			
-			// RemoveGO
-			.Add(pool.CreateRemoveGameObjectSystem())
-			
-			// Camera
-			.Add(pool.CreateDefaultCameraSystem())
-			.Add(pool.CreateSmoothCameraSystem())
-			
-			// Stats
-			.Add(pool.CreateGameStatsSystem())
-			
-			// Sound
-			.Add(pool.CreateSoundSystem())
-			
-			// Destroy
-			.Add(pool.CreateDestroyEntityDelayedSystem())
-			.Add(pool.CreateDestroyEntitySystem())
+            .Add(pool.CreateStartGameSystem())
 
-			.Add(pool.CreatePauseGameSystem())
-			.Add(pool.CreateEndGameSystem())
-			.Add(pool.CreateSlowGameSystem())
-			.Add(pool.CreateCallOnFrameEndSystem());
+            // RemoveGO
+            .Add(pool.CreateRemoveGameObjectSystem())
+
+            // Camera
+            .Add(pool.CreateDefaultCameraSystem())
+            .Add(pool.CreateSmoothCameraSystem())
+
+            // Stats
+            .Add(pool.CreateGameStatsSystem())
+
+            // Sound
+            .Add(pool.CreateSoundSystem())
+
+            // Destroy
+            .Add(pool.CreateDestroyEntitySystem())
+
+            .Add(pool.CreatePauseGameSystem())
+            .Add(pool.CreateEndGameSystem())
+            .Add(pool.CreateSlowGameSystem())
+            .Add(pool.CreateCallOnFrameEndSystem())
+            .Add(pool.CreateDestroyEntityDelayedSystem());
     }
 }

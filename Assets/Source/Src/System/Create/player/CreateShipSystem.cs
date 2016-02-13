@@ -40,7 +40,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			.AddHealth(shipModel.health)
 			.AddResource(ResourceWithColliders.Player)
 			.AddExplosionOnDeath(1.0f, Resource.Explosion)
-			.AddGhost(0.0f, 0.1f, 1.0f) 
+			.AddGhost(0.0f, 0.1f, 0.3f) 
 			.IsMoveWithCamera(true);
 		
 		ship.AddParent(getShipChildren(ship, shipModel));
