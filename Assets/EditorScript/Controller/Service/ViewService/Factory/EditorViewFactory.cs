@@ -17,7 +17,8 @@
                 view = new EditPathView((services as EditorServices).PathService, services.ViewService);
                 break;
             case ViewTypes.EDITOR_LEVELS:
-                view = new LevelsView((services as EditorServices).LevelService, services.ViewService, (services as EditorServices).PathService);
+                view = new LevelsView((services as EditorServices).LevelService, services.ViewService,
+                    (services as EditorServices).PathService, (services as EditorServices).EnemyService);
                 break;
             case ViewTypes.EDITOR_EDIT_LEVEL:
                 view = new EditLevelView(services.Pool, (services as EditorServices).LevelService, services.ViewService, (services as EditorServices).PathService);

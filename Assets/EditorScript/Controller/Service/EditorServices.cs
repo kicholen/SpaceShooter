@@ -47,7 +47,7 @@ public class EditorServices : IServices {
         gameService = new GameService(pool, viewService);
         pathService = new PathService(pool, wwwService, eventService);
         levelService = new LevelService(wwwService, eventService);
-        enemyService = new EnemyService(wwwService, eventService);
+        enemyService = new EnemyService(pool, wwwService, eventService);
         infoService = new InfoService(viewService, uiFactoryService, eventService);
         updateables.Add(infoService);
     }

@@ -1,13 +1,27 @@
-﻿using System;
+﻿using Entitas;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class EnemyService : IEnemyService {
     IWwwService wwwService;
     EventService eventService;
+    Pool pool;
 
-    public EnemyService(IWwwService wwwService, EventService eventService) {
+    List<EnemyModelComponent> enemies;
+
+    public EnemyService(Pool pool, IWwwService wwwService, EventService eventService) {
+        this.pool = pool;
         this.wwwService = wwwService;
         this.eventService = eventService;
+    }
+
+    public void LoadEnemies(Action onEnemiesLoaded) {
+        wwwService.Send<GetEnemies>(new GetEnemies(), (request) => {
+            enemies = request.Enemies;
+            replaceOrAddEnemies(enemies);
+            onEnemiesLoaded();
+        }, onRequestFailed);
     }
 
     public void LoadEnemyIds(Action<Dictionary<long, string>> onEnemiesLoaded) {
@@ -32,5 +46,28 @@ public class EnemyService : IEnemyService {
 
     void onRequestFailed(string message) {
         eventService.Dispatch<InfoBoxShowEvent>(new InfoBoxShowEvent(message));
+    }
+
+    void replaceOrAddEnemies(List<EnemyModelComponent> enemies)
+    {
+        Entity[] entities = pool.GetGroup(Matcher.EnemyModel).GetEntities();
+
+        foreach (EnemyModelComponent enemy in enemies) {
+            bool found = false;
+            foreach (Entity e in entities) {
+                if (enemy.type == e.enemyModel.type) {
+                    e.ReplaceEnemyModel(enemy.id, enemy.type, enemy.resource, enemy.weapon, enemy.amount, enemy.time, enemy.spawnDelay,
+                        enemy.weaponResource, enemy.velocity, enemy.angle, enemy.waves, enemy.angleOffset, enemy.startVelocity, enemy.followDelay,
+                        enemy.selfDestructionDelay, enemy.timeDelay, enemy.delay, enemy.randomPositionOffsetX);
+                    found = true;
+                    Debug.Log("Replaced: " + enemy.type);
+                }
+            }
+            if (!found) {
+                pool.CreateEntity()
+                    .AddComponent(ComponentIds.EnemyModel, enemy);
+                Debug.Log("Created: " + enemy.type);
+            }
+        }
     }
 }

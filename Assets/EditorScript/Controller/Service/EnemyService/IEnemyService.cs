@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 public interface IEnemyService {
+    void LoadEnemies(Action onLoaded);
     void LoadEnemyIds(Action<Dictionary<long, string>> onEnemiesLoaded);
     void LoadEnemyById(long id, Action<EnemyModelComponent> onEnemyLoaded);
     void CreateNewEnemy(Action<EnemyModelComponent> onEnemyCreated);

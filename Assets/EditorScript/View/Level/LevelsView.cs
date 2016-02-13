@@ -5,15 +5,17 @@ using System;
 
 public class LevelsView : View, IView {
     IPathService pathService;
-
     ILevelService levelService;
     IViewService viewService;
+    IEnemyService enemyService;
+
     Transform content;
 
-    public LevelsView(ILevelService levelService, IViewService viewService, IPathService pathService) : base("EditorView/Level/LevelsView") {
+    public LevelsView(ILevelService levelService, IViewService viewService, IPathService pathService, IEnemyService enemyService) : base("EditorView/Level/LevelsView") {
         this.levelService = levelService;
         this.viewService = viewService;
         this.pathService = pathService;
+        this.enemyService = enemyService;
     }
 
     public override void Init() {
@@ -44,7 +46,9 @@ public class LevelsView : View, IView {
 
     void onLevelLoaded(LevelModelComponent component) {
         pathService.LoadPaths(() => {
-            (viewService.SetView(ViewTypes.EDITOR_EDIT_LEVEL) as EditLevelView).SetData(component);
+            enemyService.LoadEnemies(() => {
+                (viewService.SetView(ViewTypes.EDITOR_EDIT_LEVEL) as EditLevelView).SetData(component);
+            });
         });
     }
 }

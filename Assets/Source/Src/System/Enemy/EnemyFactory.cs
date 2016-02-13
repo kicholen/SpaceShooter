@@ -110,7 +110,7 @@ public class EnemyFactory {
         e.AddFaceDirection(true);
         e.AddCameraShakeOnDeath(1);
         addPathIfNeeded(e, posY, path);
-        addWeapon(e, component);
+        addWeapon(e, damage, component);
     }
 
     void createEnemyByTypeFromCode(int type, float posX, float posY, int health, int missileSpeedBonus, int path, int grid, int damage, float speed) {
@@ -200,34 +200,34 @@ public class EnemyFactory {
         e.AddFaceDirection(true);
         e.AddCameraShakeOnDeath(1);
         addPathIfNeeded(e, model.posY, model.path);
-        addWeapon(e, component);
+        addWeapon(e, model.damage, component);
     }
 
-    void addWeapon(Entity e, EnemyModelComponent component) {
+    void addWeapon(Entity e, int damage, EnemyModelComponent component) {
         switch (component.weapon) {
             case WeaponTypes.Circle:
-                e.AddCircleMissileSpawner(component.amount, 0, component.time, component.spawnDelay, component.weaponResource, component.velocity, CollisionTypes.Enemy);
+                e.AddCircleMissileSpawner(component.amount, damage, component.time, component.spawnDelay, component.weaponResource, component.velocity, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.CircleRotated:
-                e.AddCircleMissileRotatedSpawner(component.amount, 0, component.waves, component.angle, component.angleOffset, component.time, component.spawnDelay, component.weaponResource, component.velocity, CollisionTypes.Enemy);
+                e.AddCircleMissileRotatedSpawner(component.amount, damage, component.waves, component.angle, component.angleOffset, component.time, component.spawnDelay, component.weaponResource, component.velocity, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Dispersion:
-                e.AddDispersionMissileSpawner(component.time, 0, component.spawnDelay, component.angle, component.weaponResource, component.velocity, CollisionTypes.Enemy);
+                e.AddDispersionMissileSpawner(component.time, damage, component.spawnDelay, component.angle, component.weaponResource, component.velocity, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Home:
-                e.AddHomeMissileSpawner(component.time, component.spawnDelay, 0, component.weaponResource, component.velocity, component.startVelocity, component.followDelay, component.selfDestructionDelay, CollisionTypes.Enemy);
+                e.AddHomeMissileSpawner(component.time, component.spawnDelay, damage, component.weaponResource, component.velocity, component.startVelocity, component.followDelay, component.selfDestructionDelay, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Laser:
                 e.AddLaserSpawner(5.0f, 10.0f, 20.0f, new Vector2(), CollisionTypes.Enemy, null);
                 break;
             case WeaponTypes.Multiple:
-                e.AddMultipleMissileSpawner(component.amount, 0, 0, component.timeDelay, component.delay, component.time, component.spawnDelay, component.weaponResource, component.randomPositionOffsetX, component.startVelocity, CollisionTypes.Enemy);
+                e.AddMultipleMissileSpawner(component.amount, damage, 0, component.timeDelay, component.delay, component.time, component.spawnDelay, component.weaponResource, component.randomPositionOffsetX, component.startVelocity, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Single:
-                e.AddMissileSpawner(component.time, 0, component.spawnDelay, component.weaponResource, component.startVelocity, CollisionTypes.Enemy);
+                e.AddMissileSpawner(component.time, damage, component.spawnDelay, component.weaponResource, component.startVelocity, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Target:
-                e.AddTargetMissileSpawner(component.time, 0, component.spawnDelay, component.weaponResource, component.velocity, CollisionTypes.Enemy, CollisionTypes.Player);
+                e.AddTargetMissileSpawner(component.time, damage, component.spawnDelay, component.weaponResource, component.velocity, CollisionTypes.Enemy, CollisionTypes.Player);
                 break;
         }
     }
