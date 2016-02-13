@@ -60,14 +60,11 @@ public class EnemyService : IEnemyService {
                         enemy.weaponResource, enemy.velocity, enemy.angle, enemy.waves, enemy.angleOffset, enemy.startVelocity, enemy.followDelay,
                         enemy.selfDestructionDelay, enemy.timeDelay, enemy.delay, enemy.randomPositionOffsetX);
                     found = true;
-                    Debug.Log("Replaced: " + enemy.type);
                 }
             }
-            if (!found) {
+            if (!found)
                 pool.CreateEntity()
                     .AddComponent(ComponentIds.EnemyModel, enemy);
-                Debug.Log("Created: " + enemy.type);
-            }
         }
     }
 }

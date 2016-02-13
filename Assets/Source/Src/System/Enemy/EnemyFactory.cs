@@ -332,6 +332,6 @@ public class EnemyFactory {
 	}
 
     EnemyModelComponent getModelIfExist(int type) {
-        return _enemies.count >= type ? _enemies.GetEntities()[type - 1].enemyModel : null;
+        return _enemies.count >= type && type != 0 ? _enemies.GetEntities()[type - 1].enemyModel : null;
     }
 }
