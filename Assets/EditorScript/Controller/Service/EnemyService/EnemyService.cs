@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using RSG;
 using System;
 using System.Collections.Generic;
 
@@ -15,12 +16,16 @@ public class EnemyService : IEnemyService {
         this.eventService = eventService;
     }
 
-    public void LoadEnemies(Action onEnemiesLoaded) {
+    public IPromise LoadEnemies() {
+        Promise promise = new Promise();
         wwwService.Send<GetEnemies>(new GetEnemies(), (request) => {
             enemies = request.Enemies;
             replaceOrAddEnemies(enemies);
-            onEnemiesLoaded();
-        }, onRequestFailed);
+            promise.Resolve();
+        }, (error) => {
+            promise.Reject(new Exception(error));
+        });
+        return promise;
     }
 
     public void LoadEnemyIds(Action<Dictionary<long, string>> onEnemiesLoaded) {

@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using RSG;
 using System;
 using System.Collections.Generic;
 
@@ -24,12 +25,16 @@ public class DifficultyService : IDifficultyService
         wwwService.Send<DeleteDifficulty>(new DeleteDifficulty(id), (request) => onDeleted(), onRequestFailed);
     }
 
-    public void LoadDifficulties(Action onLoaded) {
+    public IPromise LoadDifficulties() {
+        Promise promise = new Promise();
         wwwService.Send<GetDifficulties>(new GetDifficulties(), (request) => {
             difficulties = request.Difficulties;
             replaceOrAddDifficulties(difficulties);
-            onLoaded();
-        }, onRequestFailed);
+            promise.Resolve();
+        }, (error) => {
+            promise.Reject(new Exception(error));
+        });
+        return promise;
     }
 
     public void LoadDifficultyById(long id, Action<DifficultyModelComponent> onLoaded) {

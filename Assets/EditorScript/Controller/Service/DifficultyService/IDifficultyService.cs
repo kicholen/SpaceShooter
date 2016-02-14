@@ -1,9 +1,10 @@
-﻿using System;
+﻿using RSG;
+using System;
 using System.Collections.Generic;
 
 public interface IDifficultyService
 {
-    void LoadDifficulties(Action onLoaded);
+    IPromise LoadDifficulties();
     void LoadDifficultyIds(Action<Dictionary<long, string>> onLoaded);
     void LoadDifficultyById(long id, Action<DifficultyModelComponent> onLoaded);
     void CreateNewDifficulty(Action<DifficultyModelComponent> onCreated);

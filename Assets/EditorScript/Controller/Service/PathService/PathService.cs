@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using RSG;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,16 @@ public class PathService : IPathService {
         wwwService.Send<GetPathIds>(new GetPathIds(), (request) => { onPathsLoaded(request.PathIds); }, onRequestFailed);
     }
 
-    public void LoadPaths(Action onPathsLoaded) {
+    public IPromise LoadPaths() {
+        Promise promise = new Promise();
         wwwService.Send<GetPaths>(new GetPaths(), (request) => {
             paths = request.Paths;
             replaceOrAddPaths(paths);
-            onPathsLoaded();
-        }, onRequestFailed);
+            promise.Resolve();
+         }, (error) => {
+             promise.Reject(new Exception(error));
+         });
+        return promise;
     }
 
     public PathModelComponent TryToGetPath(string name) {

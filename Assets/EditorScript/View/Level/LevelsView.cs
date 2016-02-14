@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System;
+using RSG;
 
 public class LevelsView : View, IView {
     IPathService pathService;
@@ -50,14 +51,12 @@ public class LevelsView : View, IView {
     }
 
     void onLevelLoaded(LevelModelComponent component) {
-        pathService.LoadPaths(() => {
-            enemyService.LoadEnemies(() => {
-                bonusService.LoadBonuses(() => {
-                    difficultyService.LoadDifficulties(() => {
-                        (viewService.SetView(ViewTypes.EDITOR_EDIT_LEVEL) as EditLevelView).SetData(component);
-                    });
-                });
-            });
-        });
+        Promise.All(
+            pathService.LoadPaths(),
+            enemyService.LoadEnemies(),
+            bonusService.LoadBonuses(),
+            difficultyService.LoadDifficulties())
+        .Catch(exception => eventService.Dispatch<InfoBoxShowEvent>(new InfoBoxShowEvent(exception.Message)))
+        .Done(() => (viewService.SetView(ViewTypes.EDITOR_EDIT_LEVEL) as EditLevelView).SetData(component));
     }
 }

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using RSG;
+using System;
 using System.Collections.Generic;
 
 public interface IBonusService
 {
-    void LoadBonuses(Action onLoaded);
+    IPromise LoadBonuses();
     void LoadBonusIds(Action<Dictionary<long, string>> onLoaded);
     void LoadBonusById(long id, Action<BonusModelComponent> onLoaded);
     void CreateNewBonus(Action<BonusModelComponent> onCreated);

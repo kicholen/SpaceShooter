@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using RSG;
 using System;
 using System.Collections.Generic;
 
@@ -28,12 +29,16 @@ public class BonusService : IBonusService
         wwwService.Send<GetBonus>(new GetBonus(id), (request) => { onLoaded(request.Component); }, onRequestFailed);
     }
 
-    public void LoadBonuses(Action onLoaded) {
+    public IPromise LoadBonuses() {
+        Promise promise = new Promise();
         wwwService.Send<GetBonuses>(new GetBonuses(), (request) => {
             bonuses = request.Bonuses;
             replaceOrAddBonuses(bonuses);
-            onLoaded();
-        }, onRequestFailed);
+            promise.Resolve();
+        }, (error) => {
+            promise.Reject(new Exception(error));
+        });
+        return promise;
     }
 
     public void LoadBonusIds(Action<Dictionary<long, string>> onLoaded) {

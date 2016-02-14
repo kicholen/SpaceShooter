@@ -1,9 +1,10 @@
-﻿using System;
+﻿using RSG;
+using System;
 using System.Collections.Generic;
 
 public interface IPathService
 {
-    void LoadPaths(Action onPathsLoaded);
+    IPromise LoadPaths();
     PathModelComponent TryToGetPath(string id);
     List<string> GetPathNames();
     void LoadPathIds(Action<Dictionary<long, string>> onPathsLoaded);
