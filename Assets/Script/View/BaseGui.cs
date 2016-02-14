@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseGui {
 
@@ -28,6 +29,10 @@ public class BaseGui {
 
     protected Transform getChild(string childName) {
         return go.transform.FindChild(childName);
+    }
+
+    protected void setText(string childName, string text) {
+        getChild(childName).GetComponent<Text>().text = text;
     }
 
     public virtual void Destroy() {

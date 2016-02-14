@@ -11,6 +11,7 @@ public class View : BaseGui {
 	protected Pool pool;
 	protected EventService eventService;
 	protected IUIFactoryService uiFactoryService;
+    protected ITranslationService translationService;
 	
     string prefabPath;
 
@@ -20,9 +21,10 @@ public class View : BaseGui {
         this.prefabPath = prefabPath;
     }
 
-    public void SetBaseServices(IUIFactoryService uiFactoryService, EventService eventService) {
+    public void SetBaseServices(IUIFactoryService uiFactoryService, EventService eventService, ITranslationService translationService) {
         this.uiFactoryService = uiFactoryService;
         this.eventService = eventService;
+        this.translationService = translationService;
     }
 
     public void SetPool(Pool pool) {

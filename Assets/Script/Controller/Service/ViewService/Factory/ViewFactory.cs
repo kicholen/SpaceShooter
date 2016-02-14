@@ -37,7 +37,7 @@ public class ViewFactory : IViewFactory {
 	}
 
     protected void initView(IView view) {
-        view.SetBaseServices(services.UIFactoryService, services.EventService);
+        view.SetBaseServices(services.UIFactoryService, services.EventService, services.TranslationService);
         view.SetPool(services.Pool);
         view.Init();
     }

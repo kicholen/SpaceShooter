@@ -3,7 +3,7 @@ using UnityEngine;
 
 public interface IView {
 	GameObject Go { get; }
-    void SetBaseServices(IUIFactoryService uiFactoryService, EventService eventService);
+    void SetBaseServices(IUIFactoryService uiFactoryService, EventService eventService, ITranslationService translationService);
     void SetPool(Pool pool);
     void Init();
 	void SetParent(Transform parent);

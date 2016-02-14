@@ -10,6 +10,15 @@ public class LandingView : View, IView {
 
     public override void Init() {
         base.Init();
+        addListeners();
+        setTranslations();
+    }
+
+    void setTranslations() {
+        setText("PlayButton/PlayText", translationService.Translate("Graj"));
+    }
+
+    void addListeners() {
         uiFactoryService.AddButton(go.transform, "PlayButton", onPlayClicked);
         uiFactoryService.AddButton(go.transform, "ShipButton", onShipClicked);
         uiFactoryService.AddButton(go.transform, "SettingsButton", onSettingsClicked);

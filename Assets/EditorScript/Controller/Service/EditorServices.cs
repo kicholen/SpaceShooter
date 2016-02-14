@@ -18,6 +18,7 @@ public class EditorServices : IServices {
     IWwwService wwwService;
     IInfoService infoService;
     ISettingsService settingsService;
+    ITranslationService translationService;
 
     public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
@@ -35,6 +36,7 @@ public class EditorServices : IServices {
     public IWwwService WwwService { get { return wwwService; } }
     public IInfoService InfoService { get { return infoService; } }
     public ISettingsService SettingsService { get { return settingsService; } }
+    public ITranslationService TranslationService { get { return translationService; } }
 
     public EditorServices(IController controller) {
         this.controller = controller;
@@ -58,6 +60,7 @@ public class EditorServices : IServices {
         difficultyService = new DifficultyService(pool, wwwService, eventService);
         infoService = new InfoService(viewService, uiFactoryService, eventService);
         settingsService = new SettingsService(pool);
+        translationService = new TranslationService(settingsService);
         updateables.Add(infoService);
     }
 
@@ -65,6 +68,7 @@ public class EditorServices : IServices {
         gameService.Init(this);
         settingsService.Init();
         viewService.Init(this);
+        translationService.Init();
         ViewService.SetView(ViewTypes.EDITOR_LANDING);
     }
 	

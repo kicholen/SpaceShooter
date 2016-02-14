@@ -13,4 +13,5 @@ public interface IServices : Updateable {
 	IUIFactoryService UIFactoryService { get; }
     IWwwService WwwService { get; }
     ISettingsService SettingsService { get; }
+    ITranslationService TranslationService { get; }
 }
