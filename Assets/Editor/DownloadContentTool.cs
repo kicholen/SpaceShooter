@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class JellyTools {
+public class DownloadContentTool {
     static RequestBuilder builder = new RequestBuilder();
 
     [MenuItem("Jelly/DownloadAll")]
@@ -15,7 +15,8 @@ public class JellyTools {
             downloadLevels().Then(models => saveLevels(models)),
             downloadEnemies().Then(models => saveEnemies(models)),
             downloadBonuses().Then(models => saveBonuses(models)),
-            downloadDifficulties().Then(models => saveDifficulties(models))
+            downloadDifficulties().Then(models => saveDifficulties(models)),
+            downloadLanguages().Then(models => saveLanguages(models))
         )
         .Catch(exception => Debug.Log(exception.Message))
         .Done(() => Debug.Log("Download Completed"));
@@ -101,6 +102,22 @@ public class JellyTools {
         return promise;
     }
 
+    static IPromise<List<LanguageModel>> downloadLanguages() {
+        Promise<List<LanguageModel>> promise = new Promise<List<LanguageModel>>();
+        GetLanguages request = new GetLanguages();
+        builder.Build(request);
+        while (!request.Process().isDone) { }
+
+        if (request.Successful()) {
+            request.ParseResult();
+            promise.Resolve(request.Languages);
+        }
+        else {
+            promise.Reject(new Exception(request.GetErrorMessage()));
+        }
+        return promise;
+    }
+
     static IPromise saveLevels(List<LevelModelComponent> levels) {
         Promise promise = new Promise();
         foreach (LevelModelComponent level in levels)
@@ -137,6 +154,14 @@ public class JellyTools {
         Promise promise = new Promise();
         foreach (BonusModelComponent bonus in bonuses)
             Utils.Serialize(bonus, bonus.type.ToString());
+        promise.Resolve();
+        return promise;
+    }
+
+    static IPromise saveLanguages(List<LanguageModel> languages) {
+        Promise promise = new Promise();
+        foreach (LanguageModel language in languages)
+            Utils.Serialize(language, language.name);
         promise.Resolve();
         return promise;
     }

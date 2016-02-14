@@ -18,12 +18,14 @@ public class TranslationService : ITranslationService
 
     public void Init() {
         language = getLanguage();
-        translation.Add(language, Utils.Deserialize<LanguageModel>(language));
+        LanguageModel model = Utils.Deserialize<LanguageModel>(language);
+        model.Init();
+        translation.Add(language, model);
     }
 
     public string Translate(string value) {
         string result = value;
-        translation[language].translations.TryGetValue(value, out result);
+        translation[language].data.TryGetValue(value, out result);
         return result;
     }
 
