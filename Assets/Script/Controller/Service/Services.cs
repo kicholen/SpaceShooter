@@ -11,6 +11,7 @@ public class Services : IServices {
 	IViewService viewService;
 	IUIFactoryService uiFactoryService;
     IWwwService wwwService;
+    ISettingsService settingsService;
 
     public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
@@ -21,6 +22,7 @@ public class Services : IServices {
 	public IViewService ViewService { get { return viewService; } }
 	public IUIFactoryService UIFactoryService { get { return uiFactoryService; } }
     public IWwwService WwwService { get { return wwwService; } }
+    public ISettingsService SettingsService { get { return settingsService; } }
 
     public Services(IController controller) {
         this.controller = controller;
@@ -47,5 +49,6 @@ public class Services : IServices {
         viewService = new ViewService(eventService, uiFactoryService);
         loadService = new LoadService(eventService);
         gameService = new GameService(pool, viewService);
+        settingsService = new SettingsService(pool);
     }
 }

@@ -21,7 +21,7 @@ public class JellyTools {
         .Done(() => Debug.Log("Download Completed"));
     }
 
-    static IPromise<List<PathModelComponent>> downloadPaths() {//Action<List<PathModelComponent>> onPathsLoaded
+    static IPromise<List<PathModelComponent>> downloadPaths() {
         Promise<List<PathModelComponent>> promise = new Promise<List<PathModelComponent>>();
         GetPaths request = new GetPaths();
         builder.Build(request);
@@ -104,7 +104,7 @@ public class JellyTools {
     static IPromise saveLevels(List<LevelModelComponent> levels) {
         Promise promise = new Promise();
         foreach (LevelModelComponent level in levels)
-            Utils.Serialize(level, level.name);
+            Utils.Serialize(level, level.id.ToString());
         promise.Resolve();
         return promise;
     }

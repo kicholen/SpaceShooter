@@ -35,8 +35,8 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 			EnemyModel enemyModel = levelModel.enemies[levelModel.enemyIndex];
 			if (enemyModel.spawnBarrier < cameraPosition.y) {
 				levelModel.enemyIndex += 1;
-				float healthMultiplier = (difficulty.hpBoostPercent + 100) / 100;
-				_factory.CreateEnemyByModel(enemyModel, difficulty.missileSpeedBoostPercent, healthMultiplier);
+                float healthMultiplier = ((float)difficulty.hpBoostPercent + 100.0f) / 100.0f;
+                _factory.CreateEnemyByModel(enemyModel, difficulty.missileSpeedBoostPercent, healthMultiplier);
 			}
 		}
 

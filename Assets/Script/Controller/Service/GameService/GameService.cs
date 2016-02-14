@@ -66,9 +66,6 @@ public class GameService : IGameService {
 
             .Add(pool.CreateTimeSystem())
 
-                // Settings stuff
-                .Add(pool.CreateDifficultyControllerSystem())
-
                 // Initialize
                 .Add(pool.CreateCreateBonusSystem())
                 .Add(pool.CreateCreatePathSystem())
@@ -80,6 +77,9 @@ public class GameService : IGameService {
                 .Add(pool.CreateCreateCameraSystem())
                 .Add(pool.CreateCreateLevelSystem())
                 .Add(pool.CreateCreateGridSystem())
+
+                // Settings stuff
+                .Add(pool.CreateDifficultyControllerSystem())
 
                 // Spawners
                 .Add(pool.CreateSpawnMissileSystem())

@@ -1,22 +1,18 @@
 using Entitas;
 
 public class CreateDifficultySystem : IInitializeSystem, ISetPool {
-	Pool _pool;
+    const int DIFFICULTIES_COUNT = 3;
 
-	const string EASY = "Easy";
-	const string NORMAL = "Normal";
-	const string HARD = "Hard";
+    Pool pool;
 
 	public void SetPool(Pool pool) {
-		_pool = pool;
+		this.pool = pool;
 	}
 	
 	public void Initialize() {
-		_pool.CreateEntity()
-			.AddComponent(ComponentIds.DifficultyModel, Utils.Deserialize<DifficultyModelComponent>(EASY));
-		_pool.CreateEntity()
-			.AddComponent(ComponentIds.DifficultyModel, Utils.Deserialize<DifficultyModelComponent>(NORMAL));
-		_pool.CreateEntity()
-			.AddComponent(ComponentIds.DifficultyModel, Utils.Deserialize<DifficultyModelComponent>(HARD));
+        for (int i = 1; i <= DIFFICULTIES_COUNT; i++) {
+            pool.CreateEntity()
+                .AddComponent(ComponentIds.DifficultyModel, Utils.Deserialize<DifficultyModelComponent>(i.ToString()));
+        }
 	}
 }

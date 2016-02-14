@@ -27,7 +27,10 @@ public class ViewFactory : IViewFactory {
 			case ViewTypes.SHIP:
 				view = new ShipView(services.ViewService);
 			break;
-		}
+            case ViewTypes.SETTINGS:
+                view = new SettingsView(services.SettingsService, services.ViewService);
+                break;
+        }
         initView(view);
 
         return view;

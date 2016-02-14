@@ -1,38 +1,42 @@
 using Entitas;
 
 public class DifficultyControllerSystem : IInitializeSystem, ISetPool {
-
-	Pool _pool;
-	Group _group;
-	Group _models;
+	Pool pool;
+	Group group;
+	Group difficulties;
 	
 	public void SetPool(Pool pool) {
-		_pool = pool;
-		_pool.GetGroup(Matcher.SettingsModel).OnEntityUpdated += update;
-		_group = pool.GetGroup(Matcher.DifficultyController);
-		_models = pool.GetGroup(Matcher.DifficultyModel);
-	}
+		this.pool = pool;
+		this.pool.GetGroup(Matcher.SettingsModel).OnEntityUpdated += update;
+		group = pool.GetGroup(Matcher.DifficultyController);
+		difficulties = pool.GetGroup(Matcher.DifficultyModel);
+    }
 
 	public void Initialize() {
-		_pool.CreateEntity()
+		pool.CreateEntity()
 			.AddDifficultyController(DifficultyTypes.None, 0, 0, 0);
-	}
+        updateDifficulty(pool.GetGroup(Matcher.SettingsModel).GetSingleEntity().settingsModel);
+    }
 
 	void update(Group group, Entity entity, int index, IComponent previousComponent, IComponent nextComponent) {
-		SettingsModelComponent settings = (SettingsModelComponent)nextComponent;
-		DifficultyControllerComponent difficulty = _group.GetSingleEntity().difficultyController;
+        SettingsModelComponent settings = (SettingsModelComponent)nextComponent;
+        updateDifficulty(settings);
+    }
 
-		if (settings.difficulty == difficulty.difficultyType) {
-			return;
-		}
+    void updateDifficulty(SettingsModelComponent settings) {
+        DifficultyControllerComponent difficulty = group.GetSingleEntity().difficultyController;
 
-		foreach (Entity e in _models.GetEntities()) {
-			DifficultyModelComponent model = e.difficultyModel;
-			if (settings.difficulty == model.type) {
-				difficulty.dmgBoostPercent = model.dmgBoostPercent;
-				difficulty.hpBoostPercent = model.hpBoostPercent;
-				difficulty.missileSpeedBoostPercent = model.missileSpeedBoostPercent;
-			}
-		}
-	}
+        if (settings.difficulty == difficulty.difficultyType) {
+            return;
+        }
+
+        foreach (Entity e in difficulties.GetEntities()) {
+            DifficultyModelComponent model = e.difficultyModel;
+            if (settings.difficulty == model.type) {
+                difficulty.dmgBoostPercent = model.dmgBoostPercent;
+                difficulty.hpBoostPercent = model.hpBoostPercent;
+                difficulty.missileSpeedBoostPercent = model.missileSpeedBoostPercent;
+            }
+        }
+    }
 }

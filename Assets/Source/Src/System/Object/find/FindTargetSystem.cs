@@ -40,7 +40,8 @@ public class FindTargetSystem : IReactiveSystem, ISetPool {
 					e.AddFollowTarget(chosenEnemy);
                 }
 			}
-			e.RemoveFindTarget();
+
+            e.RemoveFindTarget();
 		}
 	}
 }

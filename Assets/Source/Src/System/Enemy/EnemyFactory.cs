@@ -24,12 +24,14 @@ public class EnemyFactory {
 
     void createEnemyFromCode(EnemyModel model, int missileSpeedBonus, float healthMultiplier) {
         Entity e;
+        float missileSpeed = (missileSpeedBonus + 100.0f) / 100.0f;
+
         switch (model.type) {
             case EnemyTypes.Normal:
                 e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
                 e.AddFaceDirection(true);
                 e.AddCameraShakeOnDeath(1);
-                e.AddMissileSpawner(0.0f, model.damage, 2.5f, ResourceWithColliders.MissileEnemy, new Vector2(0.0f, -4.0f * (missileSpeedBonus + 100) / 100), CollisionTypes.Enemy);
+                e.AddMissileSpawner(0.0f, model.damage, 2.5f, ResourceWithColliders.MissileEnemy, new Vector2(0.0f, -4.0f * missileSpeed), CollisionTypes.Enemy);
                 addPathIfNeeded(e, model.posY, model.path);
                 break;
             case EnemyTypes.Small:
@@ -41,28 +43,28 @@ public class EnemyFactory {
                 e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
                 e.AddFaceDirection(true);
                 e.AddCameraShakeOnDeath(1);
-                e.AddHomeMissileSpawner(4.0f, 2.0f, model.damage, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy);
+                e.AddHomeMissileSpawner(4.0f, 2.0f, model.damage, ResourceWithColliders.MissileEnemy, 2.0f * missileSpeed, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy);
                 addPathIfNeeded(e, model.posY, model.path);
                 break;
             case EnemyTypes.CircleMissile:
                 e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
                 e.AddFaceDirection(true);
                 e.AddCameraShakeOnDeath(1);
-                e.AddCircleMissileSpawner(5, model.damage, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+                e.AddCircleMissileSpawner(5, model.damage, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * missileSpeed, CollisionTypes.Enemy);
                 addPathIfNeeded(e, model.posY, model.path);
                 break;
             case EnemyTypes.CircleRotateMissile:
                 e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
                 e.AddFaceDirection(true);
                 e.AddCameraShakeOnDeath(1);
-                e.AddCircleMissileRotatedSpawner(6, model.damage, 4, 0, 10, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+                e.AddCircleMissileRotatedSpawner(6, model.damage, 4, 0, 10, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * missileSpeed, CollisionTypes.Enemy);
                 addPathIfNeeded(e, model.posY, model.path);
                 break;
             case EnemyTypes.TargetMissile:
                 e = createStandardEnemy(model, healthMultiplier, ResourceWithColliders.Enemy);
                 e.AddFaceDirection(true);
                 e.AddCameraShakeOnDeath(1);
-                e.AddTargetMissileSpawner(6, model.damage, 6, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy, CollisionTypes.Player);
+                e.AddTargetMissileSpawner(6, model.damage, 6, ResourceWithColliders.MissileEnemy, 3.0f * missileSpeed, CollisionTypes.Enemy, CollisionTypes.Player);
                 addPathIfNeeded(e, model.posY, model.path);
                 break;
             case EnemyTypes.Meteor:
@@ -110,17 +112,20 @@ public class EnemyFactory {
         e.AddFaceDirection(true);
         e.AddCameraShakeOnDeath(1);
         addPathIfNeeded(e, posY, path);
-        addWeapon(e, damage, component);
+        float missileSpeed = (missileSpeedBonus + 100.0f) / 100.0f;
+        addWeapon(e, missileSpeed, damage, component);
     }
 
     void createEnemyByTypeFromCode(int type, float posX, float posY, int health, int missileSpeedBonus, int path, int grid, int damage, float speed) {
         Entity e;
+        float missileSpeed = (missileSpeedBonus + 100.0f) / 100.0f;
+
         switch (type) {
             case EnemyTypes.Normal:
                 e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
                 e.AddFaceDirection(true);
                 e.AddCameraShakeOnDeath(1);
-                e.AddMissileSpawner(0.0f, damage, 2.5f, ResourceWithColliders.MissileEnemy, new Vector2(0.0f, -4.0f * (missileSpeedBonus + 100) / 100), CollisionTypes.Enemy);
+                e.AddMissileSpawner(0.0f, damage, 2.5f, ResourceWithColliders.MissileEnemy, new Vector2(0.0f, -4.0f * missileSpeed), CollisionTypes.Enemy);
                 addPathIfNeeded(e, posY, path);
                 addGridIfNeeded(e, grid);
                 break;
@@ -134,7 +139,7 @@ public class EnemyFactory {
                 e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
                 e.AddFaceDirection(true);
                 e.AddCameraShakeOnDeath(1);
-                e.AddHomeMissileSpawner(4.0f, 2.0f, damage, ResourceWithColliders.MissileEnemy, 2.0f * (missileSpeedBonus + 100) / 100, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy);
+                e.AddHomeMissileSpawner(4.0f, 2.0f, damage, ResourceWithColliders.MissileEnemy, 2.0f * missileSpeed, new Vector2(2.0f, 1.0f), 0.5f, 3.0f, CollisionTypes.Enemy);
                 addPathIfNeeded(e, posY, path);
                 addGridIfNeeded(e, grid);
                 break;
@@ -142,7 +147,7 @@ public class EnemyFactory {
                 e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
                 e.AddFaceDirection(true);
                 e.AddCameraShakeOnDeath(1);
-                e.AddCircleMissileSpawner(5, damage, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+                e.AddCircleMissileSpawner(5, damage, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * missileSpeed, CollisionTypes.Enemy);
                 addPathIfNeeded(e, posY, path);
                 addGridIfNeeded(e, grid);
                 break;
@@ -150,7 +155,7 @@ public class EnemyFactory {
                 e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
                 e.AddFaceDirection(true);
                 e.AddCameraShakeOnDeath(1);
-                e.AddCircleMissileRotatedSpawner(6, damage, 4, 0, 10, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy);
+                e.AddCircleMissileRotatedSpawner(6, damage, 4, 0, 10, 4.0f, 0.1f, ResourceWithColliders.MissileEnemy, 3.0f * missileSpeed, CollisionTypes.Enemy);
                 addPathIfNeeded(e, posY, path);
                 addGridIfNeeded(e, grid);
                 break;
@@ -158,7 +163,7 @@ public class EnemyFactory {
                 e = createStandardEnemy(type, damage, posX, posY, health, speed, ResourceWithColliders.Enemy);
                 e.AddFaceDirection(true);
                 e.AddCameraShakeOnDeath(1);
-                e.AddTargetMissileSpawner(6, damage, 6, ResourceWithColliders.MissileEnemy, 3.0f * (missileSpeedBonus + 100) / 100, CollisionTypes.Enemy, CollisionTypes.Player);
+                e.AddTargetMissileSpawner(6, damage, 6, ResourceWithColliders.MissileEnemy, 3.0f * missileSpeed, CollisionTypes.Enemy, CollisionTypes.Player);
                 addPathIfNeeded(e, posY, path);
                 addGridIfNeeded(e, grid);
                 break;
@@ -195,39 +200,46 @@ public class EnemyFactory {
         }
     }
 
-    void createEnemyFromComponent(EnemyModel model, int missileSpeedonus, float healthMultiplier, EnemyModelComponent component) {
-        Entity e = createStandardEnemy(model, healthMultiplier, component.resource);
+    void createEnemyFromComponent(EnemyModel model, int missileSpeedBonus, float health, EnemyModelComponent component) {
+        Entity e = createStandardEnemy(model, health, component.resource);
         e.AddFaceDirection(true);
         e.AddCameraShakeOnDeath(1);
         addPathIfNeeded(e, model.posY, model.path);
-        addWeapon(e, model.damage, component);
+        float missileSpeed = (missileSpeedBonus + 100.0f) / 100.0f;
+        addWeapon(e, missileSpeed, model.damage, component);
     }
 
-    void addWeapon(Entity e, int damage, EnemyModelComponent component) {
+    void addWeapon(Entity e, float missileSpeedBonus, int damage, EnemyModelComponent component) {
         switch (component.weapon) {
             case WeaponTypes.Circle:
-                e.AddCircleMissileSpawner(component.amount, damage, component.time, component.spawnDelay, component.weaponResource, component.velocity, CollisionTypes.Enemy);
+                e.AddCircleMissileSpawner(component.amount, damage, component.time, component.spawnDelay, component.weaponResource,
+                    component.velocity * missileSpeedBonus, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.CircleRotated:
-                e.AddCircleMissileRotatedSpawner(component.amount, damage, component.waves, component.angle, component.angleOffset, component.time, component.spawnDelay, component.weaponResource, component.velocity, CollisionTypes.Enemy);
+                e.AddCircleMissileRotatedSpawner(component.amount, damage, component.waves, component.angle, component.angleOffset,
+                    component.time, component.spawnDelay, component.weaponResource, component.velocity * missileSpeedBonus, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Dispersion:
-                e.AddDispersionMissileSpawner(component.time, damage, component.spawnDelay, component.angle, component.weaponResource, component.velocity, CollisionTypes.Enemy);
+                e.AddDispersionMissileSpawner(component.time, damage, component.spawnDelay, component.angle, component.weaponResource,
+                    component.velocity * missileSpeedBonus, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Home:
-                e.AddHomeMissileSpawner(component.time, component.spawnDelay, damage, component.weaponResource, component.velocity, component.startVelocity, component.followDelay, component.selfDestructionDelay, CollisionTypes.Enemy);
+                e.AddHomeMissileSpawner(component.time, component.spawnDelay, damage, component.weaponResource, component.velocity * missileSpeedBonus,
+                    component.startVelocity, component.followDelay, component.selfDestructionDelay, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Laser:
                 e.AddLaserSpawner(5.0f, 10.0f, 20.0f, new Vector2(), CollisionTypes.Enemy, null);
                 break;
             case WeaponTypes.Multiple:
-                e.AddMultipleMissileSpawner(component.amount, damage, 0, component.timeDelay, component.delay, component.time, component.spawnDelay, component.weaponResource, component.randomPositionOffsetX, component.startVelocity, CollisionTypes.Enemy);
+                e.AddMultipleMissileSpawner(component.amount, damage, 0, component.timeDelay, component.delay, component.time,
+                    component.spawnDelay, component.weaponResource, component.randomPositionOffsetX, component.startVelocity * missileSpeedBonus, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Single:
-                e.AddMissileSpawner(component.time, damage, component.spawnDelay, component.weaponResource, component.startVelocity, CollisionTypes.Enemy);
+                e.AddMissileSpawner(component.time, damage, component.spawnDelay, component.weaponResource, component.startVelocity * missileSpeedBonus, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Target:
-                e.AddTargetMissileSpawner(component.time, damage, component.spawnDelay, component.weaponResource, component.velocity, CollisionTypes.Enemy, CollisionTypes.Player);
+                e.AddTargetMissileSpawner(component.time, damage, component.spawnDelay, component.weaponResource, component.velocity * missileSpeedBonus,
+                    CollisionTypes.Enemy, CollisionTypes.Player);
                 break;
         }
     }

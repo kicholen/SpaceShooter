@@ -26,7 +26,7 @@ public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
 		Vector3 cameraPosition = _camera.GetSingleEntity().position.pos;
 		DifficultyControllerComponent difficulty = _difficulty.GetSingleEntity().difficultyController;
 		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
-		float healthMultiplier = (difficulty.hpBoostPercent + 100) / 100;
+		float healthMultiplier = ((float)difficulty.hpBoostPercent + 100.0f) / 100.0f;
 
 		foreach (Entity e in _group.GetEntities()) {
 			WaveSpawnerComponent component = e.waveSpawner;
