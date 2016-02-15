@@ -42,6 +42,12 @@
             case ViewTypes.EDITOR_BONUSES:
                 view = new BonusesView(services.Pool, services.ViewService, (services as EditorServices).BonusService);
                 break;
+            case ViewTypes.EDITOR_EDIT_LANGUAGE:
+                view = new EditLanguageView(services.Pool, services.ViewService, (services as EditorServices).LanguageService);
+                break;
+            case ViewTypes.EDITOR_LANUGAGES:
+                view = new LanguagesView(services.Pool, services.ViewService, (services as EditorServices).LanguageService);
+                break;
         }
         if (view == null) {
             view = base.Create(type);

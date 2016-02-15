@@ -18,6 +18,7 @@ public class EditorView : View, IView {
         addButton("Edit Enemies", () => viewService.SetView(ViewTypes.EDITOR_ENEMIES));
         addButton("Edit Bonuses", () => viewService.SetView(ViewTypes.EDITOR_BONUSES));
         addButton("Edit Difficulties", () => viewService.SetView(ViewTypes.EDITOR_DIFFICULTIES));
+        addButton("Edit Languages", () => viewService.SetView(ViewTypes.EDITOR_LANUGAGES));
     }
 
     void addButton(string text, UnityAction onClicked) {
