@@ -1,5 +1,7 @@
 public enum ViewTypes
 {
+    EDITOR_LANUGAGES = -13,
+    EDITOR_EDIT_LANGUAGE = -12,
     EDITOR_BONUSES = -11,
     EDITOR_EDIT_BONUS = -10,
     EDITOR_DIFFICULTIES = -9,

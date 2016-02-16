@@ -60,6 +60,7 @@ public class GameService : IGameService {
     Systems CreateSystems() {
 #if (UNITY_EDITOR)
         return new DebugSystems()
+        .Add(pool.CreateTestSystem())
 #else
         return new Systems()
 #endif
@@ -117,7 +118,8 @@ public class GameService : IGameService {
                 // AI
                 .Add(pool.CreateFirstBossSystem())
 
-                // blockade
+                // special enemies
+                .Add(pool.CreateMotherShipSystem())
                 .Add(pool.CreateMovingBlockadeSystem())
 
             // Tween

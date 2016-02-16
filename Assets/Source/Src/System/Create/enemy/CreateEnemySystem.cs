@@ -10,10 +10,21 @@ public class CreateEnemySystem : IInitializeSystem, ISetPool
         this.pool = pool;
     }
 
-    public void Initialize() {
-        for (int i = 1; i <= ENEMY_COUNT; i++) {
+    public void Initialize()
+    {
+        for (int i = 1; i <= ENEMY_COUNT; i++)
+        {
             pool.CreateEntity()
                 .AddComponent(ComponentIds.EnemyModel, Utils.Deserialize<EnemyModelComponent>(i.ToString()));
         }
+        createEnemyFactory();
+    }
+
+    private void createEnemyFactory()
+    {
+        EnemyFactory factory = new EnemyFactory();
+        factory.SetPool(pool);
+        pool.CreateEntity()
+            .AddEnemyFactory(factory);
     }
 }

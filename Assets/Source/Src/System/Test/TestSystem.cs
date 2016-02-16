@@ -57,8 +57,22 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		}
 		if (Input.GetKeyDown(KeyCode.E)) {
 			endGame();
-		}
-	}
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            _pool.CreateEntity()
+                .AddHealth(10000)
+                .AddVelocityLimit(0.0f)
+                .AddVelocity(new Vector2())
+                .AddCollision(CollisionTypes.Enemy, 5000)
+                .AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed)
+                .AddExplosionOnDeath(1.0f, Resource.Explosion)
+                .AddResource(ResourceWithColliders.Blockade)
+                .IsMoveWithCamera(true)
+                .AddMotherShip(0.0f, 1.0f, 3.0f, 0, 4, 1, 1000, 1, 3.0f)
+                .AddPosition(new Vector2(0.0f, _playerGroup.GetSingleEntity().position.pos.y + 1.0f));
+        }
+    }
 	
 	void changeCamera() {
 		Group group = _pool.GetGroup(Matcher.Camera);

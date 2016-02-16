@@ -2,45 +2,51 @@ using Entitas;
 using UnityEngine;
 
 public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
+	Pool pool;
+	Group camera;
+	Group group;
+	Group difficulty;
+	Group time;
+    Group enemyFactory;
 
-	Pool _pool;
-	Group _camera;
-	Group _group;
-	Group _difficulty;
-	Group _time;
+    EnemyFactory factory;
 
-	EnemyFactory _factory;
-	
-	public void SetPool(Pool pool) {
-		_pool = pool;
-		_group = pool.GetGroup(Matcher.WaveSpawner);
-		_difficulty = pool.GetGroup(Matcher.DifficultyController);
-		_time = pool.GetGroup(Matcher.Time);
-		_camera = pool.GetGroup(Matcher.Camera);
-
-		_factory = new EnemyFactory();
-		_factory.SetPool(_pool, _pool.GetGroup(Matcher.PathModel), _pool.GetGroup(Matcher.EnemyModel));
+    public void SetPool(Pool pool) {
+		this.pool = pool;
+		group = pool.GetGroup(Matcher.WaveSpawner);
+		time = pool.GetGroup(Matcher.Time);
+		camera = pool.GetGroup(Matcher.Camera);
+        enemyFactory = pool.GetGroup(Matcher.EnemyFactory);
 	}
 	
-	public void Execute() {
-		Vector3 cameraPosition = _camera.GetSingleEntity().position.pos;
-		DifficultyControllerComponent difficulty = _difficulty.GetSingleEntity().difficultyController;
-		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
-		float healthMultiplier = ((float)difficulty.hpBoostPercent + 100.0f) / 100.0f;
+	public void Execute()
+    {
+        Vector3 cameraPosition = camera.GetSingleEntity().position.pos;
+        float deltaTime = time.GetSingleEntity().time.gameDeltaTime;
+        EnemyFactory factory = getFactory();
 
-		foreach (Entity e in _group.GetEntities()) {
-			WaveSpawnerComponent component = e.waveSpawner;
-			component.time -= deltaTime; 
+        foreach (Entity e in group.GetEntities())
+        {
+            WaveSpawnerComponent component = e.waveSpawner;
+            component.time -= deltaTime;
 
-			if (component.time < 0.0f) {
-				_factory.CreateEnemyByType(component.type, 0.0f, cameraPosition.y, (int)(component.health * healthMultiplier), 
-				                           difficulty.missileSpeedBoostPercent, component.path, component.grid, component.damage, component.speed);
-				component.time = component.timeOffset;
-				component.count = component.count - 1;
-			}
-			if (component.count == 0) {
-				e.isDestroyEntity = true;
-			}
-		}
-	}
+            if (component.time < 0.0f)
+            {
+                factory.CreateEnemyByType(component.type, 0.0f, cameraPosition.y, component.health, component.path, component.grid, component.damage, component.speed);
+                component.time = component.timeOffset;
+                component.count = component.count - 1;
+            }
+            if (component.count == 0)
+            {
+                e.isDestroyEntity = true;
+            }
+        }
+    }
+
+    EnemyFactory getFactory()
+    {
+        if (factory == null)
+            factory = enemyFactory.GetSingleEntity().enemyFactory.factory;
+        return factory;
+    }
 }

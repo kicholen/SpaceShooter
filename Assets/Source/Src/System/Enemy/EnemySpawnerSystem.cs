@@ -2,32 +2,30 @@ using Entitas;
 using UnityEngine;
 
 public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
+	Pool pool;
+	Group group;
+	Group camera;
+    Group enemyFactory;
 
-	Group _group;
-	Group _camera;
-	Group _difficulty;
-	Pool _pool;
-	EnemyFactory _factory;
+    EnemyFactory factory;
 
-	public void SetPool(Pool pool) {
-		_pool = pool;
-		_group = pool.GetGroup(Matcher.EnemySpawner);
-		_camera = pool.GetGroup(Matcher.Camera);
-		_difficulty = pool.GetGroup(Matcher.DifficultyController);
-		_factory = new EnemyFactory();
-		_factory.SetPool(_pool, _pool.GetGroup(Matcher.PathModel), _pool.GetGroup(Matcher.EnemyModel));
+    public void SetPool(Pool pool) {
+		this.pool = pool;
+		group = pool.GetGroup(Matcher.EnemySpawner);
+		camera = pool.GetGroup(Matcher.Camera);
+        enemyFactory = pool.GetGroup(Matcher.EnemyFactory);
 	}
 	
 	public void Execute() {
-		DifficultyControllerComponent difficulty = _difficulty.GetSingleEntity().difficultyController;
-		Camera camera = _camera.GetSingleEntity().camera.camera;
-		Vector3 cameraPosition = camera.transform.position;
-		foreach (Entity e in _group.GetEntities()) {
-			spawnIfCan(e, cameraPosition, difficulty);
+        Vector3 cameraPosition = camera.GetSingleEntity().position.pos;
+        EnemyFactory factory = getFactory();
+
+        foreach (Entity e in group.GetEntities()) {
+			spawnIfCan(e, cameraPosition, factory);
 		}
 	}
 	
-	void spawnIfCan(Entity e, Vector3 cameraPosition, DifficultyControllerComponent difficulty) {
+	void spawnIfCan(Entity e, Vector3 cameraPosition, EnemyFactory factory) {
 		EnemySpawnerComponent enemySpawner = e.enemySpawner;
 		LevelModelComponent levelModel = enemySpawner.model;
 
@@ -35,8 +33,7 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 			EnemyModel enemyModel = levelModel.enemies[levelModel.enemyIndex];
 			if (enemyModel.spawnBarrier < cameraPosition.y) {
 				levelModel.enemyIndex += 1;
-                float healthMultiplier = ((float)difficulty.hpBoostPercent + 100.0f) / 100.0f;
-                _factory.CreateEnemyByModel(enemyModel, difficulty.missileSpeedBoostPercent, healthMultiplier);
+                factory.CreateEnemyByModel(enemyModel);
 			}
 		}
 
@@ -44,9 +41,16 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 			WaveModel waveModel = levelModel.waves[levelModel.waveIndex];
 			if (waveModel.spawnBarrier < cameraPosition.y) {
 				levelModel.waveIndex += 1;
-				_pool.CreateEntity()
+				pool.CreateEntity()
 					.AddWaveSpawner(waveModel.count, waveModel.type, waveModel.spawnOffset, 0.0f, waveModel.speed, waveModel.health, waveModel.path, waveModel.grid, waveModel.damage);
 			}
 		}
-	}
+    }
+
+    EnemyFactory getFactory()
+    {
+        if (factory == null)
+            factory = enemyFactory.GetSingleEntity().enemyFactory.factory;
+        return factory;
+    }
 }

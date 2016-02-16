@@ -6,7 +6,7 @@ public class CollisionSystem : IExecuteSystem, ISetPool {
 	Group _difficulty;
 
 	public void SetPool(Pool pool) {
-		_group = pool.GetGroup(Matcher.AllOf(Matcher.Collision, Matcher.Health));
+		_group = pool.GetGroup(Matcher.AllOf(Matcher.Collision, Matcher.Health, Matcher.GameObject));
 		_difficulty = pool.GetGroup(Matcher.DifficultyController);
 	}
 	
