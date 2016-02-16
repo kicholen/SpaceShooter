@@ -6,5 +6,6 @@ public static class Resource {
 	public const string Particle = "Particle";
 	public const string Explosion = "Explosions/Explosion04c";
 	public const string ExplosionMissile = "Explosions/ExplosionMissile";
-	public const string Background = "Background";
+	public const string AtomBomb = "Explosions/AtomBomb";
+    public const string Background = "Background";
 }

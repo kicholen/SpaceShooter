@@ -1,6 +1,1 @@
-public class GameActivateLaserEvent : GameEvent {
-	
-	public GameActivateLaserEvent() {
-	}
-	
-}
+public class GameActivateLaserEvent : GameEvent { }

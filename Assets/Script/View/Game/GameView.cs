@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System;
 
 public class GameView : View, IView, Updateable {
 
-	List<Updateable> updateables; //todo change this one, for example replace with interface
+	List<Updateable> updateables;
 	IGameService gameService;
 	
 	public GameView(List<Updateable> updateables, IGameService gameService) : base("View/GameView") {
@@ -18,6 +19,7 @@ public class GameView : View, IView, Updateable {
         base.Init();
         uiFactoryService.AddButton(go.transform, "Exit", onExitClicked);
         uiFactoryService.AddButton(go.transform, "Laser", onLaserClicked);
+        uiFactoryService.AddButton(go.transform, "Atom", onAtomBombClicked);
 
         eventService.AddListener<GameSlowEvent>(onGameSlow);
         go.SetActive(false);
@@ -55,5 +57,10 @@ public class GameView : View, IView, Updateable {
 
 	void onLaserClicked() {
 		eventService.Dispatch<GameActivateLaserEvent>(new GameActivateLaserEvent());
-	}
+    }
+
+    void onAtomBombClicked()
+    {
+        eventService.Dispatch<GameSpawnAtomBombEvent>(new GameSpawnAtomBombEvent());
+    }
 }

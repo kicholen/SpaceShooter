@@ -95,6 +95,7 @@ public class GameService : IGameService {
                 .Add(pool.CreateDispersionMissileSpawnerSystem())
                 .Add(pool.CreateTargetMissileSpawnerSystem())
                 .Add(pool.CreateTargetMissileSystem())
+                .Add(pool.CreateAtomBombSystem())
 
             // AddGO
             .Add(pool.CreateAddGameObjectSystem())

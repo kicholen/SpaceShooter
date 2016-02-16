@@ -16,6 +16,7 @@ public class PlayerInputSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 
 	public void Initialize() {
 		_pool.GetGroup(Matcher.EventService).GetSingleEntity().eventService.dispatcher.AddListener<GameActivateLaserEvent>(activateLaser);
+		_pool.GetGroup(Matcher.EventService).GetSingleEntity().eventService.dispatcher.AddListener<GameSpawnAtomBombEvent>(spawnAtomBomb);
 	}
 
 	public void Execute() {
@@ -88,9 +89,15 @@ public class PlayerInputSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 			player.AddLaserSpawner(5.0f, 0.0f, 0.0f, new Vector2(), CollisionTypes.Player, null)
 				.AddDelayedCall(5.0f, deactivateLaser);
 		}
-	}
+    }
 
-	void deactivateLaser(Entity player) {
+    void spawnAtomBomb(GameSpawnAtomBombEvent e)
+    {
+        _pool.CreateEntity()
+            .IsAtomBomb(true);
+    }
+
+    void deactivateLaser(Entity player) {
 		if (player!=null&&player.hasLaserSpawner) {
 			player.RemoveLaserSpawner();
 		}
