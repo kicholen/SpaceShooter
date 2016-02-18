@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -51,7 +52,7 @@ public class RightBottomPanelEnemyViewUpdater : EditorViewUpdaterBase {
         List<string> options = EditLevelView.pathService.GetPathNames();
         options.Add("0");
         return createDropdownElement("path", enemyExecutor.getPath().ToString(), options, (value) => {
-            enemyExecutor.Execute(new ChangeEnemyPathAction(value));
+            enemyExecutor.Execute(new ChangeEnemyPathAction(options[Convert.ToInt16(value)]));
         });
     }
 

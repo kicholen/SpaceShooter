@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -52,7 +53,7 @@ public class RightBottomPanelWaveViewUpdater : EditorViewUpdaterBase {
         List<string> options = EditLevelView.pathService.GetPathNames();
         options.Add("0");
         return createDropdownElement("path", waveExecutor.getPath().ToString(), options, (value) => {
-            waveExecutor.Execute(new ChangeWavePathAction(value));
+            waveExecutor.Execute(new ChangeWavePathAction(options[Convert.ToInt16(value)]));
         });
     }
 
