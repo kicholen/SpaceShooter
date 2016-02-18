@@ -1,17 +1,17 @@
 using Entitas;
 
 public class CreateBonusSystem : IInitializeSystem, ISetPool {
-	Pool _pool;
+	Pool pool;
 
-	const int BONUSES_COUNT = 2;
+	const int BONUSES_COUNT = 7;
 
 	public void SetPool(Pool pool) {
-		_pool = pool;
+		this.pool = pool;
 	}
 	
 	public void Initialize() {
 		for (int i = 1; i <= BONUSES_COUNT; i++) {
-			_pool.CreateEntity()
+			pool.CreateEntity()
 				.AddComponent(ComponentIds.BonusModel, Utils.Deserialize<BonusModelComponent>(i.ToString()));
 		}
 	}

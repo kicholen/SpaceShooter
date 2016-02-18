@@ -5,54 +5,75 @@ using System.Collections.Generic;
 public class CreateLevelSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.CreateLevel.OnEntityAdded(); } }
 
-	Pool _pool;
-	Group _group;
-	Group _players;
-	Group _cameras;
+	Pool pool;
+	Group group;
+	Group players;
+	Group cameras;
 
 	public void SetPool(Pool pool) {
-		_pool = pool;
-		_group = _pool.GetGroup(Matcher.LevelModel);
-		_players = _pool.GetGroup(Matcher.Player);
-		_cameras = _pool.GetGroup(Matcher.Camera);
+		this.pool = pool;
+        group = this.pool.GetGroup(Matcher.LevelModel);
+        players = this.pool.GetGroup(Matcher.Player);
+        cameras = this.pool.GetGroup(Matcher.Camera);
 	}
 	
-	public void Execute(List<Entity> entities) {
-		Entity e = entities.SingleEntity();
-		e.isDestroyEntity = true;
+	public void Execute(List<Entity> entities)
+    {
+        Entity e = entities.SingleEntity();
+        Entity cameraEntity = cameras.GetSingleEntity();
+        Entity player = players.GetSingleEntity();
+        CreateLevelComponent createLevel = e.createLevel;
+        LevelModelComponent component = createLevelComponent(createLevel);
+        Vector2 screenSize = getScreenSize(cameraEntity);
 
-		CreateLevelComponent createLevel = e.createLevel;
+        addCameraSnapPositionIfNotExist(component, cameraEntity);
+        player.AddSnapPosition(component.position.x, component.position.y, screenSize.x, screenSize.y, true);
+        createBackground(screenSize.x, screenSize.y);
+        createShipBonus();
 
-		LevelModelComponent component = getLevelModelIfExists(createLevel.level);
-		if (component == null) {
-			component = Utils.Deserialize<LevelModelComponent>(createLevel.level.ToString());
-			_pool.CreateEntity()
-				.AddComponent(ComponentIds.LevelModel, component);
-		}
-		else {
-			component.enemyIndex = 0;
-			component.waveIndex = 0;
-		}
+        e.isDestroyEntity = true;
+    }
 
-		_pool.CreateEntity()
-			.AddEnemySpawner(component);
+    void createShipBonus()
+    {
+        pool.CreateEntity()
+            .AddShipBonus(0.0f, 0.0f);
+    }
 
-		Entity cameraEntity = _cameras.GetSingleEntity();
-		if (!cameraEntity.hasSnapPosition) {
-			cameraEntity.AddSnapPosition(component.position.x, component.position.y, component.size.x, component.size.y, false);
-		}
+    Vector2 getScreenSize(Entity cameraEntity)
+    {
+        Camera camera = cameraEntity.camera.camera;
+        Vector2 screenSize = new Vector2(camera.orthographicSize * camera.aspect * 2.0f, camera.orthographicSize * 2.0f);
+        return screenSize;
+    }
 
-		Entity player = _players.GetSingleEntity();
-		Camera camera = cameraEntity.camera.camera;
-		float screenWidth = camera.orthographicSize * camera.aspect * 2.0f;
-		float screenHeight = camera.orthographicSize * 2.0f;
-		player.AddSnapPosition(component.position.x, component.position.y, screenWidth, screenHeight, true);
+    void addCameraSnapPositionIfNotExist(LevelModelComponent component, Entity cameraEntity)
+    {
+        if (!cameraEntity.hasSnapPosition)
+        {
+            cameraEntity.AddSnapPosition(component.position.x, component.position.y, component.size.x, component.size.y, false);
+        }
+    }
 
-		createBackground(screenWidth, screenHeight);
-	}
+    LevelModelComponent createLevelComponent(CreateLevelComponent createLevel)
+    {
+        LevelModelComponent component = getLevelModelIfExists(createLevel.level);
+        if (component == null)
+        {
+            component = Utils.Deserialize<LevelModelComponent>(createLevel.level.ToString());
+            pool.CreateEntity()
+                .AddComponent(ComponentIds.LevelModel, component);
+        }
+        component.enemyIndex = 0;
+        component.waveIndex = 0;
 
-	LevelModelComponent getLevelModelIfExists(int id) {
-		foreach (Entity e in _group.GetEntities()) {
+        pool.CreateEntity()
+            .AddEnemySpawner(component);
+        return component;
+    }
+
+    LevelModelComponent getLevelModelIfExists(int id) {
+		foreach (Entity e in group.GetEntities()) {
 			if (id == e.levelModel.id) {
 				return e.levelModel;
 			}
@@ -61,7 +82,7 @@ public class CreateLevelSystem : IReactiveSystem, ISetPool {
 	}
 
 	void createBackground(float width, float height) {
-		_pool.CreateEntity()
+		pool.CreateEntity()
 			.IsMoveWithCamera(true)
 			.AddVelocity(new Vector2())
 			.AddVelocityLimit(0.0f)

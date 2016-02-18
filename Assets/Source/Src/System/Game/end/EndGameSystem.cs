@@ -32,7 +32,8 @@ public class EndGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool {
 		clearPlayer();
 		clearPause();
 		clearBlockade();
-		setInput(false);
+        clearShipBonus();
+        setInput(false);
 	}
 	
 	void setCamera() {

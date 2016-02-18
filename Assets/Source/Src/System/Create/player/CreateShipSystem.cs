@@ -78,7 +78,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			addSecondaryMissiles(children, parent);
 		}
         //addHelperShips(children, parent, component);
-        addShield(children, parent, component);
+        //addShield(children, parent, component);
 
 		addNonRemovable(children);
 		return children;

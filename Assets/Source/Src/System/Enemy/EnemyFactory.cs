@@ -261,9 +261,9 @@ public class EnemyFactory {
 			.IsNonRemovable(true)
 			.IsActive(true);
 		if (model.health >= 0) {
-			e.AddHealth((int)(model.health * healthFactor))
-				.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed)
-				.AddExplosionOnDeath(1.0f, Resource.Explosion);
+            e.AddHealth((int)(model.health * healthFactor))
+                .AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed | BonusTypes.Laser | BonusTypes.Shield | BonusTypes.Atom | BonusTypes.FireRate | BonusTypes.Damage)
+                .AddExplosionOnDeath(1.0f, Resource.Explosion);
 		}
 		return e;
 	}
@@ -280,8 +280,8 @@ public class EnemyFactory {
 			.IsActive(true);
 		if (health >= 0) {
 			e.AddHealth(health)
-				.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed)
-				.AddExplosionOnDeath(1.0f, Resource.Explosion);
+				.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed | BonusTypes.Laser | BonusTypes.Shield | BonusTypes.Atom | BonusTypes.FireRate | BonusTypes.Damage)
+                .AddExplosionOnDeath(1.0f, Resource.Explosion);
 		}
 		return e;
 	}
@@ -294,8 +294,8 @@ public class EnemyFactory {
 			.AddCollision(CollisionTypes.Enemy, damage);
 		if (health >= 0) {
 			e.AddHealth(health)
-				.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed)
-				.AddExplosionOnDeath(1.0f, Resource.Explosion);
+				.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed | BonusTypes.Laser | BonusTypes.Shield | BonusTypes.Atom | BonusTypes.FireRate | BonusTypes.Damage)
+                .AddExplosionOnDeath(1.0f, Resource.Explosion);
 		}
 		return e;
 	}
