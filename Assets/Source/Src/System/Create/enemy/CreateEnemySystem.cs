@@ -4,7 +4,7 @@ public class CreateEnemySystem : IInitializeSystem, ISetPool
 {
     Pool pool;
 
-    const int ENEMY_COUNT = 1;
+    const int ENEMY_COUNT = 18;
 
     public void SetPool(Pool pool) {
         this.pool = pool;

@@ -105,9 +105,16 @@ public class EditLevelView : View, IView {
         modifier.SetSelectedType(type);
     }
 
-    void save() {
+    void save()
+    {
+        sortWavesAndEnemies();
         endGame();
         levelService.UpdateLevel(component, goToLevelsView);
+    }
+
+    void sortWavesAndEnemies()
+    {
+        executor.Execute(new SortWavesAndEnemiesAction());
     }
 
     void delete() {
@@ -120,6 +127,7 @@ public class EditLevelView : View, IView {
     }
 
     void startGame() {
+        sortWavesAndEnemies();
         eventService.Dispatch<NoActiveModelEvent>(new NoActiveModelEvent());
         pool.GetGroup(Matcher.CurrentShip).GetSingleEntity().currentShip.model.health = int.MaxValue;
         go.AddComponent<HighlightCurrentNodeBehaviour>();
