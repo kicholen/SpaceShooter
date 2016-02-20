@@ -1,8 +1,7 @@
-using Entitas;
+﻿using Entitas;
 using UnityEngine;
 
 public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
-	Pool pool;
 	Group camera;
 	Group group;
 	Group difficulty;
@@ -12,7 +11,6 @@ public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
     EnemyFactory factory;
 
     public void SetPool(Pool pool) {
-		this.pool = pool;
 		group = pool.GetGroup(Matcher.WaveSpawner);
 		time = pool.GetGroup(Matcher.Time);
 		camera = pool.GetGroup(Matcher.Camera);

@@ -29,20 +29,8 @@ public class HomeMissileSystem : IExecuteSystem, ISetPool {
 	void navigateMissile(Entity e, HomeMissileComponent homeMissile) {
         FollowTargetComponent targetComponent = e.followTarget;
 
-        // Find out what type of thing we're targeting, in case of
-        // it dies and we'll need another similiar target.
-        if (homeMissile.targetCollisionType == CollisionTypes.Unknown) {
-            if (targetComponent.target == null) {
-                // this missile doesn't know it's target and can't find it. Please DIE!
-                e.isDestroyEntity = true;
-                return;
-            }
-
-            homeMissile.targetCollisionType = targetComponent.target.collision.collide;
-        }
-
+        // The target is not alive, so go find another one.
         if (targetComponent.target == null || !targetComponent.target.hasGameObject) {
-            // The target is not alive, so go find another one.
             e.AddFindTarget(homeMissile.targetCollisionType);
             e.RemoveFollowTarget();
             return;

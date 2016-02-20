@@ -1,4 +1,4 @@
-using Entitas;
+﻿using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,6 @@ public class ActivateBonusSystem : IReactiveSystem, ISetPool {
 	Group currentShip;
     Group player;
     Group shipBonus;
-    Group input;
 
     public void SetPool(Pool pool) {
 		this.pool = pool;
@@ -19,7 +18,6 @@ public class ActivateBonusSystem : IReactiveSystem, ISetPool {
 		currentShip = pool.GetGroup(Matcher.CurrentShip);
         player = pool.GetGroup(Matcher.Player);
         shipBonus = pool.GetGroup(Matcher.ShipBonus);
-        input = pool.GetGroup(Matcher.Input);
     }
 
     public void Execute(List<Entity> entities) {

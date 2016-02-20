@@ -8,14 +8,12 @@ public class AtomBombSystem : IReactiveSystem, ISetPool
 
     const float flyDuration = 1.0f;
 
-    Pool pool;
     Group enemy;
     Group player;
     Group camera;
 
     public void SetPool(Pool pool)
     {
-        this.pool = pool;
         enemy = pool.GetGroup(Matcher.Enemy);
         player = pool.GetGroup(Matcher.Player);
         camera = pool.GetGroup(Matcher.Camera);
@@ -28,14 +26,13 @@ public class AtomBombSystem : IReactiveSystem, ISetPool
             Vector2 playerPosition = player.GetSingleEntity().position.pos;
             Vector2 cameraPosition = camera.GetSingleEntity().position.pos;
 
-            Entity bomb = pool.CreateEntity()
-                .AddResource(Resource.Particle)
+            e.AddResource(Resource.Particle)
                 .AddCameraShakeOnDeath(1)
                 .AddPosition(playerPosition)
                 .AddExplosionOnDeath(1.0f, Resource.AtomBomb)
                 .AddTween(true, new System.Collections.Generic.List<Tween>());
 
-            bomb.tween.AddTween(bomb.position, EaseTypes.cubicIn, PositionAccessorType.XY, flyDuration)
+            e.tween.AddTween(e.position, EaseTypes.cubicIn, PositionAccessorType.XY, flyDuration)
                 .From(playerPosition.x, playerPosition.y)
                 .To(cameraPosition.x, cameraPosition.y + Config.CAMERA_SPEED * flyDuration)
                 .SetEndCallback(destroyAllEnemies);

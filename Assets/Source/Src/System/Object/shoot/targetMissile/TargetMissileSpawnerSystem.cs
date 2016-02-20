@@ -2,19 +2,19 @@
 using UnityEngine;
 
 public class TargetMissileSpawnerSystem : IExecuteSystem, ISetPool {
-    Pool _pool;
-    Group _time;
-    Group _missiles;
+    Pool pool;
+    Group group;
+    Group time;
 
     public void SetPool(Pool pool) {
-        _pool = pool;
-        _missiles = _pool.GetGroup(Matcher.TargetMissileSpawner);
-        _time = pool.GetGroup(Matcher.Time);
+        this.pool = pool;
+        group = this.pool.GetGroup(Matcher.TargetMissileSpawner);
+        time = pool.GetGroup(Matcher.Time);
     }
 
     public void Execute() {
-        float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
-        foreach (Entity e in _missiles.GetEntities()) {
+        float deltaTime = time.GetSingleEntity().time.gameDeltaTime;
+        foreach (Entity e in group.GetEntities()) {
             TargetMissileSpawnerComponent missile = e.targetMissileSpawner;
             missile.time -= deltaTime;
             spawnMissileIfDelayReached(deltaTime, e, missile);
@@ -29,7 +29,7 @@ public class TargetMissileSpawnerSystem : IExecuteSystem, ISetPool {
     }
 
     void spawnMissile(TargetMissileSpawnerComponent missile, Vector2 position) {
-        _pool.CreateEntity()
+        pool.CreateEntity()
             .AddPosition(new Vector2(position.x, position.y))
             .AddVelocityLimit(missile.velocity)
             .AddHealth(0)

@@ -12,17 +12,15 @@ namespace Entitas {
             _magnetComponentPool.Clear();
         }
 
-        public Entity AddMagnet(float newVelocity, float newRadius) {
+        public Entity AddMagnet(float newRadius) {
             var component = _magnetComponentPool.Count > 0 ? _magnetComponentPool.Pop() : new MagnetComponent();
-            component.velocity = newVelocity;
             component.radius = newRadius;
             return AddComponent(ComponentIds.Magnet, component);
         }
 
-        public Entity ReplaceMagnet(float newVelocity, float newRadius) {
+        public Entity ReplaceMagnet(float newRadius) {
             var previousComponent = hasMagnet ? magnet : null;
             var component = _magnetComponentPool.Count > 0 ? _magnetComponentPool.Pop() : new MagnetComponent();
-            component.velocity = newVelocity;
             component.radius = newRadius;
             ReplaceComponent(ComponentIds.Magnet, component);
             if (previousComponent != null) {

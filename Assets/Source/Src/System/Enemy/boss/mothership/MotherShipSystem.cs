@@ -1,10 +1,8 @@
-﻿using System;
-using Entitas;
+﻿using Entitas;
 using UnityEngine;
 
 public class MotherShipSystem : IExecuteSystem, ISetPool
 {
-    Pool pool;
     Group group;
     Group time;
     Group enemyFactory;
@@ -13,7 +11,6 @@ public class MotherShipSystem : IExecuteSystem, ISetPool
 
     public void SetPool(Pool pool)
     {
-        this.pool = pool;
         group = pool.GetGroup(Matcher.AllOf(Matcher.MotherShip, Matcher.Position));
         time = pool.GetGroup(Matcher.Time);
         enemyFactory = pool.GetGroup(Matcher.EnemyFactory);

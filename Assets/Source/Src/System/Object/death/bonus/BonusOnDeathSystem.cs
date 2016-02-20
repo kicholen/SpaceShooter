@@ -5,9 +5,9 @@ using UnityEngine;
 public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.BonusOnDeath, Matcher.CollisionDeath).OnEntityAdded(); } }
 
-	Pool _pool;
-	Group _group;
-	Group _players;
+	Pool pool;
+	Group group;
+	Group players;
 
 	const float MAX_TWEEN_RADIUS = 1.0f;
 
@@ -16,18 +16,18 @@ public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 
 	public void SetPool(Pool pool) {
 		Random.seed = 42;
-		_pool = pool;
-		_group = pool.GetGroup(Matcher.BonusModel);
-		_players = pool.GetGroup(Matcher.Player);
+		this.pool = pool;
+		group = pool.GetGroup(Matcher.BonusModel);
+		players = pool.GetGroup(Matcher.Player);
 	}
 	
 	public void Execute(List<Entity> entities) {
-		Entity player = _players.GetSingleEntity();
+		Entity player = players.GetSingleEntity();
 		foreach (Entity e in entities) {
 			BonusOnDeathComponent bonus = e.bonusOnDeath;
 			int type = bonus.type;
 
-			foreach (Entity bonusEntity in _group.GetEntities()) {
+			foreach (Entity bonusEntity in group.GetEntities()) {
 				BonusModelComponent model = bonusEntity.bonusModel;
 				if ((type & model.type) > 0) {
 					if (Random.value <= model.probability) {
@@ -45,15 +45,16 @@ public class BonusOnDeathSystem : IReactiveSystem, ISetPool {
 		for (int i = 0; i < amount; i++) {
 			float offsetX = Random.Range(-MAX_TWEEN_RADIUS, MAX_TWEEN_RADIUS);
 			float offsetY = Random.Range(-MAX_TWEEN_RADIUS, MAX_TWEEN_RADIUS);
-			Entity bonusEntity = _pool.CreateEntity()
+			Entity bonusEntity = pool.CreateEntity()
 				.AddBonus(bonus.type)
+				.AddVelocityLimit(TEST_VELOCITY)
 				.AddVelocity(new Vector2())
-				.AddTween(true, new List<Tween>())
+                .AddTween(true, new List<Tween>())
 				.AddPosition(new Vector2(position.x, position.y))
 				.AddHealth(0)
 				.AddCollision(CollisionTypes.Bonus, 0)
 				.AddFollowTarget(follow)
-				.AddMagnet(TEST_VELOCITY, TEST_RADIUS)
+				.AddMagnet(TEST_RADIUS)
                 .AddTweenOnDeath(0.5f, 1.4f)
 				.AddResource(bonus.resource);
 			bonusEntity.tween.AddTween(bonusEntity.position, EaseTypes.linear, PositionAccessorType.XY, 2.0f)

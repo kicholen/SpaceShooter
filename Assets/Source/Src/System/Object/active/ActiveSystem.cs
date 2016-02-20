@@ -4,7 +4,6 @@ using UnityEngine;
 public class ActiveSystem : IExecuteSystem, ISetPool {
 	Group camera;
 	Group group;
-    Rect rect;
 
     public void SetPool(Pool pool) {
 		camera = pool.GetGroup(Matcher.Camera);
@@ -12,19 +11,13 @@ public class ActiveSystem : IExecuteSystem, ISetPool {
 	}
 	
 	public void Execute() {
-		Rect rect = getCameraRect();
+		Rect rect = calculateCameraRect();
 		foreach (Entity e in group.GetEntities()) {
 			if (rect.Contains(e.position.pos)) {
 				e.isNonRemovable = false;
 				e.isActive = false;
 			}
 		}
-	}
-
-	Rect getCameraRect() {
-        if (rect == null)
-            rect = calculateCameraRect();
-        return rect;
 	}
 
     Rect calculateCameraRect()

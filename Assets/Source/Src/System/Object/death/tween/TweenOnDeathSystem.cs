@@ -24,7 +24,6 @@ public class TweenOnDeathSystem : IReactiveSystem {
     }
 
     void removeComponents(Entity e) {
-        e.RemovePosition();
         e.RemoveVelocity();
         e.RemoveCollision();
         e.RemoveMagnet();

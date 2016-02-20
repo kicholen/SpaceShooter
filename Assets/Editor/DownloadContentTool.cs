@@ -152,8 +152,8 @@ public class DownloadContentTool {
 
     static IPromise saveBonuses(List<BonusModelComponent> bonuses) {
         Promise promise = new Promise();
-        foreach (BonusModelComponent bonus in bonuses)
-            Utils.Serialize(bonus, bonus.type.ToString());
+        for (int i = 0; i < bonuses.Count; i++)
+            Utils.Serialize(bonuses[i], i.ToString());
         promise.Resolve();
         return promise;
     }
