@@ -20,4 +20,19 @@
     public int getWeapon() {
         return model.weapon;
     }
+
+    public bool getFaceDirection()
+    {
+        return model.faceDirection;
+    }
+
+    public float getRandomRotation()
+    {
+        return model.randomRotation;
+    }
+
+    public int getShakeCamera()
+    {
+        return model.shakeCamera;
+    }
 }

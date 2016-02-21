@@ -21,4 +21,8 @@ public class EnemyModelComponent : IComponent {
     public float timeDelay;
     public float delay;
     public float randomPositionOffsetX;
+
+    public bool faceDirection;
+    public int shakeCamera;
+    public float randomRotation;
 }

@@ -25,6 +25,9 @@ public class EnemyLeftPanelHud : EditorViewUpdaterBase {
     void setData() {
         createChangeEnemyResource().transform.SetParent(content, false);
         createChangeEnemyWeapon().transform.SetParent(content, false);
+        createChangeEnemyFaceDirection().transform.SetParent(content, false);
+        createChangeEnemyRandomRotation().transform.SetParent(content, false);
+        createChangeEnemyShakeCamera().transform.SetParent(content, false);
     }
 
     GameObject createChangeEnemyWeapon() {
@@ -46,6 +49,27 @@ public class EnemyLeftPanelHud : EditorViewUpdaterBase {
         return createDropdownElementOfString("resource", executor.getResource().ToString(), types, (value) => {
             setResource(value, types[Convert.ToInt16(value)]);
             executor.Execute(new ChangeEnemyModelResourceAction(types[Convert.ToInt16(value)]));
+        });
+    }
+
+    GameObject createChangeEnemyFaceDirection()
+    {
+        return createToggleElement("faceDirection", executor.getFaceDirection(), (value) => {
+            executor.Execute(new ChangeEnemyFaceDirectionAction(value));
+        });
+    }
+
+    GameObject createChangeEnemyRandomRotation()
+    {
+        return createInputElement("randomRotation", executor.getRandomRotation().ToString(), (value) => {
+            executor.Execute(new ChangeEnemyRandomRotationAction(value));
+        });
+    }
+
+    GameObject createChangeEnemyShakeCamera()
+    {
+        return createToggleElement("shakeCamera", executor.getShakeCamera() == 1, (value) => {
+            executor.Execute(new ChangeEnemyShakeCameraAction(value ? 1 : 0));
         });
     }
 

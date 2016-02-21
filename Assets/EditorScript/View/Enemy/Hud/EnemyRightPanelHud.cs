@@ -57,6 +57,7 @@ public class EnemyRightPanelHud : EditorViewUpdaterBase {
                 createChangeVelocityField().transform.SetParent(content, false);
                 createChangeAngleField().transform.SetParent(content, false);
                 createChangeWeaponResourceField().transform.SetParent(content, false);
+                createChangeVelocityField().transform.SetParent(content, false);
                 break;
             case WeaponTypes.Home:
                 createChangeVelocityField().transform.SetParent(content, false);

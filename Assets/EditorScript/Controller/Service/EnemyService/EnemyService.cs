@@ -68,7 +68,8 @@ public class EnemyService : IEnemyService {
                 if (enemy.type == e.enemyModel.type) {
                     e.ReplaceEnemyModel(enemy.id, enemy.type, enemy.resource, enemy.weapon, enemy.amount, enemy.time, enemy.spawnDelay,
                         enemy.weaponResource, enemy.velocity, enemy.angle, enemy.waves, enemy.angleOffset, enemy.startVelocity, enemy.followDelay,
-                        enemy.selfDestructionDelay, enemy.timeDelay, enemy.delay, enemy.randomPositionOffsetX);
+                        enemy.selfDestructionDelay, enemy.timeDelay, enemy.delay, enemy.randomPositionOffsetX, enemy.faceDirection, enemy.shakeCamera,
+                        enemy.randomRotation);
                     found = true;
                 }
             }

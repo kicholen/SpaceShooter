@@ -49,4 +49,15 @@ public class EditorViewUpdaterBase : BaseGui {
 
         return gameObject;
     }
+
+    protected GameObject createToggleElement(string text, bool value, UnityAction<bool> onValueChange)
+    {
+        GameObject gameObject = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/ToggleElement"));
+        gameObject.GetComponentInChildren<Text>().text = text;
+        Toggle toggle = gameObject.GetComponentInChildren<Toggle>();
+        toggle.isOn = value;
+        toggle.onValueChanged.AddListener(onValueChange);
+
+        return gameObject;
+    }
 }
