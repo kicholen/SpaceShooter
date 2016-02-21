@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class EditLevelView : View, IView {
     public static IPathService pathService;
+    public static IEnemyService enemyService;
 
     ILevelService levelService;
     IViewService viewService;
@@ -19,11 +20,13 @@ public class EditLevelView : View, IView {
     RightBottomPanelHud rightBottomPanelHud;
     RightLevelSliderHud rightLevelSliderHud;
 
-    public EditLevelView(Pool pool, ILevelService levelService, IViewService viewService, IPathService pathService) : base("EditorView/Level/EditLevelView") {
+    public EditLevelView(Pool pool, ILevelService levelService, IViewService viewService, IPathService pathService, IEnemyService enemyService)
+        : base("EditorView/Level/EditLevelView") {
         this.pool = pool;
         this.levelService = levelService;
         this.viewService = viewService;
         EditLevelView.pathService = pathService;
+        EditLevelView.enemyService = enemyService;
     }
 
     public void SetData(LevelModelComponent component) {

@@ -73,9 +73,10 @@ public class EditorServices : IServices {
         viewService.Init(this);
         translationService.Init();
         ViewService.SetView(ViewTypes.EDITOR_LANDING);
+        pool.GetGroup(Matcher.Time).GetSingleEntity().time.isPaused = false;
     }
-	
-	public void Update () {
+
+    public void Update () {
 		for (int i = 0; i < updateables.Count; i++) {
 			updateables[i].Update();
 		}

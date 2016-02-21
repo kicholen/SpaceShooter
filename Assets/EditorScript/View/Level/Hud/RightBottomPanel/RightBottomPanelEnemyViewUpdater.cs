@@ -63,8 +63,8 @@ public class RightBottomPanelEnemyViewUpdater : EditorViewUpdaterBase {
     }
 
     GameObject createChangeTypeField() {
-        List<string> types = typeof(EnemyTypes).GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public)
-            .Select(fieldInfo => ((int)fieldInfo.GetRawConstantValue()).ToString()).ToList<string>();
+        List<string> types = EditLevelView.enemyService.GetEnemyNames();
+        types.Insert(0, "0");
         return createDropdownElement("type", enemyExecutor.getType().ToString(), types, (value) => {
             enemyExecutor.Execute(new ChangeEnemyTypeAction(value));
         });

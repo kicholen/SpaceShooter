@@ -2,6 +2,7 @@
 using RSG;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class EnemyService : IEnemyService {
     IWwwService wwwService;
@@ -26,6 +27,11 @@ public class EnemyService : IEnemyService {
             promise.Reject(new Exception(error));
         });
         return promise;
+    }
+
+    public List<string> GetEnemyNames()
+    {
+        return enemies.Select(cmp => cmp.type.ToString()).ToList<string>();
     }
 
     public void LoadEnemyIds(Action<Dictionary<long, string>> onEnemiesLoaded) {

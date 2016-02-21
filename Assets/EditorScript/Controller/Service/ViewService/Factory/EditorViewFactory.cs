@@ -22,7 +22,11 @@
                     (services as EditorServices).BonusService, (services as EditorServices).DifficultyService);
                 break;
             case ViewTypes.EDITOR_EDIT_LEVEL:
-                view = new EditLevelView(services.Pool, (services as EditorServices).LevelService, services.ViewService, (services as EditorServices).PathService);
+                view = new EditLevelView(services.Pool,
+                    (services as EditorServices).LevelService,
+                    services.ViewService,
+                    (services as EditorServices).PathService,
+                    (services as EditorServices).EnemyService);
                 break;
             case ViewTypes.EDITOR_EDIT_ENEMY:
                 view = new EditEnemyView(services.Pool, services.ViewService, (services as EditorServices).EnemyService);

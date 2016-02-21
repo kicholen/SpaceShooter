@@ -30,7 +30,6 @@ public class EditEnemyView : View, IView {
         createEnemy();
         createDummy();
         createHud();
-        pool.GetGroup(Matcher.Time).GetSingleEntity().time.isPaused = false;
     }
 
     public override void Destroy() {
