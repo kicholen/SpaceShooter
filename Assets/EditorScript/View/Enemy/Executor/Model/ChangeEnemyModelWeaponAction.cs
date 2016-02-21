@@ -30,6 +30,11 @@ public class ChangeEnemyModelWeaponAction : IEnemyModelCmpAction {
     }
 
     string getDefaultResource(EnemyModelComponent model) {
-        return model.weapon == WeaponTypes.Home ? ResourceWithColliders.MissileEnemyHoming : ResourceWithColliders.MissileEnemy;
+        if (model.weapon == WeaponTypes.Home)
+            return ResourceWithColliders.MissileEnemyHoming;
+        if (model.weapon == WeaponTypes.Laser)
+            return Resource.Laser;
+
+        return ResourceWithColliders.MissileEnemy;
     }
 }

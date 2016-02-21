@@ -236,7 +236,7 @@ public class EnemyFactory {
                     component.startVelocity, component.followDelay, component.selfDestructionDelay, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Laser:
-                e.AddLaserSpawner(0.0f, component.velocity, component.velocity, component.angle, Vector2.up, CollisionTypes.Enemy, damage, Resource.Laser, null);
+                e.AddLaserSpawner(0.0f, component.velocity, component.velocity, component.angle, Vector2.up, CollisionTypes.Enemy, damage, component.weaponResource, null);
                 break;
             case WeaponTypes.Multiple:
                 e.AddMultipleMissileSpawner(component.amount, damage, 0, component.timeDelay, component.delay, component.time,
