@@ -12,7 +12,7 @@ public class LaserSystem : IExecuteSystem, ISetPool {
 		foreach (Entity e in _group.GetEntities()) {
 			LaserComponent component = e.laser;
 			Entity source = component.source;
-			if (source != null && source.hasLaserSpawner) { // todo make it child or sth
+			if (source != null && source.hasLaserSpawner) {
 				Vector2 sourcePosition = source.position.pos;
 				LaserSpawnerComponent sourceSpawner = source.laserSpawner;
 

@@ -26,5 +26,7 @@ public class EnemyChangeVelocityAction : IEnemyWeaponParameterAction {
             entity.homeMissileSpawner.velocity = velocity;
         if (entity.hasTargetMissileSpawner)
             entity.targetMissileSpawner.velocity = velocity;
+        if (entity.hasLaserSpawner)
+            entity.laserSpawner.maxHeight = velocity;
     }
 }

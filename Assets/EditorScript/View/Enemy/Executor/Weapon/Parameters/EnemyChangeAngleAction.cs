@@ -20,5 +20,7 @@ public class EnemyChangeAngleAction : IEnemyWeaponParameterAction {
             entity.dispersionMissileSpawner.angle = angle;
         if (entity.hasCircleMissileRotatedSpawner)
             entity.circleMissileRotatedSpawner.angle = angle;
+        if (entity.hasLaserSpawner)
+            entity.laserSpawner.angle = angle;
     }
 }

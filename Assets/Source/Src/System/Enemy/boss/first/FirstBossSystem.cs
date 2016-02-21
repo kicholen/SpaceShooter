@@ -1,10 +1,9 @@
-using Entitas;
-using UnityEngine;
+﻿using Entitas;
 
 public class FirstBossSystem : IExecuteSystem, ISetPool {
-	Pool _pool;
-	Group _group;
-	Group _time;
+	Pool pool;
+	Group group;
+	Group time;
 
 	const float EPSILON = 0.005f;
 
@@ -12,14 +11,14 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 	bool initalize = false;
 
 	public void SetPool(Pool pool) {
-		_pool = pool;
-		_group = pool.GetGroup(Matcher.FirstBoss);
-		_time = _pool.GetGroup(Matcher.Time);
+		this.pool = pool;
+		group = pool.GetGroup(Matcher.FirstBoss);
+        time = pool.GetGroup(Matcher.Time);
 	}
 	
 	public void Execute() {
-		float deltaTime = _time.GetSingleEntity().time.gameDeltaTime;
-		foreach (Entity e in _group.GetEntities()) {
+		float deltaTime = time.GetSingleEntity().time.gameDeltaTime;
+		foreach (Entity e in group.GetEntities()) {
 			if (e.position.pos.y == 0.0f) {
 				e.position.pos.y = 7.0f;
 			}
@@ -31,7 +30,7 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 
 			if (!tests) {
 				if (!e.hasLaserSpawner) {
-					e.AddLaserSpawner(5.0f, 0.0f, 0.0f, new UnityEngine.Vector2(), CollisionTypes.Enemy, null);
+					e.AddLaserSpawner(5.0f, 10.0f, 10.0f, 0.0f, new UnityEngine.Vector2(), CollisionTypes.Enemy, 1, Resource.EnemyLaser, null);
 				}
 				else {
 					LaserSpawnerComponent laser = e.laserSpawner;

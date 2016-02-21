@@ -1,4 +1,4 @@
-using Entitas;
+﻿using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -236,7 +236,7 @@ public class EnemyFactory {
                     component.startVelocity, component.followDelay, component.selfDestructionDelay, CollisionTypes.Enemy);
                 break;
             case WeaponTypes.Laser:
-                e.AddLaserSpawner(5.0f, 10.0f, 20.0f, new Vector2(), CollisionTypes.Enemy, null);
+                e.AddLaserSpawner(0.0f, component.velocity, component.velocity, component.angle, Vector2.up, CollisionTypes.Enemy, damage, Resource.Laser, null);
                 break;
             case WeaponTypes.Multiple:
                 e.AddMultipleMissileSpawner(component.amount, damage, 0, component.timeDelay, component.delay, component.time,

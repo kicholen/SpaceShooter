@@ -133,7 +133,7 @@ public class ActivateBonusSystem : IReactiveSystem, ISetPool {
 
         if (!playerEntity.hasLaserSpawner)
         {
-            playerEntity.AddLaserSpawner(5.0f, 0.0f, 0.0f, new Vector2(), CollisionTypes.Player, null)
+            playerEntity.AddLaserSpawner(5.0f, 10.0f, 10.0f, 0.0f, new Vector2(), CollisionTypes.Player, 1, Resource.Laser, null)
                 .AddDelayedCall(5.0f, deactivateLaser);
         }
     }

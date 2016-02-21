@@ -23,5 +23,12 @@ public class EnemyChangeWeaponResourceAction : IEnemyWeaponParameterAction {
             entity.missileSpawner.resource = weaponResource;
         if (entity.hasTargetMissileSpawner)
             entity.targetMissileSpawner.resource = weaponResource;
+        if (entity.hasLaserSpawner)
+        {
+            entity.laserSpawner.resource = weaponResource;
+            if (entity.laserSpawner.laser != null)
+                entity.laserSpawner.laser.isDestroyEntity = true;
+            entity.laserSpawner.laser = null;
+        }
     }
 }

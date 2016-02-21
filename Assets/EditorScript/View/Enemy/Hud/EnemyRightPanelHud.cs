@@ -65,7 +65,9 @@ public class EnemyRightPanelHud : EditorViewUpdaterBase {
                 createChangeSelfDestructDelayField().transform.SetParent(content, false);
                 break;
             case WeaponTypes.Laser:
-                //todo
+                createChangeAngleField().transform.SetParent(content, false);
+                createChangeVelocityField().transform.SetParent(content, false);
+                createChangeLaserResourceField().transform.SetParent(content, false);
                 break;
             case WeaponTypes.Multiple:
                 createChangeAmountField().transform.SetParent(content, false);
@@ -177,6 +179,17 @@ public class EnemyRightPanelHud : EditorViewUpdaterBase {
         types.Add(ResourceWithColliders.MissileEnemyHoming);
         types.Add(ResourceWithColliders.MissileEnemy);
         return createDropdownElementOfString("weaponResource", component.weaponResource, types, (value) => {
+            executor.Execute(new EnemyChangeWeaponResourceAction(types[Convert.ToInt16(value)]));
+        });
+    }
+
+    GameObject createChangeLaserResourceField()
+    {
+        List<string> types = new List<string>();
+        types.Add(Resource.Laser);
+        types.Add(Resource.EnemyLaser);
+        types.Add(Resource.BigEnemyLaser);
+        return createDropdownElementOfString("laserResource", component.weaponResource, types, (value) => {
             executor.Execute(new EnemyChangeWeaponResourceAction(types[Convert.ToInt16(value)]));
         });
     }
