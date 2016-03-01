@@ -37,6 +37,23 @@ public class LevelView : View, IView {
 		levels.Add(2);
 		levels.Add(101);
 		levels.Add(999);
+		levels.Add(13);
+		levels.Add(290);
+		levels.Add(323);
+		levels.Add(326);
+		levels.Add(328);
+		levels.Add(366);
+		levels.Add(400);
+		levels.Add(500);
+		levels.Add(562);
+		levels.Add(999);
+		levels.Add(1001);
+		levels.Add(1044);
+		levels.Add(1111);
+		levels.Add(1837);
+		levels.Add(1951);
+		levels.Add(2081);
+		levels.Add(2536);
 #endif
         for (int i = 0; i < levels.Count; i++) {
 			GameObject button = uiFactoryService.CreatePrefab("Element/SimpleButton");

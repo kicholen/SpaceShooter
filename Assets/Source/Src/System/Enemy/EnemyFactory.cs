@@ -39,8 +39,9 @@ public class EnemyFactory {
 
     Entity createEnemyByTypeFromComponent(EnemyModelComponent component, int type, float posX, float posY, int health, int path, int grid, int damage, float velocityLimit) {
         Entity e = createStandardEnemy(type, damage, posX, posY, health, velocityLimit, component.resource);
-        e.AddFaceDirection(true);
-        e.AddCameraShakeOnDeath(1);
+        e.AddFaceDirection(component.faceDirection);
+        addCameraShakeIfNeeded(component, e);
+        addRotationIfNeeded(component, e);
         addPathIfNeeded(e, posY, path);
         addWeapon(e, damage, component);
         return e;

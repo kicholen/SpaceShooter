@@ -4,7 +4,6 @@ using UnityEngine;
 public class WaveSpawnerSystem : IExecuteSystem, ISetPool {
 	Group camera;
 	Group group;
-	Group difficulty;
 	Group time;
     Group enemyFactory;
 
