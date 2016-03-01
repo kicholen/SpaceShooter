@@ -6,4 +6,5 @@ public static class BonusTypes {
 	public const int Atom = 1 << 4;
 	public const int FireRate = 1 << 5;
 	public const int Damage = 1 << 6;
+	public const int HomingMissile = 1 << 7;
 }

@@ -72,7 +72,7 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 	List<Entity> getShipChildren(Entity parent, ShipModelComponent component) {
 		List<Entity> children = new List<Entity>();
 		if (component.hasHomeMissile) {
-			addHomeMissile(children, parent, component);
+			//addHomeMissile(children, parent, component);
 		}
 		if (component.hasSecondaryMissiles) {
 			addSecondaryMissiles(children, parent);

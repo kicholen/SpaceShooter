@@ -55,6 +55,9 @@ public class ActivateBonusSystem : IReactiveSystem, ISetPool {
             case BonusTypes.Damage:
                 activateDamageBoost();
                 break;
+            case BonusTypes.HomingMissile:
+                spawnHomingMissiles();
+                break;
             default:
 			throw new UnityException("Unknown bonus type: " + bonus.type);
 		}
@@ -86,7 +89,8 @@ public class ActivateBonusSystem : IReactiveSystem, ISetPool {
                 ent.shipBonus.damageBoost = 0;
                 ent.shipBonus.fireRateBoost = 0;
             }
-            player.GetSingleEntity().isWeapon = false;
+            if(player.count > 0)
+                player.GetSingleEntity().isWeapon = false;
         });
     }
 
@@ -149,6 +153,30 @@ public class ActivateBonusSystem : IReactiveSystem, ISetPool {
         if (player != null && player.hasLaserSpawner)
         {
             player.RemoveLaserSpawner();
+        }
+    }
+
+    void spawnHomingMissiles()
+    {
+        Entity playerEntity = player.GetSingleEntity();
+        ShipModelComponent component = currentShip.GetSingleEntity().currentShip.model;
+
+        if (!playerEntity.hasHomeMissileSpawner)
+        {
+            playerEntity.AddHomeMissileSpawner(0.0f, component.homeMissileSpawnDelay, component.homeMissileDamage, ResourceWithColliders.MissileHoming, component.homeMissileVelocity, new Vector2(component.homeMissileVelocity * 0.6f, -1.2f), 0.25f, 3.0f, CollisionTypes.Player);
+            pool.CreateEntity()
+                .AddDelayedCall(1.0f, removeHomeMissile);
+        }
+    }
+
+    void removeHomeMissile(Entity entity)
+    {
+        entity.isDestroyEntity = true;
+        if (player.count > 0)
+        {
+            Entity e = player.GetSingleEntity();
+            if (e.hasHomeMissileSpawner)
+                e.RemoveHomeMissileSpawner();
         }
     }
 }

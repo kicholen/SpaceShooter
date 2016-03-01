@@ -155,15 +155,16 @@ public class EnemyFactory {
 			.AddCollision(CollisionTypes.Enemy, model.damage)
 			.IsNonRemovable(true)
 			.IsActive(true);
-		if (model.health >= 0) {
+		if (model.health >= 0)
+        {
             e.AddHealth((int)(model.health * healthFactor))
-                .AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed | BonusTypes.Laser | BonusTypes.Shield | BonusTypes.Atom | BonusTypes.FireRate | BonusTypes.Damage)
+                .AddBonusOnDeath(getAllBonuses())
                 .AddExplosionOnDeath(1.0f, Resource.Explosion);
-		}
+        }
         return e;
 	}
 
-	Entity createStandardEnemy(int type, int damage, float posX, float posY, int health, float speedLimit, string resource) {
+    Entity createStandardEnemy(int type, int damage, float posX, float posY, int health, float speedLimit, string resource) {
 		Entity e = pool.CreateEntity()
 			.AddEnemy(type)
 			.AddPosition(new Vector2(posX, posY))
@@ -175,7 +176,7 @@ public class EnemyFactory {
 			.IsActive(true);
 		if (health >= 0) {
 			e.AddHealth(health)
-				.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed | BonusTypes.Laser | BonusTypes.Shield | BonusTypes.Atom | BonusTypes.FireRate | BonusTypes.Damage)
+				.AddBonusOnDeath(getAllBonuses())
                 .AddExplosionOnDeath(1.0f, Resource.Explosion);
 		}
 		return e;
@@ -189,7 +190,7 @@ public class EnemyFactory {
 			.AddCollision(CollisionTypes.Enemy, damage);
 		if (health >= 0) {
 			e.AddHealth(health)
-				.AddBonusOnDeath(BonusTypes.Star | BonusTypes.Speed | BonusTypes.Laser | BonusTypes.Shield | BonusTypes.Atom | BonusTypes.FireRate | BonusTypes.Damage)
+				.AddBonusOnDeath(getAllBonuses())
                 .AddExplosionOnDeath(1.0f, Resource.Explosion);
 		}
 		return e;
@@ -269,5 +270,10 @@ public class EnemyFactory {
         if (difficultyController == null)
             difficultyController = difficulty.GetSingleEntity().difficultyController;
         return difficultyController;
+    }
+
+    int getAllBonuses()
+    {
+        return BonusTypes.Star | BonusTypes.Speed | BonusTypes.Laser | BonusTypes.Shield | BonusTypes.Atom | BonusTypes.FireRate | BonusTypes.Damage | BonusTypes.HomingMissile;
     }
 }
