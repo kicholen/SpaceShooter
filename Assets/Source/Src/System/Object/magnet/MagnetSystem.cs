@@ -2,7 +2,6 @@ using Entitas;
 using UnityEngine;
 
 public class MagnetSystem : IExecuteSystem, ISetPool {
-    const float POWER_OF_TWO = 2.0f;
 
     Group group;
 
@@ -19,22 +18,20 @@ public class MagnetSystem : IExecuteSystem, ISetPool {
 				Vector2 position = e.position.pos;
 
                 VelocityComponent velocity = e.velocity;
-                if (isPointInCircle(targetPosition.x, targetPosition.y, magnetComponent.radius, position.x, position.y))
+                if (Vector2.Distance(targetPosition, position) <= magnetComponent.radius)
                 {
-                    if (e.hasTween)
-                        e.RemoveTween();
-                    velocity.vel.Set((targetPosition.x - position.x), (targetPosition.y - position.y));
+                    removeTweenIfExist(e);
+                    velocity.vel = targetPosition - position;
                 }
                 else
-                {
-                    velocity.vel.Set(0.0f, 0.0f);
-                }
+                    velocity.vel.Set(Vector2.zero);
             }
 		}
 	}
 
-	bool isPointInCircle(float centerX, float centerY, float radiusPower, float x, float y) {
-		float distance = Mathf.Pow(centerX - x, POWER_OF_TWO) + Mathf.Pow(centerY - y, POWER_OF_TWO);
-		return distance < radiusPower;
-	}
+    void removeTweenIfExist(Entity e)
+    {
+        if (e.hasTween)
+            e.RemoveTween();
+    }
 }

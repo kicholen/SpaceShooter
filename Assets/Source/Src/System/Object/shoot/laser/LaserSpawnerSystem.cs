@@ -56,7 +56,6 @@ public class LaserSpawnerSystem : IExecuteSystem, ISetPool {
                 .AddLaser(laserHeight, component.direction, e)
                 .AddPosition(new Vector2().Set(e.position.pos))
                 .AddResource(component.resource);
-            Debug.Log(component.resource);
             laser.isNonRemovable = true;
             component.laser = laser;
         }
