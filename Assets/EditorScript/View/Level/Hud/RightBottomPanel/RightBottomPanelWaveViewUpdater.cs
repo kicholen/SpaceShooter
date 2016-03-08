@@ -68,8 +68,12 @@ public class RightBottomPanelWaveViewUpdater : EditorViewUpdaterBase {
     GameObject createChangeTypeField() {
         List<string> types = EditLevelView.enemyService.GetEnemyNames();
         types.Insert(0, "0");
+        types.Insert(0, "500");
+        types.Insert(0, "501");
+        types.Insert(0, "1000");
+
         return createDropdownElement("type", waveExecutor.getType().ToString(), types, (value) => {
-            waveExecutor.Execute(new ChangeWaveTypeAction(value));
+            waveExecutor.Execute(new ChangeWaveTypeAction(types[Convert.ToInt16(value)]));
         });
     }
 
