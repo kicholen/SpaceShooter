@@ -2,7 +2,6 @@
 using UnityEngine;
 
 public class EnemyFactory {
-	Pool pool;
 	Group paths;
     Group enemies;
     Group difficulty;
@@ -14,7 +13,6 @@ public class EnemyFactory {
 
     public void SetPool(Pool pool)
     {
-        this.pool = pool;
 		paths = pool.GetGroup(Matcher.PathModel);
 		enemies = pool.GetGroup(Matcher.EnemyModel);
         difficulty = pool.GetGroup(Matcher.DifficultyController);
