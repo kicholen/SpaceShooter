@@ -11,12 +11,12 @@ public class LeftPanelHud : BaseGui {
     LeftPanelViewState state;
     bool isGameInProgress;
 
-    public LeftPanelHud(Transform content, EventService eventService, LevelActionExecutor executor, Action onDelete, Action onSave, Action onBack) {
+    public LeftPanelHud(Transform content, EventService eventService, LevelActionExecutor executor, Action onDelete, Action onSave, Action onBack, Action onClone) {
         go = content.gameObject;
         this.eventService = eventService;
         this.executor = executor;
         state = LeftPanelViewState.Hidden;
-        setData(onDelete, onSave, onBack);
+        setData(onDelete, onSave, onBack, onClone);
     }
 
     public void setDebugToggles(Action<bool> onPathViewChanged, Action<bool> onTimeViewChanged, Action<bool> onGridViewChanged) {
@@ -42,19 +42,20 @@ public class LeftPanelHud : BaseGui {
         });
     }
 
-    void setData(Action onDelete, Action onSave, Action onBack) {
+    void setData(Action onDelete, Action onSave, Action onBack, Action onClone) {
         content = getChild("ExtendPanel/Viewport/Content");
-        addListeners(onDelete, onSave, onBack);
+        addListeners(onDelete, onSave, onBack, onClone);
         fillContent();
         updateView();
     }
 
-    void addListeners(Action onDelete, Action onSave, Action onBack) {
+    void addListeners(Action onDelete, Action onSave, Action onBack, Action onClone) {
         getChild("ExtendButton").GetComponent<Button>().onClick.AddListener(changeStateAndUpdateView);
         getChild("ExtendPanel/HideButton").GetComponent<Button>().onClick.AddListener(changeStateAndUpdateView);
         getChild("ExtendPanel/SaveButton").GetComponent<Button>().onClick.AddListener(() => onSave());
         getChild("ExtendPanel/BackButton").GetComponent<Button>().onClick.AddListener(() => onBack());
         getChild("ExtendPanel/DeleteButton").GetComponent<Button>().onClick.AddListener(() => onDelete());
+        getChild("ExtendPanel/CloneButton").GetComponent<Button>().onClick.AddListener(() => onClone());
     }
 
     void changeStateAndUpdateView() {

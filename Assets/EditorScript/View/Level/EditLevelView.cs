@@ -75,7 +75,7 @@ public class EditLevelView : View, IView {
     }
 
     void createHud() {
-        leftPanelHud = new LeftPanelHud(getChild("LeftPanel"), eventService, executor, delete, save, goToLevelsView);
+        leftPanelHud = new LeftPanelHud(getChild("LeftPanel"), eventService, executor, delete, save, goToLevelsView, clone);
         leftPanelHud.setDebugToggles(changeDebugPathView, changeDebugTimeView, showDebugGrid);
         leftPanelHud.setStartEndGameCallbacks(startGame, endGame);
         new RightPanelHud(getChild("RightPanel"), onSelectedTypeChange);
@@ -123,6 +123,24 @@ public class EditLevelView : View, IView {
     void delete() {
         endGame();
         levelService.DeleteLevel(component.id, goToLevelsView);
+    }
+
+    void clone()
+    {
+        endGame();
+        sortWavesAndEnemies();
+        levelService.CreateNewLevel(newComponent => {
+            newComponent.enemies = component.enemies;
+            newComponent.enemyIndex = component.enemyIndex;
+            newComponent.name = component.name + "(cloned)";
+            newComponent.position = component.position;
+            newComponent.size = component.size;
+            newComponent.waveIndex = component.waveIndex;
+            newComponent.waves = component.waves;
+            levelService.UpdateLevel(newComponent, () => 
+                eventService.Dispatch<InfoBoxShowEvent>(new InfoBoxShowEvent("Cloned to " + newComponent.name))
+            );
+        });
     }
 
     void goToLevelsView() {
