@@ -67,6 +67,7 @@ public class RightBottomPanelEnemyViewUpdater : EditorViewUpdaterBase {
         types.Insert(0, "0");
         types.Insert(0, "500");
         types.Insert(0, "501");
+        types.Insert(0, "502");
         types.Insert(0, "1000");
 
         return createDropdownElement("type", enemyExecutor.getType().ToString(), types, (value) => {

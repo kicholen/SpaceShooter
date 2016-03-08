@@ -70,6 +70,7 @@ public class RightBottomPanelWaveViewUpdater : EditorViewUpdaterBase {
         types.Insert(0, "0");
         types.Insert(0, "500");
         types.Insert(0, "501");
+        types.Insert(0, "502");
         types.Insert(0, "1000");
 
         return createDropdownElement("type", waveExecutor.getType().ToString(), types, (value) => {
