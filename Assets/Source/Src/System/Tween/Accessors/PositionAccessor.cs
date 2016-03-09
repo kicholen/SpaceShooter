@@ -1,4 +1,3 @@
-using UnityEngine;
 using Entitas;
 
 public static class PositionAccessorType {

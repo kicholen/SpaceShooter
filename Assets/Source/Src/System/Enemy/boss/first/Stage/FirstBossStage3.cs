@@ -16,11 +16,19 @@ public class FirstBossStage3 : BossStage
     public void Update(Entity e, float deltaTime)
     {
         List<Entity> children = e.parent.children;
+        bool isFirst = true;
         foreach (Entity child in children)
         {
             child.RemoveChild();
             child.RemoveRelativePosition();
-            child.AddVelocity(new Vector2(0.0f, -2.0f));
+            child.AddVelocity(new Vector2(isFirst ? 0.2f : -0.2f, -0.5f));
+            child.AddTween(false, new List<Tween>());
+            child.tween.AddTween(child.laserSpawner, EaseTypes.quadOut, LaserSpawnerAccessorType.ANGLE, 3.0f)
+                .From(child.laserSpawner.angle)
+                .To(isFirst ? 360.0f : -360.0f)
+                .PingPong();
+
+            isFirst = false;
         }
         children.Clear();
     }

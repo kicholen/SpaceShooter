@@ -23,7 +23,9 @@ public class TweenComponent : IComponent {
 			return new PositionAccessor();
 		case "GameObjectComponent":
 			return new GameObjectAccessor();
-		default:
+        case "LaserSpawnerComponent":
+            return new LaserSpawnerAccessor();
+            default:
 			throw new Exception("Component " + component.GetType().ToString() + " doesn't have accessor");
 		}
 	}
