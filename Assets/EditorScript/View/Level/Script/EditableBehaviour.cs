@@ -45,7 +45,7 @@ public class EditableBehaviour : MonoBehaviour {
 
     void updatePosition()
     {
-        transform.position = new Vector3(0.0f, getSpawnBarrier(), 0.0f);
+        transform.position = new Vector3(Mathf.Sin(getSpawnBarrier()) + UnityEngine.Random.Range(-0.4f, 0.4f), getSpawnBarrier(), 0.0f);
         refreshNumeration();
     }
 
