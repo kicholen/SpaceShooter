@@ -1,56 +1,54 @@
 ﻿using Entitas;
+using System.Collections.Generic;
 
 public class FirstBossSystem : IExecuteSystem, ISetPool {
 	Pool pool;
 	Group group;
 	Group time;
 
-	const float EPSILON = 0.005f;
+    List<BossStage> stages;
 
-	bool tests = false;
-	bool initalize = false;
+    //const float EPSILON = 0.005f;
 
-	public void SetPool(Pool pool) {
+    public void SetPool(Pool pool) {
 		this.pool = pool;
 		group = pool.GetGroup(Matcher.FirstBoss);
         time = pool.GetGroup(Matcher.Time);
+        createStages();
 	}
-	
-	public void Execute() {
+
+    public void Execute() {
 		float deltaTime = time.GetSingleEntity().time.gameDeltaTime;
-		foreach (Entity e in group.GetEntities()) {
-			if (e.position.pos.y == 0.0f) {
-				e.position.pos.y = 7.0f;
-			}
-			FirstBossComponent component = e.firstBoss;
-			component.age += deltaTime;
-			e.velocity.vel.Set(0.0f, 0.0f);
-			//float age = component.age;
-			//setVelocity(e.velocity, e.position, _player.GetSingleEntity().position);
+        foreach (Entity e in group.GetEntities())
+        {
+            FirstBossComponent cmp = e.firstBoss;
+            cmp.age += deltaTime;
+            BossStage stage = stages[cmp.stage];
 
-			if (!tests) {
-				if (!e.hasLaserSpawner) {
-					e.AddLaserSpawner(5.0f, 10.0f, 10.0f, 0.0f, new UnityEngine.Vector2(), CollisionTypes.Enemy, 1, Resource.EnemyLaser, null);
-				}
-				else {
-					LaserSpawnerComponent laser = e.laserSpawner;
-					laser.angle += component.laserAngle * deltaTime;
+            stage.Update(e, deltaTime);
+            advanceStageIfNeeded(cmp, stage);
+        }
+    }
 
-					if (laser.angle < EPSILON) {
-						e.RemoveLaserSpawner();
-					}
-				}
-				if (!initalize) {
-					//e.AddCircleMissileRotatedSpawner(20, 8, 0, 10, 0.0f, 0.1f, Resource.MissileEnemy, 3.0f, CollisionTypes.Enemy);
-					//e.AddCircleMissileSpawner(20, 2.0f, 0.05f, Resource.MissileEnemy, 4.0f, CollisionTypes.Enemy);
-					//e.AddMultipleMissileSpawner(5, 5, 0.1f, 0.1f, 5.0f, 5.0f, Resource.MissileEnemy, 0.1f, velocity.x, -velocity.y, CollisionTypes.Enemy);
-					initalize = true;
-				}
-			}
-		}
-	}
+    void advanceStageIfNeeded(FirstBossComponent cmp, BossStage stage)
+    {
+        if (cmp.age > stage.TimeLimit)
+        {
+            if (stages.Count > (cmp.stage + 1))
+                cmp.stage = cmp.stage + 1;
+            else
+            {
+                cmp.age = 0.0f;
+                cmp.stage = 0;
+            }
+        }
+    }
 
-	void setVelocity(VelocityComponent velocity, PositionComponent actual, PositionComponent desired) {
-		//velocity.x = (desired.x - actual.x) * 2.0f;
-	}
+    void createStages()
+    {
+        stages = new List<BossStage>();
+        stages.Add(new FirstBossStage1(pool));
+        stages.Add(new FirstBossStage2());
+        stages.Add(new FirstBossStage3());
+    }
 }

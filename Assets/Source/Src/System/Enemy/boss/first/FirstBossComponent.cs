@@ -5,4 +5,6 @@ public class FirstBossComponent : IComponent {
 	public float age;
 
 	public float laserAngle;
+
+    public int stage;
 }
