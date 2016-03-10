@@ -16,7 +16,9 @@ public class Tween {
 	int tweenType;
 	IComponent target;
 	ITweenAccessor accessor;
+
     bool pingPong;
+    public bool ShouldClear = true;
 
     public void Setup(IComponent target, ITweenAccessor accessor, Func<float, float> ease, int tweenType, float duration) {
 		this.target = target;
@@ -55,8 +57,14 @@ public class Tween {
 		return this;
     }
 
-    public void PingPong() {
+    public Tween PingPong() {
         pingPong = true;
+        return this;
+    }
+
+    public Tween BlockClear() {
+        ShouldClear = false;
+        return this;
     }
 
     public void Update(float deltaTime) {

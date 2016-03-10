@@ -12,19 +12,21 @@ namespace Entitas {
 
         public bool hasFirstBoss { get { return HasComponent(ComponentIds.FirstBoss); } }
 
-        public Entity AddFirstBoss(float newRandom, float newAge, float newLaserAngle) {
+        public Entity AddFirstBoss(float newRandom, float newAge, float newLaserAngle, int newStage) {
             var component = CreateComponent<FirstBossComponent>(ComponentIds.FirstBoss);
             component.random = newRandom;
             component.age = newAge;
             component.laserAngle = newLaserAngle;
+            component.stage = newStage;
             return AddComponent(ComponentIds.FirstBoss, component);
         }
 
-        public Entity ReplaceFirstBoss(float newRandom, float newAge, float newLaserAngle) {
+        public Entity ReplaceFirstBoss(float newRandom, float newAge, float newLaserAngle, int newStage) {
             var component = CreateComponent<FirstBossComponent>(ComponentIds.FirstBoss);
             component.random = newRandom;
             component.age = newAge;
             component.laserAngle = newLaserAngle;
+            component.stage = newStage;
             ReplaceComponent(ComponentIds.FirstBoss, component);
             return this;
         }

@@ -26,7 +26,7 @@ public class TweenSystem : IExecuteSystem, ISetPool {
 		for (int i = 0; i < tweens.Count; i++) {
 			Tween tween = tweens[i];
 			tween.Update(deltaTime);
-			if (tween.HasEnded()) {
+			if (tween.HasEnded() && tween.ShouldClear) {
 				onTweenEnded(e, tweenComponent, tween);
 			}
 		}

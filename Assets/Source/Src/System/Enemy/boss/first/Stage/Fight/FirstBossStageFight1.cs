@@ -1,20 +1,25 @@
 ﻿using Entitas;
 using UnityEngine;
 
-public class FirstBossStage1 : BossStage
+public class FirstBossStageFight1 : BossStage
 {
     Pool pool;
     float timeLimit;
 
     public float TimeLimit { get { return timeLimit; } }
 
-    public FirstBossStage1(Pool pool)
+    public FirstBossStageFight1(Pool pool)
     {
         this.pool = pool;
         timeLimit = 2.0f;
     }
 
     public void Update(Entity e, float deltaTime)
+    {
+        spawnLasers(e);
+    }
+
+    void spawnLasers(Entity e)
     {
         if (e.parent.children.Count == 0)
         {

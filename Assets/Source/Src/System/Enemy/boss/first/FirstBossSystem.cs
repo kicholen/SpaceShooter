@@ -8,8 +8,6 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
 
     List<BossStage> stages;
 
-    //const float EPSILON = 0.005f;
-
     public void SetPool(Pool pool) {
 		this.pool = pool;
 		group = pool.GetGroup(Matcher.FirstBoss);
@@ -38,8 +36,8 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
                 cmp.stage = cmp.stage + 1;
             else
             {
-                cmp.age = 0.0f;
-                cmp.stage = 0;
+                cmp.age = stages[0].TimeLimit;
+                cmp.stage = 2;
             }
         }
     }
@@ -47,8 +45,10 @@ public class FirstBossSystem : IExecuteSystem, ISetPool {
     void createStages()
     {
         stages = new List<BossStage>();
-        stages.Add(new FirstBossStage1(pool));
-        stages.Add(new FirstBossStage2());
-        stages.Add(new FirstBossStage3());
+        stages.Add(new FirstBossStageEntry());
+        stages.Add(new FirstBossStageMovement());
+        stages.Add(new FirstBossStageFight1(pool));
+        stages.Add(new FirstBossStageFight2());
+        stages.Add(new FirstBossStageFight3());
     }
 }

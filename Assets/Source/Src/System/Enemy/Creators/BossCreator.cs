@@ -20,14 +20,8 @@ public class BossCreator
             .AddCollision(CollisionTypes.Enemy, health)
             .AddHealth(health)
             .AddResource(ResourceWithColliders.Boss)
-            .AddTween(true, new List<Tween>())
-            .AddFirstBoss(22.0f, 0.0f, 90.0f);
+            .AddFirstBoss(22.0f, 0.0f, 90.0f, 0);
         boss.isMoveWithCamera = true;
-
-        boss.tween.AddTween(boss.position, EaseTypes.bounceIn, PositionAccessorType.X, 5.0f)
-            .From(posX)
-            .To(posX + 5f)
-            .PingPong();
 
         boss.AddParent(new List<Entity>());
         return boss;

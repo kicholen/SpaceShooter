@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirstBossStage3 : BossStage
+public class FirstBossStageFight3 : BossStage
 {
     float timeLimit;
 
     public float TimeLimit { get { return timeLimit; } }
 
-    public FirstBossStage3()
+    public FirstBossStageFight3()
     {
         timeLimit = 6.0f;
     }
