@@ -116,8 +116,9 @@ public class GameService : IGameService {
                 // magnet
                 .Add(pool.CreateSystem<MagnetSystem>())
 
-                // AI
+                // Boss
                 .Add(pool.CreateSystem<FirstBossSystem>())
+                .Add(pool.CreateSystem<SecondBossSystem>())
 
                 // special enemies
                 .Add(pool.CreateSystem<MotherShipSystem>())

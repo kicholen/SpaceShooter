@@ -79,7 +79,10 @@ public class EnemyFactory {
                 e = enemyCreator.createMothership(type, posX, posY, health, missileSpeedFactor);
                 break;
             case EnemyTypes.FirstBoss:
-                e = bossCreator.createFirstBoss(type, posX, posY, health, missileSpeedFactor);
+                e = bossCreator.createFirstBoss(type, posX, posY, health, missileSpeedFactor, getDamageFactor());
+                break;
+            case EnemyTypes.SecondBoss:
+                e = bossCreator.createSecondBoss(type, posX, posY, health, missileSpeedFactor, getDamageFactor());
                 break;
             default:
                 e = enemyCreator.createStandardEnemy(type, damage, posX, posY, health, velocityLimit * missileSpeedFactor, ResourceWithColliders.Enemy);

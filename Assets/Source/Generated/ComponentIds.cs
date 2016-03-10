@@ -91,36 +91,37 @@ public static class ComponentIds {
     public const int Resource = 81;
     public const int Rotate = 82;
     public const int SecondaryWeapon = 83;
-    public const int SettingsModel = 84;
-    public const int Shake = 85;
-    public const int ShieldCollision = 86;
-    public const int ShipBonus = 87;
-    public const int ShipModel = 88;
-    public const int SlowGame = 89;
-    public const int SmoothCamera = 90;
-    public const int SnapPosition = 91;
-    public const int SortOrder = 92;
-    public const int Sound = 93;
-    public const int SoundOnDeath = 94;
-    public const int SpeedBonus = 95;
-    public const int StartGame = 96;
-    public const int StaticCamera = 97;
-    public const int TargetMissile = 98;
-    public const int TargetMissileSpawner = 99;
-    public const int Test = 100;
-    public const int Thunder = 101;
-    public const int Time = 102;
-    public const int Trail = 103;
-    public const int Tween = 104;
-    public const int TweenOnDeath = 105;
-    public const int UIFactoryService = 106;
-    public const int UIResource = 107;
-    public const int Velocity = 108;
-    public const int VelocityLimit = 109;
-    public const int WaveSpawner = 110;
-    public const int Weapon = 111;
+    public const int SecondBoss = 84;
+    public const int SettingsModel = 85;
+    public const int Shake = 86;
+    public const int ShieldCollision = 87;
+    public const int ShipBonus = 88;
+    public const int ShipModel = 89;
+    public const int SlowGame = 90;
+    public const int SmoothCamera = 91;
+    public const int SnapPosition = 92;
+    public const int SortOrder = 93;
+    public const int Sound = 94;
+    public const int SoundOnDeath = 95;
+    public const int SpeedBonus = 96;
+    public const int StartGame = 97;
+    public const int StaticCamera = 98;
+    public const int TargetMissile = 99;
+    public const int TargetMissileSpawner = 100;
+    public const int Test = 101;
+    public const int Thunder = 102;
+    public const int Time = 103;
+    public const int Trail = 104;
+    public const int Tween = 105;
+    public const int TweenOnDeath = 106;
+    public const int UIFactoryService = 107;
+    public const int UIResource = 108;
+    public const int Velocity = 109;
+    public const int VelocityLimit = 110;
+    public const int WaveSpawner = 111;
+    public const int Weapon = 112;
 
-    public const int TotalComponents = 112;
+    public const int TotalComponents = 113;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -207,6 +208,7 @@ public static class ComponentIds {
         "Resource",
         "Rotate",
         "SecondaryWeapon",
+        "SecondBoss",
         "SettingsModel",
         "Shake",
         "ShieldCollision",
@@ -322,6 +324,7 @@ public static class ComponentIds {
         typeof(ResourceComponent),
         typeof(RotateComponent),
         typeof(SecondaryWeaponComponent),
+        typeof(SecondBossComponent),
         typeof(SettingsModelComponent),
         typeof(ShakeComponent),
         typeof(ShieldCollisionComponent),

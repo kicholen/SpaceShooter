@@ -1,16 +1,16 @@
 ﻿using Entitas;
 using System.Collections.Generic;
 
-public class FirstBossStageEntry : BossStage
+public class SecondBossStageEntry : BossStage
 {
     float timeLimit;
 
     public float TimeLimit { get { return timeLimit; } }
     public int Count { get { return 1; } }
 
-    public FirstBossStageEntry()
+    public SecondBossStageEntry()
     {
-        timeLimit = 2.0f;
+        timeLimit = 0.5f;
     }
 
     public void Update(Entity e, float deltaTime)
@@ -18,12 +18,8 @@ public class FirstBossStageEntry : BossStage
         if (!e.hasTween)
         {
             e.AddTween(true, new List<Tween>());
-            e.tween.AddTween(e.position, EaseTypes.quadIn, PositionAccessorType.X, timeLimit)
-                .From(e.position.pos.x + 5.0f)
-                .To(e.position.pos.x)
-                .BlockClear();
             e.tween.AddTween(e.position, EaseTypes.quadOut, PositionAccessorType.Y, timeLimit)
-                .From(e.position.pos.y - 4.0f)
+                .From(e.position.pos.y + 3.0f)
                 .To(e.position.pos.y + Config.CAMERA_SPEED * timeLimit)
                 .BlockClear();
         }
