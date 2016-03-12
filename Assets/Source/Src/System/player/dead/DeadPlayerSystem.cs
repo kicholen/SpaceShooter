@@ -4,27 +4,52 @@ using System.Collections.Generic;
 public class DeadPlayerSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.CollisionDeath, Matcher.Player).OnEntityAdded(); } }
 
-	Pool _pool;
-	Group _time;
-	Group _input;
-	Group _eventService;
+	Pool pool;
+	Group time;
+	Group input;
+	Group eventService;
+    Group analyticsService;
+    Group gameStats;
+    Group enemySpawner;
 
-	public void SetPool(Pool pool) {
-		_pool = pool;
-		_time = pool.GetGroup(Matcher.Time);
-		_input = pool.GetGroup(Matcher.Input);
-		_eventService = pool.GetGroup(Matcher.EventService);
-	}
+    public void SetPool(Pool pool) {
+		this.pool = pool;
+		time = pool.GetGroup(Matcher.Time);
+		input = pool.GetGroup(Matcher.Input);
+		eventService = pool.GetGroup(Matcher.EventService);
+		analyticsService = pool.GetGroup(Matcher.AnalyticsService);
+		gameStats = pool.GetGroup(Matcher.GameStats);
+		enemySpawner = pool.GetGroup(Matcher.EnemySpawner);
+    }
 
-	public void Execute(List<Entity> entities) {
-		TimeComponent time = _time.GetSingleEntity().time;
-		time.modificator = 0.2f;
-		InputComponent input = _input.GetSingleEntity().input;
-		input.isInputBlocked = true;
+	public void Execute(List<Entity> entities)
+    {
+        freezeInputTimeAndCamera();
+        sendGameStats();
 
-		_pool.CreateEntity()
-			.AddCreateCamera(CameraTypes.Static, false);
+        eventService.GetSingleEntity().eventService.dispatcher.Dispatch<GameEndedEvent>(new GameEndedEvent(true));
+    }
 
-		_eventService.GetSingleEntity().eventService.dispatcher.Dispatch<GameEndedEvent>(new GameEndedEvent(true));
-	}
+    void sendGameStats()
+    {
+        IAnalyticsService service = analyticsService.GetSingleEntity().analyticsService.service;
+        GameStatsComponent gameStatsComponent = gameStats.GetSingleEntity().gameStats;
+        EnemySpawnerComponent enemySpawnerComponent = enemySpawner.GetSingleEntity().enemySpawner;
+
+        service.GameCoins(enemySpawnerComponent.model.name, gameStatsComponent.starsPicked);
+        service.GameBonuses(enemySpawnerComponent.model.name, gameStatsComponent.bonusesPicked);
+        service.GameShips(enemySpawnerComponent.model.name, gameStatsComponent.shipsDestroyed);
+        service.GameFail(enemySpawnerComponent.model.name, gameStatsComponent.score);
+    }
+
+    void freezeInputTimeAndCamera()
+    {
+        TimeComponent timeComponent = time.GetSingleEntity().time;
+        timeComponent.modificator = 0.2f;
+        InputComponent inputComponent = input.GetSingleEntity().input;
+        inputComponent.isInputBlocked = true;
+
+        pool.CreateEntity()
+            .AddCreateCamera(CameraTypes.Static, false);
+    }
 }

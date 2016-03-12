@@ -17,7 +17,8 @@ public class GameService : IGameService {
 		pool.CreateEntity()
 			.AddEventService(services.EventService)
 			.AddUIFactoryService(services.UIFactoryService)
-			.AddCanvas(services.ViewService.Canvas);
+			.AddAnalyticsService(services.AnalyticsService)
+            .AddCanvas(services.ViewService.Canvas);
 			
 		systems.Initialize();
 		services.Updateables.Add(this);

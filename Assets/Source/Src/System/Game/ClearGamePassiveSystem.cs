@@ -73,7 +73,7 @@ public class ClearGamePassiveSystem {
 	
 	protected void clearGameStats() {
 		foreach (Entity e in gameStats.GetEntities()) {
-			e.ReplaceGameStats(0, 0, 0);
+			e.ReplaceGameStats(0, 0, 0, 0);
 		}
 	}
 

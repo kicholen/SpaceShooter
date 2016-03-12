@@ -20,7 +20,8 @@ public class EditorServices : IServices {
     ISettingsService settingsService;
     ITranslationService translationService;
     ILanguageService languageService;
-
+    IAnalyticsService analyticsService;
+    
     public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
 	public List<Updateable> Updateables { get { return updateables; } }
@@ -39,6 +40,7 @@ public class EditorServices : IServices {
     public ISettingsService SettingsService { get { return settingsService; } }
     public ITranslationService TranslationService { get { return translationService; } }
     public ILanguageService LanguageService { get { return languageService; } }
+    public IAnalyticsService AnalyticsService { get { return analyticsService; } }
 
     public EditorServices(IController controller) {
         this.controller = controller;
@@ -64,6 +66,7 @@ public class EditorServices : IServices {
         settingsService = new SettingsService(pool);
         translationService = new TranslationService(settingsService);
         languageService = new LanguageService(wwwService, eventService);
+        analyticsService = new AnalyticsService(settingsService);
         updateables.Add(infoService);
     }
 

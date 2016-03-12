@@ -11,21 +11,21 @@ public class GameStatsSystem : IMultiReactiveSystem, IInitializeSystem, ISetPool
 			return tri;
 		}
 	}
-	Pool _pool;
-	Group _group;
+	Pool pool;
+	Group group;
 	
 	public void SetPool(Pool pool) {
-		_pool = pool;
-		_group = pool.GetGroup(Matcher.GameStats);
+		this.pool = pool;
+		group = pool.GetGroup(Matcher.GameStats);
 	}
 
 	public void Initialize() {
-		_pool.CreateEntity()
-			.AddGameStats(0, 0, 0);
+		pool.CreateEntity()
+			.AddGameStats(0, 0, 0, 0);
 	}
 
 	public void Execute(List<Entity> entities) {
-		GameStatsComponent gameStats = _group.GetSingleEntity().gameStats;
+		GameStatsComponent gameStats = group.GetSingleEntity().gameStats;
 		foreach (Entity e in entities) {
 			if (e.hasBonus) {
 				updateBonusStat(gameStats, e.bonus);

@@ -13,7 +13,8 @@ public class Services : IServices {
     IWwwService wwwService;
     ISettingsService settingsService;
     ITranslationService translationService;
-
+    IAnalyticsService analyticsService;
+    
     public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
 	public List<Updateable> Updateables { get { return updateables; } }
@@ -25,6 +26,7 @@ public class Services : IServices {
     public IWwwService WwwService { get { return wwwService; } }
     public ISettingsService SettingsService { get { return settingsService; } }
     public ITranslationService TranslationService { get { return translationService;  } }
+    public IAnalyticsService AnalyticsService { get { return analyticsService;  } }
 
     public Services(IController controller) {
         this.controller = controller;
@@ -53,5 +55,6 @@ public class Services : IServices {
         gameService = new GameService(pool, viewService);
         settingsService = new SettingsService(pool);
         translationService = new TranslationService(settingsService);
+        analyticsService = new AnalyticsService(settingsService);
     }
 }

@@ -14,4 +14,5 @@ public interface IServices : Updateable {
     IWwwService WwwService { get; }
     ISettingsService SettingsService { get; }
     ITranslationService TranslationService { get; }
+    IAnalyticsService AnalyticsService { get; }
 }
