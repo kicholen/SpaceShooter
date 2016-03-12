@@ -30,7 +30,7 @@ public class AddGameObjectSystem : IReactiveSystem, ISetPool {
 			}
 
             gameObject.transform.SetParent(container, false);
-			e.AddGameObject(gameObject, resourceName);
+			e.AddGameObject(gameObject, resourceName, true);
 		}
     }
 

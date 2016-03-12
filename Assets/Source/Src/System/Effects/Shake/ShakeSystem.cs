@@ -5,8 +5,6 @@ public class ShakeSystem : IExecuteSystem, ISetPool {
 	Group _group;
 	Group _time;
 
-	const float TOTAL_ROAD_MULTIPLICATOR = 4.0f;
-
 	public void SetPool(Pool pool) {
 		_group = pool.GetGroup(Matcher.AllOf(Matcher.Shake, Matcher.Position));
 		_time = pool.GetGroup(Matcher.Time);
@@ -24,19 +22,22 @@ public class ShakeSystem : IExecuteSystem, ISetPool {
 			}
 			else {
 				if (!componentProperties.velocityCalculated) {
-					componentProperties.velocity = componentProperties.totalOffsetX * TOTAL_ROAD_MULTIPLICATOR / componentProperties.totalTime;
+					componentProperties.velocity = componentProperties.totalOffsetX / componentProperties.totalTime;
 				}
 				Vector2 originalPosition = e.position.pos;
 				componentProperties.offsetX += componentProperties.direction * componentProperties.velocity * deltaTime;
 
 				if (componentProperties.offsetX >= componentProperties.totalOffsetX) {
 					componentProperties.direction = -1;
-				}
+                    componentProperties.offsetX = 0.0f;
+
+                }
 				else if (componentProperties.offsetX <= -componentProperties.totalOffsetX) {
 					componentProperties.direction = 1;
-				}
+                    componentProperties.offsetX = 0.0f;
+                }
 
-				if (e.hasCamera) {
+                if (e.hasCamera) {
 					e.camera.camera.transform.position = new Vector3(originalPosition.x + componentProperties.offsetX, originalPosition.y, Config.CAMERA_START_Z);
 				}
 				else {

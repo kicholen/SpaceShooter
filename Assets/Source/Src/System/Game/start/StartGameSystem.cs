@@ -18,7 +18,7 @@ public class StartGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool
 		int level = 0;
 		foreach (Entity e in entities) {
 			level = e.startGame.level;
-			_pool.DestroyEntity(e);
+			pool.DestroyEntity(e);
 		}
 		
 		setCamera();
@@ -29,8 +29,9 @@ public class StartGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool
 		clearWaveSpawners();
 		clearCameraShakes();
 		clearGameStats();
+        clearScore();
 
-		createGrid();
+        createGrid();
 		createShip();
 		setInput(true);
 	}
@@ -48,26 +49,26 @@ public class StartGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool
 				e.staticCamera.offset = new Vector3(0.0f, 0.0f, 0.0f);
 			}
 		}
-		_pool.CreateEntity()
+		pool.CreateEntity()
 			.AddCreateCamera(CameraTypes.Smooth, false);
 	}
 	
 	void restartLevel(int level) {
 		foreach (Entity e in _createLevels.GetEntities()) {
-			_pool.DestroyEntity(e);
+			pool.DestroyEntity(e);
 		}
 		
-		_pool.CreateEntity()
+		pool.CreateEntity()
 			.AddCreateLevel(level, "/Resources/Content/level/");
 	}
 
 	void createGrid() {
-		_pool.CreateEntity()
+		pool.CreateEntity()
 			.IsCreateGrid(true);
 	}
 
 	void createShip() {
-		_pool.CreateEntity()
+		pool.CreateEntity()
 			.IsCreateShip(true);
 	}
 }

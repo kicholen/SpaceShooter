@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Entitas;
 using System.Collections.Generic;
 
@@ -35,7 +35,7 @@ public class View : BaseGui {
 		go = uiFactoryService.CreatePrefab(prefabPath);
 		rectTransform = go.GetComponent<RectTransform>();
 		entity = pool.CreateEntity()
-			.AddGameObject(go, "View");
+			.AddGameObject(go, "View", true);
 	}
 	
 	public void SetParent(Transform parent) {

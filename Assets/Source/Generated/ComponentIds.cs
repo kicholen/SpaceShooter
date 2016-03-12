@@ -63,66 +63,69 @@ public static class ComponentIds {
     public const int Indicator = 53;
     public const int IndicatorPanel = 54;
     public const int Input = 55;
-    public const int Laser = 56;
-    public const int LaserSpawner = 57;
-    public const int LeaderFollower = 58;
-    public const int LevelDimensions = 59;
-    public const int LevelModel = 60;
-    public const int Magnet = 61;
-    public const int MaterialReference = 62;
-    public const int MissileSpawner = 63;
-    public const int MotherShip = 64;
-    public const int MouseInput = 65;
-    public const int MoveWithCamera = 66;
-    public const int MovingBlockade = 67;
-    public const int MultipleMissileSpawner = 68;
-    public const int NonRemovable = 69;
-    public const int Parent = 70;
-    public const int ParticlesOnDeath = 71;
-    public const int ParticleSpawn = 72;
-    public const int Path = 73;
-    public const int PathModel = 74;
-    public const int PauseGame = 75;
-    public const int Player = 76;
-    public const int PlayerHealthBar = 77;
-    public const int PlayerModel = 78;
-    public const int PoolableGO = 79;
-    public const int Position = 80;
-    public const int RelativePosition = 81;
-    public const int Resource = 82;
-    public const int Rotate = 83;
-    public const int SecondaryWeapon = 84;
-    public const int SecondBoss = 85;
-    public const int SettingsModel = 86;
-    public const int Shake = 87;
-    public const int ShieldCollision = 88;
-    public const int ShipBonus = 89;
-    public const int ShipModel = 90;
-    public const int SlowGame = 91;
-    public const int SmoothCamera = 92;
-    public const int SnapPosition = 93;
-    public const int SortOrder = 94;
-    public const int Sound = 95;
-    public const int SoundOnDeath = 96;
-    public const int SpeedBonus = 97;
-    public const int StartGame = 98;
-    public const int StaticCamera = 99;
-    public const int TargetMissile = 100;
-    public const int TargetMissileSpawner = 101;
-    public const int Test = 102;
-    public const int Thunder = 103;
-    public const int Time = 104;
-    public const int Trail = 105;
-    public const int Tween = 106;
-    public const int TweenOnDeath = 107;
-    public const int UIFactoryService = 108;
-    public const int UIResource = 109;
-    public const int Velocity = 110;
-    public const int VelocityLimit = 111;
-    public const int WaveSpawner = 112;
-    public const int Weapon = 113;
+    public const int KillInfo = 56;
+    public const int Laser = 57;
+    public const int LaserSpawner = 58;
+    public const int LeaderFollower = 59;
+    public const int LevelDimensions = 60;
+    public const int LevelModel = 61;
+    public const int Magnet = 62;
+    public const int MaterialReference = 63;
+    public const int MissileSpawner = 64;
+    public const int MotherShip = 65;
+    public const int MouseInput = 66;
+    public const int MoveWithCamera = 67;
+    public const int MovingBlockade = 68;
+    public const int MultipleMissileSpawner = 69;
+    public const int NonRemovable = 70;
+    public const int Parent = 71;
+    public const int ParticlesOnDeath = 72;
+    public const int ParticleSpawn = 73;
+    public const int Path = 74;
+    public const int PathModel = 75;
+    public const int PauseGame = 76;
+    public const int Player = 77;
+    public const int PlayerHealthBar = 78;
+    public const int PlayerModel = 79;
+    public const int PlayerScore = 80;
+    public const int PoolableGO = 81;
+    public const int Position = 82;
+    public const int RelativePosition = 83;
+    public const int Resource = 84;
+    public const int Rotate = 85;
+    public const int Score = 86;
+    public const int SecondaryWeapon = 87;
+    public const int SecondBoss = 88;
+    public const int SettingsModel = 89;
+    public const int Shake = 90;
+    public const int ShieldCollision = 91;
+    public const int ShipBonus = 92;
+    public const int ShipModel = 93;
+    public const int SlowGame = 94;
+    public const int SmoothCamera = 95;
+    public const int SnapPosition = 96;
+    public const int SortOrder = 97;
+    public const int Sound = 98;
+    public const int SoundOnDeath = 99;
+    public const int SpeedBonus = 100;
+    public const int StartGame = 101;
+    public const int StaticCamera = 102;
+    public const int TargetMissile = 103;
+    public const int TargetMissileSpawner = 104;
+    public const int Test = 105;
+    public const int Thunder = 106;
+    public const int Time = 107;
+    public const int Trail = 108;
+    public const int Tween = 109;
+    public const int TweenOnDeath = 110;
+    public const int UIFactoryService = 111;
+    public const int UIResource = 112;
+    public const int Velocity = 113;
+    public const int VelocityLimit = 114;
+    public const int WaveSpawner = 115;
+    public const int Weapon = 116;
 
-    public const int TotalComponents = 114;
+    public const int TotalComponents = 117;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -181,6 +184,7 @@ public static class ComponentIds {
         "Indicator",
         "IndicatorPanel",
         "Input",
+        "KillInfo",
         "Laser",
         "LaserSpawner",
         "LeaderFollower",
@@ -204,11 +208,13 @@ public static class ComponentIds {
         "Player",
         "PlayerHealthBar",
         "PlayerModel",
+        "PlayerScore",
         "PoolableGO",
         "Position",
         "RelativePosition",
         "Resource",
         "Rotate",
+        "Score",
         "SecondaryWeapon",
         "SecondBoss",
         "SettingsModel",
@@ -298,6 +304,7 @@ public static class ComponentIds {
         typeof(IndicatorComponent),
         typeof(IndicatorPanelComponent),
         typeof(InputComponent),
+        typeof(KillInfoComponent),
         typeof(LaserComponent),
         typeof(LaserSpawnerComponent),
         typeof(LeaderFollowerComponent),
@@ -321,11 +328,13 @@ public static class ComponentIds {
         typeof(PlayerComponent),
         typeof(PlayerHealthBarComponent),
         typeof(PlayerModelComponent),
+        typeof(PlayerScoreComponent),
         typeof(PoolableGOComponent),
         typeof(PositionComponent),
         typeof(RelativePositionComponent),
         typeof(ResourceComponent),
         typeof(RotateComponent),
+        typeof(ScoreComponent),
         typeof(SecondaryWeaponComponent),
         typeof(SecondBossComponent),
         typeof(SettingsModelComponent),

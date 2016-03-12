@@ -51,7 +51,9 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 	void createUI(Entity ship) {
 		createHealthBar(ship);
 		createIndicatorPanel(ship);
-	}
+        createScoreText(ship);
+        createKillInfoText(ship);
+    }
 
 	void createHealthBar(Entity player) {
 		Entity e = _pool.CreateEntity()
@@ -67,9 +69,27 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			.AddUIResource(UIResource.UIIndicator)
 			.AddChild(player);
 		player.parent.children.Add(e);
-	}
-	
-	List<Entity> getShipChildren(Entity parent, ShipModelComponent component) {
+    }
+
+    void createScoreText(Entity player)
+    {
+        Entity e = _pool.CreateEntity()
+            .IsPlayerScore(true)
+            .AddUIResource(UIResource.UIScore)
+            .AddChild(player);
+        player.parent.children.Add(e);
+    }
+
+    void createKillInfoText(Entity player)
+    {
+        Entity e = _pool.CreateEntity()
+            .IsKillInfo(true)
+            .AddUIResource(UIResource.UIKillInfo)
+            .AddChild(player);
+        player.parent.children.Add(e);
+    }
+
+    List<Entity> getShipChildren(Entity parent, ShipModelComponent component) {
 		List<Entity> children = new List<Entity>();
 		if (component.hasHomeMissile) {
 			//addHomeMissile(children, parent, component);

@@ -151,6 +151,7 @@ public class GameService : IGameService {
                 .Add(pool.CreateSystem<GridSystem>())
                 .Add(pool.CreateSystem<PlayerHealthBarSystem>())
                 .Add(pool.CreateSystem<IndicatorSystem>())
+                .Add(pool.CreateSystem<PlayerScoreSystem>())
 
                 // Object
                 .Add(pool.CreateSystem<HealthSystem>())
@@ -195,7 +196,8 @@ public class GameService : IGameService {
 
             // Stats
             .Add(pool.CreateSystem<GameStatsSystem>())
-
+            .Add(pool.CreateSystem<ScoreSystem>())
+            
             // Sound
             .Add(pool.CreateSystem<SoundSystem>())
 

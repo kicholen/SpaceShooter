@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Entitas;
 using System.Collections.Generic;
 
@@ -29,7 +29,10 @@ public class RemoveGameObjectSystem : ISystem, ISetPool, IEnsureComponents {
 
 	void removeGameObject(GameObjectComponent component) {
 		component.gameObject.SetActive(false);
-		addToPool(component);
+        if (component.isPoolable)
+            addToPool(component);
+        else
+            UnityEngine.Object.Destroy(component.gameObject);
 	}
 
 	void addToPool(GameObjectComponent gameObjectComponent) {

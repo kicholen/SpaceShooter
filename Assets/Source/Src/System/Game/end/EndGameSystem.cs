@@ -28,7 +28,8 @@ public class EndGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool {
         clearMissileSpawners();
         clearCameraShakes();
 		clearGameStats();
-		clearGrids();
+        clearScore();
+        clearGrids();
 		clearPlayer();
 		clearPause();
 		clearBlockade();
@@ -37,13 +38,13 @@ public class EndGameSystem : ClearGamePassiveSystem, IReactiveSystem, ISetPool {
 	}
 	
 	void setCamera() {
-		_pool.CreateEntity()
+		pool.CreateEntity()
 			.AddCreateCamera(CameraTypes.Static, true);
 	}
 	
 	void clearLevel() {
 		foreach(Entity e in _createLevels.GetEntities()) {
-			_pool.DestroyEntity(e);
+			pool.DestroyEntity(e);
 		}
 	}
 

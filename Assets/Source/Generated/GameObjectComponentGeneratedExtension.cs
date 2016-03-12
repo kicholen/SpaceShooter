@@ -12,17 +12,19 @@ namespace Entitas {
 
         public bool hasGameObject { get { return HasComponent(ComponentIds.GameObject); } }
 
-        public Entity AddGameObject(UnityEngine.GameObject newGameObject, string newPath) {
+        public Entity AddGameObject(UnityEngine.GameObject newGameObject, string newPath, bool newIsPoolable) {
             var component = CreateComponent<GameObjectComponent>(ComponentIds.GameObject);
             component.gameObject = newGameObject;
             component.path = newPath;
+            component.isPoolable = newIsPoolable;
             return AddComponent(ComponentIds.GameObject, component);
         }
 
-        public Entity ReplaceGameObject(UnityEngine.GameObject newGameObject, string newPath) {
+        public Entity ReplaceGameObject(UnityEngine.GameObject newGameObject, string newPath, bool newIsPoolable) {
             var component = CreateComponent<GameObjectComponent>(ComponentIds.GameObject);
             component.gameObject = newGameObject;
             component.path = newPath;
+            component.isPoolable = newIsPoolable;
             ReplaceComponent(ComponentIds.GameObject, component);
             return this;
         }

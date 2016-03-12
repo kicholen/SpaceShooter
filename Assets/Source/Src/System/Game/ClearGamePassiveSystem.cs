@@ -2,21 +2,21 @@ using Entitas;
 
 public class ClearGamePassiveSystem {
 
-	protected Pool _pool;
+	protected Pool pool;
 	Group resources;
 	Group enemySpawners;
-	Group bonusSpawners;
 	Group homeMissileSpawners;
 	Group waveSpawners;
     Group missileSpawners;
     Group shakes;
 	Group gameStats;
+    Group score;
 	Group grids;
 	Group input;
     Group shipBonus;
 
     public void Init(Pool pool) {
-		_pool = pool;
+		this.pool = pool;
 		resources = pool.GetGroup(Matcher.Resource);
 		enemySpawners = pool.GetGroup(Matcher.EnemySpawner);
 		homeMissileSpawners = pool.GetGroup(Matcher.HomeMissileSpawner);
@@ -24,14 +24,15 @@ public class ClearGamePassiveSystem {
         missileSpawners = pool.GetGroup(Matcher.MissileSpawner);
         shakes = pool.GetGroup(Matcher.Shake);
 		gameStats = pool.GetGroup(Matcher.GameStats);
-		grids = pool.GetGroup(Matcher.Grid);
+        score = pool.GetGroup(Matcher.Score);
+        grids = pool.GetGroup(Matcher.Grid);
 		input = pool.GetGroup(Matcher.Input);
 		shipBonus = pool.GetGroup(Matcher.ShipBonus);
     }
 	
 	protected void clearEnemySpawners() {
 		foreach (Entity e in enemySpawners.GetEntities()) {
-			_pool.DestroyEntity(e);
+			pool.DestroyEntity(e);
 		}
 	}
 	
@@ -75,9 +76,15 @@ public class ClearGamePassiveSystem {
 		foreach (Entity e in gameStats.GetEntities()) {
 			e.ReplaceGameStats(0, 0, 0, 0);
 		}
-	}
+    }
 
-	protected void clearGrids() {
+    protected void clearScore()
+    {
+        foreach (Entity e in score.GetEntities())
+            e.ReplaceScore(0, 0, Config.SCORE_MULTIPLIER_BASE, 0.0f, Config.SCORE_MULTIPLIER_DURATION);
+    }
+
+    protected void clearGrids() {
 		foreach (Entity e in grids.GetEntities()) {
 			e.isDestroyEntity = true;
 		}

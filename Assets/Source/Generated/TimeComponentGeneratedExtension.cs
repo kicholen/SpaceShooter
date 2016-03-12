@@ -12,21 +12,21 @@ namespace Entitas {
 
         public bool hasTime { get { return HasComponent(ComponentIds.Time); } }
 
-        public Entity AddTime(float newDeltaTime, float newGameDeltaTime, float newTime, float newModificator, bool newIsPaused) {
+        public Entity AddTime(float newDeltaTime, float newGameDeltaTime, float newGameTime, float newModificator, bool newIsPaused) {
             var component = CreateComponent<TimeComponent>(ComponentIds.Time);
             component.deltaTime = newDeltaTime;
             component.gameDeltaTime = newGameDeltaTime;
-            component.time = newTime;
+            component.gameTime = newGameTime;
             component.modificator = newModificator;
             component.isPaused = newIsPaused;
             return AddComponent(ComponentIds.Time, component);
         }
 
-        public Entity ReplaceTime(float newDeltaTime, float newGameDeltaTime, float newTime, float newModificator, bool newIsPaused) {
+        public Entity ReplaceTime(float newDeltaTime, float newGameDeltaTime, float newGameTime, float newModificator, bool newIsPaused) {
             var component = CreateComponent<TimeComponent>(ComponentIds.Time);
             component.deltaTime = newDeltaTime;
             component.gameDeltaTime = newGameDeltaTime;
-            component.time = newTime;
+            component.gameTime = newGameTime;
             component.modificator = newModificator;
             component.isPaused = newIsPaused;
             ReplaceComponent(ComponentIds.Time, component);

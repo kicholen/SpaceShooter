@@ -31,7 +31,7 @@ public class AddUIGameObjectSystem : IReactiveSystem, ISetPool {
 			}
 			
 			gameObject.transform.SetParent(canvas.transform, false);
-			e.AddGameObject(gameObject, resourceName);
+			e.AddGameObject(gameObject, resourceName, false);
 		}
 	}
 	
