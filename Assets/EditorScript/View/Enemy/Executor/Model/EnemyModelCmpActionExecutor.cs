@@ -35,4 +35,9 @@
     {
         return model.shakeCamera;
     }
+
+    public int getScore()
+    {
+        return model.score;
+    }
 }

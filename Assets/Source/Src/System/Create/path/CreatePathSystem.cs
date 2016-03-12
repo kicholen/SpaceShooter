@@ -3,7 +3,7 @@ using Entitas;
 public class CreatePathSystem : IInitializeSystem, ISetPool {
 	Pool _pool;
 
-	const int PATHS_COUNT = 50;
+	const int PATHS_COUNT = 52;
 
 	public void SetPool(Pool pool) {
 		_pool = pool;

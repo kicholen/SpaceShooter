@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using Entitas;
-using UnityEngine;
 
 public class ScoreSystem : IReactiveSystem, IInitializeSystem, ISetPool
 {
     Pool pool;
     Group group;
     Group time;
+    Group enemy;
+
+    Dictionary<int, int> scores;
 
     public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Enemy, Matcher.CollisionDeath).OnEntityAdded(); } }
 
@@ -15,6 +17,7 @@ public class ScoreSystem : IReactiveSystem, IInitializeSystem, ISetPool
         this.pool = pool;
         group = pool.GetGroup(Matcher.Score);
         time = pool.GetGroup(Matcher.Time);
+        enemy = pool.GetGroup(Matcher.EnemyModel);
     }
 
     public void Initialize()
@@ -66,6 +69,23 @@ public class ScoreSystem : IReactiveSystem, IInitializeSystem, ISetPool
 
     int getScore(int type)
     {
-        return type;
+        int value = 0;
+        if (getScoreMap().TryGetValue(type, out value))
+            return value;
+        return 0;
+    }
+
+    Dictionary<int, int> getScoreMap()
+    {
+        if (scores == null)
+            createScoreMap();
+        return scores;
+    }
+
+    void createScoreMap()
+    {
+        scores = new Dictionary<int, int>();
+        foreach (Entity e in enemy.GetEntities())
+            scores.Add(e.enemyModel.type, e.enemyModel.score);
     }
 }

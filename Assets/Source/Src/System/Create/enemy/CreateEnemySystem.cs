@@ -4,7 +4,7 @@ public class CreateEnemySystem : IInitializeSystem, ISetPool
 {
     Pool pool;
 
-    const int ENEMY_COUNT = 21;
+    const int ENEMY_COUNT = 24;
 
     public void SetPool(Pool pool) {
         this.pool = pool;
@@ -13,10 +13,8 @@ public class CreateEnemySystem : IInitializeSystem, ISetPool
     public void Initialize()
     {
         for (int i = 1; i <= ENEMY_COUNT; i++)
-        {
             pool.CreateEntity()
                 .AddComponent(ComponentIds.EnemyModel, Utils.Deserialize<EnemyModelComponent>(i.ToString()));
-        }
         createEnemyFactory();
     }
 

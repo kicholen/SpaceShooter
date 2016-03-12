@@ -28,6 +28,7 @@ public class EnemyLeftPanelHud : EditorViewUpdaterBase {
         createChangeEnemyFaceDirection().transform.SetParent(content, false);
         createChangeEnemyRandomRotation().transform.SetParent(content, false);
         createChangeEnemyShakeCamera().transform.SetParent(content, false);
+        createChangeEnemyScore().transform.SetParent(content, false);
     }
 
     GameObject createChangeEnemyWeapon() {
@@ -70,6 +71,13 @@ public class EnemyLeftPanelHud : EditorViewUpdaterBase {
     {
         return createToggleElement("shakeCamera", executor.getShakeCamera() == 1, (value) => {
             executor.Execute(new ChangeEnemyShakeCameraAction(value ? 1 : 0));
+        });
+    }
+
+    GameObject createChangeEnemyScore()
+    {
+        return createInputElement("score", executor.getScore().ToString(), (value) => {
+            executor.Execute(new ChangeEnemyScoreAction(value));
         });
     }
 

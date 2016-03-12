@@ -25,4 +25,5 @@ public class EnemyModelComponent : IComponent {
     public bool faceDirection;
     public int shakeCamera;
     public float randomRotation;
+    public int score;
 }
