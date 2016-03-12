@@ -69,7 +69,7 @@ public class EnemyService : IEnemyService {
                     e.ReplaceEnemyModel(enemy.id, enemy.type, enemy.resource, enemy.weapon, enemy.amount, enemy.time, enemy.spawnDelay,
                         enemy.weaponResource, enemy.velocity, enemy.angle, enemy.waves, enemy.angleOffset, enemy.startVelocity, enemy.followDelay,
                         enemy.selfDestructionDelay, enemy.timeDelay, enemy.delay, enemy.randomPositionOffsetX, enemy.faceDirection, enemy.shakeCamera,
-                        enemy.randomRotation);
+                        enemy.randomRotation, enemy.score);
                     found = true;
                 }
             }

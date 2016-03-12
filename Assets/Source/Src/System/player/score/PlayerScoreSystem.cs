@@ -6,12 +6,16 @@ public class PlayerScoreSystem : IExecuteSystem, ISetPool
     Group group;
     Group killInfo;
     Group score;
+    Group translation;
+
+    ITranslationService service;
 
     public void SetPool(Pool pool)
     {
         group = pool.GetGroup(Matcher.AllOf(Matcher.PlayerScore, Matcher.GameObject));
         killInfo = pool.GetGroup(Matcher.AllOf(Matcher.KillInfo, Matcher.GameObject));
         score = pool.GetGroup(Matcher.Score);
+        translation = pool.GetGroup(Matcher.TranslationService);
     }
 
     public void Execute()
@@ -35,14 +39,21 @@ public class PlayerScoreSystem : IExecuteSystem, ISetPool
     string getKillInfoText(int count)
     {
         if (count > 20)
-            return "MonsterKill";
+            return getTranslationService().Translate("Zabójca!");
         if (count > 15)
-            return "UltraKill";
+            return getTranslationService().Translate("Rewelacja");
         if (count > 10)
-            return "SuperKill";
+            return getTranslationService().Translate("Świetnie");
         if (count > 5)
-            return "Neat";
+            return getTranslationService().Translate("Nieźle");
 
         return "";
+    }
+
+    ITranslationService getTranslationService()
+    {
+        if (service == null)
+            service = translation.GetSingleEntity().translationService.service;
+        return service;
     }
 }

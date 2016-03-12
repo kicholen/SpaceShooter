@@ -18,6 +18,7 @@ public class GameService : IGameService {
 			.AddEventService(services.EventService)
 			.AddUIFactoryService(services.UIFactoryService)
 			.AddAnalyticsService(services.AnalyticsService)
+			.AddTranslationService(services.TranslationService)
             .AddCanvas(services.ViewService.Canvas);
 			
 		systems.Initialize();

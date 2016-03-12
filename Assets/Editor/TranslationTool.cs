@@ -7,7 +7,7 @@ using System;
 
 public class TranslationTool
 {
-    const string path = "/Script/View/";
+    static readonly string[] paths = { "/Script/View/", "/Source/Src/" };
     const string prefix = "Translate(\"";
     const string sufix = "\")";
 
@@ -18,7 +18,8 @@ public class TranslationTool
     [MenuItem("Jelly/RefreshTranslations")]
     public static void RefreshTranslations() {
         EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.StandaloneWindows64);
-        parse(new System.IO.DirectoryInfo(Application.dataPath + path));
+        foreach (string path in paths)
+            parse(new System.IO.DirectoryInfo(Application.dataPath + path));
 
         getLanguageIds().Then<long>(ids => {
             Promise<long> promise = new Promise<long>();

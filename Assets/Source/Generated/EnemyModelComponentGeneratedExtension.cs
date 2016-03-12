@@ -12,7 +12,7 @@ namespace Entitas {
 
         public bool hasEnemyModel { get { return HasComponent(ComponentIds.EnemyModel); } }
 
-        public Entity AddEnemyModel(int newId, int newType, string newResource, int newWeapon, int newAmount, float newTime, float newSpawnDelay, string newWeaponResource, float newVelocity, int newAngle, int newWaves, int newAngleOffset, UnityEngine.Vector2 newStartVelocity, float newFollowDelay, float newSelfDestructionDelay, float newTimeDelay, float newDelay, float newRandomPositionOffsetX, bool newFaceDirection, int newShakeCamera, float newRandomRotation) {
+        public Entity AddEnemyModel(int newId, int newType, string newResource, int newWeapon, int newAmount, float newTime, float newSpawnDelay, string newWeaponResource, float newVelocity, int newAngle, int newWaves, int newAngleOffset, UnityEngine.Vector2 newStartVelocity, float newFollowDelay, float newSelfDestructionDelay, float newTimeDelay, float newDelay, float newRandomPositionOffsetX, bool newFaceDirection, int newShakeCamera, float newRandomRotation, int newScore) {
             var component = CreateComponent<EnemyModelComponent>(ComponentIds.EnemyModel);
             component.id = newId;
             component.type = newType;
@@ -35,10 +35,11 @@ namespace Entitas {
             component.faceDirection = newFaceDirection;
             component.shakeCamera = newShakeCamera;
             component.randomRotation = newRandomRotation;
+            component.score = newScore;
             return AddComponent(ComponentIds.EnemyModel, component);
         }
 
-        public Entity ReplaceEnemyModel(int newId, int newType, string newResource, int newWeapon, int newAmount, float newTime, float newSpawnDelay, string newWeaponResource, float newVelocity, int newAngle, int newWaves, int newAngleOffset, UnityEngine.Vector2 newStartVelocity, float newFollowDelay, float newSelfDestructionDelay, float newTimeDelay, float newDelay, float newRandomPositionOffsetX, bool newFaceDirection, int newShakeCamera, float newRandomRotation) {
+        public Entity ReplaceEnemyModel(int newId, int newType, string newResource, int newWeapon, int newAmount, float newTime, float newSpawnDelay, string newWeaponResource, float newVelocity, int newAngle, int newWaves, int newAngleOffset, UnityEngine.Vector2 newStartVelocity, float newFollowDelay, float newSelfDestructionDelay, float newTimeDelay, float newDelay, float newRandomPositionOffsetX, bool newFaceDirection, int newShakeCamera, float newRandomRotation, int newScore) {
             var component = CreateComponent<EnemyModelComponent>(ComponentIds.EnemyModel);
             component.id = newId;
             component.type = newType;
@@ -61,6 +62,7 @@ namespace Entitas {
             component.faceDirection = newFaceDirection;
             component.shakeCamera = newShakeCamera;
             component.randomRotation = newRandomRotation;
+            component.score = newScore;
             ReplaceComponent(ComponentIds.EnemyModel, component);
             return this;
         }
