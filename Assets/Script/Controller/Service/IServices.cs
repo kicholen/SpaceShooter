@@ -1,4 +1,4 @@
-using Entitas;
+﻿using Entitas;
 using System.Collections.Generic;
 
 public interface IServices : Updateable {
@@ -15,4 +15,7 @@ public interface IServices : Updateable {
     ISettingsService SettingsService { get; }
     ITranslationService TranslationService { get; }
     IAnalyticsService AnalyticsService { get; }
+    IShipService ShipService { get; }
+    ICurrencyService CurrencyService { get; }
+    IGamerService GamerService { get; }
 }

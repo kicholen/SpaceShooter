@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ViewService : IViewService {
     const string CANVAS_PREFAB_PATH = "Canvas";
@@ -11,8 +11,9 @@ public class ViewService : IViewService {
 	GameObject touchBlocker;
 	IView currentView;
 	IView nextView;
+    TopPanelComponent topPanel;
 
-	public ViewService(EventService eventService, IUIFactoryService uiFactoryService) {
+    public ViewService(EventService eventService, IUIFactoryService uiFactoryService) {
         factory = new ViewFactory();
         createCanvasAndTouchBlocker(uiFactoryService);
         addViewShowHiddenListeners(eventService);
@@ -34,7 +35,12 @@ public class ViewService : IViewService {
 			showCurrentView();
             return currentView;
         }
-	}
+    }
+
+    public void CreateTopPanel(IServices services)
+    {
+        topPanel = new TopPanelComponent(services);
+    }
 
     void createCanvasAndTouchBlocker(IUIFactoryService uiFactoryService) {
         canvas = uiFactoryService.CreatePrefab(CANVAS_PREFAB_PATH).GetComponent<Canvas>();
@@ -61,5 +67,14 @@ public class ViewService : IViewService {
 		touchBlocker.SetActive(true);
 		currentView.SetParent(canvas.transform);
 		currentView.Show();
-	}
+        showOrHideTopPanel();
+    }
+
+    void showOrHideTopPanel()
+    {
+        if (currentView.TopPanelVisible())
+            topPanel.Show();
+        else
+            topPanel.Hide();
+    }
 }

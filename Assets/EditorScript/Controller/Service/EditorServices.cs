@@ -21,7 +21,10 @@ public class EditorServices : IServices {
     ITranslationService translationService;
     ILanguageService languageService;
     IAnalyticsService analyticsService;
-    
+    IShipService shipService;
+    ICurrencyService currencyService;
+    IGamerService gamerService;
+
     public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
 	public List<Updateable> Updateables { get { return updateables; } }
@@ -41,6 +44,9 @@ public class EditorServices : IServices {
     public ITranslationService TranslationService { get { return translationService; } }
     public ILanguageService LanguageService { get { return languageService; } }
     public IAnalyticsService AnalyticsService { get { return analyticsService; } }
+    public IShipService ShipService { get { return shipService; } }
+    public ICurrencyService CurrencyService { get { return currencyService; } }
+    public IGamerService GamerService { get { return gamerService; } }
 
     public EditorServices(IController controller) {
         this.controller = controller;
@@ -67,13 +73,18 @@ public class EditorServices : IServices {
         translationService = new TranslationService(settingsService);
         languageService = new LanguageService(wwwService, eventService);
         analyticsService = new AnalyticsService(settingsService);
+        shipService = new ShipService();
+        gamerService = new GamerService();
+        currencyService = new CurrenyService(eventService, gamerService);
         updateables.Add(infoService);
     }
 
     public void Init() {
-        gameService.Init(this);
         settingsService.Init();
+        gameService.Init(this);
+        shipService.Init(this);
         viewService.Init(this);
+        currencyService.Init();
         translationService.Init();
         ViewService.SetView(ViewTypes.EDITOR_LANDING);
         pool.GetGroup(Matcher.Time).GetSingleEntity().time.isPaused = false;

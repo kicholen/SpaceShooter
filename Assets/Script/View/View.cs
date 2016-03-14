@@ -3,9 +3,9 @@ using Entitas;
 using System.Collections.Generic;
 
 public class View : BaseGui {
-	const float pixelsPerUnit = 100.0f;
+    const float animationDuration = 0.1f;
 
-	RectTransform rectTransform;
+    RectTransform rectTransform;
 	Entity entity;
 
 	protected Pool pool;
@@ -16,6 +16,8 @@ public class View : BaseGui {
     string prefabPath;
 
     public GameObject Go { get { return go; } }
+
+    public virtual bool TopPanelVisible() { return true; }
 
     public View(string prefabPath) {
         this.prefabPath = prefabPath;
@@ -40,12 +42,13 @@ public class View : BaseGui {
 	
 	public void SetParent(Transform parent) {
 		go.transform.SetParent(parent, false);
-	}
+        go.transform.SetAsFirstSibling();
+    }
 	
 	public virtual void Show() {
 		Vector2 from = new Vector2(rectTransform.localPosition.x - Screen.width, rectTransform.localPosition.y);
 		entity.AddTween(false, new List<Tween>());
-		entity.tween.AddTween(entity.gameObject, EaseTypes.bounceOut, GameObjectAccessorType.LOCAL_X, 0.1f)
+		entity.tween.AddTween(entity.gameObject, EaseTypes.bounceOut, GameObjectAccessorType.LOCAL_X, animationDuration)
 			.From(from.x)
 			.To(rectTransform.localPosition.x)
 			.SetEndCallback(OnShown);
@@ -55,7 +58,7 @@ public class View : BaseGui {
 	public virtual void Hide() {
 		Vector2 to = new Vector2(rectTransform.localPosition.x + Screen.width, rectTransform.localPosition.y);
 		entity.AddTween(false, new List<Tween>());
-		entity.tween.AddTween(entity.gameObject, EaseTypes.bounceIn, GameObjectAccessorType.LOCAL_X, 0.1f)
+		entity.tween.AddTween(entity.gameObject, EaseTypes.bounceIn, GameObjectAccessorType.LOCAL_X, animationDuration)
 			.From(rectTransform.localPosition.x)
 			.To(to.x)
 			.SetEndCallback(OnHidden);

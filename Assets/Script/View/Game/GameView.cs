@@ -1,16 +1,16 @@
-using Entitas;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using System;
 
 public class GameView : View, IView, Updateable {
 
 	List<Updateable> updateables;
 	IGameService gameService;
-	
-	public GameView(List<Updateable> updateables, IGameService gameService) : base("View/GameView") {
+
+    public override bool TopPanelVisible() { return false; }
+
+    public GameView(List<Updateable> updateables, IGameService gameService) : base("View/GameView") {
 		this.updateables = updateables;
 		this.gameService = gameService;
 	}
@@ -47,7 +47,7 @@ public class GameView : View, IView, Updateable {
 		OnHidden();
 	}
 
-	void onGameSlow(GameSlowEvent e) {
+    void onGameSlow(GameSlowEvent e) {
 		go.SetActive(e.slow < 1.0f);
 	}
 

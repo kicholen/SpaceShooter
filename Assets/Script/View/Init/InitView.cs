@@ -1,11 +1,12 @@
 using UnityEngine.UI;
-using Entitas;
 
 public class InitView : View, IView {
 
 	Scrollbar progressBar;
 
-	public InitView() : base("View/InitView") { }
+    public override bool TopPanelVisible() { return false; }
+
+    public InitView() : base("View/InitView") { }
 
     public override void Init() {
         base.Init();

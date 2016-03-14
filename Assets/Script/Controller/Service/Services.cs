@@ -14,7 +14,10 @@ public class Services : IServices {
     ISettingsService settingsService;
     ITranslationService translationService;
     IAnalyticsService analyticsService;
-    
+    IShipService shipService;
+    ICurrencyService currencyService;
+    IGamerService gamerService;
+
     public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
 	public List<Updateable> Updateables { get { return updateables; } }
@@ -27,6 +30,9 @@ public class Services : IServices {
     public ISettingsService SettingsService { get { return settingsService; } }
     public ITranslationService TranslationService { get { return translationService;  } }
     public IAnalyticsService AnalyticsService { get { return analyticsService;  } }
+    public IShipService ShipService { get { return shipService;  } }
+    public ICurrencyService CurrencyService { get { return currencyService; } }
+    public IGamerService GamerService { get { return gamerService; } }
 
     public Services(IController controller) {
         this.controller = controller;
@@ -38,9 +44,10 @@ public class Services : IServices {
 
     public void Init() {
         viewService.Init(this);
+        currencyService.Init();
     }
 
-	public void Update () {
+    public void Update () {
 		for (int i = 0; i < updateables.Count; i++) {
 			updateables[i].Update();
 		}
@@ -56,5 +63,8 @@ public class Services : IServices {
         settingsService = new SettingsService(pool);
         translationService = new TranslationService(settingsService);
         analyticsService = new AnalyticsService(settingsService);
+        shipService = new ShipService();
+        gamerService = new GamerService();
+        currencyService = new CurrenyService(eventService, gamerService);
     }
 }

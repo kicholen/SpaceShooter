@@ -1,4 +1,4 @@
-using Entitas;
+﻿using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -21,8 +21,6 @@ public class CreateShipSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			_pool.CreateEntity()
 				.AddComponent(ComponentIds.ShipModel, Utils.Deserialize<ShipModelComponent>(i.ToString()));
 		}
-		_pool.CreateEntity()
-			.AddCurrentShip(_pool.GetGroup(Matcher.ShipModel).GetEntities()[0].shipModel);
 	}
 
 	public void Execute(List<Entity> entities) {
