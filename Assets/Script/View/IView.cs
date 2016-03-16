@@ -4,7 +4,7 @@ using UnityEngine;
 public interface IView {
 	GameObject Go { get; }
     bool TopPanelVisible();
-
+    bool BottomPanelVisible();
     void SetBaseServices(IUIFactoryService uiFactoryService, EventService eventService, ITranslationService translationService);
     void SetPool(Pool pool);
     void Init();

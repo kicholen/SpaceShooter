@@ -34,7 +34,7 @@ public class AtomBombSystem : IReactiveSystem, ISetPool
 
             e.tween.AddTween(e.position, EaseTypes.cubicIn, PositionAccessorType.XY, flyDuration)
                 .From(playerPosition.x, playerPosition.y)
-                .To(cameraPosition.x, cameraPosition.y + Config.CAMERA_SPEED * flyDuration)
+                .To(cameraPosition.x, cameraPosition.y + GameConfig.CAMERA_SPEED * flyDuration)
                 .SetEndCallback(destroyAllEnemies);
         }
     }

@@ -81,7 +81,7 @@ public class ClearGamePassiveSystem {
     protected void clearScore()
     {
         foreach (Entity e in score.GetEntities())
-            e.ReplaceScore(0, 0, Config.SCORE_MULTIPLIER_BASE, 0.0f, Config.SCORE_MULTIPLIER_DURATION);
+            e.ReplaceScore(0, 0, GameConfig.SCORE_MULTIPLIER_BASE, 0.0f, GameConfig.SCORE_MULTIPLIER_DURATION);
     }
 
     protected void clearGrids() {

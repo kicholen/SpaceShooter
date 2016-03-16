@@ -5,6 +5,7 @@ public class InitView : View, IView {
 	Scrollbar progressBar;
 
     public override bool TopPanelVisible() { return false; }
+    public override bool BottomPanelVisible() { return false; }
 
     public InitView() : base("View/InitView") { }
 

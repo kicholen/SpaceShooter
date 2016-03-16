@@ -11,7 +11,9 @@ public class ViewService : IViewService {
 	GameObject touchBlocker;
 	IView currentView;
 	IView nextView;
+
     TopPanelComponent topPanel;
+    BottomPanelComponent bottomPanel;
 
     public ViewService(EventService eventService, IUIFactoryService uiFactoryService) {
         factory = new ViewFactory();
@@ -42,6 +44,11 @@ public class ViewService : IViewService {
         topPanel = new TopPanelComponent(services);
     }
 
+    public void CreateBottomPanel(IServices services)
+    {
+        bottomPanel = new BottomPanelComponent(services);
+    }
+
     void createCanvasAndTouchBlocker(IUIFactoryService uiFactoryService) {
         canvas = uiFactoryService.CreatePrefab(CANVAS_PREFAB_PATH).GetComponent<Canvas>();
         touchBlocker = uiFactoryService.CreatePrefab(TOUCHBLOCKER_PREFAB_PATH);
@@ -67,7 +74,13 @@ public class ViewService : IViewService {
 		touchBlocker.SetActive(true);
 		currentView.SetParent(canvas.transform);
 		currentView.Show();
+        editElementsVisibility();
+    }
+
+    void editElementsVisibility()
+    {
         showOrHideTopPanel();
+        showOrHideBottomPanel();
     }
 
     void showOrHideTopPanel()
@@ -76,5 +89,13 @@ public class ViewService : IViewService {
             topPanel.Show();
         else
             topPanel.Hide();
+    }
+
+    void showOrHideBottomPanel()
+    {
+        if (currentView.BottomPanelVisible())
+            bottomPanel.Show();
+        else
+            bottomPanel.Hide();
     }
 }

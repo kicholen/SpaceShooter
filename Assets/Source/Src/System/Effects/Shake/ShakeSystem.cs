@@ -38,7 +38,7 @@ public class ShakeSystem : IExecuteSystem, ISetPool {
                 }
 
                 if (e.hasCamera) {
-					e.camera.camera.transform.position = new Vector3(originalPosition.x + componentProperties.offsetX, originalPosition.y, Config.CAMERA_START_Z);
+					e.camera.camera.transform.position = new Vector3(originalPosition.x + componentProperties.offsetX, originalPosition.y, GameConfig.CAMERA_START_Z);
 				}
 				else {
 					e.position.pos.Set(originalPosition.x + componentProperties.offsetX, originalPosition.y);

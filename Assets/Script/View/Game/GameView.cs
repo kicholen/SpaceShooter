@@ -9,7 +9,8 @@ public class GameView : View, IView, Updateable {
 	IGameService gameService;
 
     public override bool TopPanelVisible() { return false; }
-
+    public override bool BottomPanelVisible() { return false; }
+    
     public GameView(List<Updateable> updateables, IGameService gameService) : base("View/GameView") {
 		this.updateables = updateables;
 		this.gameService = gameService;

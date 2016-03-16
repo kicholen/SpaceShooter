@@ -22,6 +22,7 @@ public enum ViewTypes
 	SLOW = 7,
 	SUMMARY = 8,
 	SHIP = 9,
-	SETTINGS = 10
+	SETTINGS = 10,
+    MAIN = 11
 }
 

@@ -18,6 +18,7 @@ public class View : BaseGui {
     public GameObject Go { get { return go; } }
 
     public virtual bool TopPanelVisible() { return true; }
+    public virtual bool BottomPanelVisible() { return true; }
 
     public View(string prefabPath) {
         this.prefabPath = prefabPath;
@@ -64,7 +65,7 @@ public class View : BaseGui {
 			.SetEndCallback(OnHidden);
 	}
 	
-	public void OnShown(Entity e = null) {
+	public virtual void OnShown(Entity e = null) {
 		eventService.Dispatch<ViewShownEvent>(new ViewShownEvent());
 	}
 	

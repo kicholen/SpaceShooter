@@ -1,27 +1,19 @@
 ﻿using Entitas;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
-public class TopPanelComponent : BaseGui
+public class BottomPanelComponent : BaseGui
 {
     IServices services;
 
     RectTransform rectTransform;
     Entity entity;
 
-    Button addCoinsButton;
-    Text coinsText;
-    Button addGemsButton;
-    Text gemsText;
-    Button levelButton;
-    Text levelText;
-    Slider levelSlider;
-
-    bool isVisible;
     float showYPosition;
+    bool isVisible;
 
-    public TopPanelComponent(IServices services)
+    public BottomPanelComponent(IServices services)
     {
         this.services = services;
         init();
@@ -56,10 +48,9 @@ public class TopPanelComponent : BaseGui
 
     void init()
     {
-        go = services.UIFactoryService.CreatePrefab("View/Elements/TopPanel");
+        go = services.UIFactoryService.CreatePrefab("View/Elements/BottomPanel");
         go.transform.SetParent(services.ViewService.Canvas.transform, false);
         setReferences();
-        setData();
         addListeners();
         createEntity();
     }
@@ -67,41 +58,24 @@ public class TopPanelComponent : BaseGui
     void createEntity()
     {
         entity = services.Pool.CreateEntity()
-            .AddGameObject(go, "TopPanelComponent", false);
+            .AddGameObject(go, "BottomPanelComponent", false);
     }
 
     void setReferences()
     {
         rectTransform = go.GetComponent<RectTransform>();
-        addCoinsButton = getChild("CoinsButton/AddButton").GetComponent<Button>();
-        coinsText = getChild("CoinsButton/Text").GetComponent<Text>();
-        addGemsButton = getChild("GemsButton/AddButton").GetComponent<Button>();
-        gemsText = getChild("GemsButton/Text").GetComponent<Text>();
-        levelButton = getChild("LevelButton").GetComponent<Button>();
-        levelText = getChild("LevelButton/Slider/Fill Area/Text").GetComponent<Text>();
-        levelSlider = getChild("LevelButton/Slider").GetComponent<Slider>();
-    }
-
-    void setData()
-    {
-        coinsText.text = services.CurrencyService.Coins.ToString();
-        levelText.text = "80% mock";
-        levelSlider.value = 0.8f;
     }
 
     void addListeners()
     {
-        services.EventService.AddListener<CoinsChangedEvent>(onCoinsChanged);
-        services.EventService.AddListener<GemsChangedEvent>(onGemsChanged);
+        getChild("ShopButton").GetComponent<Button>().onClick.AddListener(buttonClicked(PanelType.SHOP));
+        getChild("ShipButton").GetComponent<Button>().onClick.AddListener(buttonClicked(PanelType.SHIP));
+        getChild("PlayButton").GetComponent<Button>().onClick.AddListener(buttonClicked(PanelType.PLAY));
+        getChild("SettingsButton").GetComponent<Button>().onClick.AddListener(buttonClicked(PanelType.SETTINGS));
     }
 
-    void onCoinsChanged(CoinsChangedEvent e)
+    UnityEngine.Events.UnityAction buttonClicked(PanelType type)
     {
-        coinsText.text = e.coins.ToString();
-    }
-
-    void onGemsChanged(GemsChangedEvent e)
-    {
-        gemsText.text = e.gems.ToString();
+        return () => services.EventService.Dispatch<BottomButtonClickedEvent>(new BottomButtonClickedEvent(type));
     }
 }

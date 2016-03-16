@@ -23,7 +23,7 @@ public class ScoreSystem : IReactiveSystem, IInitializeSystem, ISetPool
     public void Initialize()
     {
         pool.CreateEntity()
-            .AddScore(0, 0, Config.SCORE_MULTIPLIER_BASE, 0.0f, Config.SCORE_MULTIPLIER_DURATION);
+            .AddScore(0, 0, GameConfig.SCORE_MULTIPLIER_BASE, 0.0f, GameConfig.SCORE_MULTIPLIER_DURATION);
     }
 
     public void Execute(List<Entity> entities)
@@ -54,7 +54,7 @@ public class ScoreSystem : IReactiveSystem, IInitializeSystem, ISetPool
 
     void setScoreComponent(ScoreComponent scoreComponent, bool shouldMultiply)
     {
-        scoreComponent.multiplier = shouldMultiply ? scoreComponent.multiplier + Config.SCORE_MULTIPLIER_PROGRESS : Config.SCORE_MULTIPLIER_BASE;
+        scoreComponent.multiplier = shouldMultiply ? scoreComponent.multiplier + GameConfig.SCORE_MULTIPLIER_PROGRESS : GameConfig.SCORE_MULTIPLIER_BASE;
     }
 
     bool isMultiplierActive(ScoreComponent scoreComponent, float gameTime)

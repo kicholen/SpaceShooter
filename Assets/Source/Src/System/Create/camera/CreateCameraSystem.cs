@@ -22,7 +22,7 @@ public class CreateCameraSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			.AddCamera(camera)
 			.AddStaticCamera(getStartCameraPosition())
 			.AddVelocity(new Vector2(0.0f, 0.0f))
-			.AddPosition(new Vector2(0.0f, Config.CAMERA_START_OFFSET));
+			.AddPosition(new Vector2(0.0f, GameConfig.CAMERA_START_OFFSET));
 	}
 
 	public void Execute(List<Entity> entities) {
@@ -38,7 +38,7 @@ public class CreateCameraSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 			Vector2 playerPosition = player.position.pos;
 			camera.AddSmoothCamera(shouldReset ? getStartCameraPosition() : camera.staticCamera.offset)
 				.ReplaceFollowTarget(player)
-				.ReplaceVelocity(new Vector2(0.0f, Config.CAMERA_SPEED))
+				.ReplaceVelocity(new Vector2(0.0f, GameConfig.CAMERA_SPEED))
 				.ReplacePosition(new Vector2(playerPosition.x, playerPosition.y + camera.staticCamera.offset.y))
 				.RemoveStaticCamera();
 		}
@@ -76,6 +76,6 @@ public class CreateCameraSystem : IInitializeSystem, IReactiveSystem, ISetPool {
 	}
 
 	Vector3 getStartCameraPosition() {
-		return new Vector3(0.0f, 0.0f, Config.CAMERA_START_Z);
+		return new Vector3(0.0f, 0.0f, GameConfig.CAMERA_START_Z);
 	}
 }

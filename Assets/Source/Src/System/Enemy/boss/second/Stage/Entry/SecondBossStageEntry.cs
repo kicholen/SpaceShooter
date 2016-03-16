@@ -20,7 +20,7 @@ public class SecondBossStageEntry : BossStage
             e.AddTween(true, new List<Tween>());
             e.tween.AddTween(e.position, EaseTypes.quadOut, PositionAccessorType.Y, timeLimit)
                 .From(e.position.pos.y + 3.0f)
-                .To(e.position.pos.y + Config.CAMERA_SPEED * timeLimit)
+                .To(e.position.pos.y + GameConfig.CAMERA_SPEED * timeLimit)
                 .BlockClear();
         }
     }

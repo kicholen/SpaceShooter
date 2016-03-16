@@ -40,7 +40,7 @@ public class BackgroundSystem : IExecuteSystem, IInitializeSystem, ISetPool {
 		Entity e = _pool.CreateEntity()
 			.AddVelocity(new Vector2(0.0f, -Random.Range(2.0f, 3.0f)))
 			.AddPosition(new Vector2(Random.Range(position.pos.x + component.dimension.x / 2.0f, position.pos.x - component.dimension.x / 2.0f), 
-			                         Random.Range(position.pos.y + component.dimension.y / 2.0f + Config.CAMERA_START_OFFSET, position.pos.y - component.dimension.y / 2.0f + Config.CAMERA_START_OFFSET)))
+			                         Random.Range(position.pos.y + component.dimension.y / 2.0f + GameConfig.CAMERA_START_OFFSET, position.pos.y - component.dimension.y / 2.0f + GameConfig.CAMERA_START_OFFSET)))
 			.AddResource(Resource.Particle)
 			.IsBackgroundStar(true)
 			.AddSortOrder(SortTypes.Background)

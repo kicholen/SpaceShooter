@@ -191,7 +191,7 @@ public class EditLevelView : View, IView {
             maxY = wave.spawnBarrier > maxY ? wave.spawnBarrier : maxY;
         }
 
-        return maxY * Config.CAMERA_SPEED;
+        return maxY * GameConfig.CAMERA_SPEED;
     }
 
     GameObject getTimeElementGO() {

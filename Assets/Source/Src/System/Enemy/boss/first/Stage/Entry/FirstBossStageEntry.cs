@@ -24,7 +24,7 @@ public class FirstBossStageEntry : BossStage
                 .BlockClear();
             e.tween.AddTween(e.position, EaseTypes.quadOut, PositionAccessorType.Y, timeLimit)
                 .From(e.position.pos.y - 4.0f)
-                .To(e.position.pos.y + Config.CAMERA_SPEED * timeLimit)
+                .To(e.position.pos.y + GameConfig.CAMERA_SPEED * timeLimit)
                 .BlockClear();
         }
     }
