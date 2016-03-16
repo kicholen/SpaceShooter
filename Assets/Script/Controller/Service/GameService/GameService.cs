@@ -49,7 +49,7 @@ public class GameService : IGameService {
 
 	public void EndGame(Entity e) {
 		e.isDestroyEntity = true;
-		viewService.SetView(ViewTypes.LANDING);
+		viewService.SetView(ViewTypes.MAIN);
 		pool.CreateEntity()
 			.IsEndGame(true);
 	}

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Entitas;
-using UnityEngine;
 
 public class MainView : View, IView
 {
@@ -19,7 +18,8 @@ public class MainView : View, IView
         base.Init();
         attachPanels();
         addListeners();
-        setCurrentPanel(PanelType.PLAY);
+        activePanelType = PanelType.PLAY;
+        refreshPanelStates();
     }
 
     public override void Destroy()
@@ -31,15 +31,23 @@ public class MainView : View, IView
     public override void OnShown(Entity e = null)
     {
         base.OnShown(e);
-        go.AddComponent<MainViewComponent>();
+        go.AddComponent<MainViewComponent>().PanelSwitched = onPanelSwitched;
+    }
+
+    void onPanelSwitched(PanelType panel)
+    {
+        if (activePanelType == panel)
+            return;
+        activePanelType = panel;
+        refreshPanelStates();
     }
 
     void attachPanels()
     {
-        panels.Add(PanelType.SHOP, new ShopPanel(getChild("ShopPanel")));
-        panels.Add(PanelType.SHIP, new ShipPanel(getChild("ShipPanel")));
-        panels.Add(PanelType.PLAY, new PlayPanel(getChild("PlayPanel")));
-        panels.Add(PanelType.SETTINGS, new SettingsPanel(getChild("SettingsPanel")));
+        panels.Add(PanelType.SHOP, new ShopPanel(getChild("Viewport/Content/ShopPanel")));
+        panels.Add(PanelType.SHIP, new ShipPanel(getChild("Viewport/Content/ShipPanel")));
+        panels.Add(PanelType.PLAY, new PlayPanel(getChild("Viewport/Content/PlayPanel"), services));
+        panels.Add(PanelType.SETTINGS, new SettingsPanel(getChild("Viewport/Content/SettingsPanel"), services));
     }
 
     void addListeners()
@@ -52,15 +60,18 @@ public class MainView : View, IView
         if (activePanelType == e.type)
             return;
 
-        go.GetComponent<MainViewComponent>().SwitchToScreen(e.type);
-        setCurrentPanel(e.type);
-        activePanelType = e.type;
+        go.GetComponent<MainViewComponent>().SwitchToPanel(e.type);
     }
 
-    void setCurrentPanel(PanelType panelType)
+    void refreshPanelStates()
     {
-        if (activePanelType != PanelType.NONE)
-            panels[activePanelType].Disable();
-        panels[panelType].Enable();
+        foreach (KeyValuePair<PanelType, IPanel> entry in panels)
+        {
+            if (activePanelType == entry.Key)
+                entry.Value.Enable();
+            else
+                entry.Value.Disable();
+        }
+        services.EventService.Dispatch<PanelSwitchedEvent>(new PanelSwitchedEvent(activePanelType));
     }
 }

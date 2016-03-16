@@ -85,6 +85,8 @@ public class ViewService : IViewService {
 
     void showOrHideTopPanel()
     {
+        if (topPanel == null)
+            return;
         if (currentView.TopPanelVisible())
             topPanel.Show();
         else
@@ -93,6 +95,8 @@ public class ViewService : IViewService {
 
     void showOrHideBottomPanel()
     {
+        if (bottomPanel == null)
+            return;
         if (currentView.BottomPanelVisible())
             bottomPanel.Show();
         else

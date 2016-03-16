@@ -15,21 +15,9 @@ public class ViewFactory : IViewFactory {
 			case ViewTypes.INIT:
 				view = new InitView();
 			break;
-			case ViewTypes.LANDING:
-				view = new LandingView(services.ViewService);
-			break;
-			case ViewTypes.LEVEL:
-				view = new LevelView(services.LoadService, services.ViewService, services.GameService);
-			break;
 			case ViewTypes.LOAD:
 				view = new LoadView();
 			break;
-			case ViewTypes.SHIP:
-				view = new ShipView(services.ViewService);
-			break;
-            case ViewTypes.SETTINGS:
-                view = new SettingsView(services.SettingsService, services.ViewService);
-                break;
             case ViewTypes.MAIN:
                 view = new MainView(services);
                 break;

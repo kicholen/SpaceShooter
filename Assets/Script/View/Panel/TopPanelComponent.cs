@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class TopPanelComponent : BaseGui
 {
+    const float hidePositionOffset = 20.0f;
+
+
     IServices services;
 
     RectTransform rectTransform;
@@ -33,6 +36,7 @@ public class TopPanelComponent : BaseGui
     {
         if (!isVisible)
         {
+            activateButtons();
             isVisible = true;
             go.SetActive(true);
             entity.AddTween(false, new List<Tween>());
@@ -46,11 +50,12 @@ public class TopPanelComponent : BaseGui
     {
         if (isVisible)
         {
+            deactivateButtons();
             isVisible = false;
             entity.AddTween(false, new List<Tween>());
             entity.tween.AddTween(entity.gameObject, EaseTypes.linear, GameObjectAccessorType.LOCAL_Y, Config.TOP_PANEL_ANIMATION_DURATION)
                 .From(rectTransform.localPosition.y)
-                .To(rectTransform.localPosition.y + Screen.height * (rectTransform.anchorMax.y - rectTransform.anchorMin.y) * 2.0f);
+                .To(rectTransform.localPosition.y + Screen.height * (rectTransform.anchorMax.y - rectTransform.anchorMin.y) * 2.0f + hidePositionOffset);
         }
     }
 
@@ -103,5 +108,19 @@ public class TopPanelComponent : BaseGui
     void onGemsChanged(GemsChangedEvent e)
     {
         gemsText.text = e.gems.ToString();
+    }
+
+    void deactivateButtons()
+    {
+        addCoinsButton.interactable = false;
+        addGemsButton.interactable = false;
+        levelButton.interactable = false;
+    }
+
+    void activateButtons()
+    {
+        addCoinsButton.interactable = true;
+        addGemsButton.interactable = true;
+        levelButton.interactable = true;
     }
 }

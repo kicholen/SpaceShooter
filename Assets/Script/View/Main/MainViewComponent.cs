@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,10 +9,13 @@ public class MainViewComponent : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     const int fastSwipeMaxFrames = 30;
     const float fastSwipeMinThreshold = 30.0f;
     const float switchSpeed = 8f;
+    const float animDuration = 0.5f;
+
+    public Action<PanelType> PanelSwitched;
 
     ScrollRect scrollRect;
     RectTransform content;
-    int screenCount;
+    int panelCount;
 
     Vector2 startDragPosition;
     Vector2 targetPosition;
@@ -20,17 +24,18 @@ public class MainViewComponent : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     bool shouldSwitch;
     bool isBlocked;
 
-    int currentScreen = (int)PanelType.PLAY - 1;
+    int currentPanel = (int)PanelType.PLAY - 1;
 
     List<Vector2> positions = new List<Vector2>();
+    float animTime;
 
-    public void SwitchToScreen(PanelType screen)
+    public void SwitchToPanel(PanelType panel)
     {
-        currentScreen = (int)screen - 1;
+        currentPanel = (int)panel - 1;
         shouldSwitch = true;
         isDragging = false;
         isBlocked = true;
-        targetPosition = getScreenPosition(currentScreen);
+        targetPosition = getPanelPosition(currentPanel);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -51,9 +56,9 @@ public class MainViewComponent : MonoBehaviour, IBeginDragHandler, IEndDragHandl
             shouldSwitch = true;
 
             if (isFastSwipe())
-                fastSwipeSwitchToScreen();
+                fastSwipeSwitchToPanel();
             else
-                switchToClosestScreen();
+                switchToClosestPanel();
         }
     }
 
@@ -61,7 +66,7 @@ public class MainViewComponent : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     {
         scrollRect = GetComponent<ScrollRect>();
         content = scrollRect.content;
-        screenCount = content.childCount;
+        panelCount = content.childCount;
         createPositionsList();
     }
 
@@ -69,6 +74,8 @@ public class MainViewComponent : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     {
         if (canSwitch())
             preformSwitch();
+        else
+            animTime = 0.0f;
 
         if (isDragging)
             fastSwipeCount++;
@@ -81,28 +88,30 @@ public class MainViewComponent : MonoBehaviour, IBeginDragHandler, IEndDragHandl
 
     void preformSwitch()
     {
-        content.localPosition = Vector2.Lerp(content.localPosition, targetPosition, switchSpeed * Time.deltaTime);
-        if (Vector2.Distance(content.localPosition, targetPosition) < 0.005f)
+        animTime += Time.deltaTime;
+        content.localPosition = Vector2.Lerp(content.localPosition, targetPosition, animTime / animDuration);
+        if (Vector2.Distance(content.localPosition, targetPosition) < 0.05f)
         {
             content.localPosition = targetPosition;
             shouldSwitch = false;
             isBlocked = false;
+            PanelSwitched((PanelType)(currentPanel + 1));
         }
     }
 
-    void switchToClosestScreen()
+    void switchToClosestPanel()
     {
         targetPosition = Vector3.zero;
         float minDistance = Mathf.Infinity;
 
-        for (int i = 0; i < screenCount; i++)
+        for (int i = 0; i < panelCount; i++)
         {
-            float distance = Vector2.Distance(getScreenPosition(i), content.localPosition);
+            float distance = Vector2.Distance(getPanelPosition(i), content.localPosition);
             if (distance < minDistance)
             {
                 minDistance = distance;
-                targetPosition = getScreenPosition(i);
-                currentScreen = i;
+                targetPosition = getPanelPosition(i);
+                currentPanel = i;
             }
         }
     }
@@ -112,44 +121,44 @@ public class MainViewComponent : MonoBehaviour, IBeginDragHandler, IEndDragHandl
         return fastSwipeCount <= fastSwipeMaxFrames && Mathf.Abs(startDragPosition.x - content.localPosition.x) > fastSwipeMinThreshold;
     }
 
-    void fastSwipeSwitchToScreen()
+    void fastSwipeSwitchToPanel()
     {
         if (startDragPosition.x - content.localPosition.x > 0.0f)
-            tryToMoveToNextScreen();
+            tryToMoveToNextPanel();
         else
-            tryToMoveToPreviousScreen();
+            tryToMoveToPreviousPanel();
     }
 
-    void tryToMoveToPreviousScreen()
+    void tryToMoveToPreviousPanel()
     {
-        if (currentScreen - 1 >= 0)
+        if (currentPanel - 1 >= 0)
         {
-            currentScreen = currentScreen - 1;
-            targetPosition = getScreenPosition(currentScreen);
+            currentPanel = currentPanel - 1;
+            targetPosition = getPanelPosition(currentPanel);
         }
     }
 
-    void tryToMoveToNextScreen()
+    void tryToMoveToNextPanel()
     {
-        if (currentScreen + 1 < screenCount)
+        if (currentPanel + 1 < panelCount)
         {
-            currentScreen = currentScreen + 1;
-            targetPosition = getScreenPosition(currentScreen);
+            currentPanel = currentPanel + 1;
+            targetPosition = getPanelPosition(currentPanel);
         }
     }
 
-    Vector2 getScreenPosition(int screen)
+    Vector2 getPanelPosition(int panel)
     {
-        return positions[screen];
+        return positions[panel];
     }
 
     void createPositionsList()
     {
-        for (int i = 0; i < screenCount; ++i)
+        for (int i = 0; i < panelCount; ++i)
         {
-            scrollRect.horizontalNormalizedPosition = i / (float)(screenCount - 1);
+            scrollRect.horizontalNormalizedPosition = i / (float)(panelCount - 1);
             positions.Add(content.localPosition);
         }
-        scrollRect.horizontalNormalizedPosition = (float)currentScreen / (screenCount - 1);
+        scrollRect.horizontalNormalizedPosition = (float)currentPanel / (panelCount - 1);
     }
 }

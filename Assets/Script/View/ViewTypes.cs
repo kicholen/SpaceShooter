@@ -1,4 +1,4 @@
-public enum ViewTypes
+﻿public enum ViewTypes
 {
     EDITOR_LANUGAGES = -13,
     EDITOR_EDIT_LANGUAGE = -12,
@@ -14,15 +14,11 @@ public enum ViewTypes
     EDITOR_PATH = -2,
     EDITOR_LANDING = -1,
 	INIT = 1,
-	LANDING = 2,
-	LEVEL = 3,
-	LOAD = 4,
-	GAME = 5,
-	PAUSE = 6,
-	SLOW = 7,
-	SUMMARY = 8,
-	SHIP = 9,
-	SETTINGS = 10,
-    MAIN = 11
+	LOAD = 2,
+	GAME = 3,
+	PAUSE = 4,
+	SLOW = 5,
+	SUMMARY = 6,
+    MAIN = 7
 }
 
