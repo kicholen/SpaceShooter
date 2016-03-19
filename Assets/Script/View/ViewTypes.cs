@@ -18,7 +18,7 @@
 	GAME = 3,
 	PAUSE = 4,
 	SLOW = 5,
-	SUMMARY = 6,
+	RESULTS = 6,
     MAIN = 7
 }
 

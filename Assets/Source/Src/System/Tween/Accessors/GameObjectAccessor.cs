@@ -1,5 +1,7 @@
 using UnityEngine;
 using Entitas;
+using UnityEngine.UI;
+using System;
 
 public static class GameObjectAccessorType {
 	public const int LOCAL_X = 1;
@@ -8,6 +10,7 @@ public static class GameObjectAccessorType {
 	public const int LOCAL_SCALE_X = 4;
 	public const int LOCAL_SCALE_Y = 5;
 	public const int LOCAL_SCALE_XY = 6;
+	public const int TEXT = 7;
 }
 
 public class GameObjectAccessor : ITweenAccessor {
@@ -35,7 +38,10 @@ public class GameObjectAccessor : ITweenAccessor {
             returnValues[0] = go.transform.localScale.x;
             returnValues[1] = go.transform.localScale.y;
             return 2;
-		default:
+        case GameObjectAccessorType.TEXT:
+            returnValues[0] = Convert.ToInt32(go.GetComponent<Text>().text);
+            return 1;
+            default:
 			return 0;
 		}
 	}
@@ -60,6 +66,9 @@ public class GameObjectAccessor : ITweenAccessor {
             break;
         case GameObjectAccessorType.LOCAL_SCALE_XY:
             go.transform.localScale = new Vector2(newValues[0], newValues[1]);
+            break;
+        case GameObjectAccessorType.TEXT:
+            go.GetComponent<Text>().text = newValues[0].ToString("0");
             break;
         default:
 			break;

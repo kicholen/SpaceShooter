@@ -21,6 +21,9 @@ public class ViewFactory : IViewFactory {
             case ViewTypes.MAIN:
                 view = new MainView(services);
                 break;
+            case ViewTypes.RESULTS:
+                view = new ResultsView(services);
+                break;
         }
         initView(view);
 

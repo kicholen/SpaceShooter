@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using System;
+using Entitas;
 using Entitas.Unity.VisualDebugging;
 
 public class GameService : IGameService {
@@ -48,7 +49,8 @@ public class GameService : IGameService {
 	}
 
 	public void EndGame(Entity e) {
-		e.isDestroyEntity = true;
+        if (e != null)
+            e.isDestroyEntity = true;
 		viewService.SetView(ViewTypes.MAIN);
 		pool.CreateEntity()
 			.IsEndGame(true);
@@ -56,8 +58,13 @@ public class GameService : IGameService {
 
 	void onGameEnded(GameEndedEvent e) {
 		pool.CreateEntity()
-			.AddDelayedCall(2.0f, EndGame);
+			.AddDelayedCall(2.0f, showResults);
 	}
+
+    void showResults(Entity entity)
+    {
+        viewService.SetView(ViewTypes.RESULTS);
+    }
 
     Systems CreateSystems() {
 #if (UNITY_EDITOR)

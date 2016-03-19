@@ -2,5 +2,5 @@
 
 public interface IAdService
 {
-    void ShowIfShould(Action onFinished);
+    void ShowIfShould(Action<bool> onFinished);
 }

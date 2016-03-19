@@ -5,28 +5,25 @@ public class AdService : IAdService
 {
     ICurrencyService currencyService;
 
-    Action onFinished;
+    Action<bool> onFinished;
 
     public AdService(ICurrencyService currencyService)
     {
         this.currencyService = currencyService;
     }
 
-    public void ShowIfShould(Action onFinished)
+    public void ShowIfShould(Action<bool> onFinished)
     {
         this.onFinished = onFinished;
         if (shoudShowAd())
             Advertisement.Show("rewardedVideo", new ShowOptions { resultCallback = onShown });
         else
-            onFinished();
+            onFinished(false);
     }
 
     void onShown(ShowResult result)
     {
-        if (result == ShowResult.Finished)
-            addReward();
-
-        onFinished();
+        onFinished(result == ShowResult.Finished);
     }
 
     void addReward()
