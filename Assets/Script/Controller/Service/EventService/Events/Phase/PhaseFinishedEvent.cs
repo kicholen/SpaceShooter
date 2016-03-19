@@ -5,5 +5,4 @@ public class PhaseFinishedEvent : GameEvent {
 	public PhaseFinishedEvent(Phase phase) {
 		this.phase = phase;
 	}
-	
 }

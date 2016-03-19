@@ -18,6 +18,8 @@ public class Services : IServices {
     ICurrencyService currencyService;
     IGamerService gamerService;
     IShopService shopService;
+    IAPService iapService;
+    IAdService adService;
 
     public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
@@ -35,6 +37,8 @@ public class Services : IServices {
     public ICurrencyService CurrencyService { get { return currencyService; } }
     public IGamerService GamerService { get { return gamerService; } }
     public IShopService ShopService { get { return shopService; } }
+    public IAPService IAPService { get { return iapService; } }
+    public IAdService AdService { get { return adService; } }
 
     public Services(IController controller) {
         this.controller = controller;
@@ -68,6 +72,8 @@ public class Services : IServices {
         shipService = new ShipService();
         gamerService = new GamerService(eventService);
         currencyService = new CurrenyService(eventService, gamerService);
-        shopService = new ShopService(currencyService);
+        iapService = new IAPService(eventService);
+        adService = new AdService(currencyService);
+        shopService = new ShopService(currencyService, eventService, iapService);
     }
 }

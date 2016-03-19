@@ -19,4 +19,6 @@ public interface IServices : Updateable {
     ICurrencyService CurrencyService { get; }
     IGamerService GamerService { get; }
     IShopService ShopService { get; }
+    IAPService IAPService { get; }
+    IAdService AdService { get; }
 }

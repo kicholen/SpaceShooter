@@ -17,6 +17,7 @@ public class InitPhase : Phase, IPhase
         actions.Enqueue(() => { services.ShipService.Init(services); nextAction(); });
         actions.Enqueue(() => { services.SettingsService.Init(); nextAction(); });
         actions.Enqueue(() => { services.ShopService.Init(); nextAction(); });
+        actions.Enqueue(() => { services.IAPService.Init(); nextAction(); });
         actions.Enqueue(() => { services.TranslationService.Init(); nextAction(); });
         actions.Enqueue(() => { services.GamerService.Init(); nextAction(); });
         actions.Enqueue(() => { services.ViewService.CreateTopPanel(services); nextAction(); });
