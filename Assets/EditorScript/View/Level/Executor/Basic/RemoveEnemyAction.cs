@@ -1,7 +1,7 @@
 ﻿public class RemoveEnemyAction : ILevelAction {
-    EnemyModel model;
+    EnemySpawnModel model;
 
-    public RemoveEnemyAction(EnemyModel model) {
+    public RemoveEnemyAction(EnemySpawnModel model) {
         this.model = model;
     }
 

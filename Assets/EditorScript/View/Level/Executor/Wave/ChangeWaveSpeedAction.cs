@@ -13,7 +13,7 @@ public class ChangeWaveSpeedAction : IWaveAction {
         }
     }
 
-    public void Execute(WaveModel model) {
+    public void Execute(WaveSpawnModel model) {
         model.speed = speed;
     }
 }

@@ -2,19 +2,19 @@
 using UnityEngine;
 
 public class EditableBehaviour : MonoBehaviour {
-    public WaveModel waveModel;
-    public EnemyModel enemyModel;
+    public WaveSpawnModel waveModel;
+    public EnemySpawnModel enemyModel;
 
     Action refreshNumeration;
 
     public float SpawnBarrier { get { return waveModel != null ? waveModel.spawnBarrier : enemyModel.spawnBarrier; } }
 
-    public void SetWaveModel(WaveModel waveModel) {
+    public void SetWaveModel(WaveSpawnModel waveModel) {
         this.waveModel = waveModel;
         SetSpawnBarrier(waveModel.spawnBarrier);
     }
 
-    public void SetEnemyModel(EnemyModel enemyModel) {
+    public void SetEnemyModel(EnemySpawnModel enemyModel) {
         this.enemyModel = enemyModel;
         SetSpawnBarrier(enemyModel.spawnBarrier);
     }

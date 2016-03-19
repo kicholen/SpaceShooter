@@ -13,7 +13,7 @@ public class ChangeWaveCountAction : IWaveAction {
         }
     }
 
-    public void Execute(WaveModel model) {
+    public void Execute(WaveSpawnModel model) {
         model.count = count;
     }
 }

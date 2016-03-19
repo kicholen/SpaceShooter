@@ -16,7 +16,7 @@ public class ChangeWaveHealthAction : IWaveAction {
         }
     }
 
-    public void Execute(WaveModel model) {
+    public void Execute(WaveSpawnModel model) {
         model.health = health;
     }
 }

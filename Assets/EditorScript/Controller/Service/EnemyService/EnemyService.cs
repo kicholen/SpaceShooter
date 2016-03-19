@@ -9,7 +9,7 @@ public class EnemyService : IEnemyService {
     EventService eventService;
     Pool pool;
 
-    List<EnemyModelComponent> enemies;
+    List<EnemyModel> enemies;
 
     public EnemyService(Pool pool, IWwwService wwwService, EventService eventService) {
         this.pool = pool;
@@ -38,15 +38,15 @@ public class EnemyService : IEnemyService {
         wwwService.Send<GetEnemyIds>(new GetEnemyIds(), (request) => { onEnemiesLoaded(request.EnemyIds); }, onRequestFailed);
     }
 
-    public void LoadEnemyById(long id, Action<EnemyModelComponent> onEnemyLoaded) {
+    public void LoadEnemyById(long id, Action<EnemyModel> onEnemyLoaded) {
         wwwService.Send<GetEnemy>(new GetEnemy(id), (request) => { onEnemyLoaded(request.Component); }, onRequestFailed);
     }
 
-    public void CreateNewEnemy(Action<EnemyModelComponent> onEnemyCreated) {
+    public void CreateNewEnemy(Action<EnemyModel> onEnemyCreated) {
         wwwService.Send<CreateEnemy>(new CreateEnemy(), (request) => { onEnemyCreated(request.Component); }, onRequestFailed);
     }
 
-    public void UpdateEnemy(EnemyModelComponent component, Action onEnemyUpdated) {
+    public void UpdateEnemy(EnemyModel component, Action onEnemyUpdated) {
         wwwService.Send<UpdateEnemy>(new UpdateEnemy(component), (request) => onEnemyUpdated(), onRequestFailed);
     }
 
@@ -58,24 +58,10 @@ public class EnemyService : IEnemyService {
         eventService.Dispatch<InfoBoxShowEvent>(new InfoBoxShowEvent(message));
     }
 
-    void replaceOrAddEnemies(List<EnemyModelComponent> enemies)
+    void replaceOrAddEnemies(List<EnemyModel> enemies)
     {
-        Entity[] entities = pool.GetGroup(Matcher.EnemyModel).GetEntities();
-
-        foreach (EnemyModelComponent enemy in enemies) {
-            bool found = false;
-            foreach (Entity e in entities) {
-                if (enemy.type == e.enemyModel.type) {
-                    e.ReplaceEnemyModel(enemy.id, enemy.type, enemy.resource, enemy.weapon, enemy.amount, enemy.time, enemy.spawnDelay,
-                        enemy.weaponResource, enemy.velocity, enemy.angle, enemy.waves, enemy.angleOffset, enemy.startVelocity, enemy.followDelay,
-                        enemy.selfDestructionDelay, enemy.timeDelay, enemy.delay, enemy.randomPositionOffsetX, enemy.faceDirection, enemy.shakeCamera,
-                        enemy.randomRotation, enemy.score);
-                    found = true;
-                }
-            }
-            if (!found)
-                pool.CreateEntity()
-                    .AddComponent(ComponentIds.EnemyModel, enemy);
-        }
+        Dictionary<int, EnemyModel> map = pool.GetGroup(Matcher.EnemiesModel).GetSingleEntity().enemiesModel.map;
+        foreach (EnemyModel enemy in enemies)
+            map[enemy.type] = enemy;
     }
 }

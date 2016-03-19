@@ -7,7 +7,7 @@
         this.faceDirection = faceDirection;
     }
 
-    public void Execute(EnemyModelComponent model)
+    public void Execute(EnemyModel model)
     {
         model.faceDirection = faceDirection;
     }

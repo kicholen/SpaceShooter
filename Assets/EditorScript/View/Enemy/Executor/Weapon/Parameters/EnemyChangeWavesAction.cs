@@ -14,7 +14,7 @@ public class EnemyChangeWavesAction : IEnemyWeaponParameterAction {
         }
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.waves = waves;
         if (entity.hasCircleMissileRotatedSpawner)
             entity.circleMissileRotatedSpawner.waves = waves;

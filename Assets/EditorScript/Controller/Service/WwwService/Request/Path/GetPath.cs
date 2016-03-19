@@ -2,7 +2,7 @@
 
 public class GetPath : WwwRequest {
 
-    public PathModelComponent Component;
+    public PathModel Component;
 
     public GetPath(long id) {
         urlData.Add("paths");
@@ -10,6 +10,6 @@ public class GetPath : WwwRequest {
     }
 
     public override void ParseResult() {
-        Component = JsonConvert.DeserializeObject<PathModelComponent>(result);
+        Component = JsonConvert.DeserializeObject<PathModel>(result);
     }
 }

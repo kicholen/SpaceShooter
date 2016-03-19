@@ -1,10 +1,11 @@
 ﻿using Entitas;
+using System.Collections.Generic;
 
 public class CreateEnemySystem : IInitializeSystem, ISetPool
 {
     Pool pool;
 
-    const int ENEMY_COUNT = 24;
+    const int ENEMY_COUNT = 28;
 
     public void SetPool(Pool pool) {
         this.pool = pool;
@@ -12,13 +13,17 @@ public class CreateEnemySystem : IInitializeSystem, ISetPool
 
     public void Initialize()
     {
-        for (int i = 1; i <= ENEMY_COUNT; i++)
-            pool.CreateEntity()
-                .AddComponent(ComponentIds.EnemyModel, Utils.Deserialize<EnemyModelComponent>(i.ToString()));
+        Entity e = pool.CreateEntity()
+            .AddEnemiesModel(new Dictionary<int, EnemyModel>());
+        for (int i = 0; i < ENEMY_COUNT; i++)
+        {
+            EnemyModel model = Utils.Deserialize<EnemyModel>(i.ToString());
+            e.enemiesModel.map.Add(model.type, model);
+        }
         createEnemyFactory();
     }
 
-    private void createEnemyFactory()
+    void createEnemyFactory()
     {
         EnemyFactory factory = new EnemyFactory();
         factory.SetPool(pool);

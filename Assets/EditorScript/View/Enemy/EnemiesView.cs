@@ -53,7 +53,7 @@ public class EnemiesView : View, IView {
         enemyService.CreateNewEnemy(onEnemyLoaded);
     }
 
-    void onEnemyLoaded(EnemyModelComponent component) {
+    void onEnemyLoaded(EnemyModel component) {
         (viewService.SetView(ViewTypes.EDITOR_EDIT_ENEMY) as EditEnemyView).SetData(component);
     }
 

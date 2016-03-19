@@ -13,7 +13,7 @@ public class ChangeEnemySpeedAction : IEnemyAction {
         }
     }
 
-    public void Execute(EnemyModel model) {
+    public void Execute(EnemySpawnModel model) {
         model.speed = speed;
     }
 }

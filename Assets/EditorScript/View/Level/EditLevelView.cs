@@ -47,10 +47,10 @@ public class EditLevelView : View, IView {
     }
 
     void fillViewByComponent(LevelModelComponent component) {
-        foreach (WaveModel model in component.waves) {
+        foreach (WaveSpawnModel model in component.waves) {
             factory.CreateWaveElement(model);
         }
-        foreach (EnemyModel model in component.enemies) {
+        foreach (EnemySpawnModel model in component.enemies) {
             factory.CreateEnemyElement(model);
         }
         factory.refreshNumeration();
@@ -184,10 +184,10 @@ public class EditLevelView : View, IView {
 
     float calculateLevelTime() {
         float maxY = 0.0f;
-        foreach (EnemyModel enemy in component.enemies) {
+        foreach (EnemySpawnModel enemy in component.enemies) {
             maxY = enemy.posY > maxY ? enemy.posY : maxY;
         }
-        foreach (WaveModel wave in component.waves) {
+        foreach (WaveSpawnModel wave in component.waves) {
             maxY = wave.spawnBarrier > maxY ? wave.spawnBarrier : maxY;
         }
 

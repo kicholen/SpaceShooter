@@ -14,7 +14,7 @@ public class EnemyChangeTimeDelayAction : IEnemyWeaponParameterAction {
         }
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.timeDelay = timeDelay;
         if (entity.hasMultipleMissileSpawner)
             entity.multipleMissileSpawner.timeDelay = timeDelay;

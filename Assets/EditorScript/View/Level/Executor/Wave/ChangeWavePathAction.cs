@@ -7,7 +7,7 @@ public class ChangeWavePathAction : IWaveAction {
         this.path = Convert.ToInt16(path);
     }
 
-    public void Execute(WaveModel model) {
+    public void Execute(WaveSpawnModel model) {
         model.path = path;
     }
 }

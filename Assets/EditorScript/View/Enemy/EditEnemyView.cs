@@ -6,7 +6,7 @@ public class EditEnemyView : View, IView {
     IViewService viewService;
     IEnemyService enemyService;
 
-    EnemyModelComponent component;
+    EnemyModel component;
     Entity enemyEntity;
     Entity dummyEntity;
     EnemyModelCmpActionExecutor executor;
@@ -24,7 +24,7 @@ public class EditEnemyView : View, IView {
         addSaveBackListeners();
     }
 
-    public void SetData(EnemyModelComponent component) {
+    public void SetData(EnemyModel component) {
         this.component = component;
         executor = new EnemyModelCmpActionExecutor(component);
         createEnemy();

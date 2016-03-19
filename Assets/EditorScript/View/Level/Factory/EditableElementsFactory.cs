@@ -9,7 +9,7 @@ public class EditableElementsFactory {
         this.material = material;
     }
 
-    public GameObject CreateWaveElement(WaveModel model) {
+    public GameObject CreateWaveElement(WaveSpawnModel model) {
         GameObject go = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/WaveElement"));
         EditableBehaviour editableBehaviour = go.AddComponent<EditableBehaviour>();
         editableBehaviour.SetOnSpawnBarrierChangedCallback(refreshNumeration);
@@ -18,7 +18,7 @@ public class EditableElementsFactory {
         return go;
     }
 
-    public GameObject CreateEnemyElement(EnemyModel model) {
+    public GameObject CreateEnemyElement(EnemySpawnModel model) {
         GameObject go = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Prefab/UI/EditorView/Level/EnemyElement"));
         EditableBehaviour editableBehaviour = go.AddComponent<EditableBehaviour>();
         editableBehaviour.SetOnSpawnBarrierChangedCallback(refreshNumeration);

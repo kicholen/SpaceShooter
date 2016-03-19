@@ -7,7 +7,7 @@ public class EnemyChangeWeaponResourceAction : IEnemyWeaponParameterAction {
         this.weaponResource = weaponResource;
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.weaponResource = weaponResource;
         if (entity.hasCircleMissileSpawner)
             entity.circleMissileSpawner.resource = weaponResource;

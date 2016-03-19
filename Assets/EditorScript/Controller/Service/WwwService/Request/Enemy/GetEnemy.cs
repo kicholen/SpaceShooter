@@ -2,7 +2,7 @@
 
 public class GetEnemy : WwwRequest {
 
-    public EnemyModelComponent Component;
+    public EnemyModel Component;
 
     public GetEnemy(long id) {
         urlData.Add("ships");
@@ -10,6 +10,6 @@ public class GetEnemy : WwwRequest {
     }
 
     public override void ParseResult() {
-        Component = JsonConvert.DeserializeObject<EnemyModelComponent>(result);
+        Component = JsonConvert.DeserializeObject<EnemyModel>(result);
     }
 }

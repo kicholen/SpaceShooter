@@ -6,7 +6,7 @@ public class ScoreSystem : IReactiveSystem, IInitializeSystem, ISetPool
     Pool pool;
     Group group;
     Group time;
-    Group enemy;
+    Group enemies;
 
     Dictionary<int, int> scores;
 
@@ -17,7 +17,7 @@ public class ScoreSystem : IReactiveSystem, IInitializeSystem, ISetPool
         this.pool = pool;
         group = pool.GetGroup(Matcher.Score);
         time = pool.GetGroup(Matcher.Time);
-        enemy = pool.GetGroup(Matcher.EnemyModel);
+        enemies = pool.GetGroup(Matcher.EnemiesModel);
     }
 
     public void Initialize()
@@ -85,7 +85,8 @@ public class ScoreSystem : IReactiveSystem, IInitializeSystem, ISetPool
     void createScoreMap()
     {
         scores = new Dictionary<int, int>();
-        foreach (Entity e in enemy.GetEntities())
-            scores.Add(e.enemyModel.type, e.enemyModel.score);
+        Dictionary<int, EnemyModel> enemiesMap = enemies.GetSingleEntity().enemiesModel.map;
+        foreach (KeyValuePair<int, EnemyModel> entry in enemiesMap)
+            scores.Add(entry.Key, entry.Value.score);
     }
 }

@@ -16,7 +16,7 @@ public class EnemyCreator
         this.difficultyController = difficultyController;
     }
 
-    public Entity createStandardEnemy(EnemyModel model, string resource)
+    public Entity createStandardEnemy(EnemySpawnModel model, string resource)
     {
         float healthFactor = getHealthFactor();
 

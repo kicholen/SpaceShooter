@@ -1,7 +1,7 @@
 ﻿public class ActiveEnemyModelChangeEvent : GameEvent {
-    public EnemyModel model;
+    public EnemySpawnModel model;
 
-    public ActiveEnemyModelChangeEvent(EnemyModel model) {
+    public ActiveEnemyModelChangeEvent(EnemySpawnModel model) {
         this.model = model;
     }
 }

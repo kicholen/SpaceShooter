@@ -1,18 +1,22 @@
-using Entitas;
+﻿using Entitas;
+using System.Collections.Generic;
 
 public class CreatePathSystem : IInitializeSystem, ISetPool {
-	Pool _pool;
+	Pool pool;
 
-	const int PATHS_COUNT = 52;
+	const int PATHS_COUNT = 51;
 
 	public void SetPool(Pool pool) {
-		_pool = pool;
+		this.pool = pool;
 	}
 	
 	public void Initialize() {
-		for (int i = 1; i <= PATHS_COUNT; i++) {
-			_pool.CreateEntity()
-				.AddComponent(ComponentIds.PathModel, Utils.Deserialize<PathModelComponent>(i.ToString()));
-		}
+        Entity e = pool.CreateEntity()
+            .AddPathsModel(new Dictionary<string, PathModel>());
+        for (int i = 0; i < PATHS_COUNT; i++)
+        {
+            PathModel model = Utils.Deserialize<PathModel>(i.ToString());
+            e.pathsModel.map.Add(model.name, model);
+        }
 	}
 }

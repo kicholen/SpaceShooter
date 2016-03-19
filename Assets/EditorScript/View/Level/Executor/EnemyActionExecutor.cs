@@ -1,7 +1,7 @@
 ﻿public class EnemyActionExecutor {
-    EnemyModel model;
+    EnemySpawnModel model;
 
-    public EnemyActionExecutor(EnemyModel model) {
+    public EnemyActionExecutor(EnemySpawnModel model) {
         this.model = model;
     }
 

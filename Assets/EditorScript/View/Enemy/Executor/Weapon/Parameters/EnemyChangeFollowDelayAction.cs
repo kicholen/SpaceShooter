@@ -14,7 +14,7 @@ public class EnemyChangeFollowDelayAction : IEnemyWeaponParameterAction {
         }
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.followDelay = followDelay;
         if (entity.hasHomeMissileSpawner)
             entity.homeMissileSpawner.followDelay = followDelay;

@@ -7,7 +7,7 @@ public class ChangeWaveTypeAction : IWaveAction {
         this.type = Convert.ToInt16(type);
     }
 
-    public void Execute(WaveModel model) {
+    public void Execute(WaveSpawnModel model) {
         model.type = type;
     }
 }

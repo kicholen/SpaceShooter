@@ -7,7 +7,7 @@ public class ChangeEnemyPathAction : IEnemyAction {
         this.path = Convert.ToInt16(path);
     }
 
-    public void Execute(EnemyModel model) {
+    public void Execute(EnemySpawnModel model) {
         model.path = path;
     }
 }

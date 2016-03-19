@@ -12,7 +12,7 @@ namespace Entitas {
 
         public bool hasLevelModel { get { return HasComponent(ComponentIds.LevelModel); } }
 
-        public Entity AddLevelModel(long newId, string newName, System.Collections.Generic.List<WaveModel> newWaves, int newWaveIndex, System.Collections.Generic.List<EnemyModel> newEnemies, int newEnemyIndex, UnityEngine.Vector2 newPosition, UnityEngine.Vector2 newSize) {
+        public Entity AddLevelModel(long newId, string newName, System.Collections.Generic.List<WaveSpawnModel> newWaves, int newWaveIndex, System.Collections.Generic.List<EnemySpawnModel> newEnemies, int newEnemyIndex, UnityEngine.Vector2 newPosition, UnityEngine.Vector2 newSize) {
             var component = CreateComponent<LevelModelComponent>(ComponentIds.LevelModel);
             component.id = newId;
             component.name = newName;
@@ -25,7 +25,7 @@ namespace Entitas {
             return AddComponent(ComponentIds.LevelModel, component);
         }
 
-        public Entity ReplaceLevelModel(long newId, string newName, System.Collections.Generic.List<WaveModel> newWaves, int newWaveIndex, System.Collections.Generic.List<EnemyModel> newEnemies, int newEnemyIndex, UnityEngine.Vector2 newPosition, UnityEngine.Vector2 newSize) {
+        public Entity ReplaceLevelModel(long newId, string newName, System.Collections.Generic.List<WaveSpawnModel> newWaves, int newWaveIndex, System.Collections.Generic.List<EnemySpawnModel> newEnemies, int newEnemyIndex, UnityEngine.Vector2 newPosition, UnityEngine.Vector2 newSize) {
             var component = CreateComponent<LevelModelComponent>(ComponentIds.LevelModel);
             component.id = newId;
             component.name = newName;

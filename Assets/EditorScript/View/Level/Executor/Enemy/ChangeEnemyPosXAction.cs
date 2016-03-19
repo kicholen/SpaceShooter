@@ -13,7 +13,7 @@ public class ChangeEnemyPosXAction : IEnemyAction {
         }
     }
 
-    public void Execute(EnemyModel model) {
+    public void Execute(EnemySpawnModel model) {
         model.posX = posX;
     }
 }

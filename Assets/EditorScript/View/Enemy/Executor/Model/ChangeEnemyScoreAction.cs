@@ -17,7 +17,7 @@ public class ChangeEnemyScoreAction : IEnemyModelCmpAction
         }
     }
 
-    public void Execute(EnemyModelComponent model)
+    public void Execute(EnemyModel model)
     {
         model.score = score;
     }

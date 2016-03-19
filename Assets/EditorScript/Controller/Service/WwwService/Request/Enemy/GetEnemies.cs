@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 public class GetEnemies : WwwRequest {
 
-    public List<EnemyModelComponent> Enemies;
+    public List<EnemyModel> Enemies;
 
     public GetEnemies() {
         urlData.Add("ships/all");
     }
 
     public override void ParseResult() {
-        Enemies = JsonConvert.DeserializeObject<List<EnemyModelComponent>>(result);
+        Enemies = JsonConvert.DeserializeObject<List<EnemyModel>>(result);
     }
 }
 

@@ -14,7 +14,7 @@ public class EnemyChangeSelfDestructDelayAction : IEnemyWeaponParameterAction {
         }
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.selfDestructionDelay = selfDestructionDelay;
         if (entity.hasHomeMissileSpawner)
             entity.homeMissileSpawner.selfDestructionDelay = selfDestructionDelay;

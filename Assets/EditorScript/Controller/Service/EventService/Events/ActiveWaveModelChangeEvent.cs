@@ -1,7 +1,7 @@
 ﻿public class ActiveWaveModelChangeEvent : GameEvent {
-    public WaveModel model;
+    public WaveSpawnModel model;
 
-    public ActiveWaveModelChangeEvent(WaveModel model) {
+    public ActiveWaveModelChangeEvent(WaveSpawnModel model) {
         this.model = model;
     }
 }

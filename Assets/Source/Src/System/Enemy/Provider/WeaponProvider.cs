@@ -10,7 +10,7 @@ public class WeaponProvider
         this.difficultyController = difficultyController;
     }
 
-    public void provide(Entity e, int damage, EnemyModelComponent component)
+    public void provide(Entity e, int damage, EnemyModel component)
     {
         damage = (int)(damage * getDamageFactor());
 

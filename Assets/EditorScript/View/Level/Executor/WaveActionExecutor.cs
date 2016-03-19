@@ -1,7 +1,7 @@
 ﻿public class WaveActionExecutor {
-    WaveModel model;
+    WaveSpawnModel model;
 
-    public WaveActionExecutor(WaveModel model) {
+    public WaveActionExecutor(WaveSpawnModel model) {
         this.model = model;
     }
 

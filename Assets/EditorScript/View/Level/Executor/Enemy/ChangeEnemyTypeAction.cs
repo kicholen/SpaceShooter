@@ -7,7 +7,7 @@ public class ChangeEnemyTypeAction : IEnemyAction {
         this.type = Convert.ToInt16(type);
     }
 
-    public void Execute(EnemyModel model) {
+    public void Execute(EnemySpawnModel model) {
         model.type = type;
     }
 }

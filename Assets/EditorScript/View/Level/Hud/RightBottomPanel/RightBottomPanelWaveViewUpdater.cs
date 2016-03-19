@@ -6,7 +6,7 @@ using UnityEngine;
 public class RightBottomPanelWaveViewUpdater : EditorViewUpdaterBase {
     WaveActionExecutor waveExecutor;
 
-    public void Update(Transform content, WaveModel waveModel) {
+    public void Update(Transform content, WaveSpawnModel waveModel) {
         waveExecutor = new WaveActionExecutor(waveModel);
         createChangeSpawnBarrierField().transform.SetParent(content, false);
         createChangeWaveCountField().transform.SetParent(content, false);

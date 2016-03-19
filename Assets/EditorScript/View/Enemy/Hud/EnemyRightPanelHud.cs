@@ -6,11 +6,11 @@ using UnityEngine;
 public class EnemyRightPanelHud : EditorViewUpdaterBase {
     Transform content;
     EventService eventService;
-    EnemyModelComponent component;
+    EnemyModel component;
 
     EnemyWeaponParameterActionExecutor executor;
 
-    public EnemyRightPanelHud(Transform content, EventService eventService, Entity entity, EnemyModelComponent component) {
+    public EnemyRightPanelHud(Transform content, EventService eventService, Entity entity, EnemyModel component) {
         go = content.gameObject;
         this.content = content;
         this.eventService = eventService;
@@ -19,7 +19,7 @@ public class EnemyRightPanelHud : EditorViewUpdaterBase {
         createFieldsBasedOnWeaponType();
     }
 
-    void create(Entity entity, EnemyModelComponent component) {
+    void create(Entity entity, EnemyModel component) {
         executor = new EnemyWeaponParameterActionExecutor(entity, component);
         addListeners();
     }

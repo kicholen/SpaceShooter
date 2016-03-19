@@ -42,9 +42,9 @@ public static class ComponentIds {
     public const int DifficultyModel = 32;
     public const int DispersionMissileSpawner = 33;
     public const int EndGame = 34;
-    public const int Enemy = 35;
-    public const int EnemyFactory = 36;
-    public const int EnemyModel = 37;
+    public const int EnemiesModel = 35;
+    public const int Enemy = 36;
+    public const int EnemyFactory = 37;
     public const int EnemySpawner = 38;
     public const int EventService = 39;
     public const int ExplosionOnDeath = 40;
@@ -82,7 +82,7 @@ public static class ComponentIds {
     public const int ParticlesOnDeath = 72;
     public const int ParticleSpawn = 73;
     public const int Path = 74;
-    public const int PathModel = 75;
+    public const int PathsModel = 75;
     public const int PauseGame = 76;
     public const int Player = 77;
     public const int PlayerHealthBar = 78;
@@ -113,20 +113,19 @@ public static class ComponentIds {
     public const int TargetMissile = 103;
     public const int TargetMissileSpawner = 104;
     public const int Test = 105;
-    public const int Thunder = 106;
-    public const int Time = 107;
-    public const int Trail = 108;
-    public const int TranslationService = 109;
-    public const int Tween = 110;
-    public const int TweenOnDeath = 111;
-    public const int UIFactoryService = 112;
-    public const int UIResource = 113;
-    public const int Velocity = 114;
-    public const int VelocityLimit = 115;
-    public const int WaveSpawner = 116;
-    public const int Weapon = 117;
+    public const int Time = 106;
+    public const int Trail = 107;
+    public const int TranslationService = 108;
+    public const int Tween = 109;
+    public const int TweenOnDeath = 110;
+    public const int UIFactoryService = 111;
+    public const int UIResource = 112;
+    public const int Velocity = 113;
+    public const int VelocityLimit = 114;
+    public const int WaveSpawner = 115;
+    public const int Weapon = 116;
 
-    public const int TotalComponents = 118;
+    public const int TotalComponents = 117;
 
     public static readonly string[] componentNames = {
         "Acceleration",
@@ -164,9 +163,9 @@ public static class ComponentIds {
         "DifficultyModel",
         "DispersionMissileSpawner",
         "EndGame",
+        "EnemiesModel",
         "Enemy",
         "EnemyFactory",
-        "EnemyModel",
         "EnemySpawner",
         "EventService",
         "ExplosionOnDeath",
@@ -204,7 +203,7 @@ public static class ComponentIds {
         "ParticlesOnDeath",
         "ParticleSpawn",
         "Path",
-        "PathModel",
+        "PathsModel",
         "PauseGame",
         "Player",
         "PlayerHealthBar",
@@ -235,7 +234,6 @@ public static class ComponentIds {
         "TargetMissile",
         "TargetMissileSpawner",
         "Test",
-        "Thunder",
         "Time",
         "Trail",
         "TranslationService",
@@ -285,9 +283,9 @@ public static class ComponentIds {
         typeof(DifficultyModelComponent),
         typeof(DispersionMissileSpawnerComponent),
         typeof(EndGameComponent),
+        typeof(EnemiesModelComponent),
         typeof(EnemyComponent),
         typeof(EnemyFactoryComponent),
-        typeof(EnemyModelComponent),
         typeof(EnemySpawnerComponent),
         typeof(EventServiceComponent),
         typeof(ExplosionOnDeathComponent),
@@ -325,7 +323,7 @@ public static class ComponentIds {
         typeof(ParticlesOnDeathComponent),
         typeof(ParticleSpawnComponent),
         typeof(PathComponent),
-        typeof(PathModelComponent),
+        typeof(PathsModelComponent),
         typeof(PauseGameComponent),
         typeof(PlayerComponent),
         typeof(PlayerHealthBarComponent),
@@ -356,7 +354,6 @@ public static class ComponentIds {
         typeof(TargetMissileComponent),
         typeof(TargetMissileSpawnerComponent),
         typeof(TestComponent),
-        typeof(ThunderComponent),
         typeof(TimeComponent),
         typeof(TrailComponent),
         typeof(TranslationServiceComponent),

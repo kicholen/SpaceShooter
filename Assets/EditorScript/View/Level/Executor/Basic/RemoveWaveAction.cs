@@ -1,7 +1,7 @@
 ﻿public class RemoveWaveAction : ILevelAction {
-    WaveModel model;
+    WaveSpawnModel model;
 
-    public RemoveWaveAction(WaveModel model) {
+    public RemoveWaveAction(WaveSpawnModel model) {
         this.model = model;
     }
 

@@ -9,7 +9,7 @@ public class PathService : IPathService {
     IWwwService wwwService;
     EventService eventService;
 
-    List<PathModelComponent> paths;
+    List<PathModel> paths;
 
     public PathService(Pool pool, IWwwService wwwService, EventService eventService) {
         this.pool = pool;
@@ -33,9 +33,9 @@ public class PathService : IPathService {
         return promise;
     }
 
-    public PathModelComponent TryToGetPath(string name) {
-        PathModelComponent component = null;
-        foreach (PathModelComponent path in paths) {
+    public PathModel TryToGetPath(string name) {
+        PathModel component = null;
+        foreach (PathModel path in paths) {
             if (name == path.name)
                 component = path;
         }
@@ -46,15 +46,15 @@ public class PathService : IPathService {
         return paths.Select(cmp => cmp.name).ToList<string>();
     }
 
-    public void LoadPathById(long id, Action<PathModelComponent> onPathLoaded) {
+    public void LoadPathById(long id, Action<PathModel> onPathLoaded) {
         wwwService.Send<GetPath>(new GetPath(id), (request) => { onPathLoaded(request.Component); }, onRequestFailed);
     }
 
-    public void CreateNewPath(Action<PathModelComponent> onPathCreated) {
+    public void CreateNewPath(Action<PathModel> onPathCreated) {
         wwwService.Send<CreatePath>(new CreatePath(), (request) => { onPathCreated(request.Component); }, onRequestFailed);
     }
 
-    public void UpdatePath(PathModelComponent component, Action onPathUpdated) {
+    public void UpdatePath(PathModel component, Action onPathUpdated) {
         wwwService.Send<UpdatePath>(new UpdatePath(component), (request) => onPathUpdated(), onRequestFailed);
     }
 
@@ -66,20 +66,9 @@ public class PathService : IPathService {
         eventService.Dispatch<InfoBoxShowEvent>(new InfoBoxShowEvent(message));
     }
 
-    void replaceOrAddPaths(List<PathModelComponent> paths) {
-        Entity[] entities = pool.GetGroup(Matcher.PathModel).GetEntities();
-
-        foreach (PathModelComponent path in paths) {
-            bool found = false;
-            foreach (Entity e in entities) {
-                if (path.name == e.pathModel.name) {
-                    e.ReplacePathModel(path.id, path.name, path.points);
-                    found = true;
-                }
-            }
-            if (!found)
-                pool.CreateEntity()
-                    .AddComponent(ComponentIds.PathModel, path);
-        }
+    void replaceOrAddPaths(List<PathModel> paths) {
+        Dictionary<string, PathModel> map = pool.GetGroup(Matcher.PathsModel).GetSingleEntity().pathsModel.map;
+        foreach (PathModel path in paths)
+            map[path.name] = path;
     }
 }

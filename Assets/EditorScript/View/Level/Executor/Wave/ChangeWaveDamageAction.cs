@@ -16,7 +16,7 @@ public class ChangeWaveDamageAction : IWaveAction {
         }
     }
 
-    public void Execute(WaveModel model) {
+    public void Execute(WaveSpawnModel model) {
         model.damage = damage;
     }
 }

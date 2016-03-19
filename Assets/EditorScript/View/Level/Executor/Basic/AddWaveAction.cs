@@ -12,7 +12,7 @@ public class AddWaveAction : ILevelAction {
 
     float spawnBarrier;
 
-    WaveModel model;
+    WaveSpawnModel model;
 
     public AddWaveAction(float spawnBarrier) {
         this.spawnBarrier = spawnBarrier;
@@ -23,15 +23,15 @@ public class AddWaveAction : ILevelAction {
         component.waves.Add(model);
     }
 
-    public WaveModel getModel() {
+    public WaveSpawnModel getModel() {
         if (model == null) {
             throw new Exception("First call Execute");
         }
         return model;
     }
 
-    WaveModel createWaveModel() {
-        model = new WaveModel();
+    WaveSpawnModel createWaveModel() {
+        model = new WaveSpawnModel();
         model.spawnBarrier = spawnBarrier;
         model.count = DEFAULT_COUNT;
         model.spawnOffset = DEFAULT_SPAWN_OFFSET;

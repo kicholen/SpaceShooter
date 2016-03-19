@@ -13,8 +13,8 @@ public class EnemyFactory {
 
     public void SetPool(Pool pool)
     {
-		paths = pool.GetGroup(Matcher.PathModel);
-		enemies = pool.GetGroup(Matcher.EnemyModel);
+		paths = pool.GetGroup(Matcher.PathsModel);
+		enemies = pool.GetGroup(Matcher.EnemiesModel);
         difficulty = pool.GetGroup(Matcher.DifficultyController);
         enemyCreator = new EnemyCreator(pool);
         bossCreator = new BossCreator(pool);
@@ -22,27 +22,27 @@ public class EnemyFactory {
         Random.seed = pool.count;
 	}
 
-	public Entity CreateEnemyByModel(EnemyModel model) {
+	public Entity CreateEnemyByModel(EnemySpawnModel model) {
         getDifficultyController();
-        EnemyModelComponent component = getModelIfExist(model.type);
+        EnemyModel component = getModelIfExist(model.type);
         return component != null ? createEnemyFromComponent(model, component) : createEnemyFromCode(model);
     }
 
     public Entity CreateEnemyByType(int type, float posX, float posY, int health, int path, int grid, int damage = 10, float speed = 5.0f)
     {
         getDifficultyController();
-        EnemyModelComponent component = getModelIfExist(type);
+        EnemyModel component = getModelIfExist(type);
 
         return component != null 
             ? createEnemyByTypeFromComponent(component, type, posX, posY, health, path, grid, damage, speed)
             : createEnemyByTypeFromCode(type, posX, posY, health, path, grid, damage, speed);
     }
 
-    Entity createEnemyFromCode(EnemyModel model) {
+    Entity createEnemyFromCode(EnemySpawnModel model) {
         return createEnemyByTypeFromCode(model.type, model.posX, model.posY, model.health, model.path, 0, model.damage, model.speed);
     }
 
-    Entity createEnemyByTypeFromComponent(EnemyModelComponent component, int type, float posX, float posY, int health, int path, int grid, int damage, float velocityLimit) {
+    Entity createEnemyByTypeFromComponent(EnemyModel component, int type, float posX, float posY, int health, int path, int grid, int damage, float velocityLimit) {
         Entity e = enemyCreator.createStandardEnemy(type, damage, posX, posY, health, velocityLimit, component.resource);
         e.AddFaceDirection(component.faceDirection);
         addCameraShakeIfNeeded(component, e);
@@ -91,7 +91,7 @@ public class EnemyFactory {
         return e;
     }
 
-    Entity createEnemyFromComponent(EnemyModel model, EnemyModelComponent component)
+    Entity createEnemyFromComponent(EnemySpawnModel model, EnemyModel component)
     {
         Entity e = enemyCreator.createStandardEnemy(model, component.resource);
         e.AddFaceDirection(component.faceDirection);
@@ -102,7 +102,7 @@ public class EnemyFactory {
         return e;
     }
 
-    void addRotationIfNeeded(EnemyModelComponent component, Entity e)
+    void addRotationIfNeeded(EnemyModel component, Entity e)
     {
         if (component.randomRotation > 0)
         {
@@ -111,16 +111,16 @@ public class EnemyFactory {
         }
     }
 
-    void addCameraShakeIfNeeded(EnemyModelComponent component, Entity e)
+    void addCameraShakeIfNeeded(EnemyModel component, Entity e)
     {
         if (component.shakeCamera > 0)
             e.AddCameraShakeOnDeath(component.shakeCamera);
     }
 
 	void addPathIfNeeded(Entity e, float offsetY, int path) {
-		if (path > 0) {
-			e.AddPath(0, offsetY, 0.0f, paths.GetEntities()[path - 1].pathModel);
-		}
+        PathModel pathModel = null;
+        if (paths.GetSingleEntity().pathsModel.map.TryGetValue(path.ToString(), out pathModel))
+            e.AddPath(0, offsetY, 0.0f, pathModel);
 	}
 
 	void addGridIfNeeded(Entity e, int grid) {
@@ -129,8 +129,10 @@ public class EnemyFactory {
 		}
 	}
 
-    EnemyModelComponent getModelIfExist(int type) {
-        return enemies.count >= type && type != 0 ? enemies.GetEntities()[type - 1].enemyModel : null;
+    EnemyModel getModelIfExist(int type) {
+        EnemyModel enemyModel = null;
+        enemies.GetSingleEntity().enemiesModel.map.TryGetValue(type, out enemyModel);
+        return enemyModel;
     }
 
     float getMissileSpeedFactor()

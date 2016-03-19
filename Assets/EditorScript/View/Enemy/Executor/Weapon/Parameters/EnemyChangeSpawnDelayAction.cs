@@ -14,7 +14,7 @@ public class EnemyChangeSpawnDelayAction : IEnemyWeaponParameterAction {
         }
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.spawnDelay = spawnDelay;
         if (entity.hasCircleMissileSpawner)
             entity.circleMissileSpawner.spawnDelay = spawnDelay;

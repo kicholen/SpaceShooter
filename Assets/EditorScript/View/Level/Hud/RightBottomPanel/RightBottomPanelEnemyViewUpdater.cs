@@ -6,7 +6,7 @@ using UnityEngine;
 public class RightBottomPanelEnemyViewUpdater : EditorViewUpdaterBase {
     EnemyActionExecutor enemyExecutor;
 
-    public void Update(Transform content, EnemyModel enemyModel) {
+    public void Update(Transform content, EnemySpawnModel enemyModel) {
         enemyExecutor = new EnemyActionExecutor(enemyModel);
         createChangeSpawnBarrierField().transform.SetParent(content, false);
         createChangePositionXField().transform.SetParent(content, false);

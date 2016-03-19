@@ -8,7 +8,7 @@ public class EnemyChangeStartVelocityAction : IEnemyWeaponParameterAction {
         this.startVelocity = startVelocity;
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.startVelocity = startVelocity;
         if (entity.hasHomeMissileSpawner)
             entity.homeMissileSpawner.startVelocity = startVelocity;

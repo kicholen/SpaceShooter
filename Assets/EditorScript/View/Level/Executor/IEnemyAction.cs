@@ -1,3 +1,3 @@
 ﻿public interface IEnemyAction {
-    void Execute(EnemyModel model);
+    void Execute(EnemySpawnModel model);
 }

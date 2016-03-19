@@ -17,7 +17,7 @@ public class ChangeWaveSpawnBarrierAction : IWaveAction
         }
     }
 
-    public void Execute(WaveModel model)
+    public void Execute(WaveSpawnModel model)
     {
         model.spawnBarrier = spawnBarrier;
     }

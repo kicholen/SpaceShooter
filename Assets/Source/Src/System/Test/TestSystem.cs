@@ -1,4 +1,4 @@
-using Entitas;
+﻿using Entitas;
 using UnityEngine;
 using System.IO;
 
@@ -45,9 +45,6 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 		}
 		if (Input.GetKeyDown(KeyCode.D)) {
 			changeDifficulty();
-		}
-		if (Input.GetKeyDown(KeyCode.S)) {
-			serialize();
 		}
 		if (Input.GetKeyDown(KeyCode.R)) {
 			restart();
@@ -136,21 +133,6 @@ public class TestSystem : IInitializeSystem, IExecuteSystem, ISetPool {
 			difficulty = DifficultyTypes.Easy;
 		}
 		e.ReplaceSettingsModel(difficulty, model.music, model.sound, model.language);
-	}
-
-	void serialize() {
-		Utils.Serialize(_settings.GetSingleEntity().settingsModel);
-		//Utils.Serialize(_playerModel.GetSingleEntity().playerModel);
-
-		int i = 1;
-		foreach (Entity e in _pool.GetGroup(Matcher.BonusModel).GetEntities()) {
-			Utils.Serialize(e.bonusModel, i.ToString());
-		}
-
-		i = 1;
-		foreach (Entity e in _pool.GetGroup(Matcher.PathModel).GetEntities()) {
-			Utils.Serialize(e.pathModel, i.ToString());
-		}
 	}
 
 	void restart() {

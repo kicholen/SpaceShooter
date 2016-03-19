@@ -43,7 +43,7 @@ public class PathView : View, IView {
         pathService.LoadPathById(Convert.ToInt64(pathId), onPathLoaded);
     }
 
-    void onPathLoaded(PathModelComponent component) {
+    void onPathLoaded(PathModel component) {
         (viewService.SetView(ViewTypes.EDITOR_EDIT_PATH) as EditPathView).SetData(component);
     }
 }

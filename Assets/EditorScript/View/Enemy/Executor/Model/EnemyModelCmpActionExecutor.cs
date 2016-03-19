@@ -1,7 +1,7 @@
 ﻿public class EnemyModelCmpActionExecutor {
-    EnemyModelComponent model;
+    EnemyModel model;
 
-    public EnemyModelCmpActionExecutor(EnemyModelComponent model) {
+    public EnemyModelCmpActionExecutor(EnemyModel model) {
         this.model = model;
     }
 

@@ -5,11 +5,11 @@ using System.Collections.Generic;
 public interface IPathService
 {
     IPromise LoadPaths();
-    PathModelComponent TryToGetPath(string id);
+    PathModel TryToGetPath(string id);
     List<string> GetPathNames();
     void LoadPathIds(Action<Dictionary<long, string>> onPathsLoaded);
-    void LoadPathById(long id, Action<PathModelComponent> onPathLoaded);
-    void CreateNewPath(Action<PathModelComponent> onPathCreated);
-    void UpdatePath(PathModelComponent component, Action onPathUpdated);
+    void LoadPathById(long id, Action<PathModel> onPathLoaded);
+    void CreateNewPath(Action<PathModel> onPathCreated);
+    void UpdatePath(PathModel component, Action onPathUpdated);
     void DeletePath(long id, Action onPathDeleted);
 }

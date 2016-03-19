@@ -5,7 +5,7 @@ public class EditPathView : View, IView {
     IPathService pathService;
     IViewService viewService;
 
-    PathModelComponent component;
+    PathModel component;
 
     PathCreator pathCreatorScript;
 
@@ -20,7 +20,7 @@ public class EditPathView : View, IView {
         attachScripts();
     }
 
-    public void SetData(PathModelComponent component) {
+    public void SetData(PathModel component) {
         this.component = component;
         pathCreatorScript.Init(component, pool.GetGroup(Matcher.MaterialReference).GetSingleEntity().materialReference.storage.Default);
     }

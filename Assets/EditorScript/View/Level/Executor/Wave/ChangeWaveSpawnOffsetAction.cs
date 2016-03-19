@@ -13,7 +13,7 @@ public class ChangeWaveSpawnOffsetAction : IWaveAction {
         }
     }
 
-    public void Execute(WaveModel model) {
+    public void Execute(WaveSpawnModel model) {
         model.spawnOffset = spawnOffset;
     }
 }

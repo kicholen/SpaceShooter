@@ -1,3 +1,3 @@
 ﻿public interface IEnemyModelCmpAction {
-    void Execute(EnemyModelComponent model);
+    void Execute(EnemyModel model);
 }

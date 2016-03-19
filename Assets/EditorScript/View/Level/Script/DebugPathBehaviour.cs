@@ -48,7 +48,7 @@ public class DebugPathBehaviour : MonoBehaviour {
     }
 
     void updateLineRenderer(int path, float offsetY) {
-        PathModelComponent component = EditLevelView.pathService.TryToGetPath(path.ToString());
+        PathModel component = EditLevelView.pathService.TryToGetPath(path.ToString());
         if (component != null) {
             lineRenderer.SetVertexCount(component.points.Count);
             for (int i = 0; i < component.points.Count; i++) {

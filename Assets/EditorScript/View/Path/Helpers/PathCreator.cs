@@ -13,10 +13,10 @@ public class PathCreator : MonoBehaviour {
 	Stack<ChangeAction> changes = new Stack<ChangeAction>();
 	Stack<ChangeAction> backChanges = new Stack<ChangeAction>();
 
-    PathModelComponent component;
+    PathModel component;
     Material lineMaterial;
 
-    public void Init(PathModelComponent component, Material material) {
+    public void Init(PathModel component, Material material) {
         this.component = component;
         lineMaterial = material;
         foreach (Vector2 position in component.points) {

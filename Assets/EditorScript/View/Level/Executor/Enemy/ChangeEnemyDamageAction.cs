@@ -16,7 +16,7 @@ public class ChangeEnemyDamageAction : IEnemyAction {
         }
     }
 
-    public void Execute(EnemyModel model) {
+    public void Execute(EnemySpawnModel model) {
         model.damage = damage;
     }
 }

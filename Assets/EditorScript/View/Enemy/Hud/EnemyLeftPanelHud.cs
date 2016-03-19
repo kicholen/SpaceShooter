@@ -11,7 +11,7 @@ public class EnemyLeftPanelHud : EditorViewUpdaterBase {
     EnemyWeaponActionExecutor weaponExecutor;
     Entity entity;
 
-    public EnemyLeftPanelHud(Transform content, EventService eventService, EnemyModelCmpActionExecutor executor, Entity entity, EnemyModelComponent component) {
+    public EnemyLeftPanelHud(Transform content, EventService eventService, EnemyModelCmpActionExecutor executor, Entity entity, EnemyModel component) {
         go = content.gameObject;
         this.content = content;
         this.eventService = eventService;

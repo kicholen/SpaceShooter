@@ -22,8 +22,8 @@ public class DownloadContentTool {
         .Done(() => Debug.Log("Download Completed"));
     }
 
-    static IPromise<List<PathModelComponent>> downloadPaths() {
-        Promise<List<PathModelComponent>> promise = new Promise<List<PathModelComponent>>();
+    static IPromise<List<PathModel>> downloadPaths() {
+        Promise<List<PathModel>> promise = new Promise<List<PathModel>>();
         GetPaths request = new GetPaths();
         builder.Build(request);
         while (!request.Process().isDone) { }
@@ -54,8 +54,8 @@ public class DownloadContentTool {
         return promise;
     }
 
-    static IPromise<List<EnemyModelComponent>> downloadEnemies() {
-        Promise<List<EnemyModelComponent>> promise = new Promise<List<EnemyModelComponent>>();
+    static IPromise<List<EnemyModel>> downloadEnemies() {
+        Promise<List<EnemyModel>> promise = new Promise<List<EnemyModel>>();
         GetEnemies request = new GetEnemies();
         builder.Build(request);
         while (!request.Process().isDone) { }
@@ -126,18 +126,18 @@ public class DownloadContentTool {
         return promise;
     }
 
-    static IPromise savePaths(List<PathModelComponent> paths) {
+    static IPromise savePaths(List<PathModel> paths) {
         Promise promise = new Promise();
-        foreach (PathModelComponent path in paths)
-            Utils.Serialize(path, path.name);
+        for (int i = 0; i < paths.Count; i++)
+            Utils.Serialize(paths[i], i.ToString());
         promise.Resolve();
         return promise;
     }
 
-    static IPromise saveEnemies(List<EnemyModelComponent> enemies) {
+    static IPromise saveEnemies(List<EnemyModel> enemies) {
         Promise promise = new Promise();
-        foreach (EnemyModelComponent enemy in enemies)
-            Utils.Serialize(enemy, enemy.type.ToString());
+        for (int i = 0; i < enemies.Count; i++)
+            Utils.Serialize(enemies[i], i.ToString());
         promise.Resolve();
         return promise;
     }

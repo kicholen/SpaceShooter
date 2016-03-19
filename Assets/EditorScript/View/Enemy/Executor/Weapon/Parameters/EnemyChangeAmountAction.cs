@@ -14,7 +14,7 @@ public class EnemyChangeAmountAction : IEnemyWeaponParameterAction {
         }
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.amount = amount;
         if (entity.hasCircleMissileSpawner)
             entity.circleMissileSpawner.amount = amount;

@@ -2,9 +2,9 @@
 
 public class EnemyWeaponActionExecutor {
     Entity entity;
-    EnemyModelComponent component;
+    EnemyModel component;
 
-    public EnemyWeaponActionExecutor(Entity entity, EnemyModelComponent component) {
+    public EnemyWeaponActionExecutor(Entity entity, EnemyModel component) {
         this.entity = entity;
         this.component = component;
     }

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public class LevelModelComponent : IComponent {
     public long id;
 	public string name;
-	public List<WaveModel> waves;
+	public List<WaveSpawnModel> waves;
 	public int waveIndex;
-	public List<EnemyModel> enemies;
+	public List<EnemySpawnModel> enemies;
 	public int enemyIndex;
 	public Vector2 position;
 	public Vector2 size;

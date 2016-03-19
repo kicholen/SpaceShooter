@@ -14,7 +14,7 @@ public class EnemyChangeAngleAction : IEnemyWeaponParameterAction {
         }
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.angle = angle;
         if (entity.hasDispersionMissileSpawner)
             entity.dispersionMissileSpawner.angle = angle;

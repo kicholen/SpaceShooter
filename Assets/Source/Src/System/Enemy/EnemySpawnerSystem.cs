@@ -30,7 +30,7 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 		LevelModelComponent levelModel = enemySpawner.model;
 
 		if (levelModel.enemyIndex < levelModel.enemies.Count) {
-			EnemyModel enemyModel = levelModel.enemies[levelModel.enemyIndex];
+			EnemySpawnModel enemyModel = levelModel.enemies[levelModel.enemyIndex];
 			if (enemyModel.spawnBarrier < cameraPosition.y) {
 				levelModel.enemyIndex += 1;
                 factory.CreateEnemyByModel(enemyModel);
@@ -38,7 +38,7 @@ public class EnemySpawnerSystem : IExecuteSystem, ISetPool {
 		}
 
 		if (levelModel.waveIndex < levelModel.waves.Count) {
-			WaveModel waveModel = levelModel.waves[levelModel.waveIndex];
+			WaveSpawnModel waveModel = levelModel.waves[levelModel.waveIndex];
 			if (waveModel.spawnBarrier < cameraPosition.y) {
 				levelModel.waveIndex += 1;
 				pool.CreateEntity()

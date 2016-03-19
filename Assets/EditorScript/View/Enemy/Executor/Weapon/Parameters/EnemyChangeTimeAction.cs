@@ -14,7 +14,7 @@ public class EnemyChangeTimeAction : IEnemyWeaponParameterAction {
         }
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.time = time;
         if (entity.hasCircleMissileSpawner)
             entity.circleMissileSpawner.time = time;

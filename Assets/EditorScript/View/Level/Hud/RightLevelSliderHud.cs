@@ -60,10 +60,10 @@ public class RightLevelSliderHud : BaseGui {
         LevelModelComponent level = pool.GetGroup(Matcher.EnemySpawner).GetSingleEntity().enemySpawner.model;//.pos.y = getPositionYBasedOnSlider(value);
         level.waveIndex = 0;
         level.enemyIndex = 0;
-        foreach (WaveModel wave in level.waves)
+        foreach (WaveSpawnModel wave in level.waves)
             if (wave.spawnBarrier < y)
                 level.waveIndex += 1;
-        foreach (EnemyModel enemy in level.enemies)
+        foreach (EnemySpawnModel enemy in level.enemies)
             if (enemy.spawnBarrier < y)
                 level.enemyIndex += 1;
     }

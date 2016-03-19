@@ -7,12 +7,12 @@ public class ChangeEnemyModelWeaponAction : IEnemyModelCmpAction {
     public ChangeEnemyModelWeaponAction(string weapon) {
         this.weapon = Convert.ToInt16(weapon);
     }
-    public void Execute(EnemyModelComponent model) {
+    public void Execute(EnemyModel model) {
         model.weapon = weapon;
         setDefaultParameters(model);
     }
 
-    void setDefaultParameters(EnemyModelComponent model) {
+    void setDefaultParameters(EnemyModel model) {
         model.amount = 5;
         model.time = 0.5f;
         model.spawnDelay = 2.0f;
@@ -29,7 +29,7 @@ public class ChangeEnemyModelWeaponAction : IEnemyModelCmpAction {
         model.randomPositionOffsetX = 0.2f;
     }
 
-    string getDefaultResource(EnemyModelComponent model) {
+    string getDefaultResource(EnemyModel model) {
         if (model.weapon == WeaponTypes.Home)
             return ResourceWithColliders.MissileEnemyHoming;
         if (model.weapon == WeaponTypes.Laser)

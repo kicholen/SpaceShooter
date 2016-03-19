@@ -14,7 +14,7 @@ public class EnemyChangeVelocityAction : IEnemyWeaponParameterAction {
         }
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.velocity = velocity;
         if (entity.hasCircleMissileSpawner)
             entity.circleMissileSpawner.velocity = velocity;

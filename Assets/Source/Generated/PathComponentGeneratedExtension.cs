@@ -12,7 +12,7 @@ namespace Entitas {
 
         public bool hasPath { get { return HasComponent(ComponentIds.Path); } }
 
-        public Entity AddPath(int newNode, float newStartY, float newDuration, PathModelComponent newPath) {
+        public Entity AddPath(int newNode, float newStartY, float newDuration, PathModel newPath) {
             var component = CreateComponent<PathComponent>(ComponentIds.Path);
             component.node = newNode;
             component.startY = newStartY;
@@ -21,7 +21,7 @@ namespace Entitas {
             return AddComponent(ComponentIds.Path, component);
         }
 
-        public Entity ReplacePath(int newNode, float newStartY, float newDuration, PathModelComponent newPath) {
+        public Entity ReplacePath(int newNode, float newStartY, float newDuration, PathModel newPath) {
             var component = CreateComponent<PathComponent>(ComponentIds.Path);
             component.node = newNode;
             component.startY = newStartY;

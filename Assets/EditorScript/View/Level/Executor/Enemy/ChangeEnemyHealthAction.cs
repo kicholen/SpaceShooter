@@ -16,7 +16,7 @@ public class ChangeEnemyHealthAction : IEnemyAction {
         }
     }
 
-    public void Execute(EnemyModel model) {
+    public void Execute(EnemySpawnModel model) {
         model.health = health;
     }
 }

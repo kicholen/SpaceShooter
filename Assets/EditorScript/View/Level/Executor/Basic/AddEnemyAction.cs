@@ -11,7 +11,7 @@ public class AddEnemyAction : ILevelAction {
     float spawnBarrier;
     float posY;
 
-    EnemyModel model;
+    EnemySpawnModel model;
 
     public AddEnemyAction(float spawnBarrier) {
         this.spawnBarrier = spawnBarrier;
@@ -23,15 +23,15 @@ public class AddEnemyAction : ILevelAction {
         component.enemies.Add(model);
     }
 
-    public EnemyModel getModel() {
+    public EnemySpawnModel getModel() {
         if (model == null) {
             throw new Exception("First call Execute");
         }
         return model;
     }
 
-    EnemyModel createEnemyModel() {
-        model = new EnemyModel();
+    EnemySpawnModel createEnemyModel() {
+        model = new EnemySpawnModel();
         model.spawnBarrier = spawnBarrier;
         model.posY = posY;
         model.posX = DEFAULT_POSX;

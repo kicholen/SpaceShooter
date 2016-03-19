@@ -7,7 +7,7 @@ public class ChangeWaveGridAction : IWaveAction {
         this.grid = Convert.ToInt16(grid);
     }
 
-    public void Execute(WaveModel model) {
+    public void Execute(WaveSpawnModel model) {
         model.grid = grid;
     }
 }

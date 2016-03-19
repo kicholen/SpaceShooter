@@ -14,7 +14,7 @@ public class EnemyChangeRandomPositionOffsetXAction : IEnemyWeaponParameterActio
         }
     }
 
-    public void Execute(Entity entity, EnemyModelComponent component) {
+    public void Execute(Entity entity, EnemyModel component) {
         component.randomPositionOffsetX = randomPositionOffsetX;
         if (entity.hasMultipleMissileSpawner)
             entity.multipleMissileSpawner.randomPositionOffsetX = randomPositionOffsetX;
