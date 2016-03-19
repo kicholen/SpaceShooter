@@ -24,6 +24,7 @@ public class EditorServices : IServices {
     IShipService shipService;
     ICurrencyService currencyService;
     IGamerService gamerService;
+    IShopService shopService;
 
     public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
@@ -47,6 +48,7 @@ public class EditorServices : IServices {
     public IShipService ShipService { get { return shipService; } }
     public ICurrencyService CurrencyService { get { return currencyService; } }
     public IGamerService GamerService { get { return gamerService; } }
+    public IShopService ShopService { get { return shopService; } }
 
     public EditorServices(IController controller) {
         this.controller = controller;
@@ -76,6 +78,7 @@ public class EditorServices : IServices {
         shipService = new ShipService();
         gamerService = new GamerService();
         currencyService = new CurrenyService(eventService, gamerService);
+        shopService = new ShopService(currencyService);
         updateables.Add(infoService);
     }
 

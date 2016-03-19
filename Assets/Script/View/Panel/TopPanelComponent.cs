@@ -7,7 +7,6 @@ public class TopPanelComponent : BaseGui
 {
     const float hidePositionOffset = 20.0f;
 
-
     IServices services;
 
     RectTransform rectTransform;
@@ -90,6 +89,7 @@ public class TopPanelComponent : BaseGui
     void setData()
     {
         coinsText.text = services.CurrencyService.Coins.ToString();
+        gemsText.text = services.CurrencyService.Gems.ToString();
         levelText.text = "80% mock";
         levelSlider.value = 0.8f;
     }

@@ -62,6 +62,7 @@ public class BottomPanelComponent : BaseGui
         go = services.UIFactoryService.CreatePrefab("View/Elements/BottomPanel");
         go.transform.SetParent(services.ViewService.Canvas.transform, false);
         setReferences();
+        setTranslations();
         addListeners();
         createEntity();
     }
@@ -79,6 +80,14 @@ public class BottomPanelComponent : BaseGui
         buttons.Add(PanelType.SHIP, getChild("ShipButton"));
         buttons.Add(PanelType.PLAY, getChild("PlayButton"));
         buttons.Add(PanelType.SETTINGS, getChild("SettingsButton"));
+    }
+
+    void setTranslations()
+    {
+        getChild("ShopButton/Text").GetComponent<Text>().text = services.TranslationService.Translate("SKLEP");
+        getChild("ShipButton/Text").GetComponent<Text>().text = services.TranslationService.Translate("STATEK");
+        getChild("PlayButton/Text").GetComponent<Text>().text = services.TranslationService.Translate("GRAJ");
+        getChild("SettingsButton/Text").GetComponent<Text>().text = services.TranslationService.Translate("USTAWIENIA");
     }
 
     void addListeners()

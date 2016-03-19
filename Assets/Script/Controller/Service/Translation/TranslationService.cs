@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TranslationService : ITranslationService
 {
-    const string DEFAULT_LANGUAGE = "eng";
+    const string DEFAULT_LANGUAGE = "pl";
 
     ISettingsService settingsService;
 
@@ -37,6 +37,7 @@ public class TranslationService : ITranslationService
 
     void createAvailableLanguagesMap() {
         languages = new Dictionary<SystemLanguage, string>();
+        languages.Add(SystemLanguage.Polish, "pl");
         languages.Add(SystemLanguage.English, "eng");
     }
 }

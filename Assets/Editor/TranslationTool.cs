@@ -20,6 +20,7 @@ public class TranslationTool
         EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.StandaloneWindows64);
         foreach (string path in paths)
             parse(new System.IO.DirectoryInfo(Application.dataPath + path));
+        addJsonTranslations();
 
         getLanguageIds().Then<long>(ids => {
             Promise<long> promise = new Promise<long>();
@@ -31,6 +32,16 @@ public class TranslationTool
         })
         .Catch(exception => Debug.Log(exception.Message))
         .Done(remove);
+    }
+
+    static void addJsonTranslations()
+    {
+        result["Mała Paczka Klejnotów"] = "Mała Paczka Klejnotów";
+        result["Średnia Paczka Klejnotów"] = "Średnia Paczka Klejnotów";
+        result["Duża Paczka Klejnotów"] = "Duża Paczka Klejnotów";
+        result["Mała Paczka Monet"] = "Mała Paczka Monet";
+        result["Średnia Paczka Monet"] = "Średnia Paczka Monet";
+        result["Duża Paczka Monet"] = "Duża Paczka Monet";
     }
 
     static void remove(long id) {

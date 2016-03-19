@@ -40,13 +40,13 @@
 
     public void DecreaseGems(int count)
     {
-        coins -= count;
-        eventService.Dispatch<GemsChangedEvent>(new GemsChangedEvent(coins));
+        gems -= count;
+        eventService.Dispatch<GemsChangedEvent>(new GemsChangedEvent(gems));
     }
 
     public void IncreaseGems(int count)
     {
-        coins += count;
-        eventService.Dispatch<GemsChangedEvent>(new GemsChangedEvent(coins));
+        gems += count;
+        eventService.Dispatch<GemsChangedEvent>(new GemsChangedEvent(gems));
     }
 }
