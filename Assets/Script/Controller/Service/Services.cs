@@ -66,7 +66,7 @@ public class Services : IServices {
         translationService = new TranslationService(settingsService);
         analyticsService = new AnalyticsService(settingsService);
         shipService = new ShipService();
-        gamerService = new GamerService();
+        gamerService = new GamerService(eventService);
         currencyService = new CurrenyService(eventService, gamerService);
         shopService = new ShopService(currencyService);
     }

@@ -2,4 +2,6 @@
 {
     public const float TOP_PANEL_ANIMATION_DURATION = 0.2f;
 
+    public const int MAX_LEVEL = 10;
+
 }

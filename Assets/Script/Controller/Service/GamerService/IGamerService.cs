@@ -1,4 +1,8 @@
 ﻿public interface IGamerService
 {
-    GamerModel GamerModel { get; }
+    GamerModel Model { get; }
+    int Level { get; }
+    long NextLevelExp { get; }
+    void Init();
+    string GetTopPanelFormattedText();
 }

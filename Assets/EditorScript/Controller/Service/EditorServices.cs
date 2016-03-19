@@ -76,7 +76,7 @@ public class EditorServices : IServices {
         languageService = new LanguageService(wwwService, eventService);
         analyticsService = new AnalyticsService(settingsService);
         shipService = new ShipService();
-        gamerService = new GamerService();
+        gamerService = new GamerService(eventService);
         currencyService = new CurrenyService(eventService, gamerService);
         shopService = new ShopService(currencyService);
         updateables.Add(infoService);

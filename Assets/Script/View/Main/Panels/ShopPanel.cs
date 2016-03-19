@@ -8,9 +8,6 @@ public class ShopPanel : BaseGui, IPanel
 
     IServices services;
 
-    Text gemsText;
-    Text coinsText;
-
     public ShopPanel(Transform content, IServices services)
     {
         go = content.gameObject;

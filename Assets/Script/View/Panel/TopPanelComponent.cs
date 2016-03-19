@@ -17,6 +17,7 @@ public class TopPanelComponent : BaseGui
     Button addGemsButton;
     Text gemsText;
     Button levelButton;
+    Text expText;
     Text levelText;
     Slider levelSlider;
 
@@ -82,7 +83,8 @@ public class TopPanelComponent : BaseGui
         addGemsButton = getChild("GemsButton/AddButton").GetComponent<Button>();
         gemsText = getChild("GemsButton/Text").GetComponent<Text>();
         levelButton = getChild("LevelButton").GetComponent<Button>();
-        levelText = getChild("LevelButton/Slider/Fill Area/Text").GetComponent<Text>();
+        expText = getChild("LevelButton/Slider/Fill Area/Text").GetComponent<Text>();
+        levelText = getChild("LevelButton/Text").GetComponent<Text>();
         levelSlider = getChild("LevelButton/Slider").GetComponent<Slider>();
     }
 
@@ -90,7 +92,8 @@ public class TopPanelComponent : BaseGui
     {
         coinsText.text = services.CurrencyService.Coins.ToString();
         gemsText.text = services.CurrencyService.Gems.ToString();
-        levelText.text = "80% mock";
+        expText.text = services.GamerService.GetTopPanelFormattedText();
+        levelText.text = services.GamerService.Level.ToString();
         levelSlider.value = 0.8f;
     }
 

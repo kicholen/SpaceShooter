@@ -17,8 +17,8 @@
 
     public void Init()
     {
-        coins = gamerService.GamerModel.coins;
-        gems = gamerService.GamerModel.gems;
+        coins = gamerService.Model.coins;
+        gems = gamerService.Model.gems;
     }
 
     public bool CanBePurchased(int price)
