@@ -6,8 +6,9 @@ using System;
 public class UIFactoryService : IUIFactoryService
 {
 	const string UI_PATH = "Prefab/UI/";
-
-	Vector2 dimensions = new Vector2(-1.0f, -1.0f);
+	const string SPRITE_PATH = "Sprite/";
+    
+    Vector2 dimensions = new Vector2(-1.0f, -1.0f);
 
 	public GameObject CreatePrefab(string path) {
 		GameObject go = null;
@@ -20,9 +21,24 @@ public class UIFactoryService : IUIFactoryService
 		}
 
 		return go;
-	}
+    }
 
-	public void AddButton(Transform transform, string path, UnityAction action) {
+    public Sprite CreateSprite(string path)
+    {
+        Sprite sprite = null;
+        try
+        {
+            sprite = Resources.Load<Sprite>(SPRITE_PATH + path);
+        }
+        catch (Exception)
+        {
+            Debug.Log("Cannot instantiate sprite " + path);
+        }
+
+        return sprite;
+    }
+
+    public void AddButton(Transform transform, string path, UnityAction action) {
 		GameObject go = transform.FindChild(path).gameObject;
 		Button button = go.GetComponent<Button>();
 		if (button == null) {
@@ -48,7 +64,7 @@ public class UIFactoryService : IUIFactoryService
 		text.text = lockit;
 	}
 
-	public Vector2 Dimensions {
+    public Vector2 Dimensions {
 		get {
 			if (dimensions.x < 0.0f) {
 				Camera camera = Camera.main;

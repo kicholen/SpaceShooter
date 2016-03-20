@@ -19,6 +19,7 @@
 	PAUSE = 4,
 	SLOW = 5,
 	RESULTS = 6,
-    MAIN = 7
+    MAIN = 7,
+    LEVEL_UP = 8
 }
 

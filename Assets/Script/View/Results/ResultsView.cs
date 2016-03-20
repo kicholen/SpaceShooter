@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ResultsView : View, IView
 {
-    const int DOUBLE_COINS = 2;
-
     IServices services;
 
     public override bool TopPanelVisible() { return false; }
@@ -33,15 +31,17 @@ public class ResultsView : View, IView
     void animateTexts()
     {
         GameStatsComponent gameStats = pool.GetGroup(Matcher.GameStats).GetSingleEntity().gameStats;
-        animateText(getChild("EnemiesText").gameObject, gameStats.shipsDestroyed);
-        animateText(getChild("ScoreText").gameObject, gameStats.score);
-        animateText(getChild("LevelBonusText").gameObject, services.GamerService.Level);
-        animateText(getChild("ScoreTotalText").gameObject, gameStats.score + gameStats.starsPicked * services.GamerService.Level);
-        animateText(getChild("CoinsText").gameObject, gameStats.starsPicked);
+        animateTextIfShould(getChild("EnemiesText").gameObject, gameStats.shipsDestroyed);
+        animateTextIfShould(getChild("ScoreText").gameObject, gameStats.score);
+        animateTextIfShould(getChild("LevelBonusText").gameObject, services.GamerService.Level);
+        animateTextIfShould(getChild("ScoreTotalText").gameObject, gameStats.score + gameStats.starsPicked * services.GamerService.Level);
+        animateTextIfShould(getChild("CoinsText").gameObject, gameStats.starsPicked);
     }
 
-    void animateText(GameObject goWithText, float to)
+    void animateTextIfShould(GameObject goWithText, float to)
     {
+        if (to < 1.0f)
+            return;
         Entity e = pool.CreateEntity()
                     .AddGameObject(goWithText, "", false)
                     .AddTween(false, new List<Tween>());
@@ -60,7 +60,18 @@ public class ResultsView : View, IView
     {
         GameStatsComponent gameStats = pool.GetGroup(Matcher.GameStats).GetSingleEntity().gameStats;
         services.CurrencyService.IncreaseCoins(shouldDoubleCoins ? gameStats.starsPicked * 2 : gameStats.starsPicked);
-        services.GameService.EndGame(null);
+        bool willLevelUp = services.GamerService.WillLevelUp(Config.EXP_FOR_WON_GAME);
+        services.GamerService.IncreaseExp(Config.EXP_FOR_WON_GAME);
+
+        showLevelUpViewOrEndGame(willLevelUp);
+    }
+
+    void showLevelUpViewOrEndGame(bool willLevelUp)
+    {
+        if (willLevelUp)
+            services.ViewService.SetView(ViewTypes.LEVEL_UP);
+        else
+            services.GameService.EndGame(null);
     }
 
     void onDoubleReward()

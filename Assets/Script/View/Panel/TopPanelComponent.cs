@@ -94,13 +94,14 @@ public class TopPanelComponent : BaseGui
         gemsText.text = services.CurrencyService.Gems.ToString();
         expText.text = services.GamerService.GetTopPanelFormattedText();
         levelText.text = services.GamerService.Level.ToString();
-        levelSlider.value = 0.8f;
+        levelSlider.value = services.GamerService.GetNextLevelRatio();
     }
 
     void addListeners()
     {
         services.EventService.AddListener<CoinsChangedEvent>(onCoinsChanged);
         services.EventService.AddListener<GemsChangedEvent>(onGemsChanged);
+        services.EventService.AddListener<ExpChangedEvent>(onExpChanged);
     }
 
     void onCoinsChanged(CoinsChangedEvent e)
@@ -111,6 +112,13 @@ public class TopPanelComponent : BaseGui
     void onGemsChanged(GemsChangedEvent e)
     {
         gemsText.text = e.gems.ToString();
+    }
+
+    void onExpChanged(ExpChangedEvent e)
+    {
+        expText.text = services.GamerService.GetTopPanelFormattedText();
+        levelText.text = services.GamerService.Level.ToString();
+        levelSlider.value = services.GamerService.GetNextLevelRatio();
     }
 
     void deactivateButtons()

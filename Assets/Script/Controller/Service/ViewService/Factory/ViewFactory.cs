@@ -24,6 +24,9 @@ public class ViewFactory : IViewFactory {
             case ViewTypes.RESULTS:
                 view = new ResultsView(services);
                 break;
+            case ViewTypes.LEVEL_UP:
+                view = new LevelUpView(services);
+                break;
         }
         initView(view);
 
