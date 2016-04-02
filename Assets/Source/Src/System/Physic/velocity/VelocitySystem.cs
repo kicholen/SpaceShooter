@@ -1,15 +1,14 @@
 using Entitas;
 
 public class VelocitySystem : IExecuteSystem, ISetPool {
-	Group _group;
-	int asd;
+	Group group;
 
 	public void SetPool(Pool pool) {
-		_group = pool.GetGroup(Matcher.AllOf(Matcher.VelocityLimit, Matcher.Velocity));
+		group = pool.GetGroup(Matcher.AllOf(Matcher.VelocityLimit, Matcher.Velocity));
 	}
 	
 	public void Execute() {
-		foreach (var e in _group.GetEntities()) {
+		foreach (var e in group.GetEntities()) {
 			limitVelocity(e);
 		}
 	}

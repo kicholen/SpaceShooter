@@ -58,9 +58,9 @@ public class ShopPanel : BaseGui, IPanel
 
     void onButtonClick(ShopModel model)
     {
-        bool added = false;
+        bool added = false;// show floating Text
         services.ShopService.Buy(model)
-            .Then(result => { added = true; })
-            .Catch(exception => { added = false; });// show floating Text
+            .Catch(exception => added = false)
+            .Done(() => added = true);
     }
 }

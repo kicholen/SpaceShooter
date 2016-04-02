@@ -5,8 +5,7 @@ using System.Collections.Generic;
 public class SortOrderSystem : IReactiveSystem {
 	public TriggerOnEvent trigger { get { return Matcher.SortOrder.OnEntityAdded(); } }
 
-	Group _group;
-	Group _camera;
+	Group camera;
 	
 	public void Execute(List<Entity> entities) {
 		foreach (Entity e in entities) {

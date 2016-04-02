@@ -27,6 +27,7 @@ public class EditorServices : IServices {
     IShopService shopService;
     IAPService iapService;
     IAdService adService;
+    ITimeService timeService;
 
     public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
@@ -53,6 +54,7 @@ public class EditorServices : IServices {
     public IShopService ShopService { get { return shopService; } }
     public IAPService IAPService { get { return iapService; } }
     public IAdService AdService { get { return adService; } }
+    public ITimeService TimeService { get { return timeService; } }
 
     public EditorServices(IController controller) {
         this.controller = controller;
@@ -63,6 +65,7 @@ public class EditorServices : IServices {
     }
 
     private void createServices() {
+        timeService = new TimeService();
         eventService = new EventService();
         uiFactoryService = new UIFactoryService();
         wwwService = controller.GameObject.AddComponent<WwwService>();
@@ -79,9 +82,9 @@ public class EditorServices : IServices {
         translationService = new TranslationService(settingsService);
         languageService = new LanguageService(wwwService, eventService);
         analyticsService = new AnalyticsService(settingsService);
-        shipService = new ShipService();
+        shipService = new ShipService(timeService, eventService);
         gamerService = new GamerService(eventService);
-        currencyService = new CurrenyService(eventService, gamerService);
+        currencyService = new CurrencyService(eventService, gamerService);
         iapService = new IAPService(eventService);
         adService = new AdService(currencyService);
         shopService = new ShopService(currencyService, eventService, iapService);
@@ -91,9 +94,9 @@ public class EditorServices : IServices {
     public void Init() {
         settingsService.Init();
         gameService.Init(this);
-        shipService.Init(this);
         viewService.Init(this);
         currencyService.Init();
+        shipService.Init(pool, gamerService, currencyService);
         translationService.Init();
         ViewService.SetView(ViewTypes.EDITOR_LANDING);
         pool.GetGroup(Matcher.Time).GetSingleEntity().time.isPaused = false;

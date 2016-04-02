@@ -31,10 +31,11 @@ public class ResultsView : View, IView
     void animateTexts()
     {
         GameStatsComponent gameStats = pool.GetGroup(Matcher.GameStats).GetSingleEntity().gameStats;
+        ScoreComponent score = pool.GetGroup(Matcher.Score).GetSingleEntity().score;
         animateTextIfShould(getChild("EnemiesText").gameObject, gameStats.shipsDestroyed);
-        animateTextIfShould(getChild("ScoreText").gameObject, gameStats.score);
-        animateTextIfShould(getChild("LevelBonusText").gameObject, services.GamerService.Level);
-        animateTextIfShould(getChild("ScoreTotalText").gameObject, gameStats.score + gameStats.starsPicked * services.GamerService.Level);
+        animateTextIfShould(getChild("ScoreText").gameObject, score.score);
+        animateTextIfShould(getChild("LevelBonusText").gameObject, (float)services.GamerService.Level / 100.0f);
+        animateTextIfShould(getChild("ScoreTotalText").gameObject, score.score + (float)score.score * (float)services.GamerService.Level / 100.0f);
         animateTextIfShould(getChild("CoinsText").gameObject, gameStats.starsPicked);
     }
 

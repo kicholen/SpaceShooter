@@ -1,4 +1,4 @@
-using Entitas;
+﻿using Entitas;
 
 public class ClearGamePassiveSystem {
 
@@ -74,7 +74,7 @@ public class ClearGamePassiveSystem {
 	
 	protected void clearGameStats() {
 		foreach (Entity e in gameStats.GetEntities()) {
-			e.ReplaceGameStats(0, 0, 0, 0);
+			e.ReplaceGameStats(0, 0, 0);
 		}
     }
 

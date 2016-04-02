@@ -5,11 +5,10 @@ using UnityEngine;
 public class ParticlesOnDeathSystem : IReactiveSystem, ISetPool {
 	public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.ParticlesOnDeath, Matcher.CollisionDeath).OnEntityAdded(); } }
 	
-	Pool _pool;
-	Group _group;
+	Pool pool;
 	
 	public void SetPool(Pool pool) {
-		_pool = pool;
+		this.pool = pool;
 	}
 	
 	public void Execute(List<Entity> entities) {
@@ -25,7 +24,7 @@ public class ParticlesOnDeathSystem : IReactiveSystem, ISetPool {
 	}
 
 	void spawnParticles(Vector2 position) {
-		_pool.CreateEntity()
+		pool.CreateEntity()
 			.AddPosition(new Vector2(position.x, position.y))
 			.AddParticleSpawn(10, Resource.Particle, 0.5f, 2.0f);
 		

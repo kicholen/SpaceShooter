@@ -14,12 +14,12 @@ public class InitPhase : Phase, IPhase
         actions.Enqueue(() => addViewListener());
         actions.Enqueue(() => services.ViewService.SetView(ViewTypes.INIT));
         actions.Enqueue(() => { services.GameService.Init(services); nextAction(); });
-        actions.Enqueue(() => { services.ShipService.Init(services); nextAction(); });
         actions.Enqueue(() => { services.SettingsService.Init(); nextAction(); });
         actions.Enqueue(() => { services.ShopService.Init(); nextAction(); });
         actions.Enqueue(() => { services.IAPService.Init(); nextAction(); });
         actions.Enqueue(() => { services.TranslationService.Init(); nextAction(); });
         actions.Enqueue(() => { services.GamerService.Init(); nextAction(); });
+        actions.Enqueue(() => { services.ShipService.Init(services.Pool, services.GamerService, services.CurrencyService); nextAction(); });
         actions.Enqueue(() => { services.ViewService.CreateTopPanel(services); nextAction(); });
         actions.Enqueue(() => { services.ViewService.CreateBottomPanel(services); nextAction(); });
         actions.Enqueue(() => addViewListener());

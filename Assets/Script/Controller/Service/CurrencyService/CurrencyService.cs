@@ -1,4 +1,4 @@
-﻿public class CurrenyService : ICurrencyService
+﻿public class CurrencyService : ICurrencyService
 {
     EventService eventService;
 
@@ -9,7 +9,7 @@
     public int Coins { get { return coins; } }
     public int Gems { get { return gems; } }
 
-    public CurrenyService(EventService eventService, IGamerService gamerService)
+    public CurrencyService(EventService eventService, IGamerService gamerService)
     {
         this.eventService = eventService;
         this.gamerService = gamerService;

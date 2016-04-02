@@ -20,6 +20,7 @@ public class Services : IServices {
     IShopService shopService;
     IAPService iapService;
     IAdService adService;
+    ITimeService timeService;
 
     public IController Controller { get { return controller; } }
 	public Pool Pool { get { return pool; } }
@@ -39,6 +40,7 @@ public class Services : IServices {
     public IShopService ShopService { get { return shopService; } }
     public IAPService IAPService { get { return iapService; } }
     public IAdService AdService { get { return adService; } }
+    public ITimeService TimeService { get { return timeService; } }
 
     public Services(IController controller) {
         this.controller = controller;
@@ -60,6 +62,7 @@ public class Services : IServices {
 	}
 
     void createServices() {
+        timeService = new TimeService();
         eventService = new EventService();
         uiFactoryService = new UIFactoryService();
         wwwService = controller.GameObject.AddComponent<WwwService>();
@@ -69,9 +72,9 @@ public class Services : IServices {
         settingsService = new SettingsService(pool);
         translationService = new TranslationService(settingsService);
         analyticsService = new AnalyticsService(settingsService);
-        shipService = new ShipService();
+        shipService = new ShipService(timeService, eventService);
         gamerService = new GamerService(eventService);
-        currencyService = new CurrenyService(eventService, gamerService);
+        currencyService = new CurrencyService(eventService, gamerService);
         iapService = new IAPService(eventService);
         adService = new AdService(currencyService);
         shopService = new ShopService(currencyService, eventService, iapService);

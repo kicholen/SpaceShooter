@@ -1,4 +1,8 @@
-﻿public interface IShipService
+﻿using Entitas;
+using RSG;
+
+public interface IShipService
 {
-    void Init(IServices services);
+    void Init(Pool pool, IGamerService gamerService, ICurrencyService currencyService);
+    IPromise UpgradeIfCan(UpgradeType type);
 }

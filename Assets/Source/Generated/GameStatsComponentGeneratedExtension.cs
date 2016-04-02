@@ -12,18 +12,16 @@ namespace Entitas {
 
         public bool hasGameStats { get { return HasComponent(ComponentIds.GameStats); } }
 
-        public Entity AddGameStats(int newScore, int newStarsPicked, int newBonusesPicked, int newShipsDestroyed) {
+        public Entity AddGameStats(int newStarsPicked, int newBonusesPicked, int newShipsDestroyed) {
             var component = CreateComponent<GameStatsComponent>(ComponentIds.GameStats);
-            component.score = newScore;
             component.starsPicked = newStarsPicked;
             component.bonusesPicked = newBonusesPicked;
             component.shipsDestroyed = newShipsDestroyed;
             return AddComponent(ComponentIds.GameStats, component);
         }
 
-        public Entity ReplaceGameStats(int newScore, int newStarsPicked, int newBonusesPicked, int newShipsDestroyed) {
+        public Entity ReplaceGameStats(int newStarsPicked, int newBonusesPicked, int newShipsDestroyed) {
             var component = CreateComponent<GameStatsComponent>(ComponentIds.GameStats);
-            component.score = newScore;
             component.starsPicked = newStarsPicked;
             component.bonusesPicked = newBonusesPicked;
             component.shipsDestroyed = newShipsDestroyed;

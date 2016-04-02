@@ -14,7 +14,7 @@ public class ShopService : IShopService
     List<ShopModel> gemItems = new List<ShopModel>();
     List<ShopModel> coinItems = new List<ShopModel>();
 
-    Promise<bool> promise;
+    Promise promise;
 
     public List<ShopModel> GemItems { get { return gemItems; } }
     public List<ShopModel> CoinItems { get { return coinItems; } }
@@ -30,6 +30,11 @@ public class ShopService : IShopService
     {
         createShopItems();
         addIAPListeners();
+    }
+
+    public IPromise Buy(ShopModel model)
+    {
+        return model.type == ShopType.COINS ? BuyCoins(model) : BuyGems(model);
     }
 
     void createShopItems()
@@ -66,29 +71,24 @@ public class ShopService : IShopService
             promise.Reject(new Exception(e.id));
     }
 
-    public IPromise<bool> Buy(ShopModel model)
+    IPromise BuyCoins(ShopModel model)
     {
-        return model.type == ShopType.COINS ? BuyCoins(model) : BuyGems(model);
-    }
-
-    IPromise<bool> BuyCoins(ShopModel model)
-    {
-        Promise<bool> promise = new Promise<bool>();
+        promise = new Promise();
 
         if (canBuyCoins(model))
         {
             currencyService.IncreaseCoins(model.count);
             currencyService.DecreaseGems(model.price);
-            promise.Resolve(true);
+            promise.Resolve();
         }
         else
             promise.Reject(new Exception());
         return promise;
     }
 
-    IPromise<bool> BuyGems(ShopModel model)
+    IPromise BuyGems(ShopModel model)
     {
-        promise = new Promise<bool>();
+        promise = new Promise();
 
         if (iapService.IsInitialized())
             iapService.BuyConsumableProduct(model.googleId);
@@ -101,7 +101,7 @@ public class ShopService : IShopService
     {
         currencyService.IncreaseGems(model.count);
         if (promise != null)
-            promise.Resolve(true);
+            promise.Resolve();
     }
 
     bool canBuyCoins(ShopModel model)

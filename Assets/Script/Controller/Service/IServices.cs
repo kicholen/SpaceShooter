@@ -21,4 +21,5 @@ public interface IServices : Updateable {
     IShopService ShopService { get; }
     IAPService IAPService { get; }
     IAdService AdService { get; }
+    ITimeService TimeService { get; }
 }

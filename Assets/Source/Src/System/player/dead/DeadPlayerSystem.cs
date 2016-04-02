@@ -1,4 +1,4 @@
-using Entitas;
+﻿using Entitas;
 using System.Collections.Generic;
 
 public class DeadPlayerSystem : IReactiveSystem, ISetPool {
@@ -10,6 +10,7 @@ public class DeadPlayerSystem : IReactiveSystem, ISetPool {
 	Group eventService;
     Group analyticsService;
     Group gameStats;
+    Group score;
     Group enemySpawner;
 
     public void SetPool(Pool pool) {
@@ -19,7 +20,8 @@ public class DeadPlayerSystem : IReactiveSystem, ISetPool {
 		eventService = pool.GetGroup(Matcher.EventService);
 		analyticsService = pool.GetGroup(Matcher.AnalyticsService);
 		gameStats = pool.GetGroup(Matcher.GameStats);
-		enemySpawner = pool.GetGroup(Matcher.EnemySpawner);
+		score = pool.GetGroup(Matcher.Score);
+        enemySpawner = pool.GetGroup(Matcher.EnemySpawner);
     }
 
 	public void Execute(List<Entity> entities)
@@ -34,12 +36,13 @@ public class DeadPlayerSystem : IReactiveSystem, ISetPool {
     {
         IAnalyticsService service = analyticsService.GetSingleEntity().analyticsService.service;
         GameStatsComponent gameStatsComponent = gameStats.GetSingleEntity().gameStats;
+        ScoreComponent scoreComponent = score.GetSingleEntity().score;
         EnemySpawnerComponent enemySpawnerComponent = enemySpawner.GetSingleEntity().enemySpawner;
 
         service.GameCoins(enemySpawnerComponent.model.name, gameStatsComponent.starsPicked);
         service.GameBonuses(enemySpawnerComponent.model.name, gameStatsComponent.bonusesPicked);
         service.GameShips(enemySpawnerComponent.model.name, gameStatsComponent.shipsDestroyed);
-        service.GameFail(enemySpawnerComponent.model.name, gameStatsComponent.score);
+        service.GameFail(enemySpawnerComponent.model.name, scoreComponent.score);
     }
 
     void freezeInputTimeAndCamera()

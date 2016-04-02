@@ -2,15 +2,14 @@ using Entitas;
 using UnityEngine;
 
 public class RelativePositionSystem : IExecuteSystem, ISetPool {
-	Group _group;
-	Group _time;
+	Group group;
 	
 	public void SetPool(Pool pool) {
-		_group = pool.GetGroup(Matcher.AllOf(Matcher.RelativePosition, Matcher.Child));
+		group = pool.GetGroup(Matcher.AllOf(Matcher.RelativePosition, Matcher.Child));
 	}
 	
 	public void Execute() {
-		foreach (Entity e in _group.GetEntities()) {
+		foreach (Entity e in group.GetEntities()) {
 			RelativePositionComponent relativePosition = e.relativePosition;
 			Vector2 parentPosition = e.child.parent.position.pos;
 

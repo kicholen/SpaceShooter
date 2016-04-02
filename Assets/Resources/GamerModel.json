@@ -1,1 +1,1 @@
-{"name":"Player","coins":200,"gems":100,"experience":0}
+{"name":"Player","coins":200,"gems":100,"experience":0,"upgrades":{"None":0,"Health":0,"Speed":0,"MagnetRadius":0,"LaserDamage":0,"MissileDamage":0,"MissileSpawnDelay":0,"MissileSpeed":0,"SecondaryMissileDamage":0,"SecondaryMisileSpawnDelay":0,"SecondaryMissileSpeed":0},"upgradeInProgress":0,"upgradeStartTime":0}

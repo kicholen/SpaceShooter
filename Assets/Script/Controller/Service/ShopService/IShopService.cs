@@ -7,5 +7,5 @@ public interface IShopService
     List<ShopModel> CoinItems { get; }
 
     void Init();
-    IPromise<bool> Buy(ShopModel model);
+    IPromise Buy(ShopModel model);
 }

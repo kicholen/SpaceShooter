@@ -21,7 +21,7 @@ public class GameStatsSystem : IMultiReactiveSystem, IInitializeSystem, ISetPool
 
 	public void Initialize() {
 		pool.CreateEntity()
-			.AddGameStats(0, 0, 0, 0);
+			.AddGameStats(0, 0, 0);
 	}
 
 	public void Execute(List<Entity> entities) {
