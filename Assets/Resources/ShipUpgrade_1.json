@@ -1,1 +1,1 @@
-{"type":4,"cost":[100,500,1000],"bonus":[1.0,2.0,3.0],"duration":[60.0,600.0,3600.0],"title":"laser","description":"laser damage upgrade"}
+{"type":4,"cost":[100,500,1000],"bonus":[1.0,2.0,3.0],"duration":[5.0,5.0,5.0],"title":"laser","description":"laser damage upgrade"}

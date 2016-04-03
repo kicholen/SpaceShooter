@@ -17,7 +17,12 @@ public class TweenComponent : IComponent {
 		tweens.Remove(tween);
 	}
 
-	ITweenAccessor CreateAccessor(IComponent component) {
+    public void Clear()
+    {
+        tweens.Clear();
+    }
+
+    ITweenAccessor CreateAccessor(IComponent component) {
 		switch(component.GetType().ToString()) {
 		case "PositionComponent":
 			return new PositionAccessor();

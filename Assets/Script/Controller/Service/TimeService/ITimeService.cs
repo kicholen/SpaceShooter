@@ -1,8 +1,6 @@
 ﻿using System;
 
-public interface ITimeService : Updateable
+public interface ITimeService
 {
     long Now { get; }
-    void RegisterCall(Action callback, long time);
-    void UnregisterCall(Action callback);
 }

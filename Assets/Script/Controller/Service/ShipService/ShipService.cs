@@ -15,6 +15,8 @@ public class ShipService : IShipService
 
     Dictionary<UpgradeType, ShipUpgrade> upgrades = new Dictionary<UpgradeType, ShipUpgrade>();
 
+    public Dictionary<UpgradeType, ShipUpgrade> Upgrades { get { return upgrades; } }
+
     public ShipService(ITimeService timeService, EventService eventService)
     {
         this.timeService = timeService;
@@ -28,23 +30,27 @@ public class ShipService : IShipService
         this.currencyService = currencyService;
         group = pool.GetGroup(Matcher.ShipModel);
         prepare();
-        if (isUpgradeInProgress())
-            registerUpgradeCall(gamerService.Model.upgradeInProgress, gamerService.Model.upgrades[gamerService.Model.upgradeInProgress]);
+        if (IsUpgradeInProgress())
+            registerUpgradeCall();
     }
 
-    void prepare()
+    public bool IsUpgradeInProgress()
     {
-        loadShipUgrades();
-        updateModel();
-        setCurrentShip();
+        return gamerService.Model.upgradeInProgress != UpgradeType.None;
+    }
+
+    public long UpgradeTimeLeft()
+    {
+        long finishTime = getUpgradeFinishTime(gamerService.Model.upgradeInProgress, gamerService.Model.upgrades[gamerService.Model.upgradeInProgress]);
+        return finishTime - timeService.Now;
     }
 
     public IPromise UpgradeIfCan(UpgradeType type)
     {
         Promise promise = new Promise();
-        if (isUpgradeInProgress())
+        if (IsUpgradeInProgress())
             promise.Reject(new UpgradeInProgressException());
-        if (IsMaxUpgrade(type))
+        else if (isMaxUpgrade(type))
             promise.Reject(new MaxUpgradeException());
         else if (!currencyService.CanBePurchased(getNexUpgradeCost(type)))
             promise.Reject(new NotEnoughCoinsException());
@@ -56,13 +62,20 @@ public class ShipService : IShipService
         return promise;
     }
 
+    void prepare()
+    {
+        loadShipUgrades();
+        updateModel();
+        setCurrentShip();
+    }
+
     void startUpgrade(UpgradeType type)
     {
         int level = gamerService.Model.upgrades[type];
         currencyService.DecreaseCoins(upgrades[type].cost[level]);
         gamerService.Model.upgradeInProgress = type;
         gamerService.Model.upgradeStartTime = timeService.Now;
-        registerUpgradeCall(type, level);
+        registerUpgradeCall();
     }
 
     void loadShipUgrades()
@@ -110,14 +123,14 @@ public class ShipService : IShipService
                 model.missileDamage += (int)bonus;
                 break;
             case UpgradeType.MissileSpawnDelay:
-                model.missileSpawnDelay += bonus;
+                model.missileSpawnDelay -= bonus;
                 break;
             case UpgradeType.MissileSpeed:
                 model.missileVelocity += bonus;
                 break;
             case UpgradeType.SecondaryMisileSpawnDelay:
                 model.hasSecondaryMissiles = true;
-                model.secondaryMissileSpawnDelay += bonus;
+                model.secondaryMissileSpawnDelay -= bonus;
                 break;
             case UpgradeType.SecondaryMissileDamage:
                 model.hasSecondaryMissiles = true;
@@ -139,16 +152,13 @@ public class ShipService : IShipService
             .AddCurrentShip(group.GetEntities()[0].shipModel);
     }
 
-    bool isUpgradeInProgress()
+    void onUpgradeFinished(Entity e)
     {
-        return gamerService.Model.upgradeInProgress != UpgradeType.None;
-    }
-
-    void onUpgradeFinished()
-    {
+        e.isDestroyEntity = true;
         UpgradeType type = gamerService.Model.upgradeInProgress;
         int value = gamerService.Model.upgrades[type] + 1;
         gamerService.Model.upgrades[type] = value;
+        gamerService.Model.upgradeInProgress = UpgradeType.None;
         applyUpgrade(group.GetEntities()[0].shipModel, type, upgrades[type].bonus[value - 1]);
     }
 
@@ -157,13 +167,19 @@ public class ShipService : IShipService
         return upgrades[type].cost[gamerService.Model.upgrades[type]];
     }
 
-    bool IsMaxUpgrade(UpgradeType type)
+    bool isMaxUpgrade(UpgradeType type)
     {
         return gamerService.Model.upgrades[type] == upgrades[type].cost.Count;
     }
 
-    void registerUpgradeCall(UpgradeType type, int level)
+    void registerUpgradeCall()
     {
-        timeService.RegisterCall(onUpgradeFinished, gamerService.Model.upgradeStartTime + (long)upgrades[type].duration[level]);
+        pool.CreateEntity()
+            .AddDelayedCall(UpgradeTimeLeft(), onUpgradeFinished);
+    }
+
+    long getUpgradeFinishTime(UpgradeType type, int level)
+    {
+        return gamerService.Model.upgradeStartTime + (long)upgrades[type].duration[level];
     }
 }

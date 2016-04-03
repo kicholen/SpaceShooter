@@ -25,6 +25,8 @@ public class MainView : View, IView
     public override void Destroy()
     {
         base.Destroy();
+        foreach (KeyValuePair<PanelType, IPanel> entry in panels)
+            entry.Value.Destroy();
         services.EventService.RemoveListener<BottomButtonClickedEvent>(onBottomButtonClicked);
     }
 
@@ -45,7 +47,7 @@ public class MainView : View, IView
     void attachPanels()
     {
         panels.Add(PanelType.SHOP, new ShopPanel(getChild("Viewport/Content/ShopPanel"), services));
-        panels.Add(PanelType.SHIP, new ShipPanel(getChild("Viewport/Content/ShipPanel")));
+        panels.Add(PanelType.SHIP, new ShipPanel(getChild("Viewport/Content/ShipPanel"), services));
         panels.Add(PanelType.PLAY, new PlayPanel(getChild("Viewport/Content/PlayPanel"), services));
         panels.Add(PanelType.SETTINGS, new SettingsPanel(getChild("Viewport/Content/SettingsPanel"), services));
     }

@@ -28,6 +28,7 @@ public class WeaponSystem : IReactiveSystem, ISetPool {
     void addWeapons(ShipModelComponent component, ShipBonusComponent bonusComponent, Entity e)
     {
         float missileSpawnDelay = bonusComponent == null ? component.missileSpawnDelay : component.missileSpawnDelay * (1.0f - bonusComponent.fireRateBoost);
+        float secondaryMissileSpawnDelay = bonusComponent == null ? component.secondaryMissileSpawnDelay : component.secondaryMissileSpawnDelay * (1.0f - bonusComponent.fireRateBoost);
         float damageFactor = bonusComponent == null ? 1.0f : 1.0f + bonusComponent.damageBoost;
         e.AddMissileSpawner(0.0f, (int)((float)component.missileDamage * damageFactor), missileSpawnDelay, ResourceWithColliders.MissilePrimary, new Vector2(0.0f, component.missileVelocity), CollisionTypes.Player);
         if (component.hasSecondaryMissiles)
@@ -38,7 +39,7 @@ public class WeaponSystem : IReactiveSystem, ISetPool {
                 Entity child = children[i];
                 if (child.isSecondaryWeapon)
                 {
-                    child.AddMissileSpawner(0.0f, (int)((float)component.secondaryMissileDamage * damageFactor), missileSpawnDelay, ResourceWithColliders.MissileSecondary, new Vector2(0.0f, component.missileVelocity), CollisionTypes.Player);
+                    child.AddMissileSpawner(0.0f, (int)((float)component.secondaryMissileDamage * damageFactor), secondaryMissileSpawnDelay, ResourceWithColliders.MissileSecondary, new Vector2(0.0f, component.secondaryMissileVelocity), CollisionTypes.Player);
                 }
             }
         }

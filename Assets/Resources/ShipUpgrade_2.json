@@ -1,1 +1,1 @@
-{"type":5,"cost":[100,500,1000],"bonus":[10.0,20.0,30.0],"duration":[60.0,600.0,3600.0],"title":"missile","description":"missile damage upgrade"}
+{"type":5,"cost":[100,500,1000],"bonus":[10.0,20.0,30.0],"duration":[5.0,5.0,5.0],"title":"missile","description":"missile damage upgrade"}
