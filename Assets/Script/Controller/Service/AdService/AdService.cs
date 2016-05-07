@@ -14,12 +14,15 @@ public class AdService : IAdService
 
     public void ShowIfShould(Action<bool> onFinished)
     {
+    #if UNITY_ANDROID
         this.onFinished = onFinished;
         if (shoudShowAd())
             Advertisement.Show("rewardedVideo", new ShowOptions { resultCallback = onShown });
         else
             onFinished(false);
+    #endif
     }
+    #if UNITY_ANDROID
 
     void onShown(ShowResult result)
     {
@@ -35,4 +38,5 @@ public class AdService : IAdService
     {
         return Advertisement.IsReady("rewardedVideo");
     }
+    #endif
 }

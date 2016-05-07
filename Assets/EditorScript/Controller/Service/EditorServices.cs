@@ -68,7 +68,7 @@ public class EditorServices : IServices {
         timeService = new TimeService();
         eventService = new EventService();
         uiFactoryService = new UIFactoryService();
-        wwwService = controller.GameObject.AddComponent<WwwService>();
+        wwwService = new FakeWwwService();//controller.GameObject.AddComponent<WwwService>();
         viewService = new ViewService(eventService, uiFactoryService);
         loadService = new LoadService(eventService);
         gameService = new GameService(pool, viewService);

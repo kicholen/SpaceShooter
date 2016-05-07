@@ -41,8 +41,8 @@ public static class Utils
 			return component;
 		}
 		else {
-			#if UNITY_EDITOR
-			TextReader streamReader = new StreamReader(Application.dataPath + "/Resources/" + path + jsonSufix);
+            #if UNITY_EDITOR || UNITY_STANDALONE_WIN
+            TextReader streamReader = new StreamReader(Application.dataPath + "/Resources/" + path + jsonSufix);
 			T component = serializer.Deserialize<T>(new JsonTextReader(streamReader));
 			streamReader.Dispose();
 			return component;
@@ -52,7 +52,7 @@ public static class Utils
 			return component;
 			#endif
 		}
-		#endif
+        #endif
 	}
 
 	public static void Serialize(object value, string sufix = "") {
@@ -60,16 +60,16 @@ public static class Utils
 		if (sufix != "") {
 			path += "_" + sufix;
 		}
-		#if UNITY_EDITOR
-		path = Application.dataPath + "/Resources/" + value.GetType().Name + path + jsonSufix;
-#elif UNITY_ANDROID
+        #if UNITY_EDITOR || UNITY_STANDALONE_WIN
+        path = Application.dataPath + "/Resources/" + value.GetType().Name + path + jsonSufix;
+        #elif UNITY_ANDROID
 		path = Application.persistentDataPath + "/" + value.GetType().Name + path + jsonSufix;
-#endif
+        #endif
 
-#if UNITY_WEBPLAYER || UNITY_WEBGL
+        #if UNITY_WEBPLAYER || UNITY_WEBGL
 		PlayerPrefs.SetString(path, JsonConvert.SerializeObject(value));
 		PlayerPrefs.Save();
-#else
+        #else
         JsonSerializer serializer = new JsonSerializer();
 		StreamWriter streamWriter = new StreamWriter(path, false);
 		serializer.Serialize(streamWriter, value);
